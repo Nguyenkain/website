@@ -50,3 +50,139 @@ Stack trace:
 #3 {main}
 REQUEST_URI=/website/index.php?r=users
 ---
+2013/03/07 04:35:13 [error] [exception.CException] exception 'CException' with message 'Alias "application.extensions.tinymce.ETinyMce" is invalid. Make sure it points to an existing PHP file and the file is readable.' in E:\xampp\htdocs\yiiframework\framework\YiiBase.php:316
+Stack trace:
+#0 E:\xampp\htdocs\yiiframework\framework\web\CWidgetFactory.php(146): YiiBase::import('application.ext...', true)
+#1 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(146): CWidgetFactory->createWidget(Object(NewsController), 'application.ext...', Array)
+#2 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('application.ext...', Array)
+#3 E:\xampp\htdocs\website\protected\views\news\_form.php(45): CBaseController->widget('application.ext...', Array)
+#4 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(126): require('E:\xampp\htdocs...')
+#5 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('E:\xampp\htdocs...', Array, true)
+#6 E:\xampp\htdocs\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('E:\xampp\htdocs...', Array, true)
+#7 E:\xampp\htdocs\website\protected\views\news\update.php(21): CController->renderPartial('_form', Array)
+#8 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(126): require('E:\xampp\htdocs...')
+#9 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('E:\xampp\htdocs...', Array, true)
+#10 E:\xampp\htdocs\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('E:\xampp\htdocs...', Array, true)
+#11 E:\xampp\htdocs\yiiframework\framework\web\CController.php(782): CController->renderPartial('update', Array, true)
+#12 E:\xampp\htdocs\website\protected\controllers\NewsController.php(103): CController->render('update', Array)
+#13 [internal function]: NewsController->actionUpdate('2')
+#14 E:\xampp\htdocs\yiiframework\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(NewsController), Array)
+#15 E:\xampp\htdocs\yiiframework\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(NewsController), Object(ReflectionMethod), Array)
+#16 E:\xampp\htdocs\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#17 E:\xampp\htdocs\yiiframework\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#18 E:\xampp\htdocs\yiiframework\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#19 E:\xampp\htdocs\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#20 E:\xampp\htdocs\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#21 E:\xampp\htdocs\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#22 E:\xampp\htdocs\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#23 E:\xampp\htdocs\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 E:\xampp\htdocs\yiiframework\framework\web\CWebApplication.php(282): CController->run('update')
+#25 E:\xampp\htdocs\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('news/update')
+#26 E:\xampp\htdocs\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#27 E:\xampp\htdocs\website\index.php(13): CApplication->run()
+#28 {main}
+REQUEST_URI=/website/index.php?r=news/update&id=2
+HTTP_REFERER=http://localhost/website/index.php?r=news/admin
+---
+2013/03/07 04:36:35 [error] [exception.CException] exception 'CException' with message 'Alias "application.extensions.tinymce.ETinyMce" is invalid. Make sure it points to an existing PHP file and the file is readable.' in E:\xampp\htdocs\yiiframework\framework\YiiBase.php:316
+Stack trace:
+#0 E:\xampp\htdocs\yiiframework\framework\web\CWidgetFactory.php(146): YiiBase::import('application.ext...', true)
+#1 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(146): CWidgetFactory->createWidget(Object(NewsController), 'application.ext...', Array)
+#2 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('application.ext...', Array)
+#3 E:\xampp\htdocs\website\protected\views\news\_form.php(45): CBaseController->widget('application.ext...', Array)
+#4 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(126): require('E:\xampp\htdocs...')
+#5 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('E:\xampp\htdocs...', Array, true)
+#6 E:\xampp\htdocs\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('E:\xampp\htdocs...', Array, true)
+#7 E:\xampp\htdocs\website\protected\views\news\update.php(21): CController->renderPartial('_form', Array)
+#8 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(126): require('E:\xampp\htdocs...')
+#9 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('E:\xampp\htdocs...', Array, true)
+#10 E:\xampp\htdocs\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('E:\xampp\htdocs...', Array, true)
+#11 E:\xampp\htdocs\yiiframework\framework\web\CController.php(782): CController->renderPartial('update', Array, true)
+#12 E:\xampp\htdocs\website\protected\controllers\NewsController.php(103): CController->render('update', Array)
+#13 [internal function]: NewsController->actionUpdate('2')
+#14 E:\xampp\htdocs\yiiframework\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(NewsController), Array)
+#15 E:\xampp\htdocs\yiiframework\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(NewsController), Object(ReflectionMethod), Array)
+#16 E:\xampp\htdocs\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#17 E:\xampp\htdocs\yiiframework\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#18 E:\xampp\htdocs\yiiframework\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#19 E:\xampp\htdocs\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#20 E:\xampp\htdocs\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#21 E:\xampp\htdocs\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#22 E:\xampp\htdocs\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#23 E:\xampp\htdocs\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 E:\xampp\htdocs\yiiframework\framework\web\CWebApplication.php(282): CController->run('update')
+#25 E:\xampp\htdocs\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('news/update')
+#26 E:\xampp\htdocs\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#27 E:\xampp\htdocs\website\index.php(13): CApplication->run()
+#28 {main}
+REQUEST_URI=/website/index.php?r=news/update&id=2
+HTTP_REFERER=http://localhost/website/index.php?r=news/admin
+---
+2013/03/07 04:36:37 [error] [exception.CException] exception 'CException' with message 'Alias "application.extensions.tinymce.ETinyMce" is invalid. Make sure it points to an existing PHP file and the file is readable.' in E:\xampp\htdocs\yiiframework\framework\YiiBase.php:316
+Stack trace:
+#0 E:\xampp\htdocs\yiiframework\framework\web\CWidgetFactory.php(146): YiiBase::import('application.ext...', true)
+#1 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(146): CWidgetFactory->createWidget(Object(NewsController), 'application.ext...', Array)
+#2 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('application.ext...', Array)
+#3 E:\xampp\htdocs\website\protected\views\news\_form.php(45): CBaseController->widget('application.ext...', Array)
+#4 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(126): require('E:\xampp\htdocs...')
+#5 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('E:\xampp\htdocs...', Array, true)
+#6 E:\xampp\htdocs\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('E:\xampp\htdocs...', Array, true)
+#7 E:\xampp\htdocs\website\protected\views\news\update.php(21): CController->renderPartial('_form', Array)
+#8 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(126): require('E:\xampp\htdocs...')
+#9 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('E:\xampp\htdocs...', Array, true)
+#10 E:\xampp\htdocs\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('E:\xampp\htdocs...', Array, true)
+#11 E:\xampp\htdocs\yiiframework\framework\web\CController.php(782): CController->renderPartial('update', Array, true)
+#12 E:\xampp\htdocs\website\protected\controllers\NewsController.php(103): CController->render('update', Array)
+#13 [internal function]: NewsController->actionUpdate('2')
+#14 E:\xampp\htdocs\yiiframework\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(NewsController), Array)
+#15 E:\xampp\htdocs\yiiframework\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(NewsController), Object(ReflectionMethod), Array)
+#16 E:\xampp\htdocs\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#17 E:\xampp\htdocs\yiiframework\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#18 E:\xampp\htdocs\yiiframework\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#19 E:\xampp\htdocs\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#20 E:\xampp\htdocs\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#21 E:\xampp\htdocs\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#22 E:\xampp\htdocs\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#23 E:\xampp\htdocs\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 E:\xampp\htdocs\yiiframework\framework\web\CWebApplication.php(282): CController->run('update')
+#25 E:\xampp\htdocs\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('news/update')
+#26 E:\xampp\htdocs\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#27 E:\xampp\htdocs\website\index.php(13): CApplication->run()
+#28 {main}
+REQUEST_URI=/website/index.php?r=news/update&id=2
+HTTP_REFERER=http://localhost/website/index.php?r=news/admin
+---
+2013/03/07 04:37:58 [error] [exception.CException] exception 'CException' with message 'Alias "application.extensions.tinymce.ETinyMce" is invalid. Make sure it points to an existing PHP file and the file is readable.' in E:\xampp\htdocs\yiiframework\framework\YiiBase.php:316
+Stack trace:
+#0 E:\xampp\htdocs\yiiframework\framework\web\CWidgetFactory.php(146): YiiBase::import('application.ext...', true)
+#1 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(146): CWidgetFactory->createWidget(Object(NewsController), 'application.ext...', Array)
+#2 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(172): CBaseController->createWidget('application.ext...', Array)
+#3 E:\xampp\htdocs\website\protected\views\news\_form.php(41): CBaseController->widget('application.ext...', Array)
+#4 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(126): require('E:\xampp\htdocs...')
+#5 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('E:\xampp\htdocs...', Array, true)
+#6 E:\xampp\htdocs\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('E:\xampp\htdocs...', Array, true)
+#7 E:\xampp\htdocs\website\protected\views\news\update.php(21): CController->renderPartial('_form', Array)
+#8 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(126): require('E:\xampp\htdocs...')
+#9 E:\xampp\htdocs\yiiframework\framework\web\CBaseController.php(95): CBaseController->renderInternal('E:\xampp\htdocs...', Array, true)
+#10 E:\xampp\htdocs\yiiframework\framework\web\CController.php(869): CBaseController->renderFile('E:\xampp\htdocs...', Array, true)
+#11 E:\xampp\htdocs\yiiframework\framework\web\CController.php(782): CController->renderPartial('update', Array, true)
+#12 E:\xampp\htdocs\website\protected\controllers\NewsController.php(103): CController->render('update', Array)
+#13 [internal function]: NewsController->actionUpdate('2')
+#14 E:\xampp\htdocs\yiiframework\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(NewsController), Array)
+#15 E:\xampp\htdocs\yiiframework\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(NewsController), Object(ReflectionMethod), Array)
+#16 E:\xampp\htdocs\yiiframework\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#17 E:\xampp\htdocs\yiiframework\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#18 E:\xampp\htdocs\yiiframework\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#19 E:\xampp\htdocs\yiiframework\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#20 E:\xampp\htdocs\yiiframework\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#21 E:\xampp\htdocs\yiiframework\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#22 E:\xampp\htdocs\yiiframework\framework\web\CController.php(291): CFilterChain->run()
+#23 E:\xampp\htdocs\yiiframework\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 E:\xampp\htdocs\yiiframework\framework\web\CWebApplication.php(282): CController->run('update')
+#25 E:\xampp\htdocs\yiiframework\framework\web\CWebApplication.php(141): CWebApplication->runController('news/update')
+#26 E:\xampp\htdocs\yiiframework\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#27 E:\xampp\htdocs\website\index.php(13): CApplication->run()
+#28 {main}
+REQUEST_URI=/website/index.php?r=news/update&id=2
+HTTP_REFERER=http://localhost/website/index.php?r=news/admin
+---

@@ -6,12 +6,14 @@
 
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'news-form',
-	'enableAjaxValidation'=>false,
+	<?php $form=$this->beginWidget('CActiveForm', array(
+			'id'=>'news-form',
+			'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">
+		Fields with <span class="required">*</span> are required.
+	</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -27,9 +29,14 @@
 		<?php echo $form->error($model,'short_description'); ?>
 	</div>
 
-	<div class="row">
+	<div class="tinymce">
 		<?php echo $form->labelEx($model,'news_content'); ?>
-		<?php echo $form->textArea($model,'news_content',array('rows'=>6, 'cols'=>50)); ?>
+		<br />
+		<?php $this->widget('application.extensions.tinymce.ETinyMce',
+				array('model'=>$model,
+                      'attribute'=>'news_content',
+                       'editorTemplate'=>'full',
+                        'htmlOptions'=>array('rows'=>6, 'cols'=>50, 'class'=>'tinymce'),)); ?>
 		<?php echo $form->error($model,'news_content'); ?>
 	</div>
 
@@ -55,6 +62,7 @@
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
 
-<?php $this->endWidget(); ?>
+	<?php $this->endWidget(); ?>
 
-</div><!-- form -->
+</div>
+<!-- form -->
