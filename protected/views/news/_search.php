@@ -6,49 +6,31 @@
 
 <div class="wide form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'action'=>Yii::app()->createUrl($this->route),
-	'method'=>'get',
+<?php /** @var BootActiveForm $form */
+$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+		'id'=>'horizontalForm',
+		'type'=>'vertical',
+		'htmlOptions'=>array('class'=>'well'),
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'news_id'); ?>
-		<?php echo $form->textField($model,'news_id'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'news_id'); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'category_id'); ?>
-		<?php echo $form->textField($model,'category_id'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'category_id'); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'short_description'); ?>
-		<?php echo $form->textArea($model,'short_description',array('rows'=>6, 'cols'=>50)); ?>
-	</div>
+	<?php echo $form->textAreaRow($model,'short_description',array('rows'=>6, 'cols'=>50)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'news_content'); ?>
-		<?php echo $form->textArea($model,'news_content',array('rows'=>6, 'cols'=>50)); ?>
-	</div>
+	<?php echo $form->textAreaRow($model,'news_content',array('rows'=>6, 'cols'=>50)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'created_time'); ?>
-		<?php echo $form->textField($model,'created_time',array('size'=>11,'maxlength'=>11)); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'created_time',array('size'=>11,'maxlength'=>11)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'title'); ?>
-		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>255)); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'title',array('size'=>60,'maxlength'=>255)); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'image'); ?>
-		<?php echo $form->textField($model,'image',array('size'=>60,'maxlength'=>225)); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'image',array('size'=>60,'maxlength'=>225)); ?>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
-	</div>
+	<div class="form-actions">
+	<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'Search')); ?>
+	<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset', 'label'=>'Reset')); ?>
+</div>
 
 <?php $this->endWidget(); ?>
 
