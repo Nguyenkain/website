@@ -50,3 +50,43 @@ Stack trace:
 #3 {main}
 REQUEST_URI=/website/index.php?r=users
 ---
+2013/03/07 03:45:59 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not allowed to access this page.' in /opt/lampp/htdocs/yiiframework/framework/gii/GiiModule.php:168
+Stack trace:
+#0 /opt/lampp/htdocs/yiiframework/framework/web/CController.php(263): GiiModule->beforeControllerAction(Object(DefaultController), Object(CInlineAction))
+#1 /opt/lampp/htdocs/yiiframework/framework/web/CWebApplication.php(282): CController->run('')
+#2 /opt/lampp/htdocs/yiiframework/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#3 /opt/lampp/htdocs/yiiframework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /opt/lampp/htdocs/vncweb/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/vncweb/index.php?r=gii
+---
+2013/03/07 10:17:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "news".' in /opt/lampp/htdocs/yiiframework/framework/web/CController.php:483
+Stack trace:
+#0 /opt/lampp/htdocs/yiiframework/framework/web/CController.php(270): CController->missingAction('news')
+#1 /opt/lampp/htdocs/yiiframework/framework/web/CWebApplication.php(282): CController->run('news')
+#2 /opt/lampp/htdocs/yiiframework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/news')
+#3 /opt/lampp/htdocs/yiiframework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /opt/lampp/htdocs/vncweb/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/vncweb/index.php?r=site/news
+---
+2013/03/07 10:17:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "news".' in /opt/lampp/htdocs/yiiframework/framework/web/CController.php:483
+Stack trace:
+#0 /opt/lampp/htdocs/yiiframework/framework/web/CController.php(270): CController->missingAction('news')
+#1 /opt/lampp/htdocs/yiiframework/framework/web/CWebApplication.php(282): CController->run('news')
+#2 /opt/lampp/htdocs/yiiframework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/news')
+#3 /opt/lampp/htdocs/yiiframework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /opt/lampp/htdocs/vncweb/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/vncweb/index.php?r=site/news
+---
+2013/03/07 10:18:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "news".' in /opt/lampp/htdocs/yiiframework/framework/web/CController.php:483
+Stack trace:
+#0 /opt/lampp/htdocs/yiiframework/framework/web/CController.php(270): CController->missingAction('news')
+#1 /opt/lampp/htdocs/yiiframework/framework/web/CWebApplication.php(282): CController->run('news')
+#2 /opt/lampp/htdocs/yiiframework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/news')
+#3 /opt/lampp/htdocs/yiiframework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /opt/lampp/htdocs/vncweb/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/vncweb/index.php?r=site/news
+---
