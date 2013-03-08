@@ -9,7 +9,8 @@
 
 <?php echo $form->errorSummary($model); ?>
 
-<?php echo $form->textFieldRow($model,'category_id',array('class'=>'span5')); ?>
+<?php //echo $form->textFieldRow($model,'category_id',array('class'=>'span5'));
+		echo $form->dropDownList($model,'category_id', CHtml::listData(Categories::model()->findAll(), 'category_id', 'category_name'), array('empty'=>'--please select--')); ?>
 
 <?php echo $form->textFieldRow($model,'title',array('class'=>'span5','maxlength'=>255)); ?>
 
