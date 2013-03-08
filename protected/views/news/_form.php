@@ -18,10 +18,12 @@
 				'id'=>'uploadFile',
 				'config'=>array(
 						'action'=>Yii::app()->createUrl('news/upload'),
-						'allowedExtensions'=>array("jpg"),//array("jpg","jpeg","gif","exe","mov" and etc...
+						'allowedExtensions'=>array("jpg","png"),//array("jpg","jpeg","gif","exe","mov" and etc...
 						'sizeLimit'=>10*1024*1024,// maximum file size in bytes
-						'minSizeLimit'=>0.2*1024*1024,// minimum file size in bytes
-						'onComplete'=>"js:function(id, fileName, responseJSON){ alert(fileName); }",
+						'minSizeLimit'=>2*1024,// minimum file size in bytes
+						'onComplete'=>"js:function(id, fileName, responseJSON){
+						fileName= fileName.replace('.jpg','').replace('.png','');
+						$('#News_image').val(fileName); }",
 						//'messages'=>array(
 						//                  'typeError'=>"{file} has invalid extension. Only {extensions} are allowed.",
 						//                  'sizeError'=>"{file} is too large, maximum file size is {sizeLimit}.",
@@ -32,6 +34,8 @@
 						//'showMessage'=>"js:function(message){ alert(message); }"
 				)
 )); ?>
+
+<?php echo $form->textField($model,'image',array('class'=>'span5','maxlength'=>255,'style' =>'display:none')); ?>
 
 <?php echo $form->textAreaRow($model,'short_description',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
