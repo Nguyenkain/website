@@ -63,7 +63,7 @@ return array(
 				// uncomment the following to use a MySQL database
 
 				'db'=>array(
-				'connectionString' => 'mysql:host=localhost;dbname=tin_tuc',
+				'connectionString' => 'mysql:host=localhost;dbname=vnc',
 				'emulatePrepare' => true,
 				'username' => 'root',
 				'password' => '123123123',
