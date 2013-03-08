@@ -32,7 +32,7 @@ class NewsController extends Controller
 						'users'=>array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'actions'=>array('create','update'),
+						'actions'=>array('create','update','upload'),
 						'users'=>array('@'),
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -56,7 +56,7 @@ class NewsController extends Controller
 		));
 	}
 
-	/* public function actionUpload()
+	public function actionUpload()
 	{
 		Yii::import("ext.EAjaxUpload.qqFileUploader");
 
@@ -67,63 +67,8 @@ class NewsController extends Controller
 		$result = $uploader->handleUpload($folder);
 		$result=htmlspecialchars(json_encode($result), ENT_NOQUOTES);
 		echo $result;// it's array
-	} */
-	
-	/**
-	 * Handles resource upload
-	 * @throws CHttpException
-	 */
-	public function actionUpload()
-	{
-		header('Vary: Accept');
-		if (isset($_SERVER['HTTP_ACCEPT']) &&
-		(strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false))
-		{
-			header('Content-type: application/json');
-		} else {
-			header('Content-type: text/plain');
-		}
-		$data = array();
-	
-		$model = new News('upload');
-		$model->picture = CUploadedFile::getInstance($model, 'picture');
-		if ($model->picture !== null  && $model->validate(array('picture')))
-		{
-			$model->picture->saveAs(
-					Yii::getPathOfAlias('frontend.www.files').'/'.$model->picture->name);
-			$model->file_name = $model->picture->name;
-			// save picture name
-			if( $model->save())
-			{
-				// return data to the fileuploader
-				$data[] = array(
-						'name' => $model->picture->name,
-						'type' => $model->picture->type,
-						'size' => $model->picture->size,
-						// we need to return the place where our image has been saved
-						//'url' => $model->getImageUrl(), // Should we add a helper method?
-						// we need to provide a thumbnail url to display on the list
-						// after upload. Again, the helper method now getting thumbnail.
-						//'thumbnail_url' => $model->getImageUrl(News::IMG_THUMBNAIL),
-						// we need to include the action that is going to delete the picture
-						// if we want to after loading
-						'delete_url' => $this->createUrl('news/delete',
-								array('id' => $model->id, 'method' => 'uploader')),
-						'delete_type' => 'POST');
-			} else {
-				$data[] = array('error' => 'Unable to save model after saving picture');
-			}
-		} else {
-			if ($model->hasErrors('picture'))
-			{
-				$data[] = array('error', $model->getErrors('picture'));
-			} else {
-				throw new CHttpException(500, "Could not upload file ".     CHtml::errorSummary($model));
-			}
-		}
-		// JQuery File Upload expects JSON data
-		echo json_encode($data);
 	}
+	
 	
 	/**
 	 * Creates a new model.
@@ -131,14 +76,13 @@ class NewsController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new News;
-
+		$model = new News;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['News']))
 		{
-			$model->attributes=$_POST['News'];
+			$model->attributes=$_POST['News'];	
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->news_id));
 		}
