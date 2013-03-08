@@ -13,7 +13,15 @@
 
 <?php echo $form->textFieldRow($model,'title',array('class'=>'span5','maxlength'=>255)); ?>
 
-<?php echo $form->textFieldRow($model,'image',array('class'=>'span5','maxlength'=>225)); ?>
+<?php $this->widget('bootstrap.widgets.TbFileUpload', array(
+		'url' => $this->createUrl("news/upload"),
+		'model' => $model,
+		'attribute' => 'picture', // see the attribute?
+		'multiple' => true,
+		'options' => array(
+    'maxFileSize' => 2000000,
+    'acceptFileTypes' => 'js:/(\.|\/)(gif|jpe?g|png)$/i',
+))); ?>
 
 <?php echo $form->textAreaRow($model,'short_description',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
