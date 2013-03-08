@@ -81,8 +81,9 @@ class NewsController extends Controller
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['News']))
-		{
-			$model->attributes=$_POST['News'];	
+		{	
+			$model->attributes=$_POST['News'];
+			$model->created_time = time();	
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->news_id));
 		}

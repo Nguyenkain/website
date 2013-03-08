@@ -46,8 +46,6 @@
 	<?php echo $form->error($model,'news_content'); ?>
 </div>
 
-<?php echo $form->textFieldRow($model,'created_time',array('class'=>'span5','maxlength'=>11)); ?>
-
 <div class="form-actions">
 	<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',
