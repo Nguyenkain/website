@@ -7,7 +7,6 @@
  * @property integer $category_id
  * @property string $category_name
  * @property string $description
- * @property string $created_time
  */
 class Categories extends CActiveRecord
 {
@@ -39,10 +38,9 @@ class Categories extends CActiveRecord
 		return array(
 			array('category_name, description', 'required'),
 			array('category_name', 'length', 'max'=>255),
-			array('created_time', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('category_id, category_name, description, created_time', 'safe', 'on'=>'search'),
+			array('category_id, category_name, description', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -66,7 +64,6 @@ class Categories extends CActiveRecord
 			'category_id' => 'Category',
 			'category_name' => 'Category Name',
 			'description' => 'Description',
-			'created_time' => 'Created Time',
 		);
 	}
 
@@ -84,7 +81,6 @@ class Categories extends CActiveRecord
 		$criteria->compare('category_id',$this->category_id);
 		$criteria->compare('category_name',$this->category_name,true);
 		$criteria->compare('description',$this->description,true);
-		$criteria->compare('created_time',$this->created_time,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
