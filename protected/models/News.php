@@ -14,6 +14,8 @@
  */
 class News extends CActiveRecord
 {
+
+	public $picture;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -40,15 +42,17 @@ class News extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('category_id, title, image', 'required'),
-			array('category_id', 'numerical', 'integerOnly'=>true),
-			array('created_time', 'length', 'max'=>11),
-			array('title', 'length', 'max'=>255),
-			array('image', 'length', 'max'=>225),
-			array('short_description, news_content', 'safe'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('news_id, category_id, short_description, news_content, created_time, title, image', 'safe', 'on'=>'search'),
+				array('category_id, title, image', 'required'),
+				array('category_id', 'numerical', 'integerOnly'=>true),
+				array('created_time', 'length', 'max'=>11),
+				array('title', 'length', 'max'=>255),
+				array('image', 'length', 'max'=>225),
+				array('short_description, news_content', 'safe'),
+				array('picture', 'length', 'max' => 255, 'tooLong' => '{attribute} is too long (max {max} chars).', 'on' => 'upload'),
+				array('picture', 'file', 'types' => 'jpg,jpeg,gif,png', 'maxSize' => 1024 * 1024 * 2, 'tooLarge' => 'Size should be less then 2MB !!!', 'on' => 'upload'),
+				// The following rule is used by search().
+				// Please remove those attributes that should not be searched.
+				array('news_id, category_id, short_description, news_content, created_time, title, image', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,13 +73,13 @@ class News extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'news_id' => 'News',
-			'category_id' => 'Category',
-			'short_description' => 'Short Description',
-			'news_content' => 'News Content',
-			'created_time' => 'Created Time',
-			'title' => 'Title',
-			'image' => 'Image',
+				'news_id' => 'News',
+				'category_id' => 'Category',
+				'short_description' => 'Short Description',
+				'news_content' => 'News Content',
+				'created_time' => 'Created Time',
+				'title' => 'Title',
+				'image' => 'Image',
 		);
 	}
 
@@ -99,7 +103,7 @@ class News extends CActiveRecord
 		$criteria->compare('image',$this->image,true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+				'criteria'=>$criteria,
 		));
 	}
 }
