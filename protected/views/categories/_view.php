@@ -12,9 +12,4 @@
 	<?php echo CHtml::encode($data->description); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('created_time')); ?>:</b>
-	<?php echo CHtml::encode($data->created_time); ?>
-	<br />
-
-
 </div>
