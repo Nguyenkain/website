@@ -45,7 +45,6 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 		'category_id',
 		'category_name',
 		'description',
-		'created_time',
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 		),

@@ -21,6 +21,5 @@ $this->menu=array(
 		'category_id',
 		'category_name',
 		'description',
-		'created_time',
 	),
 )); ?>
