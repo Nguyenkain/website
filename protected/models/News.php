@@ -102,7 +102,7 @@ class News extends CActiveRecord
 		$criteria->compare('category_id',$this->category_id);
 		$criteria->compare('short_description',$this->short_description,true);
 		$criteria->compare('news_content',$this->news_content,true);
-		$criteria->compare('created_time',$this->created_time,true);
+		$criteria->compare('created_time','<='.strtotime($this->created_time),false);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('image',$this->image,true);
 
