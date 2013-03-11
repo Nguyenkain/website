@@ -45,7 +45,8 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 		'news_id',
 		'category_id',
 		'short_description',
-		'created_time',
+		array('name'=>'created_time',
+        'value'=>'date("d/m/y", $data->created_time)'),
 		'title',
 		/*
 		'image',
