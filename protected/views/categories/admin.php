@@ -1,15 +1,12 @@
 <?php
-/* @var $this CategoriesController */
-/* @var $model Categories */
-
 $this->breadcrumbs=array(
-	'Categories'=>array('index'),
-	'Manage',
+	'Categories'=>array('admin'),
+	'Quản lý',
 );
 
 $this->menu=array(
-	array('label'=>'List Categories', 'url'=>array('index')),
-	array('label'=>'Create Categories', 'url'=>array('create')),
+	array('label'=>'List Categories','url'=>array('index')),
+	array('label'=>'Create Categories','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +15,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#categories-grid').yiiGridView('update', {
+	$.fn.yiiGridView.update('categories-grid', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -26,21 +23,21 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Categories</h1>
+<h1>Quản lý Danh Mục</h1>
 
 <p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
+hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính xác của kết quả tìm kiếm.
 </p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link('Tìm kiếm nâng cao','#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'categories-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
@@ -48,8 +45,9 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'category_id',
 		'category_name',
 		'description',
+		'created_time',
 		array(
-			'class'=>'CButtonColumn',
+			'class'=>'bootstrap.widgets.TbButtonColumn',
 		),
 	),
 )); ?>

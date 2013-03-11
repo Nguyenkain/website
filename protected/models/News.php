@@ -42,17 +42,21 @@ class News extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-				array('category_id, title, image', 'required'),
+				array('category_id, title, image', 'required',
+						'message'=>'Hãy vui lòng nhập giá trị cho {attribute}.'
+				),
 				array('category_id', 'numerical', 'integerOnly'=>true),
-				array('created_time', 'length', 'max'=>11),
-				array('title', 'length', 'max'=>255),
-				array('image', 'length', 'max'=>225),
+				array('created_time', 'length', 'max'=>11,
+						'message' => '{attribute} có số ký tự vượt quá {max} ký tự'
+				),
+				array('title', 'length', 'max'=>255,'message' => '{attribute} có số ký tự vượt quá {max} ký tự'),
+				array('image', 'length', 'max'=>225,'message' => '{attribute} có số ký tự vượt quá {max} ký tự'),
 				array('short_description, news_content', 'safe'),
 				array('picture', 'length', 'max' => 255, 'tooLong' => '{attribute} is too long (max {max} chars).', 'on' => 'upload'),
 				array('picture', 'file', 'types' => 'jpg,jpeg,gif,png', 'maxSize' => 1024 * 1024 * 2, 'tooLarge' => 'Size should be less then 2MB !!!', 'on' => 'upload'),
 				// The following rule is used by search().
-				// Please remove those attributes that should not be searched.
-				array('news_id, category_id, short_description, news_content, created_time, title, image', 'safe', 'on'=>'search'),
+		// Please remove those attributes that should not be searched.
+		array('news_id, category_id, short_description, news_content, created_time, title, image', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,11 +79,11 @@ class News extends CActiveRecord
 		return array(
 				'news_id' => 'News',
 				'category_id' => 'Category',
-				'short_description' => 'Short Description',
-				'news_content' => 'News Content',
-				'created_time' => 'Created Time',
-				'title' => 'Title',
-				'image' => 'Image',
+				'short_description' => 'Miêu tả ngắn',
+				'news_content' => 'Nội dung',
+				'created_time' => 'Thời gian tạo',
+				'title' => 'Tiêu đề',
+				'image' => 'Ảnh minh họa',
 		);
 	}
 
@@ -102,8 +106,17 @@ class News extends CActiveRecord
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('image',$this->image,true);
 
+		$sort = new CSort;
+		$sort->defaultOrder = 'created_time DESC';
+
+		$sort->applyOrder($criteria);
+
 		return new CActiveDataProvider($this, array(
 				'criteria'=>$criteria,
+				'sort' => $sort,
+				'pagination'=>array(
+						'pageSize'=>10,
+				),
 		));
 	}
 }

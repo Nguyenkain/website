@@ -9,7 +9,7 @@ echo "<?php\n";
 $label=$this->pluralize($this->class2name($this->modelClass));
 echo "\$this->breadcrumbs=array(
 	'$label'=>array('index'),
-	'Create',
+	'Tạo mới',
 );\n";
 ?>
 
@@ -19,6 +19,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create <?php echo $this->modelClass; ?></h1>
+<h1>Tạo mới <?php echo $this->modelClass; ?></h1>
 
 <?php echo "<?php echo \$this->renderPartial('_form', array('model'=>\$model)); ?>"; ?>
