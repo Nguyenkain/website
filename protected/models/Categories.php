@@ -36,11 +36,15 @@ class Categories extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('category_name, description', 'required'),
-			array('category_name', 'length', 'max'=>255),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('category_id, category_name, description', 'safe', 'on'=>'search'),
+				array('category_name, description', 'required',
+						'message'=>'Hãy vui lòng nhập giá trị cho {attribute}.'
+				),
+				array('category_name', 'length', 'max'=>255,
+						'message' => '{attribute} có số ký tự vượt quá {max} ký tự'
+				),
+				// The following rule is used by search().
+				// Please remove those attributes that should not be searched.
+				array('category_id, category_name, description', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,9 +65,9 @@ class Categories extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'category_id' => 'Category',
-			'category_name' => 'Category Name',
-			'description' => 'Description',
+				'category_id' => 'Danh Mục',
+				'category_name' => 'Tên danh mục',
+				'description' => 'Miêu tả',
 		);
 	}
 
@@ -83,7 +87,7 @@ class Categories extends CActiveRecord
 		$criteria->compare('description',$this->description,true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+				'criteria'=>$criteria,
 		));
 	}
 }

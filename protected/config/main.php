@@ -7,7 +7,7 @@ Yii::setPathOfAlias('frontend.www.files','/upload');
 // CWebApplication properties can be configured here.
 return array(
 		'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-		'name'=>'My Web Application',
+		'name'=>'Quản trị VnCreature',
 
 		// preloading 'log' component
 		'preload'=>array(
@@ -19,6 +19,7 @@ return array(
 		'import'=>array(
 				'application.models.*',
 				'application.components.*',
+				'ext.giix-components.*', // giix components
 		),
 
 		'modules'=>array(
@@ -31,6 +32,7 @@ return array(
 						'ipFilters'=>array('127.0.0.1','::1'),
 						'generatorPaths'=>array(
 								'bootstrap.gii',
+								'ext.giix-core', // giix generators
 						),
 				),
 

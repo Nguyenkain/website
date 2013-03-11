@@ -4,12 +4,13 @@
 )); ?>
 
 <p class="help-block">
-	Fields with <span class="required">*</span> are required.
+	Trường với ký hiệu <span class="required">*</span> là bắt buộc.
 </p>
 
 <?php echo $form->errorSummary($model); ?>
 
 <?php //echo $form->textFieldRow($model,'category_id',array('class'=>'span5'));
+		echo $form->labelEx($model,'category_id');
 		echo $form->dropDownList($model,'category_id', CHtml::listData(Categories::model()->findAll(), 'category_id', 'category_name'), array('empty'=>'--please select--')); ?>
 
 <?php echo $form->textFieldRow($model,'title',array('class'=>'span5','maxlength'=>255)); ?>
@@ -23,8 +24,9 @@
 						'sizeLimit'=>10*1024*1024,// maximum file size in bytes
 						'minSizeLimit'=>2*1024,// minimum file size in bytes
 						'onComplete'=>"js:function(id, fileName, responseJSON){
-						fileName= fileName.replace('.jpg','').replace('.png','');
-						$('#News_image').val(fileName); }",
+						var fileNameReal = responseJSON['filename'];
+						fileNameReal= fileNameReal.replace('.jpg','').replace('.png','');
+						$('#News_image').val(fileNameReal); }",
 						//'messages'=>array(
 						//                  'typeError'=>"{file} has invalid extension. Only {extensions} are allowed.",
 						//                  'sizeError'=>"{file} is too large, maximum file size is {sizeLimit}.",
@@ -55,7 +57,7 @@
 	<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'type'=>'primary',
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+			'label'=>$model->isNewRecord ? 'Tạo mới' : 'Lưu',
 		)); ?>
 </div>
 

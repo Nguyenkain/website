@@ -11,7 +11,7 @@ $label=$this->pluralize($this->class2name($this->modelClass));
 echo "\$this->breadcrumbs=array(
 	'$label'=>array('index'),
 	\$model->{$nameColumn}=>array('view','id'=>\$model->{$this->tableSchema->primaryKey}),
-	'Update',
+	'Cập nhật',
 );\n";
 ?>
 
@@ -23,6 +23,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update <?php echo $this->modelClass." <?php echo \$model->{$this->tableSchema->primaryKey}; ?>"; ?></h1>
+<h1>Cập nhật <?php echo $this->modelClass." <?php echo \$model->{$this->tableSchema->primaryKey}; ?>"; ?></h1>
 
 <?php echo "<?php echo \$this->renderPartial('_form',array('model'=>\$model)); ?>"; ?>

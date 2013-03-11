@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'News'=>array('index'),
-	'Manage',
+	'News'=>array('admin'),
+	'Quản lý',
 );
 
 $this->menu=array(
@@ -23,14 +23,14 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage News</h1>
+<h1>Quản lý Tin Tức</h1>
 
 <p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
+hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính xác của kết quả tìm kiếm.
 </p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
+<?php echo CHtml::link('Tìm kiếm nâng cao','#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -45,7 +45,6 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'news_id',
 		'category_id',
 		'short_description',
-		'news_content',
 		'created_time',
 		'title',
 		/*

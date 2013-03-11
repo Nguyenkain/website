@@ -2,7 +2,7 @@
 $this->breadcrumbs=array(
 	'News'=>array('index'),
 	$model->title=>array('view','id'=>$model->news_id),
-	'Update',
+	'Cập nhật',
 );
 
 $this->menu=array(
@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update News <?php echo $model->news_id; ?></h1>
+<h1>Cập nhật tin tức <?php echo $model->news_id; ?></h1>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'News'=>array('index'),
-	'Create',
+	'Tin tức'=>array('admin'),
+	'Tạo mới',
 );
 
 $this->menu=array(
@@ -10,6 +10,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create News</h1>
+<h1>Tạo tin mới</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

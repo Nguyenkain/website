@@ -132,11 +132,13 @@ class qqFileUploader {
             $these = implode(', ', $this->allowedExtensions);
             return array('error' => 'File has an invalid extension, it should be one of '. $these . '.');
         }
-
+		
         if(!$replaceOldFile){
+			$i = 0;
             /// don't overwrite previous files that were uploaded
             while (file_exists($uploadDirectory . $filename . '.' . $ext)) {
-                $filename .= rand(10, 99);
+                $filename .= '_'.$i;
+				$i++;
             }
         }
 
