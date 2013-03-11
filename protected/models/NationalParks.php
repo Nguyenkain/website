@@ -38,12 +38,12 @@ class NationalParks extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('park_name, park_description, longitude, latitude', 'required'),
-			array('longitude, latitude', 'numerical'),
-			array('park_name', 'length', 'max'=>255),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, park_name, park_description, longitude, latitude', 'safe', 'on'=>'search'),
+		array('park_name, park_description, longitude, latitude', 'required'),
+		array('longitude, latitude', 'numerical'),
+		array('park_name', 'length', 'max'=>255),
+		// The following rule is used by search().
+		// Please remove those attributes that should not be searched.
+		array('id, park_name, park_description, longitude, latitude', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,10 +65,10 @@ class NationalParks extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'park_name' => 'Park Name',
-			'park_description' => 'Park Description',
-			'longitude' => 'Longitude',
-			'latitude' => 'Latitude',
+			'park_name' => 'Tên Vườn Quốc Gia',
+			'park_description' => 'Mô tả Vườn Quốc Gia',
+			'longitude' => 'Kinh độ',
+			'latitude' => 'Vĩ độ',
 		);
 	}
 

@@ -1,19 +1,19 @@
 <?php
 $this->breadcrumbs=array(
-	'National Parks'=>array('index'),
+	'Vườn Quốc Gia'=>array('index'),
 	$model->id,
 );
 
 $this->menu=array(
-	array('label'=>'List NationalParks','url'=>array('index')),
-	array('label'=>'Create NationalParks','url'=>array('create')),
-	array('label'=>'Update NationalParks','url'=>array('update','id'=>$model->id)),
-	array('label'=>'Delete NationalParks','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage NationalParks','url'=>array('admin')),
+	array('label'=>'Liệt kê Vườn Quốc Gia','url'=>array('index')),
+	array('label'=>'Tạo mới Vườn Quốc Gia','url'=>array('create')),
+	array('label'=>'Cập nhật Vườn Quốc Gia','url'=>array('update','id'=>$model->id)),
+	array('label'=>'Xóa Vườn Quốc Gia','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Quản lý Vườn Quốc Gia','url'=>array('admin')),
 );
 ?>
 
-<h1>View NationalParks #<?php echo $model->id; ?></h1>
+<h1>Xem Vườn Quốc Gia #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
