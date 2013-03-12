@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'News'=>array('admin'),
+	'Vườn Quốc Gia'=>array('index'),
 	'Quản lý',
 );
 
 $this->menu=array(
-	array('label'=>'List News','url'=>array('index')),
-	array('label'=>'Create News','url'=>array('create')),
+	array('label'=>'Liệt kê Vườn Quốc Gia','url'=>array('index')),
+	array('label'=>'Tạo mới Vườn Quốc Gia','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -15,15 +15,15 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('news-grid', {
+	$.fn.yiiGridView.update('national-parks-grid', {
 		data: $(this).serialize()
 	});
 	return false;
 });
 ");
 ?>
- 	
-<h1>Quản lý Tin Tức</h1>
+
+<h1>Quản lý Vườn Quốc Gia</h1>
 
 <p>
 Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -38,19 +38,15 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 </div><!-- search-form -->
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
-	'id'=>'news-grid',
+	'id'=>'national-parks-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'news_id',
-		'category_id',
-		'short_description',
-		array('name'=>'created_time',
-        'value'=>'date("d/m/y", $data->created_time)'),
-		'title',
-		/*
-		'image',
-		*/
+		'id',
+		'park_name',
+		'park_description',
+		'longitude',
+		'latitude',
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 		),
