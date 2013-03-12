@@ -56,3 +56,6 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 		),
 	),
 )); ?>
+
+<?php Yii::app()->getClientScript()->registerCoreScript( 'jquery.ui' );?>
+

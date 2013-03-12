@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'National Parks'=>array('index'),
+	'Vườn Quốc Gia'=>array('index'),
 	'Quản lý',
 );
 
 $this->menu=array(
-	array('label'=>'List NationalParks','url'=>array('index')),
-	array('label'=>'Create NationalParks','url'=>array('create')),
+	array('label'=>'Liệt kê Vườn Quốc Gia','url'=>array('index')),
+	array('label'=>'Tạo mới Vườn Quốc Gia','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Quản lý National Parks</h1>
+<h1>Quản lý Vườn Quốc Gia</h1>
 
 <p>
 Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
