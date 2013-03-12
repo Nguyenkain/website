@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//protected/components/views/userMenuDiscussion.php=UTF-8
 encoding//protected/components/views/userMenuNews.php=UTF-8
 encoding//protected/config/main.php=UTF-8
 encoding//protected/extensions/bootstrap/gii/bootstrap/templates/default/_form.php=UTF-8
@@ -7,6 +8,9 @@ encoding//protected/extensions/bootstrap/gii/bootstrap/templates/default/create.
 encoding//protected/extensions/bootstrap/gii/bootstrap/templates/default/update.php=UTF-8
 encoding//protected/models/Categories.php=UTF-8
 encoding//protected/models/News.php=UTF-8
+encoding//protected/models/_base/BasePosts.php=UTF-8
+encoding//protected/models/_base/BaseReportTypes.php=UTF-8
+encoding//protected/models/_base/BaseThreads.php=UTF-8
 encoding//protected/views/categories/_form.php=UTF-8
 encoding//protected/views/categories/admin.php=UTF-8
 encoding//protected/views/categories/create.php=UTF-8
@@ -16,3 +20,7 @@ encoding//protected/views/news/_form.php=UTF-8
 encoding//protected/views/news/admin.php=UTF-8
 encoding//protected/views/news/create.php=UTF-8
 encoding//protected/views/news/update.php=UTF-8
+encoding//protected/views/posts/admin.php=UTF-8
+encoding//protected/views/threads/_form.php=UTF-8
+encoding//protected/views/threads/admin.php=UTF-8
+encoding//protected/views/threads/view.php=UTF-8

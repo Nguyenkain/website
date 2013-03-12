@@ -34,7 +34,7 @@
 							'items'=>array(
 									array('label'=>'Sinh vật', 'url'=>array('/site/index')),
 									array('label'=>'Tin tức', 'url'=>array('/news/admin')),
-									array('label'=>'Thảo luận', 'url'=>array('/site/contact')),
+									array('label'=>'Thảo luận', 'url'=>array('/threads/admin')),
 									array('label'=>'Vườn Quốc Gia', 'url'=>array('/nationalparks/admin')),
 									array('label'=>'Đăng nhập', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 									array('label'=>'Đăng xuất ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
