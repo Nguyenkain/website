@@ -72,16 +72,16 @@ class Creatures extends CActiveRecord
 	{
 		return array(
 			'ID' => 'ID',
-			'Viet' => 'Viet',
+			'Viet' => 'Việt',
 			'Latin' => 'Latin',
-			'Loai' => 'Loai',
-			'Ho' => 'Ho',
-			'Bo' => 'Bo',
-			'Nhom' => 'Nhom',
+			'Loai' => 'Loài',
+			'Ho' => 'Họ',
+			'Bo' => 'Bộ',
+			'Nhom' => 'Nhóm',
 			'Description' => 'Description',
 			'Img' => 'Img',
 			'Author' => 'Author',
-			'AuthorName' => 'Author Name',
+			'AuthorName' => 'Tên tác giả',
 		);
 	}
 

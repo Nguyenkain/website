@@ -32,7 +32,7 @@
 					array(
 							'class'=>'bootstrap.widgets.TbMenu',
 							'items'=>array(
-									array('label'=>'Sinh vật', 'url'=>array('/site/index')),
+									array('label'=>'Sinh vật', 'url'=>array('/creatures/admin')),
 									array('label'=>'Tin tức', 'url'=>array('/news/admin')),
 									array('label'=>'Thảo luận', 'url'=>array('/site/contact')),
 									array('label'=>'Vườn Quốc Gia', 'url'=>array('/site/contact')),

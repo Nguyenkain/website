@@ -1,6 +1,6 @@
 <?php
 
-class CreaturesController extends Controller
+class NhomController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -61,14 +61,14 @@ class CreaturesController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Creatures;
+		$model=new Nhom;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Creatures']))
+		if(isset($_POST['Nhom']))
 		{
-			$model->attributes=$_POST['Creatures'];
+			$model->attributes=$_POST['Nhom'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->ID));
 		}
@@ -90,9 +90,9 @@ class CreaturesController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Creatures']))
+		if(isset($_POST['Nhom']))
 		{
-			$model->attributes=$_POST['Creatures'];
+			$model->attributes=$_POST['Nhom'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->ID));
 		}
@@ -127,7 +127,7 @@ class CreaturesController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Creatures');
+		$dataProvider=new CActiveDataProvider('Nhom');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -138,10 +138,10 @@ class CreaturesController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Creatures('search');
+		$model=new Nhom('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Creatures']))
-			$model->attributes=$_GET['Creatures'];
+		if(isset($_GET['Nhom']))
+			$model->attributes=$_GET['Nhom'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -155,7 +155,7 @@ class CreaturesController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Creatures::model()->findByPk($id);
+		$model=Nhom::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -167,7 +167,7 @@ class CreaturesController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='creatures-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='nhom-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
