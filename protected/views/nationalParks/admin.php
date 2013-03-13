@@ -45,7 +45,6 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 				'name' => 'park_description',
 				'value' => '$data->park_description',
                 'type' => 'raw',
-				'htmlOptions' => array('width' => '100px'),
 				),
 			'longitude',
 			'latitude',
