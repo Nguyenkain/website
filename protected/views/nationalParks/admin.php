@@ -43,8 +43,7 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 			'park_name',
 			array(
 				'name' => 'park_description',
-				'value' => '$data->park_description',
-				'type' => 'raw',
+				'value' => html_entity_decode('$data->park_description'),
 				'htmlOptions' => array('width' => '180px'),
 				),
 			'longitude',
