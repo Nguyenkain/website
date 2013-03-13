@@ -108,7 +108,7 @@
     if (status == 'OK' && results.length > 0) {
       map.fitBounds(results[0].geometry.viewport);
     } else {
-      alert("Geocode was not successful for the following reason: " + status);
+      alert("Không tìm thấy địa điểm này: " + result);
     }
   }
   
