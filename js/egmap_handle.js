@@ -49,6 +49,28 @@ function reverseGeocodeResult(results, status) {
 		document.getElementById('formatedAddress').innerHTML = 'Error';
 	}
 }
+
+// adds marker to the center of the map
+  function addMarkerAtCenter() {
+    var marker = new google.maps.Marker({
+        position: map.getCenter(),
+        map: map
+    });
+    var text = 'Lat/Lng: ' + getCenterLatLngText();
+    if(currentReverseGeocodeResponse) {
+      var addr = '';
+      if(currentReverseGeocodeResponse.size == 0) {
+        addr = 'None';
+      } else {
+        addr = currentReverseGeocodeResponse[0].formatted_address;
+      }
+      text = text + '<br>' + 'address: <br>' + addr;
+    }
+    var infowindow = new google.maps.InfoWindow({ content: text });
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(map,marker);
+    });
+  }
 //
 // geocodes the address inserted
 
@@ -58,6 +80,7 @@ function geocode() {
 		'address': address,
 		'partialmatch': true
 	}, geocodeResult);
+    addMarkerAtCenter();
 }
 
 function geocodeResult(results, status) {
