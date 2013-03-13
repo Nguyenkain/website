@@ -13,7 +13,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('news_content')); ?>:</b>
-	<?php echo CHtml::encode($data->news_content); ?>
+	<?php echo $data->news_content ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('created_time')); ?>:</b>

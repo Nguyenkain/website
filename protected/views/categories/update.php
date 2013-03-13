@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Categories'=>array('index'),
+	'Danh mục'=>array('admin'),
 	$model->category_name=>array('view','id'=>$model->category_id),
 	'Cập nhật',
 );

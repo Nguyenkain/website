@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 		'Threads'=>array('index'),
-		'Quáº£n lÃ½',
+		'Quản lý',
 );
 
 $this->menu=array(

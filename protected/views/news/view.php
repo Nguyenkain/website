@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-		'News'=>array('index'),
+		'Tin tức'=>array('index'),
 		$model->title,
 );
 
@@ -14,20 +14,23 @@ $this->menu=array(
 ?>
 
 <h1>
-	View News #
-	<?php echo $model->news_id; ?>
+	Xem tin
+	<?php echo $model->title; ?>
 </h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
-		'type' => 'raw',
 		'attributes'=>array(
-		'news_id',
-		'category_id',
-		'short_description',
-		'news_content',
-		'created_time',
-		'title',
-		'image',
-	),
+			'news_id',
+			'category_id',
+			'short_description',
+			array( 
+				'label'=>'Nội dung',
+				'type'=>'raw',
+				'value'=>$model->news_content,
+			),
+			'created_time',
+			'title',
+			'image',
+		),
 )); ?>
