@@ -69,6 +69,13 @@ abstract class BaseThreads extends GxActiveRecord {
 			'last_posted_time' => Yii::t('app', 'Bài viết cuối'),
 		);
 	}
+	
+	function defaultScope()
+	{
+		return array(
+				'alias' => $this->tableName()
+		);
+	}
 
 	public function search() {
 		$criteria = new CDbCriteria;
