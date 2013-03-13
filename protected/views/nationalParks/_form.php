@@ -138,15 +138,14 @@
 	<?php Yii::import('ext.EGMap.*');
 	// center the map
 	// wherever you want
-	$latitude = 105.82866520624998;
-	$longitude = 21.0464771977015;
-	$zoom = 8;
+	$latitude = 21.028797427164005;
+	$longitude = 105.85235420000004;
 	$gMap = new EGMap();
 	$gMap->setJsName('map');
 	$gMap->width = '100%';
 	$gMap->height = '400';
 	$gMap->setCenter($latitude, $longitude);
-	$gMap->zoom = 8;
+	$gMap->zoom = 6;
 	$gMap->addGlobalVariable('geocoder');
 	$gMap->addGlobalVariable('centerChangedLast');
 	$gMap->addGlobalVariable('reverseGeocodedLast');
