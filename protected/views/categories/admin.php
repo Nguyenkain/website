@@ -41,6 +41,10 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 	'id'=>'categories-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
+	'template'=>'{summary}{pager}{items}{pager}',
+	'pagerCssClass'=>'pagination pagination-right',
+	'htmlOptions' => array('class' => 'grid-view rounded'),
+	'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 	'columns'=>array(
 		'category_id',
 		'category_name',

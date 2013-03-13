@@ -15,6 +15,7 @@
 
 <?php echo $form->textFieldRow($model,'title',array('class'=>'span5','maxlength'=>255)); ?>
 
+<?php echo $form->labelEx($model,'image'); ?>
 <?php $this->widget('ext.EAjaxUpload.EAjaxUpload',
 		array(
 				'id'=>'uploadFile',

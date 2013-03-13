@@ -14,9 +14,7 @@
 
 <?php echo $form->textAreaRow($model,'news_content',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
-<?php echo $form->textField($model,'created_time',array('class'=>'span5','maxlength'=>11, 'style'=>'display:none')); ?>
-
-<?php echo $form->LabelEx($model,'created_time');?>
+<?php echo $form->textFieldRow($model,'created_time',array('class'=>'span5','maxlength'=>11, 'style'=>'display:none')); ?>
 
 <?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
     'name'=>'Date',
@@ -24,7 +22,7 @@
     'options'=>array(
 		'dateFormat' => 'mm/dd/y',
 		'onSelect'=>"js:function(selectedDate) {
-			selectedDate += ' 23:59';
+			selectedDate += ' 23:59:59';
     		$('#News_created_time').val(selectedDate);
     	}",
     ),
