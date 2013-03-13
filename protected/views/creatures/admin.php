@@ -26,8 +26,7 @@ $('.search-form form').submit(function(){
 <h1>Manage Creatures</h1>
 
 <p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi giá trị tìm kiếm để tăng độ chính xác của kết quả tìm kiếm.
 </p>
 
 <?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
@@ -48,13 +47,13 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'Loai',
 		'Ho',
 		'Bo',
-		/*
+		
 		'Nhom',
-		'Description',
-		'Img',
-		'Author',
+	/*	'Description',*/
+	/*	'Img',        */
+	/*	'Author',     */
 		'AuthorName',
-		*/
+		
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 		),

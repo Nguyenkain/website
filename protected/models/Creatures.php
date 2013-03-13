@@ -44,6 +44,7 @@ class Creatures extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('ID,Viet','required','message'=>'Hãy vui lòng nhập giá trị cho {attributes}.'),
 			array('ID, Loai, Ho, Bo, Nhom, Author', 'numerical', 'integerOnly'=>true),
 			array('Viet, Latin, AuthorName', 'length', 'max'=>50),
 			array('Img', 'length', 'max'=>200),
@@ -72,16 +73,16 @@ class Creatures extends CActiveRecord
 	{
 		return array(
 			'ID' => 'ID',
-			'Viet' => 'Viet',
+			'Viet' => 'Việt',
 			'Latin' => 'Latin',
-			'Loai' => 'Loai',
-			'Ho' => 'Ho',
-			'Bo' => 'Bo',
-			'Nhom' => 'Nhom',
+			'Loai' => 'Loài',
+			'Ho' => 'Họ',
+			'Bo' => 'Bộ',
+			'Nhom' => 'Nhóm',
 			'Description' => 'Description',
 			'Img' => 'Img',
 			'Author' => 'Author',
-			'AuthorName' => 'Author Name',
+			'AuthorName' => 'Tên tác giả',
 		);
 	}
 

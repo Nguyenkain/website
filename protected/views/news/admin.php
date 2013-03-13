@@ -22,7 +22,7 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
-
+ 	
 <h1>Quản lý Tin Tức</h1>
 
 <p>
