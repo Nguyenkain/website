@@ -1,7 +1,10 @@
 <?php $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 		'id' => 'national-parks-form',
 		'enableAjaxValidation' => false,
-		)); ?>
+		));
+	$baseUrl = Yii::app()->baseUrl;
+	$js = Yii::app()->getClientScript();
+	$js->registerScriptFile($baseUrl . '/js/egmap_handle.js'); ?>
 
 <p class="help-block">
 	Trường với ký hiệu <span class="required">*</span> là bắt buộc.
@@ -24,102 +27,12 @@
 	<?php echo $form->error($model, 'news_content'); ?>
 </div>
 
-<style>
-  div#map {
-    position: relative;
-  }
-  div#crosshair {
-    position: absolute;
-/*
-     the top will be half of the width of the map
-     less 50% of its size more or less
-     to center the image correctly on the map
-*/
-    top: 192px;
-    height: 19px;
-    width: 19px;
-    left: 50%;
-    margin-left: -8px;
-    display: block;
-/* we are going to borrow a crosshair gif from google */
-    background: url(http://gmaps-samples-v3.googlecode.com/svn/trunk/geocoder/crosshair.gif);
-    background-position: center center;
-    background-repeat: no-repeat;
-}
-</style>
-
-<script type="text/javascript">
-  //
-  // function to get the latitude and longitude
-  // and place them on the test fields
-  function setLatLngToClass(){
-    if(document.getElementById('NationalParks_latitude'))
-        document.getElementById('NationalParks_latitude').value = map.getCenter().lat();
-    if(document.getElementById('NationalParks_longitude'))
-        document.getElementById('NationalParks_longitude').value = map.getCenter().lng();
-  }
-  //
-  // function to get Centered Latitude and Longitude points
-  function getCenterLatLngText() {
-    return '(' + map.getCenter().lng() +', '+ map.getCenter().lat() +')';
-  }
-  //
-  // function to call when the center of the map
-  // has changed. Center information will be
-  // collected and displayed on the document
-  // elements
-  function centerChanged() {
-    centerChangedLast = new Date();
-    var latlng = getCenterLatLngText();
-    document.getElementById('latlng').innerHTML = latlng;
-    document.getElementById('formatedAddress').innerHTML = '';
-    currentReverseGeocodeResponse = reverseGeocode();
-  }
-  //
-  // Collects reverse center location
-  function reverseGeocode() {
-    reverseGeocodedLast = new Date();
-    geocoder.geocode({latLng:map.getCenter()},reverseGeocodeResult);
-  }
-  //
-  // Displays collected reverse geocoded results
-  // and displays them on document elements
-  function reverseGeocodeResult(results, status) {
-    currentReverseGeocodeResponse = results;
-    if(status == 'OK') {
-      if(results.length == 0) {
-        document.getElementById('formatedAddress').innerHTML = 'None';
-      } else {
-        document.getElementById('formatedAddress').innerHTML = results[0].formatted_address;
-      }
-    } else {
-      document.getElementById('formatedAddress').innerHTML = 'Error';
-    }
-  }
-  //
-  // geocodes the address inserted
-  function geocode() {
-    var address = document.getElementById("address").value;
-    geocoder.geocode({
-      'address': address,
-      'partialmatch': true}, geocodeResult);
-  }
-  function geocodeResult(results, status) {
-    if (status == 'OK' && results.length > 0) {
-      map.fitBounds(results[0].geometry.viewport);
-    } else {
-      alert("Không tìm thấy địa điểm này: " + result);
-    }
-  }
-  
-</script>
-
 <body style="background:white">
 <div class="form">
 <div id="address_search">  
  Tìm địa điểm trên bản đồ:
  <input type="text" id="address" style="width:300px"/>
- <button type="button" class="small"onclick="geocode()">Tìm kiếm</button>
+ <button type="button" class="buttons" onclick="geocode()">Tìm kiếm</button>
   <ul>
      <li>Kinh độ/Vĩ độ:&nbsp;<span id="latlng"></span></li>
      <li>Địa điểm:&nbsp;<span id="formatedAddress"></span></li>
@@ -128,14 +41,7 @@
 <div id="map">
     <div id="map_canvas" style="width:100%; height:400px"></div>
     <div id="crosshair"></div>
-</div>
-<div style="overflow:hidden;width:100%;text-align:right">
-<button type="button" class="small" onclick="setLatLngToClass()">Lấy giá trị kinh độ, vĩ độ</button>
-</div>
-</body>
-
-
-	<?php Yii::import('ext.EGMap.*');
+    <?php Yii::import('ext.EGMap.*');
 	// center the map
 	// wherever you want
 	$latitude = 21.028797427164005;
@@ -167,10 +73,15 @@
       }
     },1000);',
 		'centerChanged();')); ?>
-    
+</div>
+<div style="overflow:hidden;width:100%;text-align:right">
+<button type="button" class="buttons" onclick="setLatLngToClass()">Lấy giá trị kinh độ, vĩ độ</button>
+</div>
+</body>
     
 	<?php echo $form->textFieldRow($model, 'longitude', array('class' => 'span5')); ?>
 	<?php echo $form->textFieldRow($model, 'latitude', array('class' => 'span5')); ?>
+    
 <div class="form-actions">
 <?php $this->widget('bootstrap.widgets.TbButton', array(
 		'buttonType' => 'submit',
