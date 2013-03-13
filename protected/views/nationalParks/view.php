@@ -20,7 +20,7 @@ $this->menu=array(
 	'attributes'=>array(
 		'id',
 		'park_name',
-		CHtml::decode('park_description'),
+		'park_description',
 		'longitude',
 		'latitude',
 	),
