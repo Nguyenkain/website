@@ -22,6 +22,7 @@ $this->menu=array(
 		'user_id',
 		'thread_id',
 		'post_content',
-		'post_created_time',
+        array('name'=>'post_created_time',
+        'value'=>date("d/m/y H:i:s", $model->post_created_time)),
 	),
 )); ?>
