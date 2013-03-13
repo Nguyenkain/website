@@ -15,7 +15,10 @@
 
 	<?php echo $form->textFieldRow($model,'Loai',array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldRow($model,'Ho',array('class'=>'span5')); ?>
+	<?php //echo $form->textFieldRow($model,'category_id',array('class'=>'span5'));
+		echo $form->labelEx($model,'ID');
+		echo $form->dropDownList($model,'ID',CHtml::listData(ho::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--')); ?>
+	
 
 	<?php echo $form->textFieldRow($model,'Bo',array('class'=>'span5')); ?>
 
