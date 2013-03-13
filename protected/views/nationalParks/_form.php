@@ -138,8 +138,8 @@
 	<?php Yii::import('ext.EGMap.*');
 	// center the map
 	// wherever you want
-	$latitude = 39.72098197183251;
-	$longitude = 2.9115524999999964;
+	$latitude = 105.82866520624998;
+	$longitude = 21.0464771977015;
 	$zoom = 8;
 	$gMap = new EGMap();
 	$gMap->setJsName('map');
