@@ -84,7 +84,7 @@ abstract class BasePosts extends GxActiveRecord {
 		$criteria->compare('user_id', $this->user_id);
 		$criteria->compare('thread_id', $this->thread_id);
 		$criteria->compare('post_content', $this->post_content, true);
-		$criteria->compare('post_created_time', $this->post_created_time);
+		$criteria->compare('post_created_time', '<='.strtotime($this->post_created_time), false);
 
 		/* return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

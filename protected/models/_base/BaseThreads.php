@@ -78,7 +78,7 @@ abstract class BaseThreads extends GxActiveRecord {
 		$criteria->compare('user_id', $this->user_id);
 		$criteria->compare('thread_title', $this->thread_title, true);
 		$criteria->compare('thread_content', $this->thread_content, true);
-		$criteria->compare('thread_created_time', $this->thread_created_time);
+		$criteria->compare('thread_created_time', '<='.strtotime($this->thread_created_time), false);
 		$criteria->compare('last_posted_time', $this->last_posted_time);
 
 		return new CActiveDataProvider($this, array(
