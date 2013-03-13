@@ -140,6 +140,7 @@
 	// wherever you want
 	$latitude = 39.72098197183251;
 	$longitude = 2.9115524999999964;
+	$zoom = 8;
 	$gMap = new EGMap();
 	$gMap->setJsName('map');
 	$gMap->width = '100%';
