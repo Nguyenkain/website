@@ -145,7 +145,7 @@
 	$gMap->width = '100%';
 	$gMap->height = '400';
 	$gMap->setCenter($latitude, $longitude);
-	$gMap->zoom = 6;
+	$gMap->zoom = 7;
 	$gMap->addGlobalVariable('geocoder');
 	$gMap->addGlobalVariable('centerChangedLast');
 	$gMap->addGlobalVariable('reverseGeocodedLast');
