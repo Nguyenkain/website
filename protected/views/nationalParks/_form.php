@@ -61,7 +61,7 @@
   //
   // function to get Centered Latitude and Longitude points
   function getCenterLatLngText() {
-    return '(' + map.getCenter().lat() +', '+ map.getCenter().lng() +')';
+    return '(' + map.getCenter().lng() +', '+ map.getCenter().lat() +')';
   }
   //
   // function to call when the center of the map
@@ -138,15 +138,15 @@
 	<?php Yii::import('ext.EGMap.*');
 	// center the map
 	// wherever you want
-	$latitude = 39.72098197183251;
-	$longitude = 2.9115524999999964;
-	$zoom = 8;
+	$latitude = 105.81499;
+	$longitude = 21.027826;
+    $zoom = 6;
 	$gMap = new EGMap();
 	$gMap->setJsName('map');
 	$gMap->width = '100%';
 	$gMap->height = '400';
 	$gMap->setCenter($latitude, $longitude);
-	$gMap->zoom = 8;
+	$gMap->zoom = 6;
 	$gMap->addGlobalVariable('geocoder');
 	$gMap->addGlobalVariable('centerChangedLast');
 	$gMap->addGlobalVariable('reverseGeocodedLast');
