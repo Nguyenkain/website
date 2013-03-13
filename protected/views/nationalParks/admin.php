@@ -41,10 +41,13 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 		'columns' => array(
 			'id',
 			'park_name',
-			'park_description',
+			array( 
+				'label'=>'Mô tả Vườn Quốc Gia',
+				'type'=>'raw',
+				'value'=>$model->park_description,
+			),
 			'longitude',
 			'latitude',
 			array('class' => 'bootstrap.widgets.TbButtonColumn', ),
-            'type'=>'raw',
 			),
 		)); ?>
