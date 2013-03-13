@@ -52,9 +52,12 @@ Yii::app()->clientScript->registerScript('search', "
 			'value' => '$data->user->name',
         ),
 		'post_content',
-		'post_created_time',
+        array('name'=>'post_created_time',
+        'value'=>'date("d/m/y H:i:s", $data->post_created_time)'),
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 		),
 	),
 )); ?>
+
+<?php Yii::app()->getClientScript()->registerCoreScript( 'jquery.ui' );?>
