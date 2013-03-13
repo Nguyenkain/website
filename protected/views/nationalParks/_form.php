@@ -4,7 +4,8 @@
 		));
 	$baseUrl = Yii::app()->baseUrl;
 	$js = Yii::app()->getClientScript();
-	$js->registerScriptFile($baseUrl . '/js/egmap_handle.js'); ?>
+	$js->registerScriptFile($baseUrl . '/js/egmap_handle.js');
+	$js->registerCssFile($baseUrl . '/css/form.css'); ?>
 
 <p class="help-block">
 	Trường với ký hiệu <span class="required">*</span> là bắt buộc.
@@ -39,15 +40,39 @@
  </ul>
 </div>
 <div id="map">
-    <div id="map_canvas" style="width:100%; height:400px"></div>
+    <div id="map_canvas"></div>
     <div id="crosshair"></div>
     <?php Yii::import('ext.EGMap.*');
-	// center the map
-	// wherever you want
-	$latitude = 21.028797427164005;
-	$longitude = 105.85235420000004;
 	$gMap = new EGMap();
 	$gMap->setJsName('map');
+
+	// Preparing InfoWindow with information about our marker.
+	$info_window = new EGMapInfoWindow($model->park_name);
+
+	// Setting up an icon for marker.
+	$icon = new EGMapMarkerImage("http://google-maps-icons.googlecode.com/files/forest.png");
+	$icon->setSize(32, 37);
+	$icon->setAnchor(16, 16.5);
+	$icon->setOrigin(0, 0);
+
+	if ($model->longitude != null && $model->latitude != null)
+	{
+		$longitude = $model->longitude;
+		$latitude = $model->latitude;
+		// Add Gmaker
+		$marker = new EGMapMarker($latitude, $longitude, array('title' => $model->
+				park_description, 'icon' => $icon));
+		$marker->addHtmlInfoWindow($info_window);
+		$gMap->addMarker($marker);
+
+	} else
+	{
+		// center the map
+		// wherever you want
+		$latitude = 21.028797427164005;
+		$longitude = 105.85235420000004;
+	}
+
 	$gMap->width = '100%';
 	$gMap->height = '400';
 	$gMap->setCenter($latitude, $longitude);
