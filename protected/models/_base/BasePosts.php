@@ -20,6 +20,7 @@
 abstract class BasePosts extends GxActiveRecord {
 
 	public $user_search;
+	public $thread_search;
 
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
@@ -65,6 +66,7 @@ abstract class BasePosts extends GxActiveRecord {
 				'post_content' => Yii::t('app', 'Nội dung'),
 				'post_created_time' => Yii::t('app', 'Ngày tạo'),
 				'user' => null,
+				'thread' => null,
 		);
 	}
 
@@ -73,6 +75,9 @@ abstract class BasePosts extends GxActiveRecord {
 
 		$criteria->compare('user.name',$this->user_search, true);
 		$criteria->with = 'user';
+		
+		$criteria->compare('thread.thread_title',$this->thread_search, true);
+		$criteria->with = 'thread';
 
 
 		$criteria->compare('post_id', $this->post_id);
@@ -92,6 +97,10 @@ abstract class BasePosts extends GxActiveRecord {
 								'user_search'=>array(
 										'asc'=>'user.name',
 										'desc'=>'user.name DESC',
+								),
+								'thread_search'=>array(
+										'asc'=>'thread.thread_title',
+										'desc'=>'thread.thread_title DESC',
 								),
 								'*',
 						),

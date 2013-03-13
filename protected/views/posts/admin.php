@@ -45,7 +45,7 @@ Yii::app()->clientScript->registerScript('search', "
 		'filter'=>$model,
 		'columns'=>array(
 		'post_id',
-		'user_id',
+		'thread_id',
 		array(
 			'name' => 'user_search',
 			'header' => 'Người viết',
