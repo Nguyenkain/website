@@ -135,7 +135,7 @@
 </body>
 
 
-	<?php Yii::import('ext.egmap.*');
+	<?php Yii::import('ext.EGMap.*');
 	// center the map
 	// wherever you want
 	$latitude = 39.72098197183251;
