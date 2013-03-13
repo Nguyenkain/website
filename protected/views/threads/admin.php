@@ -46,7 +46,7 @@ Yii::app()->clientScript->registerScript('search', "
 		'columns'=>array(
 				array(
 		            'class'=>'CLinkColumn',
-				    'header'=>'thread_id',
+				    'header'=>'Chủ đề',
 				    'labelExpression'=>'$data->thread_id',
 				    'urlExpression'=>'Yii::app()->createUrl("threads/view",array("id"=>$data->thread_id))',
 				),
@@ -54,7 +54,8 @@ Yii::app()->clientScript->registerScript('search', "
 				'user_id',
 				'thread_title',
 				'thread_content',
-				'thread_created_time',
+				array('name'=>'thread_created_time',
+		        'value'=>'date("d/m/y H:i:s", $data->thread_created_time)'),
 				/*
 				 'last_posted_time',
 */
@@ -63,3 +64,5 @@ Yii::app()->clientScript->registerScript('search', "
 		),
 	),
 )); ?>
+
+<?php Yii::app()->getClientScript()->registerCoreScript( 'jquery.ui' );?>

@@ -10,6 +10,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Creatures</h1>
+<h1>Tạo sinh vật mới</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
