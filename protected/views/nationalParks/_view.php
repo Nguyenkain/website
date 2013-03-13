@@ -8,7 +8,7 @@
 	<?php echo CHtml::encode($data->park_name); ?>
 	<br />
 
-	<b><?php echo CHtml::decode($data->getAttributeLabel('park_description')); ?>:</b>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('park_description')); ?>:</b>
 	<?php echo CHtml::decode($data->park_description); ?>
 	<br />
 
