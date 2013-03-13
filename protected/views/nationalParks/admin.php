@@ -45,5 +45,6 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 			'longitude',
 			'latitude',
 			array('class' => 'bootstrap.widgets.TbButtonColumn', ),
+            'type'=>'raw',
 			),
 		)); ?>
