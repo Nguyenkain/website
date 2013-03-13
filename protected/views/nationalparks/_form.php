@@ -111,33 +111,13 @@
       alert("Geocode was not successful for the following reason: " + status);
     }
   }
- //
- // adds marker to the center of the map
-  function addMarkerAtCenter() {
-    var marker = new google.maps.Marker({
-        position: map.getCenter(),
-        map: map
-    });
-    var text = 'Lat/Lng: ' + getCenterLatLngText();
-    if(currentReverseGeocodeResponse) {
-      var addr = '';
-      if(currentReverseGeocodeResponse.size == 0) {
-        addr = 'None';
-      } else {
-        addr = currentReverseGeocodeResponse[0].formatted_address;
-      }
-      text = text + '<br>' + 'address: <br>' + addr;
-    }
-    var infowindow = new google.maps.InfoWindow({ content: text });
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.open(map,marker);
-    });
-  }
+  
 </script>
 
 <body style="background:white">
 <div class="form">
-Tìm địa điểm trên bản đồ:
+<div id="address_search">  
+ Tìm địa điểm trên bản đồ:
  <input type="text" id="address" style="width:300px"/>
  <button type="button" class="small"onclick="geocode()">Tìm kiếm</button>
   <ul>
@@ -150,8 +130,7 @@ Tìm địa điểm trên bản đồ:
     <div id="crosshair"></div>
 </div>
 <div style="overflow:hidden;width:100%;text-align:right">
-<button type="button" class="small" onclick="setLatLngToClass()">Set Latitude & Longitude</button>
-<button type="button" class="small" onclick="addMarkerAtCenter()">Add Marker at Center</button>
+<button type="button" class="small" onclick="setLatLngToClass()">Lấy giá trị kinh độ, vĩ độ</button>
 </div>
 </body>
 
