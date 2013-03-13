@@ -85,7 +85,7 @@ class NationalParks extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('park_name',$this->park_name,true);
-		$criteria->compare('park_description',$this->park_description,true);
+		$criteria->compare('park_description',CHtml::decode($this->park_description),true);
 		$criteria->compare('longitude',$this->longitude);
 		$criteria->compare('latitude',$this->latitude);
 
