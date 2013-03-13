@@ -80,7 +80,6 @@ function geocode() {
 		'address': address,
 		'partialmatch': true
 	}, geocodeResult);
-    addMarkerAtCenter();
 }
 
 function geocodeResult(results, status) {
