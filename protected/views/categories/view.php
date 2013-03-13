@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Categories'=>array('index'),
-	$model->category_id,
+	'Danh mục'=>array('admin'),
+	$model->category_name,
 );
 
 $this->menu=array(
@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Categories #<?php echo $model->category_id; ?></h1>
+<h1>Xem danh mục <?php echo $model->category_name; ?></h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,

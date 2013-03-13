@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'News'=>array('admin'),
+	'Tin tức'=>array('admin'),
 	'Quản lý',
 );
 
@@ -41,18 +41,48 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 	'id'=>'news-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
+	'template'=>'{summary}{pager}{items}{pager}',
+	'pagerCssClass'=>'pagination pagination-right',
+	'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
+	'afterAjaxUpdate'=>"function(){
+		jQuery('#created_time_search').datepicker({'dateFormat': 'mm/dd/yy'})
+			}",
 	'columns'=>array(
 		'news_id',
-		'category_id',
+		array(
+			'name'=>'category_id',
+        	'value'=>'$data->category_id',
+			'filter' => CHtml::listData(Categories::model()->findAll(), 'category_id', 'category_name'),
+		),
+		array(
+			'name'=>'title',
+        	'value'=>'$data->title',
+			'htmlOptions'=>array(
+				'width'=>'180px',
+			),
+		),
 		'short_description',
-		array('name'=>'created_time',
-        'value'=>'date("d/m/y", $data->created_time)'),
-		'title',
+		array(
+			'name'=>'created_time',
+        	'value'=>'date("d/m/y", $data->created_time)',
+			'type' => 'raw',
+			'filter'=>$this->widget('zii.widgets.jui.CJuiDatepicker', array(
+				'model'=>$model, 
+				'attribute'=>'created_time', 
+				'htmlOptions' => array('id' => 'created_time_search'), 
+				'options' => array('dateFormat' => 'mm/dd/yy')), 
+				true
+			),
+		),
 		/*
 		'image',
 		*/
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
+			'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
 		),
 	),
 )); ?>
+
+<?php Yii::app()->getClientScript()->registerCoreScript( 'jquery.ui' );?>
+
