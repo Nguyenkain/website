@@ -43,6 +43,9 @@ Yii::app()->clientScript->registerScript('search', "
 		'id'=>'threads-grid',
 		'dataProvider'=>$model->search(),
 		'filter'=>$model,
+		'template'=>'{summary}{pager}{items}{pager}',
+		'pagerCssClass'=>'pagination pagination-right',
+		'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 		'columns'=>array(
 				array(
 		            'class'=>'CLinkColumn',
@@ -57,14 +60,16 @@ Yii::app()->clientScript->registerScript('search', "
 				),
 				'thread_title',
 				'thread_content',
-				array('name'=>'thread_created_time',
-		        'value'=>'date("d/m/y H:i:s", $data->thread_created_time)'),
+				array(
+					'name'=>'thread_created_time',
+			        'value'=>'date("d/m/y H:i:s", $data->thread_created_time)'),
 				'last_modified_time',
 				/*
 				 'last_posted_time',
 */
 				array(
-			'class'=>'bootstrap.widgets.TbButtonColumn',
+					'class'=>'bootstrap.widgets.TbButtonColumn',
+					'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
 		),
 	),
 )); ?>
