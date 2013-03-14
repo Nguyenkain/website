@@ -42,7 +42,7 @@ abstract class BasePosts extends GxActiveRecord {
 		return array(
 				array('user_id, thread_id, post_content, post_created_time', 'required'),
 				array('user_id, thread_id, post_created_time', 'numerical', 'integerOnly'=>true),
-				array('post_id, user_id, thread_id, post_content, post_created_time', 'safe', 'on'=>'search'),
+				array('post_id, user_id, thread_id, post_content, post_created_time, thread_search, user_search', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,8 +72,8 @@ abstract class BasePosts extends GxActiveRecord {
 				'thread_id' => Yii::t('app', 'Chủ đề'),
 				'post_content' => Yii::t('app', 'Nội dung'),
 				'post_created_time' => Yii::t('app', 'Ngày tạo'),
-				'user' => null,
-				'thread' => null,
+				'users' => null,
+				'threads' => null,
 		);
 	}
 
@@ -83,8 +83,8 @@ abstract class BasePosts extends GxActiveRecord {
 		$criteria->compare('users.name',$this->user_search, true);
 		$criteria->with = 'users';
 		
-		/* $criteria->compare('thread.thread_title',$this->thread_search, true);
-		$criteria->with = 'thread'; */
+		$criteria->compare('threads.thread_title',$this->thread_search, true);
+		$criteria->with = 'threads';
 
 
 		$criteria->compare('post_id', $this->post_id);
@@ -105,10 +105,10 @@ abstract class BasePosts extends GxActiveRecord {
 										'asc'=>'users.name',
 										'desc'=>'users.name DESC',
 								),
-								/* 'thread_search'=>array(
-										'asc'=>'thread.thread_title',
-										'desc'=>'thread.thread_title DESC',
-								), */
+								'thread_search'=>array(
+										'asc'=>'threads.thread_title',
+										'desc'=>'threads.thread_title DESC',
+								),
 								'*',
 						),
 				),

@@ -37,7 +37,7 @@ abstract class BaseUsers extends GxActiveRecord {
 	}
 
 	public static function representingColumn() {
-		return 'facebook_id';
+		return 'name';
 	}
 
 	public function rules() {

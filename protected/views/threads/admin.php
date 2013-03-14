@@ -53,7 +53,7 @@ Yii::app()->clientScript->registerScript('search', "
 				array(
 					'name' => 'user_search',
 					'header'=>'Người viết',
-					'value'=>'$data->users->name',
+					'value'=>'$data->users',
 				),
 				'thread_title',
 				'thread_content',

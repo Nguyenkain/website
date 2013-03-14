@@ -51,9 +51,9 @@ class ThreadsController extends Controller
 	public function actionView($id)
 	{
 		//$model=Posts::model()->findAllByAttributes(array('thread_id'=>$id));
-		$model = new Posts;
+		$model = Posts::model();
 		$thread = $this->loadModel($id);
-		$model->thread_id = $id;
+		$model->thread_search = $thread->thread_title;
 		$dataProvider=new CActiveDataProvider('Posts');
 		$this->render('view',array(
 				'post_model'=>$model,

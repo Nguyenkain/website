@@ -45,11 +45,15 @@ Yii::app()->clientScript->registerScript('search', "
 		'filter'=>$model,
 		'columns'=>array(
 		'post_id',
-		'thread_id',
+		array(
+			'name' => 'thread_search',
+			'header' => 'Chủ đề',
+			'value' => '$data->threads',
+        ),
 		array(
 			'name' => 'user_search',
 			'header' => 'Người viết',
-			'value' => '$data->user->name',
+			'value' => '$data->users->name',
         ),
 		'post_content',
         array('name'=>'post_created_time',
