@@ -155,13 +155,14 @@ class ThreadsController extends Controller
 		));
 	}
 
-	public function actionRelational()
+	public function actionRelational($id)
 	{
-		$model=new Threads('search');
+		$model = Posts::model();
+		$thread = $this->loadModel($id);
+		$model->thread_search = $thread->thread_title;
 		// partially rendering "_relational" view
 		$this->renderPartial('_relational', array(
-				'post_id' => '1',
-				'gridDataProvider' => $model->search(),
+				'post_model' => $model->search(),
 		));
 	}
 

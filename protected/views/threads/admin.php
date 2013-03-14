@@ -47,11 +47,18 @@ Yii::app()->clientScript->registerScript('search', "
 		'pagerCssClass'=>'pagination pagination-right',
 		'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 		'columns'=>array(
-				array(
+				/* array(
 		            'class'=>'CLinkColumn',
 				    'header'=>'Chủ đề',
 				    'labelExpression'=>'$data->thread_id',
 				    'urlExpression'=>'Yii::app()->createUrl("threads/view",array("id"=>$data->thread_id))',
+				), */
+				array(
+				 'class'=>'bootstrap.widgets.TbRelationalColumn',
+						'header'=>'Chủ đề',
+						'name' => 'thread_id',
+						'url' => Yii::app()->createUrl('threads/relational',array('id'=>'$data->thread_id')),
+						'value'=> '$data->thread_id',
 				),
 				array(
 					'name' => 'user_search',
