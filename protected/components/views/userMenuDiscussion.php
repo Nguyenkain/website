@@ -9,7 +9,7 @@
 	</li>
 	<?php endif; ?>
 
-	<?php if(Yii::app()->controller->id == 'posts'  && Yii::app()->controller->action->id == 'admin'):  ?>
+	<?php if(Yii::app()->controller->id == 'posts'  && (Yii::app()->controller->action->id == 'admin'|| Yii::app()->controller->action->id == 'update' || Yii::app()->controller->action->id == 'view')):  ?>
 	<li class="active"><?php echo CHtml::link('Quản lý bài viết',array('posts/admin')); ?>
 	</li>
 	<?php else: ?>
