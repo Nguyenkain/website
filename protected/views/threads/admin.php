@@ -51,15 +51,15 @@ Yii::app()->clientScript->registerScript('search', "
 				    'urlExpression'=>'Yii::app()->createUrl("threads/view",array("id"=>$data->thread_id))',
 				),
 				array(
-					'header'=>'ng viết',
+					'name' => 'user_search',
+					'header'=>'Người viết',
 					'value'=>'$data->users->name',
 				),
-				'last_modified_time',
-				'user_id',
 				'thread_title',
 				'thread_content',
 				array('name'=>'thread_created_time',
 		        'value'=>'date("d/m/y H:i:s", $data->thread_created_time)'),
+				'last_modified_time',
 				/*
 				 'last_posted_time',
 */
