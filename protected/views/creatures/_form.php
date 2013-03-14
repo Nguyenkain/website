@@ -18,15 +18,15 @@
 	<?php //echo $form->textFieldRow($model,'Nhom',array('class'=>'span5')); ?>
 	<?php 
 		echo $form->labelEx($model,'Nhom');
-		echo $form->dropDownList($model,'ID',CHtml::listData(nhom::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--')); ?>
+		echo $form->dropDownList($model,'ID',CHtml::listData(Nhom::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--')); ?>
 	<?php //echo $form->textFieldRow($model,'Bo',array('class'=>'span5')); ?>
 	
 	<?php
 		echo $form->labelEx($model,'Bo');
-		echo $form->dropDownList($model,'ID',CHtml::listData(bo::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--')); ?>
+		echo $form->dropDownList($model,'ID',CHtml::listData(Bo::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--')); ?>
 	<?php
 		echo $form->labelEx($model,'Ho');
-		echo $form->dropDownList($model,'ID',CHtml::listData(ho::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--')); ?>
+		echo $form->dropDownList($model,'ID',CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--')); ?>
 	
 
 	
