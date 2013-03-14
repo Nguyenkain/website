@@ -15,29 +15,29 @@
 
 	<?php echo $form->textFieldRow($model,'Loai',array('class'=>'span5')); ?>
 
-	
+	<?php //echo $form->textFieldRow($model,'Nhom',array('class'=>'span5')); ?>
 	<?php 
-		echo $form->labelEx($model,'Lớp');
+		echo $form->labelEx($model,'Nhom');
 		echo $form->dropDownList($model,'ID',CHtml::listData(nhom::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--')); ?>
 	<?php //echo $form->textFieldRow($model,'Bo',array('class'=>'span5')); ?>
 	
 	<?php
-		echo $form->labelEx($model,'Bộ');
+		echo $form->labelEx($model,'Bo');
 		echo $form->dropDownList($model,'ID',CHtml::listData(bo::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--')); ?>
 	<?php
-		echo $form->labelEx($model,'Họ');
+		echo $form->labelEx($model,'Ho');
 		echo $form->dropDownList($model,'ID',CHtml::listData(ho::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--')); ?>
 	
-	<?php //echo $form->textFieldRow($model,'Nhom',array('class'=>'span5')); ?>
+
 	
 
 	<?php // echo $form->textAreaRow($model,'Description',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 	<div class="tinymce">
-	<?php echo $form->labelEx($model,'Đặc tả chi tiết'); ?>
+	<?php echo $form->labelEx($model,'Description'); ?>
 	<br />
 	<?php $this->widget('application.extensions.tinymce.ETinyMce',
 			array('model'=>$model,
-                      'attribute'=>'Description',
+                       'attribute'=>'Description',
                        'editorTemplate'=>'simple',
                         'htmlOptions'=>array('rows'=>6, 'cols'=>50, 'class'=>'tinymce'),)); ?>
 	<?php echo $form->error($model,'Description'); ?>
