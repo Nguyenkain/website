@@ -31,7 +31,7 @@ class CreaturesController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','upload'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -76,6 +76,18 @@ class CreaturesController extends Controller
 		$this->render('create',array(
 			'model'=>$model,
 		));
+	}
+	public function actionUpload()
+	{
+		Yii::import("ext.EAjaxUpload.qqFileUploader");
+	
+		$folder='upload/';// folder for uploaded files
+		$allowedExtensions = array("jpg","png");//array("jpg","jpeg","gif","exe","mov" and etc...
+		$sizeLimit = 10 * 1024 * 1024;// maximum file size in bytes
+		$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+		$result = $uploader->handleUpload($folder);
+		$result=htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+		echo $result;// it's array
 	}
 
 	/**

@@ -43,12 +43,13 @@
 	<?php echo $form->error($model,'Description'); ?>
 </div>
 	<?php // echo $form->textFieldRow($model,'Img',array('class'=>'span5','maxlength'=>200)); ?>
-	<?php  echo $form->labelEx($model,'Image'); ?>
-<?php $this->widget('ext.EAjaxUpload.EAjaxUpload',
+	
+	<?php  echo $form->labelEx($model,'Img'); ?>
+	<?php $this->widget('ext.EAjaxUpload.EAjaxUpload',
 		array(
 				'id'=>'uploadFile',
 				'config'=>array(
-						'action'=>Yii::app()->createUrl('news/upload'),
+						'action'=>Yii::app()->createUrl('creatures/upload'),
 						'allowedExtensions'=>array("jpg","png"),//array("jpg","jpeg","gif","exe","mov" and etc...
 						'sizeLimit'=>10*1024*1024,// maximum file size in bytes
 						'minSizeLimit'=>2*1024,// minimum file size in bytes
@@ -56,14 +57,14 @@
 						var fileNameReal = responseJSON['filename'];
 						fileNameReal= fileNameReal.replace('.jpg','').replace('.png','');
 						$('#News_image').val(fileNameReal); }",
-						'messages'=>array(
-						                  'typeError'=>"{file} has invalid extension. Only {extensions} are allowed.",
-						                 'sizeError'=>"{file} is too large, maximum file size is {sizeLimit}.",
-						                  'minSizeError'=>"{file} is too small, minimum file size is {minSizeLimit}.",
-						                 'emptyError'=>"{file} is empty, please select files again without it.",
-						                 'onLeave'=>"The files are being uploaded, if you leave now the upload will be cancelled."
-						                 ),
-						'showMessage'=>"js:function(message){ alert(message); }"
+					//	'messages'=>array(
+					//	                  'typeError'=>"{file} has invalid extension. Only {extensions} are allowed.",
+					//	                 'sizeError'=>"{file} is too large, maximum file size is {sizeLimit}.",
+					//	                  'minSizeError'=>"{file} is too small, minimum file size is {minSizeLimit}.",
+					//	                 'emptyError'=>"{file} is empty, please select files again without it.",
+					//	                 'onLeave'=>"The files are being uploaded, if you leave now the upload will be cancelled."
+					//	                 ),
+				//		'showMessage'=>"js:function(message){ alert(message); }"
 				)
 )); ?>
 
