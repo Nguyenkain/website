@@ -20,6 +20,8 @@
  */
 abstract class BaseThreads extends GxActiveRecord {
 
+	public $user_search;	
+	
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
 	}
@@ -48,7 +50,7 @@ abstract class BaseThreads extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-			'users' => array(self::BELONGS_TO, 'Users', 'user_id'),
+			'users' => array(self::HAS_ONE, 'Users', array('user_id'=>'user_id'), 'joinType'=>'INNER JOIN'),
 			'posts' => array(self::HAS_MANY, 'Posts', 'thread_id'),
 		);
 	}
@@ -79,6 +81,9 @@ abstract class BaseThreads extends GxActiveRecord {
 
 	public function search() {
 		$criteria = new CDbCriteria;
+		
+		$criteria->compare('users.name',$this->user_search, true);
+		$criteria->with = 'users';
 
 		$criteria->compare('thread_id', $this->thread_id);
 		$criteria->compare('last_modified_time', $this->last_modified_time);
@@ -88,8 +93,21 @@ abstract class BaseThreads extends GxActiveRecord {
 		$criteria->compare('thread_created_time', '<='.strtotime($this->thread_created_time), false);
 		$criteria->compare('last_posted_time', $this->last_posted_time);
 
-		return new CActiveDataProvider($this, array(
+		/* return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,
+		)); */
+		
+		return new CActiveDataProvider( 'Threads', array(
+				'criteria'=>$criteria,
+				'sort'=>array(
+						'attributes'=>array(
+								'user_search'=>array(
+										'asc'=>'users.name',
+										'desc'=>'users.name DESC',
+								),
+								'*',
+						),
+				),
 		));
 	}
 }

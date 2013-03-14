@@ -50,6 +50,10 @@ Yii::app()->clientScript->registerScript('search', "
 				    'labelExpression'=>'$data->thread_id',
 				    'urlExpression'=>'Yii::app()->createUrl("threads/view",array("id"=>$data->thread_id))',
 				),
+				array(
+					'header'=>'ng viết',
+					'value'=>'$data->users->name',
+				),
 				'last_modified_time',
 				'user_id',
 				'thread_title',
