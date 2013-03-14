@@ -25,7 +25,7 @@
 			'cols' => 50,
 			'class' => 'tinymce'),
 		)); ?>
-	<?php echo $form->error($model, 'news_content'); ?>
+	<?php echo $form->error($model, 'park_description'); ?>
 </div>
 
 <body style="background:white">
