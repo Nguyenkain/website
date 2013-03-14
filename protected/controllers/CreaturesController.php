@@ -91,9 +91,9 @@ class CreaturesController extends Controller
 	}
 	public function actionDynamicbo()
 	{
-		$model->attributes=$_POST['Creatures'];
-		$data=Bo::model()->findAll('Nhom=:parent_id',
-				array(':parent_id'=>(int) $model->Nhom));
+		
+		$data=Bo::model()->findAll('Nhom=:Nhom',
+				array(':Nhom'=>$_POST['Creatures']['Nhom']));
 	
 		$data=CHtml::listData($data,'ID','Viet');
 		foreach($data as $value=>$name)

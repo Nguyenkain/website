@@ -22,8 +22,8 @@
 								'prompt'=>' ',
                                 'ajax' => array(
                                 'type'=>'POST',                          
-                                'url'=>CController::createUrl('currentController/dynamicbo'),
-                                'update'=>'#'.CHtml::activeId($model,'Bo')
+                                'url'=>CController::createUrl('creatures/dynamicbo'),
+                                'update'=>'Bo',
 		))); ?>
 	<?php //echo $form->textFieldRow($model,'Bo',array('class'=>'span5')); ?>
 	
@@ -32,7 +32,7 @@
 		echo $form->dropDownList($model,'Bo',CHtml::listData(Bo::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--')); ?>
 	<?php
 		echo $form->labelEx($model,'Ho');
-		echo $form->dropDownList($model,'ID',CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--')); ?>
+		echo $form->dropDownList($model,'Ho',CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--')); ?>
 	
 
 	
