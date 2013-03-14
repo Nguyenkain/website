@@ -6,7 +6,7 @@
 <?php 	echo $form->labelEx($model, 'park_name');
 	echo $form->dropDownList($model, 'park_name', CHtml::listData(NationalParks::
 		model()->findAll(array('order' => 'park_name')), 'park_name', 'park_name'),
-		array('empty' => '--Ch?n t�n Vu?n Qu?c Gia--', 'class' => 'span5')); ?>
+		array('empty' => '--Chọn tên Vườn Quốc Gia--', 'class' => 'span5')); ?>
 
 <?php echo $form->textAreaRow($model, 'park_description', array(
 		'rows' => 6,
