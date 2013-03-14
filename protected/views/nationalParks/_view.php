@@ -9,7 +9,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('park_description')); ?>:</b>
-	<?php echo CHtml::encode(substr($data->park_description,0,200)); ?>
+	<?php echo CHtml::encode(substr($data->park_description,0,600)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('longitude')); ?>:</b>
