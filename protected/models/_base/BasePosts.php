@@ -49,7 +49,14 @@ abstract class BasePosts extends GxActiveRecord {
 	public function relations() {
 		return array(
 				'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
-				'thread' => array(self::BELONGS_TO, 'Threads', 'thread_id'),
+				//'thread' => array(self::BELONGS_TO, 'Threads', 'thread_id'),
+		);
+	}
+	
+	function defaultScope()
+	{
+		return array(
+				'alias' => $this->tableName()
 		);
 	}
 
@@ -76,8 +83,8 @@ abstract class BasePosts extends GxActiveRecord {
 		$criteria->compare('user.name',$this->user_search, true);
 		$criteria->with = 'user';
 		
-		$criteria->compare('thread.thread_title',$this->thread_search, true);
-		$criteria->with = 'thread';
+		/* $criteria->compare('thread.thread_title',$this->thread_search, true);
+		$criteria->with = 'thread'; */
 
 
 		$criteria->compare('post_id', $this->post_id);
@@ -98,10 +105,10 @@ abstract class BasePosts extends GxActiveRecord {
 										'asc'=>'user.name',
 										'desc'=>'user.name DESC',
 								),
-								'thread_search'=>array(
+								/* 'thread_search'=>array(
 										'asc'=>'thread.thread_title',
 										'desc'=>'thread.thread_title DESC',
-								),
+								), */
 								'*',
 						),
 				),

@@ -29,7 +29,9 @@ $this->menu=array(
 				'type'=>'raw',
 				'value'=>$model->news_content,
 			),
-			'created_time',
+			array(
+			'name'=>'created_time',
+        	'value'=>date("d/m/y", $model->created_time)),
 			'title',
 			'image',
 		),
