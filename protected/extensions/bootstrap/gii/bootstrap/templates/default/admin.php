@@ -51,6 +51,10 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 	'id'=>'<?php echo $this->class2id($this->modelClass); ?>-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
+	'template'=>'{summary}{pager}{items}{pager}',
+	'pagerCssClass'=>'pagination pagination-right',
+	'htmlOptions' => array('class' => 'grid-view rounded'),
+	'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 	'columns'=>array(
 <?php
 $count=0;
@@ -65,6 +69,7 @@ if($count>=7)
 ?>
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
+			'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
 		),
 	),
 )); ?>
