@@ -86,6 +86,6 @@ function geocodeResult(results, status) {
 	if (status == 'OK' && results.length > 0) {
 		map.fitBounds(results[0].geometry.viewport);
 	} else {
-		alert("Không tìm th?y d?a di?m này: " + result);
+		alert("Không tìm th?y d?a di?m này: " + status);
 	}
 }

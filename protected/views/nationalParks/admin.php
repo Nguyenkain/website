@@ -44,7 +44,7 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 			array(
 				'name' => 'park_description',
 				'value' => '$data->park_description',
-                'type' => 'raw',
+				'type' => 'raw',
 				),
 			'longitude',
 			'latitude',

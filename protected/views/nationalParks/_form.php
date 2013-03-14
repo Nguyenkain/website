@@ -29,6 +29,7 @@
 </div>
 
 <body style="background:white">
+</br>
 <div class="form">
 <div id="address_search">  
  Tìm địa điểm trên bản đồ:
@@ -99,7 +100,7 @@
     },1000);',
 		'centerChanged();')); ?>
 </div>
-<div style="overflow:hidden;width:100%;text-align:right">
+<div style="overflow:hidden;width:100%;text-align:left">
 <button type="button" class="buttons" onclick="setLatLngToClass()">Lấy giá trị kinh độ, vĩ độ</button>
 </div>
 </body>
