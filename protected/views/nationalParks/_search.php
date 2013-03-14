@@ -1,4 +1,4 @@
-<?php $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+﻿<?php $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 		'action' => Yii::app()->createUrl($this->route),
 		'method' => 'get',
 		)); ?>
@@ -12,10 +12,6 @@
 		'rows' => 6,
 		'cols' => 50,
 		'class' => 'span8')); ?>
-
-#<?php echo $form->textFieldRow($model, 'longitude', array('class' => 'span5')); ?>
-#
-#<?php echo $form->textFieldRow($model, 'latitude', array('class' => 'span5')); ?>
 
 <div class="form-actions">
 <?php $this->widget('bootstrap.widgets.TbButton', array(
