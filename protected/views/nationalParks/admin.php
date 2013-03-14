@@ -41,7 +41,10 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 		'columns' => array(
 			'id',
 			'park_name',
-			substr($model->park_description, 0, 600),
+			array(
+				'name' => 'park_desription',
+				'value' => 'substr($data->park_desription, 0, 600)',
+				),
 			'longitude',
 			'latitude',
 			array('class' => 'bootstrap.widgets.TbButtonColumn', ),
