@@ -1,4 +1,4 @@
-<?php 	$this->breadcrumbs = array(
+﻿<?php 	$this->breadcrumbs = array(
 		'Vườn Quốc Gia' => array('index'),
 		$model->id,
 		);
