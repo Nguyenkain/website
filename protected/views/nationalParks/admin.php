@@ -40,11 +40,14 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 		'filter' => $model,
 		'columns' => array(
 			'id',
-			'park_name',
+			array(
+				'name' => 'park_name',
+				'value' => '$data->park_name',
+				'htmlOptions' => array('width' => '100px'),
+				),
 			array(
 				'name' => 'park_description',
-				'value' => '$data->park_description',
-                'type' => 'raw',
+				'value' => 'substr($data->park_description, 0, 600)',
 				),
 			'longitude',
 			'latitude',
