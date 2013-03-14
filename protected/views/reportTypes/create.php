@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Report Types'=>array('index'),
+	'Báo cáo'=>array('index'),
 	'Tạo mới',
 );
 

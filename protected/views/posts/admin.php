@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-		'Posts'=>array('admin'),
-		'Quản lý',
+		'Thảo luận'=>array('admin'),
+		'Bài viết',
 );
 
 $this->menu=array(
