@@ -43,7 +43,7 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 			'park_name',
 			array(
 				'name' => 'park_description',
-				'value' => 'substr($data->park_description, 0, 500)',
+				'value' => 'substr($data->park_description, 0, 600)',
 				),
 			'longitude',
 			'latitude',
