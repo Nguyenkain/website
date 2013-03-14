@@ -23,17 +23,18 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Quản lý Report Types</h1>
+<h1>Quản lý loại báo cáo</h1>
 
 <p>
-Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính xác của kết quả tìm kiếm.
+	Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>,
+	<b>&lt;&gt;</b> hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ
+	chính xác của kết quả tìm kiếm.
 </p>
 
 <?php echo CHtml::link('Tìm kiếm nâng cao','#',array('class'=>'search-button btn')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
+<div class="search-form" style="display: none">
+	<?php $this->renderPartial('_search',array(
+			'model'=>$model,
 )); ?>
 </div><!-- search-form -->
 

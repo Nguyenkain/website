@@ -10,6 +10,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Tạo mới ReportTypes</h1>
+<h1>Tạo mới loại báo cáo</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
