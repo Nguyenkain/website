@@ -43,7 +43,7 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 			array(
 				'name' => 'park_name',
 				'value' => '$data->park_name',
-				'htmlOptions' => array('width' => '40px'),
+				'htmlOptions' => array('width' => '100px'),
 				),
 			array(
 				'name' => 'park_description',
