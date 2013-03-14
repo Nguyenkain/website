@@ -11,6 +11,6 @@ class UserMenuCreatures extends CPortlet
 
 	protected function renderContent()
 	{
-		$this->render('UserMenuCreatures');
+		$this->render('userMenuCreatures');
 	}
 }

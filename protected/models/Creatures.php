@@ -79,7 +79,7 @@ class Creatures extends CActiveRecord
 			'Ho' => 'Họ',
 			'Bo' => 'Bộ',
 			'Nhom' => 'Nhóm',
-			'Description' => 'Description',
+			'Description' => 'Đặc tả chi tiết',
 			'Img' => 'Img',
 			'Author' => 'Author',
 			'AuthorName' => 'Tên tác giả',

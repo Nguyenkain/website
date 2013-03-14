@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Categories'=>array('admin'),
+	'Danh mục'=>array('admin'),
 	'Quản lý',
 );
 
