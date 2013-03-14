@@ -48,8 +48,8 @@ abstract class BasePosts extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-				'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
-				//'thread' => array(self::BELONGS_TO, 'Threads', 'thread_id'),
+				'users' => array(self::BELONGS_TO, 'Users', 'user_id'),
+				'threads' => array(self::BELONGS_TO, 'Threads', 'thread_id'),
 		);
 	}
 	

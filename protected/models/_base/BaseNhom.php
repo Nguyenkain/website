@@ -23,7 +23,7 @@ abstract class BaseNhom extends GxActiveRecord {
 	}
 
 	public function tableName() {
-		return 'vnc.nhom';
+		return 'nhom';
 	}
 
 	public static function label($n = 1) {

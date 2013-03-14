@@ -29,7 +29,7 @@ abstract class BaseThreads extends GxActiveRecord {
 	}
 
 	public static function label($n = 1) {
-		return Yii::t('app', 'Threads|Threads', $n);
+		return Yii::t('app', 'Chủ đề|Chủ đề', $n);
 	}
 
 	public static function representingColumn() {
@@ -48,7 +48,7 @@ abstract class BaseThreads extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-			'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
+			'users' => array(self::BELONGS_TO, 'Users', 'user_id'),
 			'posts' => array(self::HAS_MANY, 'Posts', 'thread_id'),
 		);
 	}
