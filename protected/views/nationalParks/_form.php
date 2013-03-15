@@ -20,8 +20,9 @@
 		'model' => $model,
 		'attribute' => 'park_description',
 		'editorTemplate' => 'full',
+        'height'    =>  '600px',
 		'htmlOptions' => array(
-			'rows' => 10,
+			'rows' => 6,
 			'cols' => 50,
 			'class' => 'tinymce'),
 		)); ?>
