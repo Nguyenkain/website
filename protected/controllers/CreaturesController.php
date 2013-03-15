@@ -31,7 +31,7 @@ class CreaturesController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','upload','dynamicbo'),
+				'actions'=>array('create','update','upload','dynamicbo','dynamicho'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -89,19 +89,44 @@ class CreaturesController extends Controller
 		$result=htmlspecialchars(json_encode($result), ENT_NOQUOTES);
 		echo $result;// it's array
 	}
-	public function actionDynamicbo()
+	public function actionDynamicbo($Ho)
 	{
 		
-		$data=Bo::model()->findAll('Nhom=:Nhom',
-				array(':Nhom'=>$_POST['Creatures']['Nhom']));
-	
-		$data=CHtml::listData($data,'ID','Viet');
-		foreach($data as $value=>$name)
-		{
-			echo CHtml::tag('option',
-					array('value'=>$value),CHtml::encode($name),true);
-		}
+	 $data = Bo::model()->findAll('Bo=:parent_id',
+                        array(':parent_id'=>(int) $_POST['Creatures']['Bo']));
+	 $data2 = Nhom::model()->findAll('Nhom=:parent_id',
+	 					array(':parent_id'=>(int)$data.'Nhom'));
+ 
+ 
+        $data = CHtml::listData($data,'ID','Viet');
+        $data2 = CHtml::listData($data2,'ID','Viet');
+            foreach($data as $ID => $value)
+            
+                $Bo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+            
+            foreach($data2 as $ID => $value)
+            
+            	$Nhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+            
+            echo CJSON::encode(array(
+            		'Bo'=>$Bo,
+            		'Nhom'=>$Nhom
+            ));
 	}
+	public function actionDynamicho()
+	{
+	
+	$data = Ho::model()->findAll('Bo=:parent_id',
+                        array(':parent_id'=>(int) $_POST['Creatures']['Bo']));
+ 
+        $data = CHtml::listData($data,'ID','Viet');
+            foreach($data as $ID => $value)
+            {
+                echo CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+            }
+		
+	}
+	
 
 	/**
 	 * Updates a particular model.

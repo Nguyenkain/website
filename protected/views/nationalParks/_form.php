@@ -21,7 +21,7 @@
 		'attribute' => 'park_description',
 		'editorTemplate' => 'full',
 		'htmlOptions' => array(
-			'rows' => 6,
+			'rows' => 10,
 			'cols' => 50,
 			'class' => 'tinymce'),
 		)); ?>
