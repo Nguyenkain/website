@@ -26,11 +26,12 @@
                         'url'=>CController::createUrl('creatures/dynamicbo'),
                         'dataType'=>'json',
                         'data'=>array('Ho'=>'js:$(this).val()'),
-                        'success'=>'function(data) {
-                    		debugger;
-                    		$("#Bo").html(data.Bo);
-                    		$("#Nhom").html(data.Nhom);
-}',
+                        'update'=>'#Bo'
+							//'function(data) {
+                    		//debugger;
+                    		//$("#Bo").html(data.Bo);
+                    		//$("#Nhom").html(data.Nhom);
+//}',
             )));
 
 ?>
