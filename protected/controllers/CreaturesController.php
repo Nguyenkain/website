@@ -31,7 +31,7 @@ class CreaturesController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','upload','dynamicbo'),
+				'actions'=>array('create','update','upload','dynamicbo','dynamicho'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -92,16 +92,32 @@ class CreaturesController extends Controller
 	public function actionDynamicbo()
 	{
 		
-		$data=Bo::model()->findAll('Nhom=:Nhom',
-				array(':Nhom'=>$_POST['Creatures']['Nhom']));
-	
-		$data=CHtml::listData($data,'ID','Viet');
-		foreach($data as $value=>$name)
-		{
-			echo CHtml::tag('option',
-					array('value'=>$value),CHtml::encode($name),true);
-		}
+	 $data = Bo::model()->findAll('Nhom=:parent_id',
+                        array(':parent_id'=>(int) $_POST['Creatures']['Nhom']));
+ 
+ 
+        $data = CHtml::listData($data,'ID','Viet');
+            foreach($data as $id => $value)
+            {
+                echo CHtml::tag('option',array('value' => $id),CHtml::encode($value),true);
+            }
+		
+		
 	}
+	public function actionDynamicho()
+	{
+	
+	$data = Ho::model()->findAll('Bo=:parent_id',
+                        array(':parent_id'=>(int) $_POST['Creatures']['Bo']));
+ 
+        $data = CHtml::listData($data,'ID','Viet');
+            foreach($data as $id => $value)
+            {
+                echo CHtml::tag('option',array('value' => $id),CHtml::encode($value),true);
+            }
+		
+	}
+	
 
 	/**
 	 * Updates a particular model.

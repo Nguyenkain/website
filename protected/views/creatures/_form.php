@@ -16,23 +16,53 @@
 	<?php echo $form->textFieldRow($model,'Loai',array('class'=>'span5')); ?>
 
 	<?php //echo $form->textFieldRow($model,'Nhom',array('class'=>'span5')); ?>
-	<?php 
-		echo $form->labelEx($model,'Nhom');
-		echo $form->dropDownList($model,'Nhom',CHtml::listData(Nhom::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--', 
-								'prompt'=>' ',
-                                'ajax' => array(
-                                'type'=>'POST',                          
-                                'url'=>CController::createUrl('creatures/dynamicbo'),
-                                'update'=>'Bo',
-		))); ?>
-	<?php //echo $form->textFieldRow($model,'Bo',array('class'=>'span5')); ?>
-	
-	<?php
-		echo $form->labelEx($model,'Bo');
-		echo $form->dropDownList($model,'Bo',CHtml::listData(Bo::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--')); ?>
-	<?php
-		echo $form->labelEx($model,'Ho');
-		echo $form->dropDownList($model,'Ho',CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--')); ?>
+	<div class="row">
+        <?php echo $form->labelEx($model,'Nhom'); ?>
+        <?php 
+              $Nhom = new CDbCriteria; 
+             // $Nhom->order = 'Viet ASC';
+        ?>
+        <?php 
+              echo $form->dropDownList($model,'Nhom',CHtml::listData(Nhom::model()->findAll($Nhom),'ID','Viet'),
+                        array(
+                            'ajax' => array(
+                            'type' => 'POST',
+                            'url' => CController::createUrl('creatures/dynamicbo'),
+                            'update' => '#creatures_'.Bo
+                        )       
+                  )
+              );
+        ?>
+        <?php echo $form->error($model,'Nhom'); ?>
+    </div>
+ 
+    <div class="row">
+        <?php echo $form->labelEx($model,'Bo'); ?>
+        <?php 
+              $Bo = new CDbCriteria;
+             // $Bo->order = 'Bo ASC';
+        ?>
+        <?php 
+              echo $form->dropDownList($model,'Bo',CHtml::listData(Bo::model()->findAll($bo),'ID','Viet'),
+                        array(
+                            'ajax' => array(
+                            'type' => 'POST',
+                            'url' => CController::createUrl('creatures/dynamicho'),
+                            'update' => '#creatures_'.Ho
+                        )   
+                    )
+              );
+        ?>
+        <?php echo $form->error($model,'bo'); ?>
+    </div>
+ 
+ 
+    <div class="row">
+ 
+        <?php echo $form->labelEx($model,'ho'); ?>
+        <?php echo $form->dropDownList($model,'ho',array());?>
+        <?php echo $form->error($model,'ho'); ?>
+    </div>
 	
 
 	
