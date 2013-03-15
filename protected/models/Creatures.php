@@ -44,14 +44,14 @@ class Creatures extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ID,Viet','required','message'=>'Hãy vui lòng nhập giá trị cho {attributes}.'),
-			array('ID, Loai, Ho, Bo, Nhom, Author', 'numerical', 'integerOnly'=>true),
+			array('Viet','required','message'=>'Hãy vui lòng nhập giá trị cho {attributes}.'),
+			array('Loai, Ho, Bo, Nhom, Author', 'numerical', 'integerOnly'=>true),
 			array('Viet, Latin, AuthorName', 'length', 'max'=>50),
 			array('Img', 'length', 'max'=>200),
 			array('Description', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('ID, Viet, Latin, Loai, Ho, Bo, Nhom, Description, Img, Author, AuthorName', 'safe', 'on'=>'search'),
+			array('Viet, Latin, Loai, Ho, Bo, Nhom, Description, Img, Author, AuthorName', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,7 +72,6 @@ class Creatures extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ID' => 'ID',
 			'Viet' => 'Việt',
 			'Latin' => 'Latin',
 			'Loai' => 'Loài',
@@ -97,7 +96,6 @@ class Creatures extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('ID',$this->ID);
 		$criteria->compare('Viet',$this->Viet,true);
 		$criteria->compare('Latin',$this->Latin,true);
 		$criteria->compare('Loai',$this->Loai);

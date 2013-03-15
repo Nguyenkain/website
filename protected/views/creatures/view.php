@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Creatures'=>array('index'),
-	$model->ID,
+	$model->Viet,
 );
 
 $this->menu=array(
@@ -13,12 +13,11 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Creatures #<?php echo $model->ID; ?></h1>
+<h1>View Creatures #<?php echo $model->Viet; ?></h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-		'ID',
 		'Viet',
 		'Latin',
 		'Loai',

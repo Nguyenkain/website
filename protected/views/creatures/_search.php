@@ -3,8 +3,6 @@
 	'method'=>'get',
 )); ?>
 
-	<?php echo $form->textFieldRow($model,'ID',array('class'=>'span5')); ?>
-
 	<?php echo $form->textFieldRow($model,'Viet',array('class'=>'span5','maxlength'=>50)); ?>
 
 	<?php echo $form->textFieldRow($model,'Latin',array('class'=>'span5','maxlength'=>50)); ?>

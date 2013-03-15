@@ -89,20 +89,29 @@ class CreaturesController extends Controller
 		$result=htmlspecialchars(json_encode($result), ENT_NOQUOTES);
 		echo $result;// it's array
 	}
-	public function actionDynamicbo()
+	public function actionDynamicbo($Ho)
 	{
 		
-	 $data = Bo::model()->findAll('Nhom=:parent_id',
-                        array(':parent_id'=>(int) $_POST['Creatures']['Nhom']));
+	 $data = Bo::model()->findAll('Bo=:parent_id',
+                        array(':parent_id'=>(int) $_POST['Creatures']['Bo']));
+	 $data2 = Nhom::model()->findAll('Nhom=:parent_id',
+	 					array(':parent_id'=>(int)$data.'Nhom'));
  
  
         $data = CHtml::listData($data,'ID','Viet');
-            foreach($data as $id => $value)
-            {
-                echo CHtml::tag('option',array('value' => $id),CHtml::encode($value),true);
-            }
-		
-		
+        $data2 = CHtml::listData($data2,'ID','Viet');
+            foreach($data as $ID => $value)
+            
+                $Bo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+            
+            foreach($data2 as $ID => $value)
+            
+            	$Nhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+            
+            echo CJSON::encode(array(
+            		'Bo'=>$Bo,
+            		'Nhom'=>$Nhom
+            ));
 	}
 	public function actionDynamicho()
 	{
@@ -111,9 +120,9 @@ class CreaturesController extends Controller
                         array(':parent_id'=>(int) $_POST['Creatures']['Bo']));
  
         $data = CHtml::listData($data,'ID','Viet');
-            foreach($data as $id => $value)
+            foreach($data as $ID => $value)
             {
-                echo CHtml::tag('option',array('value' => $id),CHtml::encode($value),true);
+                echo CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
             }
 		
 	}

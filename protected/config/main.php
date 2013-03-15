@@ -8,6 +8,7 @@ Yii::setPathOfAlias('frontend.www.files','/upload');
 return array(
 		'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 		'name'=>'Quản trị VnCreature',
+		'defaultController' => 'creatures/admin',
 
 		// preloading 'log' component
 		'preload'=>array(
