@@ -42,11 +42,15 @@ $('.search-form form').submit(function(){
 	'id'=>'report-types-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
+	'template'=>'{summary}{pager}{items}{pager}',
+	'pagerCssClass'=>'pagination pagination-right',
+	'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 	'columns'=>array(
 		'report_type_id',
 		'report_type',
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
+			'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
 		),
 	),
 )); ?>

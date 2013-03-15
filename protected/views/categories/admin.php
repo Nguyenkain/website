@@ -51,6 +51,7 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 		'description',
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
+			'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
 		),
 	),
 )); ?>

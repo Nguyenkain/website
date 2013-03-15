@@ -22,7 +22,7 @@ abstract class BaseHo extends GxActiveRecord {
 	}
 
 	public function tableName() {
-		return 'vnc.ho';
+		return 'ho';
 	}
 
 	public static function label($n = 1) {

@@ -33,7 +33,7 @@ class Creatures extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'vnc.creatures';
+		return 'creatures';
 	}
 
 	/**

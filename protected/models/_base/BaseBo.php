@@ -22,7 +22,7 @@ abstract class BaseBo extends GxActiveRecord {
 	}
 
 	public function tableName() {
-		return 'vnc.bo';
+		return 'bo';
 	}
 
 	public static function label($n = 1) {

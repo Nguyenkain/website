@@ -69,7 +69,7 @@ return array(
 				'emulatePrepare' => true,
 				'username' => 'root',
 				'password' => '123123123',
-				/* 'charset' => 'utf8', */
+				'charset' => 'latin1',
 				),
 
 				'errorHandler'=>array(

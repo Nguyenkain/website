@@ -13,14 +13,22 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Posts #<?php echo $model->post_id; ?></h1>
+<h1>Xem bài viết</h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
 		'post_id',
-		'user_id',
-		'thread_id',
+		array(
+			'name' => 'Chủ đề',
+			'header' => 'Chủ đề',
+			'value' => $model->threads,
+        ),
+		array(
+			'name' => 'Người viết',
+			'header' => 'Người viết',
+			'value' => $model->users->name,
+        ),
 		'post_content',
         array('name'=>'post_created_time',
         'value'=>date("d/m/y H:i:s", $model->post_created_time)),
