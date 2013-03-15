@@ -1,4 +1,4 @@
-// function to get the latitude and longitude
+﻿// function to get the latitude and longitude
 // and place them on the test fields
 
 function setLatLngToClass() {
@@ -86,6 +86,6 @@ function geocodeResult(results, status) {
 	if (status == 'OK' && results.length > 0) {
 		map.fitBounds(results[0].geometry.viewport);
 	} else {
-		alert("Kh�ng t�m th?y d?a di?m n�y: " + status);
+		alert("Không tìm thấy địa điểm này: " + status);
 	}
 }

@@ -52,6 +52,7 @@ abstract class BaseThreads extends GxActiveRecord {
 		return array(
 			'users' => array(self::HAS_ONE, 'Users', array('user_id'=>'user_id'), 'joinType'=>'INNER JOIN'),
 			'posts' => array(self::HAS_MANY, 'Posts', 'thread_id'),
+			'report' => array(self::HAS_MANY, 'Reports', 'thread_id'),
 		);
 	}
 
@@ -69,6 +70,7 @@ abstract class BaseThreads extends GxActiveRecord {
 			'thread_content' => Yii::t('app', 'Nội dung'),
 			'thread_created_time' => Yii::t('app', 'Ngày tạo'),
 			'last_posted_time' => Yii::t('app', 'Bài viết cuối'),
+			'report' => null,
 		);
 	}
 	
