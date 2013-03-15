@@ -43,24 +43,40 @@ Yii::app()->clientScript->registerScript('search', "
 		'id'=>'threads-grid',
 		'dataProvider'=>$model->search(),
 		'filter'=>$model,
+		'template'=>'{summary}{pager}{items}{pager}',
+		'pagerCssClass'=>'pagination pagination-right',
+		'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 		'columns'=>array(
-				array(
+				/* array(
 		            'class'=>'CLinkColumn',
 				    'header'=>'Chủ đề',
 				    'labelExpression'=>'$data->thread_id',
 				    'urlExpression'=>'Yii::app()->createUrl("threads/view",array("id"=>$data->thread_id))',
+				), */
+				array(
+				 'class'=>'bootstrap.widgets.TbRelationalColumn',
+						'header'=>'Chủ đề',
+						'name' => 'thread_id',
+						'url' => Yii::app()->createUrl('threads/relational',array('id'=>'$data->thread_id')),
+						'value'=> '$data->thread_id',
 				),
-				'last_modified_time',
-				'user_id',
+				array(
+					'name' => 'user_search',
+					'header'=>'Người viết',
+					'value'=>'$data->users',
+				),
 				'thread_title',
 				'thread_content',
-				array('name'=>'thread_created_time',
-		        'value'=>'date("d/m/y H:i:s", $data->thread_created_time)'),
+				array(
+					'name'=>'thread_created_time',
+			        'value'=>'date("d/m/y H:i:s", $data->thread_created_time)'),
+				'last_modified_time',
 				/*
 				 'last_posted_time',
 */
 				array(
-			'class'=>'bootstrap.widgets.TbButtonColumn',
+					'class'=>'bootstrap.widgets.TbButtonColumn',
+					'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
 		),
 	),
 )); ?>

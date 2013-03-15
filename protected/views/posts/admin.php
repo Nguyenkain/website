@@ -43,20 +43,28 @@ Yii::app()->clientScript->registerScript('search', "
 		'id'=>'posts-grid',
 		'dataProvider'=>$model->search(),
 		'filter'=>$model,
+		'template'=>'{summary}{pager}{items}{pager}',
+		'pagerCssClass'=>'pagination pagination-right',
+		'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 		'columns'=>array(
-		'post_id',
-		'thread_id',
-		array(
-			'name' => 'user_search',
-			'header' => 'Người viết',
-			'value' => '$data->user->name',
-        ),
-		'post_content',
-        array('name'=>'post_created_time',
-        'value'=>'date("d/m/y H:i:s", $data->post_created_time)'),
-		array(
-			'class'=>'bootstrap.widgets.TbButtonColumn',
-		),
+			'post_id',
+			array(
+				'name' => 'thread_search',
+				'header' => 'Chủ đề',
+				'value' => '$data->threads',
+	        ),
+			array(
+				'name' => 'user_search',
+				'header' => 'Người viết',
+				'value' => '$data->users->name',
+	        ),
+			'post_content',
+	        array('name'=>'post_created_time',
+	        	'value'=>'date("d/m/y H:i:s", $data->post_created_time)'),
+			array(
+				'class'=>'bootstrap.widgets.TbButtonColumn',
+				'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
+			),
 	),
 )); ?>
 

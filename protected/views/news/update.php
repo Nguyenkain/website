@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Tin tức'=>array('index'),
+	'Tin tức'=>array('admin'),
 	$model->title=>array('view','id'=>$model->news_id),
 	'Cập nhật',
 );

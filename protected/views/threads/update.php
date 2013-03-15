@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Threads'=>array('index'),
+	'Threads'=>array('admin'),
 	$model->thread_id=>array('view','id'=>$model->thread_id),
 	'Cập nhật',
 );
@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Cập nhật Threads <?php echo $model->thread_title; ?></h1>
+<h1>Cập nhật Chủ đề <?php echo $model->thread_title; ?></h1>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

@@ -37,7 +37,7 @@ abstract class BaseUsers extends GxActiveRecord {
 	}
 
 	public static function representingColumn() {
-		return 'facebook_id';
+		return 'name';
 	}
 
 	public function rules() {
@@ -55,6 +55,7 @@ abstract class BaseUsers extends GxActiveRecord {
 		return array(
 			'posts' => array(self::HAS_MANY, 'Posts', 'user_id'),
 			'reports' => array(self::HAS_MANY, 'Reports', 'user_id'),
+			'threads' => array(self::HAS_MANY, 'Posts', array('user_id'=>'user_id'), 'joinType'=>'INNER JOIN'),
 		);
 	}
 
