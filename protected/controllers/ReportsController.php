@@ -1,12 +1,12 @@
 <?php
 
-class CreaturesController extends Controller
+class ReportsController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/layout_creatures';
+	public $layout='//layouts/layout_discussion';
 
 	/**
 	 * @return array action filters
@@ -31,7 +31,7 @@ class CreaturesController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','upload','dynamicbo','dynamicho'),
+				'actions'=>array('create','update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -61,72 +61,22 @@ class CreaturesController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Creatures;
+		$model=new Reports;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Creatures']))
+		if(isset($_POST['Reports']))
 		{
-			$model->attributes=$_POST['Creatures'];
+			$model->attributes=$_POST['Reports'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->ID));
+				$this->redirect(array('view','id'=>$model->report_id));
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
 		));
 	}
-	public function actionUpload()
-	{
-		Yii::import("ext.EAjaxUpload.qqFileUploader");
-	
-		$folder='upload/';// folder for uploaded files
-		$allowedExtensions = array("jpg","png");//array("jpg","jpeg","gif","exe","mov" and etc...
-		$sizeLimit = 10 * 1024 * 1024;// maximum file size in bytes
-		$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
-		$result = $uploader->handleUpload($folder);
-		$result=htmlspecialchars(json_encode($result), ENT_NOQUOTES);
-		echo $result;// it's array
-	}
-	public function actionDynamicbo($Ho)
-	{
-		
-	 $data = Bo::model()->findAll('Bo=:parent_id',
-                        array(':parent_id'=>(int) $_POST['Creatures']['Bo']));
-	 $data2 = Nhom::model()->findAll('Nhom=:parent_id',
-	 					array(':parent_id'=>(int)$data.'Nhom'));
- 
- 
-        $data = CHtml::listData($data,'ID','Viet');
-        $data2 = CHtml::listData($data2,'ID','Viet');
-            foreach($data as $ID => $value)
-            
-                $Bo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-            
-            foreach($data2 as $ID => $value)
-            
-            	$Nhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-            
-            echo CJSON::encode(array(
-            		'Bo'=>$Bo,
-            		'Nhom'=>$Nhom
-            ));
-	}
-	public function actionDynamicho()
-	{
-	
-	$data = Ho::model()->findAll('Bo=:parent_id',
-                        array(':parent_id'=>(int) $_POST['Creatures']['Bo']));
- 
-        $data = CHtml::listData($data,'ID','Viet');
-            foreach($data as $ID => $value)
-            {
-                echo CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-            }
-		
-	}
-	
 
 	/**
 	 * Updates a particular model.
@@ -140,11 +90,11 @@ class CreaturesController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Creatures']))
+		if(isset($_POST['Reports']))
 		{
-			$model->attributes=$_POST['Creatures'];
+			$model->attributes=$_POST['Reports'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->ID));
+				$this->redirect(array('view','id'=>$model->report_id));
 		}
 
 		$this->render('update',array(
@@ -177,7 +127,7 @@ class CreaturesController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Creatures');
+		$dataProvider=new CActiveDataProvider('Reports');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -188,10 +138,10 @@ class CreaturesController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Creatures('search');
+		$model=new Reports('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Creatures']))
-			$model->attributes=$_GET['Creatures'];
+		if(isset($_GET['Reports']))
+			$model->attributes=$_GET['Reports'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -205,7 +155,7 @@ class CreaturesController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Creatures::model()->findByPk($id);
+		$model=Reports::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -217,7 +167,7 @@ class CreaturesController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='creatures-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='reports-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
