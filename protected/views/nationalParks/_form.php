@@ -61,8 +61,7 @@
 		$longitude = $model->longitude;
 		$latitude = $model->latitude;
 		// Add Gmaker
-		$marker = new EGMapMarker($latitude, $longitude, array('title' => $model->
-				park_description, 'icon' => $icon));
+		$marker = new EGMapMarker($latitude, $longitude, $icon);
 		$marker->addHtmlInfoWindow($info_window);
 		$gMap->addMarker($marker);
 
