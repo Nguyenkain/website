@@ -46,6 +46,9 @@ Yii::app()->clientScript->registerScript('search', "
 		'template'=>'{summary}{pager}{items}{pager}',
 		'pagerCssClass'=>'pagination pagination-right',
 		'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
+		'afterAjaxUpdate'=>"function(){
+		jQuery('#created_time_search').datepicker({'dateFormat': 'mm/dd/yy'})
+		}",
 		'columns'=>array(
 			'post_id',
 			array(
@@ -60,7 +63,14 @@ Yii::app()->clientScript->registerScript('search', "
 	        ),
 			'post_content',
 	        array('name'=>'post_created_time',
-	        	'value'=>'date("d/m/y H:i:s", $data->post_created_time)'),
+	        	'value'=>'date("d/m/y H:i:s", $data->post_created_time)',
+				'filter'=>$this->widget('zii.widgets.jui.CJuiDatepicker', array(
+				'model'=>$model, 
+				'attribute'=>'post_created_time', 
+				'htmlOptions' => array('id' => 'created_time_search'), 
+				'options' => array('dateFormat' => 'mm/dd/yy')), 
+				true
+			),),
 			array(
 				'class'=>'bootstrap.widgets.TbButtonColumn',
 				'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",

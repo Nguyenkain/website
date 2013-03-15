@@ -21,6 +21,7 @@ abstract class BasePosts extends GxActiveRecord {
 
 	public $user_search;
 	public $thread_search;
+	public $temp;
 
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
@@ -77,6 +78,15 @@ abstract class BasePosts extends GxActiveRecord {
 		);
 	}
 
+ protected function beforeFind() {
+    $criteria = new CDbCriteria;
+    if (isset($temp))
+    	$criteria->condition = "post_created_time <= 86400+".$temp;
+
+    $this->dbCriteria->mergeWith($criteria);
+    parent::beforeFind();
+  }
+  
 	public function search() {
 		$criteria = new CDbCriteria;
 
@@ -86,7 +96,7 @@ abstract class BasePosts extends GxActiveRecord {
 		$criteria->compare('threads.thread_title',$this->thread_search, true);
 		$criteria->with = 'threads';
 
-
+		$temp = strtotime($this->post_created_time);
 		$criteria->compare('post_id', $this->post_id);
 		$criteria->compare('user_id', $this->user_id);
 		$criteria->compare('thread_id', $this->thread_id);
