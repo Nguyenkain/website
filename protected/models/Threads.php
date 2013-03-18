@@ -21,7 +21,7 @@ class Threads extends BaseThreads
 				'*',
 				'count(*) as reports_count',
 		);
-		$criteria->join = 'JOIN Reports r on r.thread_id = threads.thread_id';
+		$criteria->join = 'JOIN reports r on r.thread_id = threads.thread_id';
 		$criteria->group = 'threads.thread_id';
 	
 		$criteria->compare('thread_id', $this->thread_id);
