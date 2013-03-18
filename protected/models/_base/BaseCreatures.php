@@ -53,6 +53,7 @@ abstract class BaseCreatures extends GxActiveRecord {
 
 	public function relations() {
 		return array(
+            
 		);
 	}
 
