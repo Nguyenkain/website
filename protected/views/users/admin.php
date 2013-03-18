@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Quản lý Users</h1>
+<h1>Quản lý Thành viên</h1>
 
 <p>
 Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -47,11 +47,16 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 	'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 	'emptyText' => 'Không có kết quả nào được tìm thấy',
 	'columns'=>array(
+		array(
+				'class'=>'bootstrap.widgets.TbImageColumn',
+				'header' => 'Ảnh đại diện',
+				'imagePathExpression' => '"http://graph.facebook.com/". $data->user_avatar ."/picture?type=normal"',
+		),
 		'name',
 		'user_dob',
 		'user_address',
 		'user_email',
-		'user_avatar',
+		
 		array(
             'class'=>'bootstrap.widgets.TbToggleColumn',
             'toggleAction'=>'site/toggleBan/',

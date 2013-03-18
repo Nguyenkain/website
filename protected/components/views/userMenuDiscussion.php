@@ -16,6 +16,14 @@
 	<li><?php echo CHtml::link('Quản lý bài viết',array('posts/admin')); ?>
 	</li>
 	<?php endif;?>
+	
+	<?php if(Yii::app()->controller->id == 'users'  && Yii::app()->controller->action->id == 'admin'):  ?>
+	<li class="active"><?php echo CHtml::link('Quản lý thành viên',array('users/admin')); ?>
+	</li>
+	<?php else: ?>
+	<li><?php echo CHtml::link('Quản lý thành viên',array('users/admin')); ?>
+	</li>
+	<?php endif;?>
 
 	<li class="nav-header">Báo cáo</li>
 	<?php if( (Yii::app()->controller->id == 'reports'  && (Yii::app()->controller->action->id == 'admin' || Yii::app()->controller->action->id == 'update' || Yii::app()->controller->action->id == 'view')) || (Yii::app()->controller->id == 'threads' && Yii::app()->controller->action->id == 'reports')):  ?>
