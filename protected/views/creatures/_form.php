@@ -99,7 +99,7 @@ echo $form->labelEx($model,'Nhom');
 
 <?php echo $form->textFieldRow($model,'AuthorName',array('class'=>'span5','maxlength'=>50)); ?>
 
-<?php $profile = CreaturesProvincesRelation::model()->findByPk(1);
+<?php $profile = CreaturesProvincesRelation::model()->findByPk(6);
 echo $profile->province_id; ?>
 
 <div class="form-actions">
