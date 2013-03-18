@@ -23,7 +23,7 @@ Yii::app()->clientScript->registerScript('search', "
 		");
 ?>
 
-<h1>Quản lý chủ đề</h1>
+<h1>Quản lý các chủ đề bị báo cáo</h1>
 
 <p>
 	Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>,
@@ -39,48 +39,53 @@ Yii::app()->clientScript->registerScript('search', "
 </div>
 <!-- search-form -->
 
+
+
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
 		'id'=>'threads-grid',
-		'dataProvider'=>$model->search(),
+		'dataProvider'=>$model->searchReports(),
 		'filter'=>$model,
 		'beforeAjaxUpdate' => 'js:function(){
-			alert("asdsad");
+		}',
+		'afterAjaxUpdate' => 'js:function() {
 		}',
 		'template'=>'{summary}{pager}{items}{pager}',
 		'pagerCssClass'=>'pagination pagination-right',
 		'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 		'emptyText' => 'Không có kết quả nào được tìm thấy',
 		'columns'=>array(
-				/* array(
-		            'class'=>'CLinkColumn',
-				    'header'=>'Chủ đề',
-				    'labelExpression'=>'$data->thread_id',
-				    'urlExpression'=>'Yii::app()->createUrl("threads/view",array("id"=>$data->thread_id))',
-				), */
-				array(
-				 'class'=>'bootstrap.widgets.TbRelationalColumn',
-						'header'=>'Chủ đề',
-						'name' => 'thread_id',
-						'url' => Yii::app()->createUrl('threads/relational',array('id'=>'$data->thread_id')),
-						'value'=> '$data->thread_id',
-				),
+				'thread_title',
+				'thread_content',
 				array(
 					'name' => 'user_search',
 					'header'=>'Người viết',
 					'value'=>'$data->users',
 				),
-				'thread_title',
-				'thread_content',
 				array(
-					'name'=>'thread_created_time',
-			        'value'=>'date("d/m/y H:i:s", $data->thread_created_time)'),
-				'last_modified_time',
-				/*
-				 'last_posted_time',
-*/
+					'class'=>'bootstrap.widgets.TbRelationalColumn',
+					'header'=>'Số lần báo cáo',
+					'name' => 'reports_count',
+					'url' => Yii::app()->createUrl('threads/reportsView',array('id'=>'$data->thread_id')),
+					'value'=> '$data->reports_count',
+				),
+				
 				array(
 					'class'=>'bootstrap.widgets.TbButtonColumn',
+					'template'=>'{unreport}{update}{delete}',
 					'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
+					'buttons'=>array(
+						'unreport' => array(
+							'label'=> 'Bỏ báo cáo',
+							'imageUrl'=> '',
+							'options'=>array("class" => "icon-eject"),
+	 						'url'=>'$this->grid->controller->createUrl("/threads/unreport", array("id"=>$data->thread_id))',
+							'click' => 'function(){
+									var r = confirm("Bạn có chắc chắn muốn bỏ báo cáo cho chủ đề này ?");
+									return r;
+	                         }',
+							
+						),
+					),
 		),
 	),
 )); ?>

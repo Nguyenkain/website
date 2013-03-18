@@ -44,6 +44,7 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 	'template'=>'{summary}{pager}{items}{pager}',
 	'pagerCssClass'=>'pagination pagination-right',
 	'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
+	'emptyText' => 'Không có kết quả nào được tìm thấy',
 	'afterAjaxUpdate'=>"function(){
 		jQuery('#created_time_search').datepicker({'dateFormat': 'mm/dd/yy'})
 			}",

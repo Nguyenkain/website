@@ -45,8 +45,8 @@ $('.search-form form').submit(function(){
 	'template'=>'{summary}{pager}{items}{pager}',
 	'pagerCssClass'=>'pagination pagination-right',
 	'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
+	'emptyText' => 'Không có kết quả nào được tìm thấy',
 	'columns'=>array(
-		'report_type_id',
 		'report_type',
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',

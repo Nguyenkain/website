@@ -46,8 +46,8 @@ Yii::app()->clientScript->registerScript('search', "
 		'template'=>'{summary}{pager}{items}{pager}',
 		'pagerCssClass'=>'pagination pagination-right',
 		'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
+		'emptyText' => 'Không có kết quả nào được tìm thấy',
 		'columns'=>array(
-			'post_id',
 			array(
 				'name' => 'thread_search',
 				'header' => 'Chủ đề',

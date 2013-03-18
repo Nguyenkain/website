@@ -1,12 +1,12 @@
 <?php
 
-class ThreadsController extends Controller
+class UsersController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/layout_discussion';
+	public $layout='//layouts/column2';
 
 	/**
 	 * @return array action filters
@@ -31,7 +31,7 @@ class ThreadsController extends Controller
 						'users'=>array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'actions'=>array('create','update','relational','reports', 'reportsView', 'unreport'),
+						'actions'=>array('create','update','ban'),
 						'users'=>array('@'),
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -50,15 +50,8 @@ class ThreadsController extends Controller
 	 */
 	public function actionView($id)
 	{
-		//$model=Posts::model()->findAllByAttributes(array('thread_id'=>$id));
-		$model = Posts::model();
-		$thread = $this->loadModel($id);
-		$model->thread_search = $thread->thread_title;
-		$dataProvider=new CActiveDataProvider('Posts');
 		$this->render('view',array(
-				'post_model'=>$model,
-				'model' => $thread,
-				'thread_title'=>$thread->thread_title,
+				'model'=>$this->loadModel($id),
 		));
 	}
 
@@ -68,16 +61,16 @@ class ThreadsController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Threads;
+		$model=new Users;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Threads']))
+		if(isset($_POST['Users']))
 		{
-			$model->attributes=$_POST['Threads'];
+			$model->attributes=$_POST['Users'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->thread_id));
+				$this->redirect(array('view','id'=>$model->user_id));
 		}
 
 		$this->render('create',array(
@@ -97,11 +90,11 @@ class ThreadsController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Threads']))
+		if(isset($_POST['Users']))
 		{
-			$model->attributes=$_POST['Threads'];
+			$model->attributes=$_POST['Users'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->thread_id));
+				$this->redirect(array('view','id'=>$model->user_id));
 		}
 
 		$this->render('update',array(
@@ -123,7 +116,7 @@ class ThreadsController extends Controller
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('reports'));
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
@@ -132,9 +125,9 @@ class ThreadsController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex($id)
+	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Threads');
+		$dataProvider=new CActiveDataProvider('Users');
 		$this->render('index',array(
 				'dataProvider'=>$dataProvider,
 		));
@@ -145,68 +138,24 @@ class ThreadsController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Threads('search');
+		$model=new Users('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Threads']))
-			$model->attributes=$_GET['Threads'];
+		if(isset($_GET['Users']))
+			$model->attributes=$_GET['Users'];
 
 		$this->render('admin',array(
 				'model'=>$model,
 		));
 	}
 
-	public function actionReports()
+	public function actionBan($id)
 	{
-		$model=new Threads('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Threads']))
-			$model->attributes=$_GET['Threads'];
-
-		$this->render('reports',array(
-				'model'=>$model,
-		));
-	}
-
-	public function actionReportsView($id)
-	{
-		$model = Reports::model();
-		$thread = $this->loadModel($id);
-		$model->thread_id = $thread->thread_id;
-		// partially rendering "_relational" view
-		$this->renderPartial('_reports', array(
-				'model' => $model,
-				'title' => $thread->thread_title,
-		));
-	}
-
-	public function actionUnreport($id)
-	{
-		$criteria = new CDbCriteria(array(
-				'condition' => 'thread_id=:parentId',
-				'params' => array(
-						':parentId' => $id),
-		));
-
-		$childrenReport = Reports::model()->findAll($criteria);
-
-		foreach ($childrenReport as $child)
-		{
-			$child->delete();
-		}
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-	}
-
-	public function actionRelational($id)
-	{
-		$model = Posts::model();
-		$thread = $this->loadModel($id);
-		$model->thread_search = $thread->thread_title;
-		// partially rendering "_relational" view
-		$this->renderPartial('_relational', array(
-				'post_model' => $model->search(),
-		));
+		return array(
+				'toggle' => array(
+						'class'=>'bootstrap.actions.TbToggleAction',
+						'modelName' => 'Users',
+				)
+		);
 	}
 
 	/**
@@ -216,7 +165,7 @@ class ThreadsController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Threads::model()->findByPk($id);
+		$model=Users::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -228,7 +177,7 @@ class ThreadsController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='threads-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='users-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
