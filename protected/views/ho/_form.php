@@ -8,19 +8,23 @@
 	<?php echo $form->errorSummary($model); ?>
 	
 
-	<?php echo $form->textFieldRow($model,'ID',array('class'=>'span5')); ?>
+	<?php //echo $form->textFieldRow($model,'ID',array('class'=>'span5')); ?>
 
 	<?php echo $form->textFieldRow($model,'Viet',array('class'=>'span5','maxlength'=>50)); ?>
 
 	<?php echo $form->textFieldRow($model,'LaTin',array('class'=>'span5','maxlength'=>50)); ?>
 
-	<?php echo $form->textFieldRow($model,'Bo',array('class'=>'span5')); ?>
+	<?php 
+		echo $form->labelEx($model,'Bo');
+		echo $form->dropDownList($model,'Bo',CHtml::listData(Bo::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--'
+								
+				)); ?>
 
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'type'=>'primary',
-			'label'=>$model->isNewRecord ? 'LÆ°u má»›i' : 'LÆ°u',
+			'label'=>$model->isNewRecord ? 'Lưu lại' : 'Lưu?',
 		)); ?>
 	</div>
 

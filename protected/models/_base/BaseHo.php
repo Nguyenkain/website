@@ -55,9 +55,9 @@ abstract class BaseHo extends GxActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'ID' => Yii::t('app', 'ID'),
-			'Viet' => Yii::t('app', 'Viet'),
-			'LaTin' => Yii::t('app', 'La Tin'),
-			'Bo' => Yii::t('app', 'Bo'),
+			'Viet' => Yii::t('app', 'Tên Việt'),
+			'LaTin' => Yii::t('app', 'Tên La Tin'),
+			'Bo' => Yii::t('app', 'Bộ'),
 		);
 	}
 
