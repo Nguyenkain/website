@@ -53,7 +53,7 @@ abstract class BaseCreatures extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-            'province_id' => array(self::BELONGS_TO, 'CreaturesProvincesRelation', 'ID'),
+            
 		);
 	}
 
