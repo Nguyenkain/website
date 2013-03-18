@@ -20,7 +20,7 @@
 		'model' => $model,
 		'attribute' => 'park_description',
 		'editorTemplate' => 'full',
-        'height'    =>  '600px',
+		'height' => '600px',
 		'htmlOptions' => array(
 			'rows' => 6,
 			'cols' => 50,
