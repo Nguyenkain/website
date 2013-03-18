@@ -20,8 +20,9 @@
 		'model' => $model,
 		'attribute' => 'park_description',
 		'editorTemplate' => 'full',
+        'height'    =>  '600px',
 		'htmlOptions' => array(
-			'rows' => 10,
+			'rows' => 6,
 			'cols' => 50,
 			'class' => 'tinymce'),
 		)); ?>
@@ -62,7 +63,7 @@
 		$latitude = $model->latitude;
 		// Add Gmaker
 		$marker = new EGMapMarker($latitude, $longitude, array('title' => $model->
-				park_description, 'icon' => $icon));
+				park_name, 'icon' => $icon));
 		$marker->addHtmlInfoWindow($info_window);
 		$gMap->addMarker($marker);
 

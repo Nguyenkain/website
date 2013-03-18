@@ -25,7 +25,7 @@ abstract class BaseReportTypes extends GxActiveRecord {
 	}
 
 	public static function label($n = 1) {
-		return Yii::t('app', 'ReportTypes|ReportTypes', $n);
+		return Yii::t('app', 'Loại báo cáo|Loại báo cáo', $n);
 	}
 
 	public static function representingColumn() {
