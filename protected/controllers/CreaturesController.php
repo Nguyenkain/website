@@ -26,21 +26,21 @@ class CreaturesController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
+		array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','upload','dynamicbo','dynamicho'),
+		),
+		array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('create','update','upload','dynamicbo','dynamicho','dynamicloai'),
 				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+		),
+		array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
-			),
-			array('deny',  // deny all users
+		),
+		array('deny',  // deny all users
 				'users'=>array('*'),
-			),
+		),
 		);
 	}
 
@@ -70,7 +70,7 @@ class CreaturesController extends Controller
 		{
 			$model->attributes=$_POST['Creatures'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->ID));
+			$this->redirect(array('view','id'=>$model->ID));
 		}
 
 		$this->render('create',array(
@@ -80,7 +80,7 @@ class CreaturesController extends Controller
 	public function actionUpload()
 	{
 		Yii::import("ext.EAjaxUpload.qqFileUploader");
-	
+
 		$folder='upload/';// folder for uploaded files
 		$allowedExtensions = array("jpg","png");//array("jpg","jpeg","gif","exe","mov" and etc...
 		$sizeLimit = 10 * 1024 * 1024;// maximum file size in bytes
@@ -89,44 +89,91 @@ class CreaturesController extends Controller
 		$result=htmlspecialchars(json_encode($result), ENT_NOQUOTES);
 		echo $result;// it's array
 	}
-	public function actionDynamicbo($Ho)
+	public function actionDynamicbo()
 	{
+		$ho = Ho::model()->findByPk((int) $_POST['Ho']);
+		$data = Bo::model()->findAll('ID=:parent_id',
+		array(':parent_id'=>(int) $ho->Bo));
 		
-	 $data = Bo::model()->findAll('Bo=:parent_id',
-                        array(':parent_id'=>(int) $_POST['Creatures']['Bo']));
-	 $data2 = Nhom::model()->findAll('Nhom=:parent_id',
-	 					array(':parent_id'=>(int)$data.'Nhom'));
- 
- 
-        $data = CHtml::listData($data,'ID','Viet');
-        $data2 = CHtml::listData($data2,'ID','Viet');
-            foreach($data as $ID => $value)
-            
-                $Bo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-            
-            foreach($data2 as $ID => $value)
-            
-            	$Nhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-            
-            echo CJSON::encode(array(
-            		'Bo'=>$Bo,
-            		'Nhom'=>$Nhom
-            ));
+		$data2 = Nhom::model()->findAll('ID=:parent_id',
+		array(':parent_id'=>(int)$data[0]->Nhom));
+
+
+		$data = CHtml::listData($data,'ID','Viet');
+		$data2 = CHtml::listData($data2,'ID','Viet');
+		$Bo='';
+		$Nhom='';
+		foreach($data as $ID => $value)
+
+		$Bo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+	
+
+		foreach($data2 as $ID => $value)
+
+		$Nhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+
+		echo CJSON::encode(array(
+	            		'dropdownBo'=>$Bo,
+	            		'dropdownNhom'=>$Nhom
+		));
 	}
 	public function actionDynamicho()
 	{
-	
-	$data = Ho::model()->findAll('Bo=:parent_id',
-                        array(':parent_id'=>(int) $_POST['Creatures']['Bo']));
- 
-        $data = CHtml::listData($data,'ID','Viet');
-            foreach($data as $ID => $value)
-            {
-                echo CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-            }
+
+		$bo = Bo::model()->findByPk((int) $_POST['Bo']);
+		$data = Ho::model()->findAll('Bo=:parent_id',
+		array(':parent_id'=>(int) $bo->ID));
 		
+		$data2 = Nhom::model()->findAll('ID=:parent_id',
+		array(':parent_id'=>(int)$bo->Nhom));
+
+
+		$data = CHtml::listData($data,'ID','Viet');
+		$data2 = CHtml::listData($data2,'ID','Viet');
+		$Ho='';
+		$Nhom='';
+		foreach($data as $ID => $value)
+
+		$Ho.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+
+		foreach($data2 as $ID => $value)
+
+		$Nhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+
+		echo CJSON::encode(array(
+	            		'dropdownHo'=>$Ho,
+	            		'dropdownNhom'=>$Nhom
+		));
 	}
+
+	public function actionDynamicloai()
+	{
 	
+		$nhom = Nhom::model()->findByPk((int) $_POST['Nhom']);
+		$data = Bo::model()->findAll('Nhom=:parent_id',
+				array(':parent_id'=>(int) $nhom->ID));
+		foreach($data as $ID) {
+		$data2 = Ho::model()->findAll('Bo=:parent_id',
+				array(':parent_id'=>(int)$ID->ID));
+		}
+	
+		$data = CHtml::listData($data,'ID','Viet');
+		$data2 = CHtml::listData($data2,'ID','Viet');
+		$Ho='';
+		$Bo='';
+		foreach($data as $ID => $value)
+	
+			$Bo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+	
+		foreach($data2 as $ID => $value)
+	
+			$Ho.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+	
+		echo CJSON::encode(array(
+				'dropdownBo'=>$Ho,
+				'dropdownNhom'=>$Bo
+		));
+	}
 
 	/**
 	 * Updates a particular model.
@@ -144,7 +191,7 @@ class CreaturesController extends Controller
 		{
 			$model->attributes=$_POST['Creatures'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->ID));
+			$this->redirect(array('view','id'=>$model->ID));
 		}
 
 		$this->render('update',array(
@@ -166,10 +213,10 @@ class CreaturesController extends Controller
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
 	/**
@@ -191,7 +238,7 @@ class CreaturesController extends Controller
 		$model=new Creatures('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Creatures']))
-			$model->attributes=$_GET['Creatures'];
+		$model->attributes=$_GET['Creatures'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -207,7 +254,7 @@ class CreaturesController extends Controller
 	{
 		$model=Creatures::model()->findByPk($id);
 		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+		throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
 

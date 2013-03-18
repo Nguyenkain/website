@@ -57,10 +57,10 @@ abstract class BaseNhom extends GxActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'ID' => Yii::t('app', 'ID'),
-			'Viet' => Yii::t('app', 'Viet'),
-			'LaTin' => Yii::t('app', 'La Tin'),
-			'Loai' => Yii::t('app', 'Loai'),
-			'icon' => Yii::t('app', 'Icon'),
+			'Viet' => Yii::t('app', 'Tên Việt'),
+			'LaTin' => Yii::t('app', 'Tên La Tin'),
+			'Loai' => Yii::t('app', 'Loài'),
+			'icon' => Yii::t('app', 'Hình đại diện'),
 		);
 	}
 

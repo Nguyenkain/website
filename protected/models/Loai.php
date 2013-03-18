@@ -1,8 +1,8 @@
 <?php
 
-Yii::import('application.models._base.BaseCreatures');
+Yii::import('application.models._base.BaseLoai');
 
-class Creatures extends BaseCreatures
+class Loai extends BaseLoai
 {
 	public static function model($className=__CLASS__) {
 		return parent::model($className);

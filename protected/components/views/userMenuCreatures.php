@@ -36,7 +36,7 @@
     
     <li class="nav-header">Bộ sinh vật</li>
 	<?php if(Yii::app()->controller->id == 'bo'  && (Yii::app()->controller->action->id == 'admin' || Yii::app()->controller->action->id == 'update')):  ?>
-	<li class="active"><?php echo CHtml::link('Quản lý họ',array('bo/admin')); ?>
+	<li class="active"><?php echo CHtml::link('Quản lý bộ',array('bo/admin')); ?>
 	</li>
 	<?php else: ?>
 	<li><?php echo CHtml::link('Quản lý bộ',array('bo/admin')); ?></li>
