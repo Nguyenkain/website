@@ -3,7 +3,7 @@
 		'method' => 'get',
 		)); ?>
 
-<?php 	echo $form->labelEx($model, 'park_name');
+<?php echo $form->labelEx($model, 'park_name');
 	echo $form->dropDownList($model, 'park_name', CHtml::listData(NationalParks::
 		model()->findAll(array('order' => 'park_name')), 'park_name', 'park_name'),
 		array('empty' => '--Chọn tên Vườn Quốc Gia--', 'class' => 'span5')); ?>
