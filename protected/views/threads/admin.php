@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 $this->breadcrumbs=array(
 		'Thảo luận'=>array('admin'),
@@ -87,7 +86,6 @@ Yii::app()->clientScript->registerScript('search', "
 )); ?>
 
 <?php Yii::app()->getClientScript()->registerCoreScript( 'jquery.ui' );?>
-=======
 <?php
 $this->breadcrumbs=array(
 		'Thảo luận'=>array('admin'),
@@ -175,4 +173,3 @@ Yii::app()->clientScript->registerScript('search', "
 )); ?>
 
 <?php Yii::app()->getClientScript()->registerCoreScript( 'jquery.ui' );?>
->>>>>>> 5006685c2a9f4a9f9fcce34ab59feebfdf4b8143

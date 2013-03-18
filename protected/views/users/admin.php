@@ -60,6 +60,7 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
         ),
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
+			'template'=>'{delete}',
 			'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
 		),
 	),
