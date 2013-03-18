@@ -99,9 +99,8 @@ echo $form->labelEx($model,'Nhom');
 
 <?php echo $form->textFieldRow($model,'AuthorName',array('class'=>'span5','maxlength'=>50)); ?>
 
-<?php $profile = CreaturesProvincesRelation::model()->findByPk(14);
-    echo $form->dropDownList(CreaturesProvincesRelation::model(), 'creature_id', CHtml::listData(CreaturesProvincesRelation::model()->findAll(array('order' => 'creature_id')), 'creature_id', 'creature_id'),
-		array('empty' => '--Chọn tên Vườn Quốc Gia--', 'class' => 'span5')); ?>
+<?php echo $form->dropDownList(CreaturesProvincesRelation::model(), 'creature_id', CHtml::listData(CreaturesProvincesRelation::model()->findAll(array('order' => 'creature_id')), 'province_id', 'creature_id'),
+		array('empty' => '--Chọn tên Vườn Quốc Gia--', 'class' => 'span2')); ?>
 
 <div class="form-actions">
 	<?php $this->widget('bootstrap.widgets.TbButton', array(
