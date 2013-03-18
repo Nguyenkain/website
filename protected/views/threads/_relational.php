@@ -8,6 +8,7 @@ $this->widget('bootstrap.widgets.TbGridView',array(
 	'pagerCssClass'=>'pagination pagination-right',
 	'htmlOptions' => array('class' => 'grid-view rounded'),
 	'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
+	'emptyText' => 'Không có kết quả nào được tìm thấy',
 	'columns'=>array(
 		'post_id',
 		'user_id',

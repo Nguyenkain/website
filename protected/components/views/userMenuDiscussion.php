@@ -18,11 +18,11 @@
 	<?php endif;?>
 
 	<li class="nav-header">Báo cáo</li>
-	<?php if(Yii::app()->controller->id == 'reports'  && (Yii::app()->controller->action->id == 'admin' || Yii::app()->controller->action->id == 'update' || Yii::app()->controller->action->id == 'view')):  ?>
-	<li class="active"><?php echo CHtml::link('Quản lý các chủ đề cáo cáo',array('reports/admin')); ?>
+	<?php if( (Yii::app()->controller->id == 'reports'  && (Yii::app()->controller->action->id == 'admin' || Yii::app()->controller->action->id == 'update' || Yii::app()->controller->action->id == 'view')) || (Yii::app()->controller->id == 'threads' && Yii::app()->controller->action->id == 'reports')):  ?>
+	<li class="active"><?php echo CHtml::link('Quản lý các chủ đề cáo cáo',array('threads/reports')); ?>
 	</li>
 	<?php else: ?>
-	<li><?php echo CHtml::link('Quản lý các chủ đề báo cáo',array('reports/admin')); ?>
+	<li><?php echo CHtml::link('Quản lý các chủ đề báo cáo',array('threads/reports')); ?>
 	</li>
 	<?php endif;?>
 	

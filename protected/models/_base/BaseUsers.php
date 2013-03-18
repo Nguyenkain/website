@@ -18,6 +18,7 @@
  * @property integer $last_time_login
  * @property string $user_avatar
  * @property string $name
+ * @property integer $ban_status
  *
  * @property Posts[] $posts
  * @property Reports[] $reports
@@ -42,12 +43,12 @@ abstract class BaseUsers extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('facebook_id, name', 'required'),
-			array('last_time_login', 'numerical', 'integerOnly'=>true),
+			array('facebook_id, name, ban_status', 'required'),
+			array('last_time_login, ban_status', 'numerical', 'integerOnly'=>true),
 			array('facebook_id, username, user_address, user_email, user_avatar, name', 'length', 'max'=>255),
 			array('user_dob', 'length', 'max'=>20),
 			array('username, user_dob, user_address, user_email, last_time_login, user_avatar', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('user_id, facebook_id, username, user_dob, user_address, user_email, last_time_login, user_avatar, name', 'safe', 'on'=>'search'),
+			array('user_id, facebook_id, username, user_dob, user_address, user_email, last_time_login, user_avatar, name, ban_status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -66,17 +67,19 @@ abstract class BaseUsers extends GxActiveRecord {
 
 	public function attributeLabels() {
 		return array(
-			'user_id' => Yii::t('app', 'User'),
+			'user_id' => Yii::t('app', 'Người dùng'),
 			'facebook_id' => Yii::t('app', 'Facebook'),
 			'username' => Yii::t('app', 'Username'),
-			'user_dob' => Yii::t('app', 'User Dob'),
-			'user_address' => Yii::t('app', 'User Address'),
-			'user_email' => Yii::t('app', 'User Email'),
-			'last_time_login' => Yii::t('app', 'Last Time Login'),
-			'user_avatar' => Yii::t('app', 'User Avatar'),
-			'name' => Yii::t('app', 'Name'),
+			'user_dob' => Yii::t('app', 'Ngày sinh'),
+			'user_address' => Yii::t('app', 'Địa chỉ'),
+			'user_email' => Yii::t('app', 'Email'),
+			'last_time_login' => Yii::t('app', 'Lần cuối đăng nhập'),
+			'user_avatar' => Yii::t('app', 'Ảnh đại diện'),
+			'name' => Yii::t('app', 'Tên'),
+			'ban_status' => Yii::t('app', 'Trạng thái Ban'),
 			'posts' => null,
 			'reports' => null,
+			'threads' => null,
 		);
 	}
 
@@ -92,6 +95,7 @@ abstract class BaseUsers extends GxActiveRecord {
 		$criteria->compare('last_time_login', $this->last_time_login);
 		$criteria->compare('user_avatar', $this->user_avatar, true);
 		$criteria->compare('name', $this->name, true);
+		$criteria->compare('ban_status', $this->ban_status);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

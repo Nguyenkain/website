@@ -1,21 +1,12 @@
 <?php
-/**
- * The following variables are available in this template:
- * - $this: the BootCrudCode object
- */
-?>
-<?php
-echo "<?php\n";
-$label=$this->pluralize($this->class2name($this->modelClass));
-echo "\$this->breadcrumbs=array(
-	'$label'=>array('index'),
+$this->breadcrumbs=array(
+	'Users'=>array('index'),
 	'Quản lý',
-);\n";
-?>
+);
 
 $this->menu=array(
-	array('label'=>'List <?php echo $this->modelClass; ?>','url'=>array('index')),
-	array('label'=>'Create <?php echo $this->modelClass; ?>','url'=>array('create')),
+	array('label'=>'List Users','url'=>array('index')),
+	array('label'=>'Create Users','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -24,7 +15,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('<?php echo $this->class2id($this->modelClass); ?>-grid', {
+	$.fn.yiiGridView.update('users-grid', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -32,23 +23,22 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Quản lý <?php echo $this->pluralize($this->class2name($this->modelClass)); ?></h1>
+<h1>Quản lý Users</h1>
 
 <p>
 Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
 hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính xác của kết quả tìm kiếm.
 </p>
 
-<?php echo "<?php echo CHtml::link('Tìm kiếm nâng cao','#',array('class'=>'search-button btn')); ?>"; ?>
-
+<?php echo CHtml::link('Tìm kiếm nâng cao','#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
-<?php echo "<?php \$this->renderPartial('_search',array(
-	'model'=>\$model,
-)); ?>\n"; ?>
+<?php $this->renderPartial('_search',array(
+	'model'=>$model,
+)); ?>
 </div><!-- search-form -->
 
-<?php echo "<?php"; ?> $this->widget('bootstrap.widgets.TbGridView',array(
-	'id'=>'<?php echo $this->class2id($this->modelClass); ?>-grid',
+<?php $this->widget('bootstrap.widgets.TbGridView',array(
+	'id'=>'users-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'template'=>'{summary}{pager}{items}{pager}',
@@ -57,17 +47,17 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 	'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 	'emptyText' => 'Không có kết quả nào được tìm thấy',
 	'columns'=>array(
-<?php
-$count=0;
-foreach($this->tableSchema->columns as $column)
-{
-	if(++$count==7)
-		echo "\t\t/*\n";
-	echo "\t\t'".$column->name."',\n";
-}
-if($count>=7)
-	echo "\t\t*/\n";
-?>
+		'name',
+		'user_dob',
+		'user_address',
+		'user_email',
+		'user_avatar',
+		array(
+            'class'=>'bootstrap.widgets.TbToggleColumn',
+            'toggleAction'=>'users/ban/id/$data->user_id',
+            'name' => 'ban_status',
+            'header' => 'Trạng thái ban'
+        ),
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 			'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",

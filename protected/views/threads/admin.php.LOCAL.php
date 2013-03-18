@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
 		'Thảo luận'=>array('admin'),
-		'Bài viết',
+		'Chủ đề',
 );
 
 $this->menu=array(
-		array('label'=>'List Posts','url'=>array('index')),
-		array('label'=>'Create Posts','url'=>array('create')),
+		array('label'=>'List Threads','url'=>array('index')),
+		array('label'=>'Create Threads','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -15,7 +15,7 @@ Yii::app()->clientScript->registerScript('search', "
 		return false;
 });
 		$('.search-form form').submit(function(){
-		$.fn.yiiGridView.update('posts-grid', {
+		$.fn.yiiGridView.update('threads-grid', {
 		data: $(this).serialize()
 });
 		return false;
@@ -23,7 +23,7 @@ Yii::app()->clientScript->registerScript('search', "
 		");
 ?>
 
-<h1>Quản lý bài viết</h1>
+<h1>Quản lý chủ đề</h1>
 
 <p>
 	Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>,
@@ -40,41 +40,48 @@ Yii::app()->clientScript->registerScript('search', "
 <!-- search-form -->
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
-		'id'=>'posts-grid',
+		'id'=>'threads-grid',
 		'dataProvider'=>$model->search(),
 		'filter'=>$model,
+		'beforeAjaxUpdate' => 'js:function(){
+			alert("asdsad");
+		}',
 		'template'=>'{summary}{pager}{items}{pager}',
 		'pagerCssClass'=>'pagination pagination-right',
 		'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 		'emptyText' => 'Không có kết quả nào được tìm thấy',
-		'afterAjaxUpdate'=>"function(){
-		jQuery('#created_time_search').datepicker({'dateFormat': 'mm/dd/yy'})
-		}",
 		'columns'=>array(
-			array(
-				'name' => 'thread_search',
-				'header' => 'Chủ đề',
-				'value' => '$data->threads',
-	        ),
-			array(
-				'name' => 'user_search',
-				'header' => 'Người viết',
-				'value' => '$data->users->name',
-	        ),
-			'post_content',
-	        array('name'=>'post_created_time',
-	        	'value'=>'date("d/m/y H:i:s", $data->post_created_time)',
-				'filter'=>$this->widget('zii.widgets.jui.CJuiDatepicker', array(
-				'model'=>$model, 
-				'attribute'=>'post_created_time', 
-				'htmlOptions' => array('id' => 'created_time_search'), 
-				'options' => array('dateFormat' => 'mm/dd/yy')), 
-				true
-			),),
-			array(
-				'class'=>'bootstrap.widgets.TbButtonColumn',
-				'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
-			),
+				/* array(
+		            'class'=>'CLinkColumn',
+				    'header'=>'Chủ đề',
+				    'labelExpression'=>'$data->thread_id',
+				    'urlExpression'=>'Yii::app()->createUrl("threads/view",array("id"=>$data->thread_id))',
+				), */
+				array(
+				 'class'=>'bootstrap.widgets.TbRelationalColumn',
+						'header'=>'Chủ đề',
+						'name' => 'thread_id',
+						'url' => Yii::app()->createUrl('threads/relational',array('id'=>'$data->thread_id')),
+						'value'=> '$data->thread_id',
+				),
+				array(
+					'name' => 'user_search',
+					'header'=>'Người viết',
+					'value'=>'$data->users',
+				),
+				'thread_title',
+				'thread_content',
+				array(
+					'name'=>'thread_created_time',
+			        'value'=>'date("d/m/y H:i:s", $data->thread_created_time)'),
+				'last_modified_time',
+				/*
+				 'last_posted_time',
+*/
+				array(
+					'class'=>'bootstrap.widgets.TbButtonColumn',
+					'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
+		),
 	),
 )); ?>
 
