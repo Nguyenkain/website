@@ -54,7 +54,7 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 		'user_avatar',
 		array(
             'class'=>'bootstrap.widgets.TbToggleColumn',
-            'toggleAction'=>'users/ban/id/$data->user_id',
+            'toggleAction'=>'site/toggleBan/',
             'name' => 'ban_status',
             'header' => 'Trạng thái ban'
         ),

@@ -151,6 +151,7 @@ class UsersController extends Controller
 	public function actionBan($id)
 	{
 		return array(
+
 				'toggle' => array(
 						'class'=>'bootstrap.actions.TbToggleAction',
 						'modelName' => 'Users',
