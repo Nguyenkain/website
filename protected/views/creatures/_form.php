@@ -15,13 +15,13 @@
 
 <?php echo $form->textFieldRow($model,'Latin',array('class'=>'span5','maxlength'=>50)); ?>
 
-<?php echo $form->textFieldRow($model,'Loai',array('class'=>'span5')); ?>
+
 
 <?php //echo $form->textFieldRow($model,'Nhom',array('class'=>'span5')); ?>
 <?php 
 echo $form->labelEx($model,'Ho');
 echo $form->dropDownList($model,'Ho',CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--',
-								'prompt'=>' ',
+								
 								'ajax' => array(
 								'type'=>'POST',
 								'dataType'=>'json',
@@ -31,6 +31,7 @@ echo $form->dropDownList($model,'Ho',CHtml::listData(Ho::model()->findAll(), 'ID
                                 'success'=>'function(data){
                                 $("#Creatures_Bo").html(data.dropdownBo);
                                 $("#Creatures_Nhom").html(data.dropdownNhom);
+								$("#Creatures_Loai").html(data.dropdownLoai);
 
 }'
 		))); ?>
@@ -53,6 +54,13 @@ echo $form->labelEx($model,'Nhom');
 								"readonly"=>"readonly",
 		
 		)); ?>
+		<?php echo $form->labelEx($model,'Loai');
+echo $form->dropDownList($model,'Loai',CHtml::listData(Loai::model()->findAll('ID=:parent_id',
+								array(':parent_id'=>(int) $model->Loai)), 'ID', 'Loai' ), 
+								array(
+								
+								"readonly"=>"readonly",
+			)); ?>
 
 
 
@@ -95,9 +103,15 @@ echo $form->labelEx($model,'Nhom');
 				)
 )); ?>
 
-<?php echo $form->textFieldRow($model,'Author',array('class'=>'span5')); ?>
+<?php //echo $form->textFieldRow($model,'Author',array('class'=>'span5')); ?>
+<?php echo $form->labelEx($model,'AuthorName');
+echo $form->dropDownList($model,'AuthorName',CHtml::listData(author::model()->findAll(), 'ID', 'Name' ), 
+								array(
+								
+								
+			)); ?>
 
-<?php echo $form->textFieldRow($model,'AuthorName',array('class'=>'span5','maxlength'=>50)); ?>
+<?php //echo $form->textFieldRow($model,'AuthorName',array('class'=>'span5','maxlength'=>50)); ?>
 
 <div class="form-actions">
 	<?php $this->widget('bootstrap.widgets.TbButton', array(

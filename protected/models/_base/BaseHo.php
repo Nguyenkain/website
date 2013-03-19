@@ -44,11 +44,14 @@ abstract class BaseHo extends GxActiveRecord {
 
 	public function relations() {
 		return array(
+				'ID' => array(self::HAS_MANY, 'Creatures', 'Ho'),
+				'rBo' => array(self::BELONGS_TO,'Bo','Bo'),
 		);
 	}
 
 	public function pivotModels() {
 		return array(
+				
 		);
 	}
 
