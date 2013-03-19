@@ -97,12 +97,15 @@ class CreaturesController extends Controller
 		
 		$data2 = Nhom::model()->findAll('ID=:parent_id',
 		array(':parent_id'=>(int)$data[0]->Nhom));
+		$data3 = Loai::model()->findAll('ID=:parent_id',
+		array(':parent_id'=>(int)$data2[0]->Loai));
 
 
 		$data = CHtml::listData($data,'ID','Viet');
 		$data2 = CHtml::listData($data2,'ID','Viet');
 		$Bo='';
 		$Nhom='';
+		$Loai='';
 		foreach($data as $ID => $value)
 
 		$Bo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
@@ -111,39 +114,20 @@ class CreaturesController extends Controller
 		foreach($data2 as $ID => $value)
 
 		$Nhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+		foreach($data3 as $ID => $value)
+		
+			$Loai.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
 
 		echo CJSON::encode(array(
 	            		'dropdownBo'=>$Bo,
-	            		'dropdownNhom'=>$Nhom
+	            		'dropdownNhom'=>$Nhom,
+						'dropdownLoai'=>$Loai
 		));
 	}
-	public function actionDynamicho()
+	public function actionCreatdataforLoai($data,$row)
 	{
 
-		$bo = Bo::model()->findByPk((int) $_POST['Bo']);
-		$data = Ho::model()->findAll('Bo=:parent_id',
-		array(':parent_id'=>(int) $bo->ID));
-		
-		$data2 = Nhom::model()->findAll('ID=:parent_id',
-		array(':parent_id'=>(int)$bo->Nhom));
-
-
-		$data = CHtml::listData($data,'ID','Viet');
-		$data2 = CHtml::listData($data2,'ID','Viet');
-		$Ho='';
-		$Nhom='';
-		foreach($data as $ID => $value)
-
-		$Ho.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-
-		foreach($data2 as $ID => $value)
-
-		$Nhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-
-		echo CJSON::encode(array(
-	            		'dropdownHo'=>$Ho,
-	            		'dropdownNhom'=>$Nhom
-		));
+		return  CHtml::encode($data->name) ;
 	}
 
 	public function actionDynamicloai()

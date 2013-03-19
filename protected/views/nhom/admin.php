@@ -40,12 +40,21 @@ Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi 
 	'id'=>'nhom-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
+		'template'=>'{summary}{pager}{items}{pager}',
+		'pagerCssClass'=>'pagination pagination-right',
+		'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
+		'emptyText' => 'Không có kết quả nào được tìm thấy',
 	'columns'=>array(
-		'ID',
+		
 		'Viet',
 		'LaTin',
-		'Loai',
-		'icon',
+				array(
+					
+		'name'=>'Loai',
+		'value'=>'$data->rLoai',
+		'filter' => CHtml::listData(Loai::model()->findAll(), 'ID', 'Loai'),
+),
+		
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 		),

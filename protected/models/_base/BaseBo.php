@@ -44,6 +44,9 @@ abstract class BaseBo extends GxActiveRecord {
 
 	public function relations() {
 		return array(
+				'ID' => array(self::HAS_MANY, 'Creatures', 'Bo'),
+				'ID' => array(self::HAS_MANY, 'Ho', 'Bo'),
+				'rNhom'=>array(self::BELONGS_TO, 'Nhom', 'Nhom'),
 		);
 	}
 
