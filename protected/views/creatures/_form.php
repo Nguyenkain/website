@@ -105,7 +105,7 @@ echo $form->dropDownList($model,'Loai',CHtml::listData(Loai::model()->findAll('I
 
 <?php //echo $form->textFieldRow($model,'Author',array('class'=>'span5')); ?>
 <?php echo $form->labelEx($model,'AuthorName');
-echo $form->dropDownList($model,'AuthorName',CHtml::listData(author::model()->findAll(), 'ID', 'Name' ), 
+echo $form->dropDownList($model,'AuthorName',CHtml::listData(Author::model()->findAll(), 'ID', 'Name' ), 
 								array(
 								
 								
