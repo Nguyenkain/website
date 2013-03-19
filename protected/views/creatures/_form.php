@@ -91,7 +91,7 @@ echo $form->dropDownList($model,'Loai',CHtml::listData(Loai::model()->findAll('I
 						'onComplete'=>"js:function(id, fileName, responseJSON){
 						var fileNameReal = responseJSON['filename'];
 						fileNameReal= fileNameReal.replace('.jpg','').replace('.png','');
-						$('#News_image').val(fileNameReal); }",
+						$('#Creatures_Img').val(fileNameReal); }",
 						//'messages'=>array(
 						//                  'typeError'=>"{file} has invalid extension. Only {extensions} are allowed.",
 						//                  'sizeError'=>"{file} is too large, maximum file size is {sizeLimit}.",
@@ -102,6 +102,7 @@ echo $form->dropDownList($model,'Loai',CHtml::listData(Loai::model()->findAll('I
 						//'showMessage'=>"js:function(message){ alert(message); }"
 				)
 )); ?>
+<?php echo $form->textField($model,'Img',array('class'=>'span5','maxlength'=>255,'style' =>'display:none')); ?>
 
 <?php //echo $form->textFieldRow($model,'Author',array('class'=>'span5')); ?>
 <?php echo $form->labelEx($model,'AuthorName');
