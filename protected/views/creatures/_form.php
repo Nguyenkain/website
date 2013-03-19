@@ -113,6 +113,9 @@ echo $form->dropDownList($model,'AuthorName',CHtml::listData(author::model()->fi
 
 <?php //echo $form->textFieldRow($model,'AuthorName',array('class'=>'span5','maxlength'=>50)); ?>
 
+<?php echo $form->dropDownList(CreaturesProvincesRelation::model(), 'creature_id', CHtml::listData(CreaturesProvincesRelation::model()->findAll(array('order' => 'province_id')), 'province_id', 'province_id'),
+		array('empty' => '--Chọn tên Vườn Quốc Gia--', 'class' => 'span2')); ?>
+
 <div class="form-actions">
 	<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',

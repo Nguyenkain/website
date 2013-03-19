@@ -18,6 +18,10 @@ class SiteController extends Controller
 			'page'=>array(
 				'class'=>'CViewAction',
 			),
+			'toggleBan' => array(
+					'class'=>'bootstrap.actions.TbToggleAction',
+					'modelName' => 'Users',
+			),
 		);
 	}
 
