@@ -27,6 +27,10 @@ class Categories extends CActiveRecord
 	{
 		return 'categories';
 	}
+	
+	public static function representingColumn() {
+		return 'category_name';
+	}
 
 	/**
 	 * @return array validation rules for model attributes.
@@ -56,6 +60,7 @@ class Categories extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+				'news' => array(self::HAS_MANY, 'News', 'category_id'),
 		);
 	}
 

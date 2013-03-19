@@ -49,10 +49,9 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 		jQuery('#created_time_search').datepicker({'dateFormat': 'mm/dd/yy'})
 			}",
 	'columns'=>array(
-		'news_id',
 		array(
-			'name'=>'category_id',
-        	'value'=>'$data->category_id',
+			'name'=>'category_search',
+        	'value'=>'$data->categories->category_name',
 			'filter' => CHtml::listData(Categories::model()->findAll(), 'category_id', 'category_name'),
 		),
 		array(

@@ -16,6 +16,7 @@ class News extends CActiveRecord
 {
 
 	public $picture;
+	public $category_search;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -32,6 +33,13 @@ class News extends CActiveRecord
 	public function tableName()
 	{
 		return 'news';
+	}
+	
+	function defaultScope()
+	{
+		return array(
+				'alias' => $this->tableName()
+		);
 	}
 
 	/**
@@ -56,7 +64,7 @@ class News extends CActiveRecord
 				array('picture', 'file', 'types' => 'jpg,jpeg,gif,png', 'maxSize' => 1024 * 1024 * 2, 'tooLarge' => 'Size should be less then 2MB !!!', 'on' => 'upload'),
 				// The following rule is used by search().
 		// Please remove those attributes that should not be searched.
-		array('news_id, category_id, short_description, news_content, created_time, title, image', 'safe', 'on'=>'search'),
+		array('news_id, category_id, short_description, news_content, created_time, title, image, category_search', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -68,6 +76,7 @@ class News extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+				'categories' => array(self::BELONGS_TO, 'Categories', 'category_id'),
 		);
 	}
 
@@ -97,6 +106,9 @@ class News extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
+		
+		$criteria->compare('categories.category_id',$this->category_search, true);
+		$criteria->with = 'categories';
 
 		$criteria->compare('news_id',$this->news_id);
 		$criteria->compare('category_id',$this->category_id);
@@ -106,14 +118,18 @@ class News extends CActiveRecord
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('image',$this->image,true);
 
-		$sort = new CSort;
-		$sort->defaultOrder = 'created_time DESC';
-
-		$sort->applyOrder($criteria);
-
-		return new CActiveDataProvider($this, array(
+		return new CActiveDataProvider('News', array(
 				'criteria'=>$criteria,
-				'sort' => $sort,
+				'sort'=>array(
+						'defaultOrder' => 'news.created_time DESC',
+						'attributes'=>array(
+								'category_search'=>array(
+										'asc'=>'categories.category_name',
+										'desc'=>'categories.category_name DESC',
+								),
+								'*',
+						),
+				),
 				'pagination'=>array(
 						'pageSize'=>10,
 				),
