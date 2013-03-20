@@ -90,12 +90,12 @@ return CMap::mergeArray(
 				'charset' => 'utf8'
 			),
 			*/
-			'urlManager' => array(
-				'urlFormat' => 'path',
-				'showScriptName' => false,
-				'urlSuffix' => '/',
-				'rules' => $params['url.rules']
-			),
+// 			'urlManager' => array(
+// 				'urlFormat' => 'path',
+// 				'showScriptName' => false,
+// 				'urlSuffix' => '/',
+// 				'rules' => $params['url.rules']
+// 			),
 			/* uncomment and configure to suit your needs */
 			/*
 			 'request' => array(
