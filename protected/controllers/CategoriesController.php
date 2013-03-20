@@ -28,7 +28,7 @@ class CategoriesController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','userview'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -54,6 +54,25 @@ class CategoriesController extends Controller
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
+	}
+	public function actionUserview()
+	{
+		$model=new Categories;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+		if(isset($_GET['Categories'])) 
+			$model->attributes=$_GET['Categories'];
+
+	$dataProvider=new CActiveDataProvider($model, array(
+
+                    'pagination'=>array(
+                        'pageSize'=>4,
+                    ),
+                ));
+		
+$this->render('userview',array('dataProvider'=>$dataProvider));
+
 	}
 
 	/**
