@@ -22,15 +22,15 @@ return CMap::mergeArray(
 	// merge frontend specific with resulting env-local merge *override by local
 	CMap::mergeArray(
 		array(
-			//'url.format' => 'path',
+			'url.format' => 'path',
 			'url.showScriptName' => true,
-// 			'url.rules' => array(
-// 				/* for REST please @see http://www.yiiframework.com/wiki/175/how-to-create-a-rest-api/ */
-// 				/* other @see http://www.yiiframework.com/doc/guide/1.1/en/topics.url */
-// 				'<controller:\w+>/<id:\d+>' => '<controller>/view',
-// 				'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-// 				'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-// 			),
+			'url.rules' => array(
+				/* for REST please @see http://www.yiiframework.com/wiki/175/how-to-create-a-rest-api/ */
+				/* other @see http://www.yiiframework.com/doc/guide/1.1/en/topics.url */
+				'<controller:\w+>/<id:\d+>' => '<controller>/view',
+				'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+				'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+			),
 			// add here all frontend-specific parameters
 		),
 		// merge environment parameters with local *override by local
