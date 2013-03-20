@@ -95,4 +95,20 @@ class Categories extends CActiveRecord
 				'criteria'=>$criteria,
 		));
 	}
+	
+	public function getNews($id)
+	{
+		$criteria = new CDbCriteria;
+        $criteria->condition = 'category_id = ' . $id;
+        $criteria->order = 'news_id DESC';
+        $criteria->limit = 5;
+        $criteria->offset = 1;
+        
+
+		
+		return new CActiveDataProvider('News', array(
+				'pagination'=>false,
+				'criteria'=>$criteria,
+		));
+	}
 }
