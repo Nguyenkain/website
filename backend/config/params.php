@@ -22,8 +22,8 @@ return CMap::mergeArray(
 	// merge frontend specific with resulting env-local merge *override by local
 	CMap::mergeArray(
 		array(
-			'url.format' => 'path',
-			'url.showScriptName' => false,
+// 			'url.format' => 'path',
+// 			'url.showScriptName' => true,
 // 			'url.rules' => array(
 // 				/* for REST please @see http://www.yiiframework.com/wiki/175/how-to-create-a-rest-api/ */
 // 				/* other @see http://www.yiiframework.com/doc/guide/1.1/en/topics.url */
