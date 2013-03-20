@@ -29,13 +29,6 @@ $('.search-form form').submit(function(){
 Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi giá trị tìm kiếm để tăng độ chính
 </p>
 
-<?php echo CHtml::link('Tìm kiếm nâng cao','#',array('class'=>'search-button btn')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
-
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'bo-grid',
 	'dataProvider'=>$model->search(),

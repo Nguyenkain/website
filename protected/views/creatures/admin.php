@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Creatures</h1>
+<h1>Quản lý Sinh Vật</h1>
 
 <p>
 Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi giá trị tìm kiếm để tăng độ chính xác của kết quả tìm kiếm.
@@ -76,7 +76,7 @@ Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi 
 		
 array(
 		'name' => 'Ho',
-		'header'=>'Ho',
+		'header'=>'Họ',
 		'filter' => CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet'),
 		'value'=>'$data->rHo',
 'htmlOptions'=>array(

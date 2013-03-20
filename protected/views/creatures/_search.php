@@ -14,7 +14,7 @@
 	<?php 	echo $form->labelEx($model,'Nhom');
 			echo $form->dropDownList($model,'Nhom',CHtml::listData(Nhom::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--',));?>
 	<?php 	echo $form->labelEx($model,'Loai');
-			echo $form->dropDownList($model,'Loai',CHtml::listData(Loai::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--',));?>
+			echo $form->dropDownList($model,'Loai',CHtml::listData(Loai::model()->findAll(), 'ID', 'Loai' ), array('empty'=>'--please select--',));?>
 	<?php 
 			echo $form->textAreaRow($model,'Description',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
