@@ -70,12 +70,12 @@ return CMap::mergeArray(
 				'enableParamLogging' => YII_DEBUG,
 				'charset' => 'latin1'
 			),
-			'urlManager' => array(
-				'urlFormat' => 'path',
-				'showScriptName' => false,
-				'urlSuffix' => '/',
-				'rules' => $params['url.rules']
-			),
+// 			'urlManager' => array(
+// 				'urlFormat' => 'path',
+// 				'showScriptName' => false,
+// 				'urlSuffix' => '/',
+// 				'rules' => $params['url.rules']
+// 			),
 			/* make sure you have your cache set correctly before uncommenting */
 			/* 'cache' => $params['cache.core'], */
 			/* 'contentCache' => $params['cache.content'] */
