@@ -50,6 +50,7 @@ abstract class BaseAuthor extends GxActiveRecord {
 
 	public function relations() {
 		return array(
+				'ID' => array(self::HAS_MANY, 'Creatures', 'Author'),
 		);
 	}
 
@@ -61,13 +62,13 @@ abstract class BaseAuthor extends GxActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'ID' => Yii::t('app', 'ID'),
-			'Name' => Yii::t('app', 'Name'),
-			'DOB' => Yii::t('app', 'Dob'),
-			'Address' => Yii::t('app', 'Address'),
-			'Telephone' => Yii::t('app', 'Telephone'),
+			'Name' => Yii::t('app', 'Tên'),
+			'DOB' => Yii::t('app', 'Ngày sinh'),
+			'Address' => Yii::t('app', 'Địa chỉ'),
+			'Telephone' => Yii::t('app', 'Điện thoại'),
 			'Email' => Yii::t('app', 'Email'),
 			'Web' => Yii::t('app', 'Web'),
-			'Description' => Yii::t('app', 'Description'),
+			'Description' => Yii::t('app', 'Thông tin'),
 		);
 	}
 

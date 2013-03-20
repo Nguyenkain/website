@@ -3,7 +3,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="help-block">Những trường có dấu <span class="required">*</span> là bắt buộc.</p>
+	<p class="help-block">Trường có kí hiệu <span class="required">*</span> là bắt buộc.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 	

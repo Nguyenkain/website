@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Creatures #<?php echo $model->Viet; ?></h1>
+<h1>Xem Sinh Vật #<?php echo $model->Viet; ?></h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
@@ -24,7 +24,12 @@ $this->menu=array(
 		'Ho',
 		'Bo',
 		'Nhom',
-		'Description',
+		array(
+		'label'=>'Mô tả',
+		'type'=>'raw',
+		'value'=>$model->Description,
+
+),
 		'Img',
 		'Author',
 		'AuthorName',

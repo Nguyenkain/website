@@ -31,7 +31,7 @@ class CreaturesController extends Controller
 				'users'=>array('*'),
 		),
 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','upload','dynamicbo','dynamicho','dynamicloai'),
+				'actions'=>array('create','update','upload','dynamicbo','dynamicho','dynamicauthor'),
 				'users'=>array('@'),
 		),
 		array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -130,33 +130,17 @@ class CreaturesController extends Controller
 		return  CHtml::encode($data->name) ;
 	}
 
-	public function actionDynamicloai()
+	public function actionDynamicauthor()
 	{
-	
-		$nhom = Nhom::model()->findByPk((int) $_POST['Nhom']);
-		$data = Bo::model()->findAll('Nhom=:parent_id',
-				array(':parent_id'=>(int) $nhom->ID));
-		foreach($data as $ID) {
-		$data2 = Ho::model()->findAll('Bo=:parent_id',
-				array(':parent_id'=>(int)$ID->ID));
+		$data=Author::model()->findAll('ID=:parent_id',
+				array(':parent_id'=>(int) $_POST['Author']));
+		
+		$data=CHtml::listData($data,'id','name');
+		foreach($data as $value=>$name)
+		{
+			echo CHtml::tag('option',
+					array('value'=>$value),CHtml::encode($name),true);
 		}
-	
-		$data = CHtml::listData($data,'ID','Viet');
-		$data2 = CHtml::listData($data2,'ID','Viet');
-		$Ho='';
-		$Bo='';
-		foreach($data as $ID => $value)
-	
-			$Bo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-	
-		foreach($data2 as $ID => $value)
-	
-			$Ho.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-	
-		echo CJSON::encode(array(
-				'dropdownBo'=>$Ho,
-				'dropdownNhom'=>$Bo
-		));
 	}
 
 	/**

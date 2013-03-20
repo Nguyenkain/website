@@ -4,7 +4,7 @@
 )); ?>
 
 <p class="help-block">
-	Fields with <span class="required">*</span> are required.
+	Trường có kí hiệu <span class="required">*</span> là bắt buộc.
 </p>
 
 <?php echo $form->errorSummary($model); ?>
@@ -76,10 +76,20 @@ echo $form->dropDownList($model,'Loai',CHtml::listData(Loai::model()->findAll('I
 						'htmlOptions'=>array('rows'=>6, 'cols'=>50, 'class'=>'tinymce'),)); ?>
 	<?php echo $form->error($model,'Description'); ?>
 </div>
-<?php // echo $form->textFieldRow($model,'Img',array('class'=>'span5','maxlength'=>200)); ?>
 
+<?php echo $form->textField($model,'Img',array('class'=>'span5','maxlength'=>255,'style' =>'display:none')); ?>
+
+<?php //echo $form->textFieldRow($model,'Author',array('class'=>'span5')); ?>
+<?php echo $form->labelEx($model,'Author');
+echo $form->dropDownList($model,'Author',CHtml::listData(Author::model()->findAll(), 'ID', 'Name' ), 
+								array(
+								'empty'=>'--please select--',
+							'onChange'=>"$('#AuthorName').val($('#Creatures_Author option:selected').text());"
+			)); ?>
+
+<?php echo $form->textField($model,'AuthorName',array('class'=>'span5','maxlength'=>255,'style' =>'display:none','id'=>'AuthorName')); ?>
+<?php //echo $form->textFieldRow($model,'AuthorName',array('class'=>'span5','maxlength'=>50)); ?>
 <?php  echo $form->labelEx($model,'Img'); ?>
-
 <?php $this->widget('ext.EAjaxUpload.EAjaxUpload',
 		array(
 				'id'=>'uploadFile',
@@ -102,17 +112,6 @@ echo $form->dropDownList($model,'Loai',CHtml::listData(Loai::model()->findAll('I
 						//'showMessage'=>"js:function(message){ alert(message); }"
 				)
 )); ?>
-<?php echo $form->textField($model,'Img',array('class'=>'span5','maxlength'=>255,'style' =>'display:none')); ?>
-
-<?php //echo $form->textFieldRow($model,'Author',array('class'=>'span5')); ?>
-<?php echo $form->labelEx($model,'AuthorName');
-echo $form->dropDownList($model,'AuthorName',CHtml::listData(Author::model()->findAll(), 'ID', 'Name' ), 
-								array(
-								
-								
-			)); ?>
-
-<?php //echo $form->textFieldRow($model,'AuthorName',array('class'=>'span5','maxlength'=>50)); ?>
 
 <?php echo $form->dropDownList(CreaturesProvincesRelation::model(), 'creature_id', CHtml::listData(CreaturesProvincesRelation::model()->findAll(array('order' => 'province_id')), 'province_id', 'province_id'),
 		array('empty' => '--Chọn tên Vườn Quốc Gia--', 'class' => 'span2')); ?>
@@ -121,7 +120,7 @@ echo $form->dropDownList($model,'AuthorName',CHtml::listData(Author::model()->fi
 	<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'type'=>'primary',
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+			'label'=>$model->isNewRecord ? 'Tạo mới' : 'Save',
 		)); ?>
 </div>
 

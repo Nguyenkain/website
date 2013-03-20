@@ -23,18 +23,11 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Quản lý nhóm</h1>
+<h1>Quản lý Nhóm</h1>
 
 <p>
 Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi giá trị tìm kiếm để tăng độ chính
 </p>
-
-<?php echo CHtml::link('Tìm kiếm nâng cao','#',array('class'=>'search-button btn')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'nhom-grid',

@@ -57,6 +57,7 @@ abstract class BaseCreatures extends GxActiveRecord {
 			'rBo' => array(self::BELONGS_TO, 'Bo', 'Bo'),
 			'rNhom' => array(self::BELONGS_TO, 'Nhom', 'Nhom'),
 			'rLoai' => array(self::BELONGS_TO, 'Loai', 'Loai'),
+			'rAuthor'=>array(self::BELONGS_TO,'Author','Author'),
 		);
 	}
 
@@ -84,7 +85,7 @@ abstract class BaseCreatures extends GxActiveRecord {
 	public function search() {
 		$criteria = new CDbCriteria;
 		$sort = new CSort;
-		$sort->defaultOrder = 'Viet ASC';
+		$sort->defaultOrder = 'ID DESC';
 		$criteria->compare('ID', $this->ID);
 		$criteria->compare('Viet', $this->Viet, true);
 		$criteria->compare('Latin', $this->Latin, true);
