@@ -71,6 +71,7 @@ class Threads extends BaseThreads
 	
 		$children = Posts::model()->findAll($criteria);
 		$childrenReport = Reports::model()->findAll($criteria);
+		$childrenNoti = Notifications::model()->findAll($criteria);
 	
 		foreach ($children as $child)
 		{
@@ -78,6 +79,11 @@ class Threads extends BaseThreads
 		}
 		
 		foreach ($childrenReport as $child)
+		{
+			$child->delete();
+		}
+		
+		foreach ($childrenNoti as $child)
 		{
 			$child->delete();
 		}

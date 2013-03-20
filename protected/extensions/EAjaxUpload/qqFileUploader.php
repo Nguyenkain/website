@@ -137,9 +137,9 @@ class qqFileUploader {
 			$i = 0;
             /// don't overwrite previous files that were uploaded
             while (file_exists($uploadDirectory . $filename . '.' . $ext)) {
-                $filename .= '_'.$i;
 				$i++;
             }
+            $filename .= '_'.$i;
         }
 
         if ($this->file->save($uploadDirectory . $filename . '.' . $ext)){

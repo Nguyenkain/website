@@ -53,11 +53,14 @@ abstract class BaseCreatures extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-            
+			'rHo' => array(self::BELONGS_TO, 'Ho', 'Ho'),
+			'rBo' => array(self::BELONGS_TO, 'Bo', 'Bo'),
+			'rNhom' => array(self::BELONGS_TO, 'Nhom', 'Nhom'),
+			'rLoai' => array(self::BELONGS_TO, 'Loai', 'Loai'),
 		);
 	}
 
-	public function pivotModels() {
+	public function pivotModels() {	
 		return array(
 		);
 	}
@@ -80,7 +83,8 @@ abstract class BaseCreatures extends GxActiveRecord {
 
 	public function search() {
 		$criteria = new CDbCriteria;
-
+		$sort = new CSort;
+		$sort->defaultOrder = 'Viet ASC';
 		$criteria->compare('ID', $this->ID);
 		$criteria->compare('Viet', $this->Viet, true);
 		$criteria->compare('Latin', $this->Latin, true);
@@ -94,7 +98,11 @@ abstract class BaseCreatures extends GxActiveRecord {
 		$criteria->compare('AuthorName', $this->AuthorName, true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria' => $criteria,
+				'criteria'=>$criteria,
+				'sort' => $sort,
+				'pagination'=>array(
+						'pageSize'=>10,
+				),
 		));
 	}
 }

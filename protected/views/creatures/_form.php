@@ -15,13 +15,13 @@
 
 <?php echo $form->textFieldRow($model,'Latin',array('class'=>'span5','maxlength'=>50)); ?>
 
-<?php echo $form->textFieldRow($model,'Loai',array('class'=>'span5')); ?>
+
 
 <?php //echo $form->textFieldRow($model,'Nhom',array('class'=>'span5')); ?>
 <?php 
 echo $form->labelEx($model,'Ho');
 echo $form->dropDownList($model,'Ho',CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--',
-								'prompt'=>' ',
+								
 								'ajax' => array(
 								'type'=>'POST',
 								'dataType'=>'json',
@@ -31,6 +31,7 @@ echo $form->dropDownList($model,'Ho',CHtml::listData(Ho::model()->findAll(), 'ID
                                 'success'=>'function(data){
                                 $("#Creatures_Bo").html(data.dropdownBo);
                                 $("#Creatures_Nhom").html(data.dropdownNhom);
+								$("#Creatures_Loai").html(data.dropdownLoai);
 
 }'
 		))); ?>
@@ -53,6 +54,13 @@ echo $form->labelEx($model,'Nhom');
 								"readonly"=>"readonly",
 		
 		)); ?>
+		<?php echo $form->labelEx($model,'Loai');
+echo $form->dropDownList($model,'Loai',CHtml::listData(Loai::model()->findAll('ID=:parent_id',
+								array(':parent_id'=>(int) $model->Loai)), 'ID', 'Loai' ), 
+								array(
+								
+								"readonly"=>"readonly",
+			)); ?>
 
 
 
@@ -83,7 +91,7 @@ echo $form->labelEx($model,'Nhom');
 						'onComplete'=>"js:function(id, fileName, responseJSON){
 						var fileNameReal = responseJSON['filename'];
 						fileNameReal= fileNameReal.replace('.jpg','').replace('.png','');
-						$('#News_image').val(fileNameReal); }",
+						$('#Creatures_Img').val(fileNameReal); }",
 						//'messages'=>array(
 						//                  'typeError'=>"{file} has invalid extension. Only {extensions} are allowed.",
 						//                  'sizeError'=>"{file} is too large, maximum file size is {sizeLimit}.",
@@ -94,10 +102,17 @@ echo $form->labelEx($model,'Nhom');
 						//'showMessage'=>"js:function(message){ alert(message); }"
 				)
 )); ?>
+<?php echo $form->textField($model,'Img',array('class'=>'span5','maxlength'=>255,'style' =>'display:none')); ?>
 
-<?php echo $form->textFieldRow($model,'Author',array('class'=>'span5')); ?>
+<?php //echo $form->textFieldRow($model,'Author',array('class'=>'span5')); ?>
+<?php echo $form->labelEx($model,'AuthorName');
+echo $form->dropDownList($model,'AuthorName',CHtml::listData(Author::model()->findAll(), 'ID', 'Name' ), 
+								array(
+								
+								
+			)); ?>
 
-<?php echo $form->textFieldRow($model,'AuthorName',array('class'=>'span5','maxlength'=>50)); ?>
+<?php //echo $form->textFieldRow($model,'AuthorName',array('class'=>'span5','maxlength'=>50)); ?>
 
 <?php echo $form->dropDownList(CreaturesProvincesRelation::model(), 'creature_id', CHtml::listData(CreaturesProvincesRelation::model()->findAll(array('order' => 'province_id')), 'province_id', 'province_id'),
 		array('empty' => '--Chọn tên Vườn Quốc Gia--', 'class' => 'span2')); ?>

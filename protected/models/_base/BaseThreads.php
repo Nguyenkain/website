@@ -53,6 +53,7 @@ abstract class BaseThreads extends GxActiveRecord {
 			'users' => array(self::HAS_ONE, 'Users', array('user_id'=>'user_id'), 'joinType'=>'INNER JOIN'),
 			'posts' => array(self::HAS_MANY, 'Posts', 'thread_id'),
 			'report' => array(self::HAS_MANY, 'Reports', 'thread_id'),
+			'notification' => array(self::HAS_MANY, 'Notifications', 'thread_id'),
 		);
 	}
 

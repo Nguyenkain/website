@@ -40,11 +40,21 @@ Có thể dùng các kí hiệu để tìm kiếm nâng cao
 	'id'=>'ho-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
+		'template'=>'{summary}{pager}{items}{pager}',
+		'pagerCssClass'=>'pagination pagination-right',
+		'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
+		'emptyText' => 'Không có kết quả nào được tìm thấy',
 	'columns'=>array(
-		'ID',
+		
 		'Viet',
 		'LaTin',
-		'Bo',
+				array(
+					
+		'name'=>'Bo',
+		'value'=>'$data->rBo',
+		'filter' => CHtml::listData(Bo::model()->findAll(), 'ID', 'Viet'),
+		
+),
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 		),

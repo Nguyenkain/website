@@ -41,6 +41,8 @@ abstract class BaseLoai extends GxActiveRecord {
 
 	public function relations() {
 		return array(
+				'ID' => array(self::HAS_MANY, 'Creatures', 'Loai'),
+				'ID' => array(self::HAS_MANY, 'Nhom', 'Loai'),
 		);
 	}
 
