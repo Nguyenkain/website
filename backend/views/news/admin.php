@@ -54,7 +54,7 @@ Yii::app()->clientScript->registerScript('search', "
 				array(
 						'class' => 'bootstrap.widgets.TbImageColumn',
 						'header' => 'Ảnh đại diện',
-						'imagePathExpression' => 'Yii::app()->request->getBaseUrl(true) . "/../../frontend/www/images/forumpic/" . $data->image . ".jpg"',
+						'imagePathExpression' => 'Yii::app()->request->getBaseUrl(true) . "/../web/images/forumpic/" . $data->image . ".jpg"',
 						'imageOptions' => array('width'=>'60px','height' => 'auto'),
 				),
 				array(
