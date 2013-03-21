@@ -22,7 +22,16 @@ $this->menu=array(
 		'data'=>$model,
 		'attributes'=>array(
 			'news_id',
-			'category_id',
+			'title',
+			array(
+					'label'=>'Ảnh',
+					'type'=>'raw',
+					'value'=>CHtml::image(Yii::app()->request->getBaseUrl(true) . "/../web/images/forumpic/" . $model->image . ".jpg" , "Ảnh Minh Họa", array('width' => '200px')),
+			),
+			array( 
+				'label'=>'Danh mục',
+				'value'=>$model->categories->category_name,
+			),
 			'short_description',
 			array( 
 				'label'=>'Nội dung',
@@ -32,7 +41,5 @@ $this->menu=array(
 			array(
 			'name'=>'created_time',
         	'value'=>date("d/m/y", $model->created_time)),
-			'title',
-			'image',
 		),
 )); ?>

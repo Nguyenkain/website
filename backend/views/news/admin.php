@@ -53,9 +53,9 @@ Yii::app()->clientScript->registerScript('search', "
 		'columns'=>array(
 				array(
 						'class' => 'bootstrap.widgets.TbImageColumn',
-						'header' => 'Ảnh đại diện',
+						'header' => 'Ảnh',
 						'imagePathExpression' => 'Yii::app()->request->getBaseUrl(true) . "/../web/images/forumpic/" . $data->image . ".jpg"',
-						'imageOptions' => array('width'=>'60px','height' => 'auto'),
+						'htmlOptions' => array('width'=>'60px'),
 				),
 				array(
 			'header' => 'Danh mục',
@@ -76,6 +76,9 @@ Yii::app()->clientScript->registerScript('search', "
 			'name'=>'created_time',
         	'value'=>'date("d/m/y", $data->created_time)',
 			'type' => 'raw',
+			'htmlOptions'=>array(
+					'width'=>'100px',
+			),
 			'filter'=>$this->widget('zii.widgets.jui.CJuiDatepicker', array(
 				'model'=>$model,
 				'attribute'=>'created_time',
