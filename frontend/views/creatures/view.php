@@ -30,7 +30,11 @@ $this->menu=array(
 		'value'=>$model->Description,
 
 ),
-		'Img',
+			array(
+		'label'=>'Ảnh',
+		'type'=>'raw',
+		'value'=>CHtml::image(Yii::app()->request->getBaseUrl(true) . "/../web/images/forumpic" . $model->Img . ".jpg" , "Ảnh Minh Họa", array('width' => '200px')),
+),
 		'Author',
 		'AuthorName',
 	),
