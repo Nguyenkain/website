@@ -48,9 +48,10 @@ return CMap::mergeArray(
 		// setup import paths aliases
 		// @see http://www.yiiframework.com/doc/api/1.1/YiiBase#import-detail
 		'import' => array(
-			'ext.giix-components.*', // giix components
+			//'ext.giix-components.*', // giix components
 			'common.components.*',
 			'common.extensions.*',
+			'common.extensions.giix-components.*',
 			/* uncomment if required */
 			/* 'common.extensions.behaviors.*', */
 			/* 'common.extensions.validators.*', */
