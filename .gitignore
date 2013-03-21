@@ -52,3 +52,5 @@ images
 .buildpath
 .project
 .metadata
+assets
+runtime
