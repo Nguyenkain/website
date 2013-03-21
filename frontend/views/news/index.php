@@ -1,11 +1,11 @@
 
 <?php
 $i = 0;
-foreach ($model->findAll() as $value) {
+foreach ($modelCategories->findAll() as $value) {
 	$criteria = new CDbCriteria;
 	$criteria->condition = 'category_id = '.$value->category_id;
 	$criteria->order = 'news_id DESC';
-	$newest = $model2->find($criteria);?>
+	$newest = $modelNews->find($criteria);?>
 
 <h4>
 <?php if (!is_null($newest)) {
@@ -22,9 +22,9 @@ foreach ($model->findAll() as $value) {
 	$this->widget('zii.widgets.CListView',array(
 		'dataProvider'=>$value->getNews($value->category_id),
 		'itemView'=>'_index',
-		'summaryText'=>false, 
+		'summaryText'=>false,
+		'emptyText'=>false, 
 	)); }
-	//echo $this->renderPartial('_userview', array('model'=>$value->news,'dataProvider'=>$dataProvider2));
 }
 
 ?>
