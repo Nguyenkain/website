@@ -19,8 +19,9 @@ Yii::setPathOfAlias('root', $root);
 Yii::setPathOfAlias('common', $root . DIRECTORY_SEPARATOR . 'common');
 Yii::setPathOfAlias('backend', $root . DIRECTORY_SEPARATOR . 'backend');
 Yii::setPathOfAlias('www', $root. DIRECTORY_SEPARATOR . 'backend' . DIRECTORY_SEPARATOR . 'www');
+Yii::setPathOfAlias('upload_news', $root . DIRECTORY_SEPARATOR . 'frontend' . DIRECTORY_SEPARATOR . 'www' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'forumpic');
 /* uncomment if you need to use frontend folders */
-/* Yii::setPathOfAlias('frontend', $root . DIRECTORY_SEPARATOR . 'frontend'); */
+Yii::setPathOfAlias('frontend', $root . DIRECTORY_SEPARATOR . 'frontend');
 
 
 $mainLocalFile = $backendConfigDir . DIRECTORY_SEPARATOR . 'main-local.php';
@@ -68,7 +69,7 @@ return CMap::mergeArray(
 		'modules' => array(
 			'gii' => array(
 				'class' => 'system.gii.GiiModule',
-				'password' => 'clevertech',
+				'password' => '123123123',
 				'generatorPaths' => array(
 					'bootstrap.gii',
 					'ext.giix-core', // giix generators
@@ -95,6 +96,8 @@ return CMap::mergeArray(
 				'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
 				'enableParamLogging' => YII_DEBUG,
 				'charset' => 'latin1'
+			),
+			'request' => array(
 			),
 // 			'urlManager' => array(
 // 				'urlFormat' => 'path',
