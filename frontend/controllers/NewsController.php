@@ -61,27 +61,15 @@ class NewsController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$model= Categories::model();
-		$model2=new News;
+		$modelCategories = new Categories;
+		$modelNews = new News;
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		$dataProvider=new CActiveDataProvider($model, array(
-
-                    'pagination'=>array(
-                        'pageSize'=>4,
-		),
-		));
-		$dataProvider2=new CActiveDataProvider($model2, array(
-
-                    'pagination'=>array(
-                        'pageSize'=>4,
-		),
-		));
-		$this->render('index',array('model'=>$model,'model2'=>$model2,
-			'dataProvider'=>$dataProvider,
-			'dataProvider2'=>$dataProvider2
+		$dataProviderCategories= new CActiveDataProvider($modelCategories);
+		$dataProviderNews= new CActiveDataProvider($modelNews);
+		
+		$this->render('index',array(
+			'modelCategories'=>$modelCategories,
+			'modelNews'=>$modelNews
 		));
 
 	}
