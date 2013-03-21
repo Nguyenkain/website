@@ -48,5 +48,9 @@ index
 pictures
 forumpic
 images
+.settings
+.buildpath
+.project
+.metadata
 assets
 runtime
