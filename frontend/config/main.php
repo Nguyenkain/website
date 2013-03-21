@@ -67,6 +67,11 @@ return CMap::mergeArray(
 				// @see http://www.yiiframework.com/doc/api/1.1/CErrorHandler#errorAction-detail
 				'errorAction'=>'site/error'
 			),
+			/* load bootstrap components */
+			'bootstrap' => array(
+					'class' => 'common.extensions.bootstrap.components.Bootstrap',
+					'responsiveCss' => true,
+			),
 			'db' => array(
 				'connectionString' => $params['db.connectionString'],
 				'username' => $params['db.username'],
