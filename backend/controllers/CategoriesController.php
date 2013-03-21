@@ -27,21 +27,21 @@ class CategoriesController extends Controller
 	public function accessRules()
 	{
 		return array(
-		array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','userview'),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view'),
 				'users'=>array('*'),
-		),
-		array('allow', // allow authenticated user to perform 'create' and 'update' actions
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
 				'users'=>array('@'),
-		),
-		array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
-		),
-		array('deny',  // deny all users
+			),
+			array('deny',  // deny all users
 				'users'=>array('*'),
-		),
+			),
 		);
 	}
 
@@ -54,32 +54,6 @@ class CategoriesController extends Controller
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
-	}
-	public function actionUserview()
-	{
-		$model= Categories::model();
-		$model2=new News;
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		$dataProvider=new CActiveDataProvider($model, array(
-
-                    'pagination'=>array(
-                        'pageSize'=>4,
-		),
-		));
-		$dataProvider2=new CActiveDataProvider($model2, array(
-
-                    'pagination'=>array(
-                        'pageSize'=>4,
-		),
-		));
-		$this->render('userview',array('model'=>$model,'model2'=>$model2,
-			'dataProvider'=>$dataProvider,
-			'dataProvider2'=>$dataProvider2
-		));
-
 	}
 
 	/**
@@ -97,7 +71,7 @@ class CategoriesController extends Controller
 		{
 			$model->attributes=$_POST['Categories'];
 			if($model->save())
-			$this->redirect(array('view','id'=>$model->category_id));
+				$this->redirect(array('view','id'=>$model->category_id));
 		}
 
 		$this->render('create',array(
@@ -121,7 +95,7 @@ class CategoriesController extends Controller
 		{
 			$model->attributes=$_POST['Categories'];
 			if($model->save())
-			$this->redirect(array('view','id'=>$model->category_id));
+				$this->redirect(array('view','id'=>$model->category_id));
 		}
 
 		$this->render('update',array(
@@ -140,7 +114,7 @@ class CategoriesController extends Controller
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
-		$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**
@@ -162,7 +136,7 @@ class CategoriesController extends Controller
 		$model=new Categories('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Categories']))
-		$model->attributes=$_GET['Categories'];
+			$model->attributes=$_GET['Categories'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -180,7 +154,7 @@ class CategoriesController extends Controller
 	{
 		$model=Categories::model()->findByPk($id);
 		if($model===null)
-		throw new CHttpException(404,'The requested page does not exist.');
+			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
 
