@@ -65,4 +65,20 @@
 	<li><?php echo CHtml::link('Thêm nhóm mới',array('nhom/create')); ?>
 	</li>
 	<?php endif;?>
+	
+		<li class="nav-header">Quản lý tác giả</li>
+	<?php if(Yii::app()->controller->id == 'nhom'  && (Yii::app()->controller->action->id == 'admin' || Yii::app()->controller->action->id == 'update')):  ?>
+	<li class="active"><?php echo CHtml::link('Quản lý tác giả',array('author/admin')); ?>
+	</li>
+	<?php else: ?>
+	<li><?php echo CHtml::link('Quản lý tác giả',array('author/admin')); ?></li>
+	<?php endif;?>
+
+	<?php if(Yii::app()->controller->id == 'nhom'  && Yii::app()->controller->action->id == 'create'):  ?>
+	<li class="active"><?php echo CHtml::link('Thêm tác giả mới',array('author/create')); ?>
+	</li>
+	<?php else: ?>
+	<li><?php echo CHtml::link('Thêm tác giả mới',array('author/create')); ?>
+	</li>
+	<?php endif;?>
 </ul>
