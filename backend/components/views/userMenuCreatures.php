@@ -78,7 +78,7 @@
 	<li class="active"><?php echo CHtml::link('Thêm tác giả mới',array('author/create')); ?>
 	</li>
 	<?php else: ?>
-	<li><?php echo CHtml::link('Thêm tác giả mới',array('author/create')); ?>
+	<li><?php echo CHtml::link('Thêm tác giả',array('author/create')); ?>
 	</li>
 	<?php endif;?>
 </ul>
