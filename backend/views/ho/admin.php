@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 <h1>Quản lý Họ</h1>
 
 <p>
-Có thể dùng các kí hiệu để tìm kiếm nâng cao
+Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi giá trị tìm kiếm để tăng độ chính xác
 </p>
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
