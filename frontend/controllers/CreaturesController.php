@@ -49,9 +49,10 @@ class CreaturesController extends Controller
 	 * @param integer $id the ID of the model to be displayed
 	 */
 	public function actionView($id)
-	{
+	{		$dataProvider=new CActiveDataProvider('Creatures');
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
+				'dataProvider'=>$dataProvider
 		));
 	}
 	public function actionViewDetail($id)
@@ -197,10 +198,12 @@ class CreaturesController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{
+	{	$model = new Creatures;
+		
 		$dataProvider=new CActiveDataProvider('Creatures');
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+				'model'=> $model,
+				'dataProvider'=>$dataProvider
 		));
 	}
 

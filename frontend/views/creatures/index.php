@@ -1,17 +1,32 @@
-<?php
-$this->breadcrumbs=array(
-	'Creatures',
-);
-
-$this->menu=array(
-	array('label'=>'Create Creatures','url'=>array('create')),
-	array('label'=>'Manage Creatures','url'=>array('admin')),
-);
-?>
-
-<h1>Creatures</h1>
-
-<?php $this->widget('bootstrap.widgets.TbListView',array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
+<?php $form=$this->beginWidget('CActiveForm',array(
+		'id'=>'creatures-form',
+		'enableAjaxValidation'=>false,
 )); ?>
+
+<?php 
+echo $form->labelEx($model,'Ho');
+echo $form->dropDownList($model,'Ho',CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet' )); ?>
+
+
+<?php
+echo $form->labelEx($model,'Bo');
+echo $form->dropDownList($model,'Bo',CHtml::listData(Bo::model()->findAll(), 'ID', 'Viet' )); ?>
+<?php
+echo $form->labelEx($model,'Nhom');
+		echo $form->dropDownList($model,'Nhom',CHtml::listData(Nhom::model()->findAll(), 'ID', 'Viet' )); ?>
+<?php echo CHtml::radioButtonList('radio','Loai',CHtml::listData(Loai::model()->findAll(),'ID','Loai'));?>
+
+
+
+
+
+
+<div class="form-actions">
+	<?php $this->widget('bootstrap.widgets.TbButton', array(
+			'buttonType'=>'submit',
+			'type'=>'primary',
+			'label'=>$model->isNewRecord ? 'Find' : 'Save',
+		)); ?>
+</div>
+
+<?php $this->endWidget(); ?>
