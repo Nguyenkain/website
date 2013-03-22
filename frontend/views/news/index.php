@@ -11,8 +11,7 @@ foreach ($modelCategories->findAll() as $value) {
 <?php if (!is_null($newest)) {
 	echo $value->category_name ?>
 </h4>
-
-
+	<?php echo CHtml::image(Yii::app()->request->getBaseUrl(true) . "/images/forumpic/" . $newest->image . ".jpg");?>
 	<?php echo CHtml::link($newest->title,array('news/view&id='.$newest->news_id));?>
 <br/>
 	<?php echo $newest->short_description;?>
