@@ -6,7 +6,7 @@ class NewsController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column1';
+	public $layout='//layouts/layout_normal';
 
 	/**
 	 * @return array action filters
@@ -31,17 +31,6 @@ class NewsController extends Controller
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
 		),
-		array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-		),
-		array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-		),
-		array('deny',  // deny all users
-				'users'=>array('*'),
-		),
 		);
 	}
 	
@@ -64,8 +53,8 @@ class NewsController extends Controller
 		$modelCategories = new Categories;
 		$modelNews = new News;
 
-		$dataProviderCategories= new CActiveDataProvider($modelCategories);
-		$dataProviderNews= new CActiveDataProvider($modelNews);
+		//$dataProviderCategories= new CActiveDataProvider($modelCategories);
+		//$dataProviderNews= new CActiveDataProvider($modelNews);
 		
 		$this->render('index',array(
 			'modelCategories'=>$modelCategories,
@@ -87,18 +76,5 @@ class NewsController extends Controller
 		if($model===null)
 		throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
-	}
-
-	/**
-	 * Performs the AJAX validation.
-	 * @param Categories $model the model to be validated
-	 */
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='categories-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
 	}
 }
