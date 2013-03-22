@@ -407,7 +407,7 @@ ul.style2 a:hover
 {
 	width: 313px;
 	height: auto;
-	padding: 60px 25px 0px 30px;
+	padding: 45px 25px 0px 30px;
 	float: left;
 }
 
@@ -416,6 +416,7 @@ ul.style2 a:hover
 	margin: 0 auto;
 	padding: 0;
 	text-align: center;
+	line-height: 22px;
 }
 
 #search_container p
@@ -424,6 +425,7 @@ ul.style2 a:hover
 	text-align: center;
 	font-size: 11px;
 	line-height: 15px;
+	height: 20px;
 }
 
 #image_container
@@ -560,12 +562,17 @@ ul.style2 a:hover
 {
 	font-size: 11px;
 	color: #353535;
+	margin: 0;
 }
 
 #type_filter .filter_item .filter_ddl
 {
 	width: 170px;
 	margin: 5px 0 0 0;
+	color: #353535;
+	font-size: 11px;
+	height: 25px;
+	margin: 0;
 }
 
 #kingdom_choose 
@@ -579,6 +586,24 @@ ul.style2 a:hover
 	padding: 5px 0 0 5px;
 }
 
+#kingdom_choose input
+{
+	display: block;
+	float: left;
+	clear: left;
+	position: relative;
+	top: -1px;
+}
+
+#kingdom_choose label
+{
+	color: #353535;
+	font-size: 11px;
+	display: block;
+	float: left;
+	margin: 0 0 2px 3px;
+}
+
 #search_input
 {
 	position: relative;
@@ -586,6 +611,7 @@ ul.style2 a:hover
 	height: 34px;
 	padding: 4px;
 	background: url("images/search_input.png");
+	margin: 0;
 }
 
 #search_input input
@@ -594,11 +620,12 @@ ul.style2 a:hover
 	color: #333;
 	font-size: 15px;
 	padding: 5px;
-	width: 259px;
-	height: 25px;
+	width: 267px;
+	height: 34px;
+	margin: 0;
 }
 
-#search_input button
+#search_input .search_btn
 {
 	position: absolute;
 	width: 44px;
@@ -632,7 +659,7 @@ ul.style2 a:hover
 
 /*NEWS PAGE CONTENT*/
 
-#news_content
+#news_content, .page_content
 {
 	background: #FFFFFF;
 	width: 987px;
