@@ -65,4 +65,22 @@
 	<li><?php echo CHtml::link('Thêm nhóm mới',array('nhom/create')); ?>
 	</li>
 	<?php endif;?>
+    
+    <li class="nav-header">Bản đồ địa điểm phân bố</li>
+
+	<?php if(Yii::app()->controller->id == 'coordinations'  && (Yii::app()->controller->action->id == 'admin' || Yii::app()->controller->action->id == 'update')):  ?>
+	<li class="active"><?php echo CHtml::link('Quản lý địa điểm',array('coordinations/admin')); ?>
+	</li>
+	<?php else: ?>
+	<li><?php echo CHtml::link('Quản lý địa điểm',array('coordinations/admin')); ?>
+	</li>
+	<?php endif; ?>
+
+	<?php if(Yii::app()->controller->id == 'coordinations'  && Yii::app()->controller->action->id == 'create'):  ?>
+	<li class="active"><?php echo CHtml::link('Thêm địa điểm',array('coordinations/create')); ?>
+	</li>
+	<?php else: ?>
+	<li><?php echo CHtml::link('Thêm địa điểm mới',array('coordinations/create')); ?>
+	</li>
+	<?php endif;?>
 </ul>

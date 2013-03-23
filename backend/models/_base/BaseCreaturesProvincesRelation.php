@@ -7,12 +7,13 @@
  * property or method in class "CreaturesProvincesRelation".
  *
  * Columns in table "creatures_provinces_relation" available as properties of the model,
- * and there are no model relations.
+ * followed by relations of table "creatures_provinces_relation" available as properties of the model.
  *
  * @property integer $id
  * @property integer $creature_id
  * @property integer $province_id
  *
+ * @property Coordinations $province
  */
 abstract class BaseCreaturesProvincesRelation extends GxActiveRecord {
 
@@ -54,7 +55,8 @@ abstract class BaseCreaturesProvincesRelation extends GxActiveRecord {
 		return array(
 			'id' => Yii::t('app', 'ID'),
 			'creature_id' => Yii::t('app', 'Creature'),
-			'province_id' => Yii::t('app', 'Province'),
+			'province_id' => null,
+			'province' => null,
 		);
 	}
 
