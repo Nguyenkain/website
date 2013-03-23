@@ -112,7 +112,7 @@ $this->widget('ext.EchMultiSelect.EchMultiSelect', array(
 		'dropDownAttribute' => 'province_id',
 		'data' => $data,
 		'value'=> Coordinations::model()->province_id=CHtml::listData($coordinations, 'province_id', 'province_id'),
-		'dropDownHtmlOptions' => array('style' => 'width:378px;', ),
+		'dropDownHtmlOptions' => array('style' => 'width:400px;', ),
 		'options' => array(
 				'minWidth' => 350,
 				'position' => array('my' => 'left top', 'at' => 'left top'),

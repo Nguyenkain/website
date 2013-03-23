@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Creatures'=>array('index'),
-	'Create',
+		'Creatures'=>array('index'),
+		'Create',
 );
 
 $this->menu=array(
-	array('label'=>'List Creatures','url'=>array('index')),
-	array('label'=>'Manage Creatures','url'=>array('admin')),
+		array('label'=>'List Creatures','url'=>array('index')),
+		array('label'=>'Manage Creatures','url'=>array('admin')),
 );
 ?>
 
