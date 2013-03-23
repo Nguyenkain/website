@@ -107,7 +107,7 @@ echo $form->dropDownList($model, 'Author', CHtml::listData(Author::model()->
 
 <?php $data = CHtml::listData(Coordinations::model()->findAll(array('order' =>
 		'province_name')), 'province_id', 'province_name');
-$this->widget('ext.EchMultiselect.EchMultiselect', array(
+$this->widget('ext.EchMultiSelect.EchMultiSelect', array(
 		'model' => Coordinations::model(),
 		'dropDownAttribute' => 'province_id',
 		'data' => $data,
