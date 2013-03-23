@@ -118,7 +118,7 @@ $this->widget('ext.EchMultiSelect.EchMultiSelect', array(
 				'position' => array('my' => 'left top', 'at' => 'left top'),
 				'filter' => true,
 		),
-		'filterOptions' => array('width' => 100,),
+		'filterOptions' => array('width' => 70,),
 )); ?>
 
 <div class="form-actions">
