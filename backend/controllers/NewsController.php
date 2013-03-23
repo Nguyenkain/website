@@ -60,7 +60,7 @@ class NewsController extends Controller
 	{
 		Yii::import("ext.EAjaxUpload.qqFileUploader");
 
-		$folder='upload/';// folder for uploaded files
+		$folder='frontend/www/images/forumpic/';// folder for uploaded files
 		$allowedExtensions = array("jpg","png");//array("jpg","jpeg","gif","exe","mov" and etc...
 		$sizeLimit = 10 * 1024 * 1024;// maximum file size in bytes
 		$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);

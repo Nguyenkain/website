@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 <h1>Quản lý Bộ</h1>
 
 <p>
-Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi giá trị tìm kiếm để tăng độ chính
+Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi giá trị tìm kiếm để tăng độ chính xác
 </p>
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(

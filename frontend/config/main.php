@@ -30,11 +30,12 @@ return CMap::mergeArray(
 	array(
 		// @see http://www.yiiframework.com/doc/api/1.1/CApplication#basePath-detail
 		'basePath' => 'frontend',
+		'name'=>'Sinh vật rừng Việt Nam',
 		// set parameters
 		'params' => $params,
 		// preload components required before running applications
 		// @see http://www.yiiframework.com/doc/api/1.1/CModule#preload-detail
-		'preload' => array('log'),
+		'preload' => array('bootstrap', 'log'),
 		// @see http://www.yiiframework.com/doc/api/1.1/CApplication#language-detail
 		'language' => 'en',
 		// uncomment if a theme is used
@@ -44,6 +45,7 @@ return CMap::mergeArray(
 		'import' => array(
 			'common.components.*',
 			'common.extensions.*',
+			'common.extensions.giix-components.*',
 			'common.models.*',
 			// uncomment if behaviors are required
 			// you can also import a specific one
@@ -58,9 +60,19 @@ return CMap::mergeArray(
 		// @see http://www.yiiframework.com/doc/api/1.1/CModule#setModules-detail
 		/* 'modules' => array(), */
 		'components' => array(
+			/* load bootstrap components */
+			'bootstrap' => array(
+				'class' => 'common.extensions.bootstrap.components.Bootstrap',
+				'responsiveCss' => true,
+			),
 			'errorHandler' => array(
 				// @see http://www.yiiframework.com/doc/api/1.1/CErrorHandler#errorAction-detail
 				'errorAction'=>'site/error'
+			),
+			/* load bootstrap components */
+			'bootstrap' => array(
+					'class' => 'common.extensions.bootstrap.components.Bootstrap',
+					'responsiveCss' => true,
 			),
 			'db' => array(
 				'connectionString' => $params['db.connectionString'],
