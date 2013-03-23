@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /**
  * Yii extension wrapping the jQuery UI MultiSelect Widget from Eric Hynds
@@ -56,22 +56,22 @@ class EchMultiselect extends CJuiInputWidget
 	{
 		// Put togehther options for plugin
 		$options_default = array(
-			'checkAllText' => Yii::t('EchMultiSelect.EchMultiSelect','Check all'),
-			'uncheckAllText' => Yii::t('EchMultiSelect.EchMultiSelect','Uncheck all'),
-			'selectedText' =>Yii::t('EchMultiSelect.EchMultiSelect','# selected'),
-			'noneSelectedText'=>'--' . Yii::t('EchMultiSelectEchMultiSelect','Select') . '--',
+			'checkAllText' => Yii::t('EchMultiSelect.EchMultiSelect','Chọn tất cả'),
+			'uncheckAllText' => Yii::t('EchMultiSelect.EchMultiSelect','Bỏ chọn tất cả'),
+			'selectedText' =>Yii::t('EchMultiSelect.EchMultiSelect','# địa điểm'),
+			'noneSelectedText'=>'--' . Yii::t('EchMultiSelectEchMultiSelect','Chọn địa điểm') . '--',
 			'multiple'=>true,
 			'filter'=>false,
 			'ajaxRefresh'=>false, // by jeremy@Yii, see comment on extension page...
 		);
 		$filterOptions_default = array(
-			'label' => Yii::t('EchMultiSelect.EchMultiSelect','Filter:'),
-			'placeholder'=>Yii::t('EchMultiSelect.EchMultiSelect','Enter keywords'),
+			'label' => Yii::t('EchMultiSelect.EchMultiSelect','Địa điểm:'),
+			'placeholder'=>Yii::t('EchMultiSelect.EchMultiSelect','Từ khóa'),
 		);
 		$opt = array_merge($options_default, $this->options);
 		$fopt = array_merge($filterOptions_default, $this->filterOptions);
 		if($opt['multiple'] === false && !isset($this->options['noneSelectedText'])) 
-			$opt['noneSelectedText'] =  '-- ' . Yii::t('EchMultiSelect.EchMultiSelect','Select an Option') . ' --';
+			$opt['noneSelectedText'] =  '-- ' . Yii::t('EchMultiSelect.EchMultiSelect','Chọn địa điểm') . ' --';
 		$this->options = $opt;
 		$this->filterOptions = $fopt;
 		
