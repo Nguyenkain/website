@@ -143,7 +143,10 @@ class ThreadsController extends Controller
 		$criteria->group = 'thread_id';
 		
 		$dataProvider=new CActiveDataProvider('Threads',array(
-				'criteria'=>$criteria));
+				'criteria'=>$criteria,
+				'pagination'=>array(
+                'pageSize'=>6,
+            ),));
 		$this->render('index',array(
 				'dataProvider'=>$dataProvider,
 		));
