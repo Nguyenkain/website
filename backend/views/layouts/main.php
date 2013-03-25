@@ -35,11 +35,11 @@
 					array(
 							'class'=>'bootstrap.widgets.TbMenu',
 							'items'=>array(
-									array('label'=>'Sinh vật', 'url'=>array('/creatures/admin')),
-									array('label'=>'Tin tức', 'url'=>array('/news/admin')),
-									array('label'=>'Thảo luận', 'url'=>array('/threads/admin')),
-									array('label'=>'Vườn Quốc Gia', 'url'=>array('/nationalParks/admin')),
-									array('label'=>'Đăng nhập', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+									array('label'=>'Sinh vật', 'url'=>array('/creatures/admin'), 'active'=>$this->id=='creatures'?true:false),
+									array('label'=>'Tin tức', 'url'=>array('/news/admin'), 'active'=>$this->id=='news'?true:false),
+									array('label'=>'Thảo luận', 'url'=>array('/threads/admin') , 'active'=>$this->id=='threads'?true:false),
+									array('label'=>'Vườn Quốc Gia', 'url'=>array('/nationalParks/admin'), 'active'=>$this->id=='nationalParks'?true:false),
+									array('label'=>'Đăng nhập', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest, 'active'=>$this->id=='site'?true:false),
 									array('label'=>'Đăng xuất ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 							),
 					),

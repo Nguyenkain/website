@@ -15,6 +15,14 @@ $this->menu=array(
 
 <h1>Xem Sinh Vật #<?php echo $model->Viet; ?></h1>
 
+<?php $this->widget('ext.JCarousel.JCarousel', array(
+    'dataProvider' => $dataProvider,
+    'thumbUrl' => 'Yii::app()->request->getBaseUrl(true) . "/images/pictures/insect/" . $data->Img . ".jpg"',
+    'imageUrl' => 'Yii::app()->request->getBaseUrl(true) . "/images/pictures/insect/" . $data->Img . ".jpg"',
+    'vertical' => false,
+	
+)); ?>
+
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
@@ -33,7 +41,7 @@ $this->menu=array(
 			array(
 		'label'=>'Ảnh',
 		'type'=>'raw',
-		'value'=>CHtml::image(Yii::app()->request->getBaseUrl(true) . "/../web/images/forumpic" . $model->Img . ".jpg" , "Ảnh Minh Họa", array('width' => '200px')),
+		'value'=>CHtml::image(Yii::app()->request->getBaseUrl(true) . "/images/pictures/insect/" . $model->Img . ".jpg" , "Ảnh Minh Họa", array('width' => '200px')),
 ),
 		'Author',
 		'AuthorName',

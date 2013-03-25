@@ -45,6 +45,7 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 	'pagerCssClass'=>'pagination pagination-right',
 	'htmlOptions' => array('class' => 'grid-view rounded'),
 	'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
+	'emptyText' => 'Không có kết quả nào được tìm thấy',
 	'columns'=>array(
 		'id',
 		'creature_id',

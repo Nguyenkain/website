@@ -28,19 +28,19 @@
 	<?php echo CHtml::encode($data->Nhom); ?>
 	<br />
 
-	<?php /*
-	<b><?php echo CHtml::encode($data->getAttributeLabel('Description')); ?>:</b>
-	<?php echo CHtml::encode($data->Description); ?>
-	<br />
+	
+	
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('Img')); ?>:</b>
 	<?php echo CHtml::encode($data->Img); ?>
 	<br />
-
+<?php /* 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('Author')); ?>:</b>
 	<?php echo CHtml::encode($data->Author); ?>
 	<br />
-
+<b><?php echo CHtml::encode($data->getAttributeLabel('Description')); ?>:</b>
+	<?php echo CHtml::encode($data->Description); ?>
+	<br />
 	<b><?php echo CHtml::encode($data->getAttributeLabel('AuthorName')); ?>:</b>
 	<?php echo CHtml::encode($data->AuthorName); ?>
 	<br />
