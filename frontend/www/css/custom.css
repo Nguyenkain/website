@@ -247,7 +247,6 @@ hr
 {
 	background: url("images/footer_normal.png") center top no-repeat;
 	height: 200px;
-	
 }
 
 #footer p
@@ -575,7 +574,7 @@ ul.style2 a:hover
 	margin: 0;
 }
 
-#kingdom_choose 
+#kingdom_choose
 {
 	position: absolute;
 	right: 0;
@@ -592,7 +591,7 @@ ul.style2 a:hover
 	float: left;
 	clear: left;
 	position: relative;
-	top: -1px;
+	top: 2px;
 }
 
 #kingdom_choose label
@@ -601,7 +600,7 @@ ul.style2 a:hover
 	font-size: 11px;
 	display: block;
 	float: left;
-	margin: 0 0 2px 3px;
+	margin: 5px 0 5px 3px;
 }
 
 #search_input
@@ -611,7 +610,6 @@ ul.style2 a:hover
 	height: 34px;
 	padding: 4px;
 	background: url("images/search_input.png");
-	margin: 0;
 }
 
 #search_input input
@@ -632,8 +630,8 @@ ul.style2 a:hover
 	height: 35px;
 	cursor: pointer;
 	text-indent: -99999px;
-    text-align: center;
-    background-color: Transparent;
+	text-align: center;
+	background-color: Transparent;
 	border: none;
 }
 
@@ -654,7 +652,7 @@ ul.style2 a:hover
 #search_text .decoration img
 {
 	position: absolute;
-	top: 2px
+	top: 2px;
 }
 
 /*NEWS PAGE CONTENT*/
@@ -687,7 +685,7 @@ ul.style2 a:hover
 	margin: 10px 0;
 }
 
-.category_title .hoz_line
+.hoz_line
 {
 	height: 3px;
 	width: 487px;
@@ -735,7 +733,7 @@ ul.style2 a:hover
 	line-height: 14px;
 	margin: 16px 0 0 0;
 	height: 100px;
-	text-overflow:ellipsis;
+	text-overflow: ellipsis;
 	overflow: hidden;
 }
 
@@ -757,11 +755,11 @@ ul.style2 a:hover
 	padding: 0;
 }
 
-.news_list a 
+.news_list a
 {
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	overflow: hidden;	
+	overflow: hidden;
 	text-decoration: none;
 	color: #919191;
 	font-size: 11px;
@@ -771,4 +769,160 @@ ul.style2 a:hover
 {
 	position: relative;
 	left: -4px;
+}
+
+/*Discussion Page*/
+#post_button
+{
+	background: url("images/post_button.png") no-repeat center center;
+	width: 102px;
+	height: 27px;
+	font-size: 11px;
+	color: #FFFFFF;
+	display: block;
+	text-decoration: none;
+	position: relative;
+	float: left;
+	bottom: 5px;
+}
+
+#post_button span
+{
+	position: absolute;
+	top: 6px;
+	left: 15px;
+}
+
+#action_nav
+{
+	display: block;
+	margin: 10px 0 0 0;
+}
+
+#action_nav h4
+{
+	margin: 0;
+	text-transform: uppercase;
+	font-size: 14px;
+	color: #3f3f3f;
+	float: left;
+	margin: 0 0 0 10px;
+}
+
+#facebook_button
+{
+	height: 35px;
+	width: 165px;
+	display: block;
+	float: right;
+	background: url("images/facebook_button.png");
+	position: relative;
+	bottom: 8px;
+	right: 15px;
+}
+
+.hoz_line.long
+{
+	width: 971px;
+	background: url("images/hoz_line_long.png");
+	margin: 5px 0 10px 0;
+}
+
+.thread_item
+{
+	display: block;
+	margin: 15px 0;
+}
+
+.avatar
+{
+	display: block;
+	float: left;
+	width: 80px;
+	height: 80px;
+}
+
+.avatar img
+{
+	width: 76px;
+	height: 76px;
+	border: 2px solid #666; /* top-left corner */
+	border-top-left-radius: 15px;
+	-moz-border-radius-topleft: 15px;
+	-webkit-border-top-left-radius: 15px; /* bottom-right corner */
+	border-top-right-radius: 15px;
+	-moz-border-radius-topright: 15px;
+	-webkit-border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;
+	-moz-border-radius-bottomright: 15px;
+	-webkit-border-bottom-right-radius: 15px; /* bottom-left corner */
+	border-bottom-left-radius: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	-webkit-border-bottom-left-radius: 15px;
+}
+.thread_info
+{
+	float: left;
+	margin: 0 0 0 5px;
+	width: 885px;
+}
+
+.thread_title_info img
+{
+	width: 15px;
+	height: 15px;
+	float: left;
+}
+.thread_title
+{
+	text-decoration: none;
+	font-size: 12px;
+	float: left;
+	margin: 0 5px;
+	color: #505050;
+}
+
+.date_text
+{
+	float: left;
+	margin: 0;
+	font-size: 12px;
+	color: #8b8b8b;
+}
+.thread_content p
+{
+	color: #2f5607;
+	font-size: 12px;
+	padding: 8px 0;
+	margin: 0;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-weight: 600;
+	height: 20px;
+	line-height: 15px;
+}
+.thread_stats
+{
+	display: block;
+}
+.thread_stats label
+{
+	margin: 0;
+	display: inline;
+}
+.thread_stats img
+{
+	width: 17px;
+	height: 17px;
+	position: relative;
+}
+.thread_stats .stats_text
+{
+	color: #e97d13;
+}
+
+.list-view 
+{
+	padding: 0;
 }

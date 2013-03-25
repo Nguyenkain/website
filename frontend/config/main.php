@@ -31,6 +31,7 @@ return CMap::mergeArray(
 		// @see http://www.yiiframework.com/doc/api/1.1/CApplication#basePath-detail
 		'basePath' => 'frontend',
 		'name'=>'Sinh vật rừng Việt Nam',
+		'defaultController' => 'creatures/index',
 		// set parameters
 		'params' => $params,
 		// preload components required before running applications
