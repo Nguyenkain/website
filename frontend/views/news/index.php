@@ -1,7 +1,8 @@
-
 <?php
-$i = 0;
 foreach ($modelCategories->findAll() as $value) {
+?>
+<div>
+<?php
 	$criteria = new CDbCriteria;
 	$criteria->condition = 'category_id = '.$value->category_id;
 	$criteria->order = 'news_id DESC';
@@ -24,6 +25,9 @@ foreach ($modelCategories->findAll() as $value) {
 		'summaryText'=>false,
 		'emptyText'=>false, 
 	)); }
+	?>
+	</div>
+		<?php
 }
 
 ?>
