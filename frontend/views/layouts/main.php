@@ -71,7 +71,7 @@
 					array('label'=>'Tìm Kiếm', 'url'=>array('/creatures/index') , 'active'=>$this->id=='creatures'?true:false),
 					array('label'=>'Tin Tức', 'url'=>array('/news/index') , 'active'=>$this->id=='news'?true:false),
 					array('label'=>'Bản Đồ', 'url'=>array('/creatures/admin') , 'active'=>$this->id=='creatures'?true:false ),
-					array('label'=>'Thảo Luận', 'url'=>array('/creatures/admin') , 'itemOptions'=>array('class'=>'last') , 'active'=>$this->id=='creatures'?true:false),		
+					array('label'=>'Thảo Luận', 'url'=>array('/threads/') , 'itemOptions'=>array('class'=>'last') , 'active'=>$this->id=='threads'?true:false),		
 				),
 			));
 		?>

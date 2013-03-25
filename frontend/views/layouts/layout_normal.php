@@ -2,7 +2,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	$('#footer_content).hide();
+	$('#footer_content').hide();
 	$('#footer').addClass('normal');
 });
 
