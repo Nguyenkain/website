@@ -42,43 +42,50 @@ abstract class BaseCreatures extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('Loai, Ho, Bo, Nhom, Author', 'numerical', 'integerOnly'=>true),
-			array('Viet, Latin, AuthorName', 'length', 'max'=>50),
-			array('Img', 'length', 'max'=>200),
-			array('Description', 'safe'),
-			array('Viet, Latin, Loai, Ho, Bo, Nhom, Description, Img, Author, AuthorName', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('ID, Viet, Latin, Loai, Ho, Bo, Nhom, Description, Img, Author, AuthorName', 'safe', 'on'=>'search'),
+				array('Loai, Ho, Bo, Nhom, Author', 'numerical', 'integerOnly'=>true),
+				array('Viet, Latin, AuthorName', 'length', 'max'=>50),
+				array('Img', 'length', 'max'=>200),
+				array('Description', 'safe'),
+				array('Viet, Latin, Loai, Ho, Bo, Nhom, Description, Img, Author, AuthorName', 'default', 'setOnEmpty' => true, 'value' => null),
+				array('ID, Viet, Latin, Loai, Ho, Bo, Nhom, Description, Img, Author, AuthorName', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
-			'rHo' => array(self::BELONGS_TO, 'Ho', 'Ho'),
-			'rBo' => array(self::BELONGS_TO, 'Bo', 'Bo'),
-			'rNhom' => array(self::BELONGS_TO, 'Nhom', 'Nhom'),
-			'rLoai' => array(self::BELONGS_TO, 'Loai', 'Loai'),
-			'rAuthor'=>array(self::BELONGS_TO,'Author','Author'),
+				'rHo' => array(self::BELONGS_TO, 'Ho', 'Ho'),
+				'rBo' => array(self::BELONGS_TO, 'Bo', 'Bo'),
+				'rNhom' => array(self::BELONGS_TO, 'Nhom', 'Nhom'),
+				'rLoai' => array(self::BELONGS_TO, 'Loai', 'Loai'),
+				'rAuthor'=>array(self::BELONGS_TO,'Author','Author'),
+				'rProvince' => array(self::MANY_MANY, 'Coordinations', 'creatures_provinces_relation(creature_id, province_id)'),
+				'rRelation' => array(self::HAS_MANY, 'CreaturesProvincesRelation', 'creature_id'),
 		);
 	}
 
-	public function pivotModels() {	
+	public function behaviors(){
+		return array( 'CAdvancedArBehavior' => array(
+				'class' => 'application.extensions.CAdvancedArBehavior'));
+	}
+
+	public function pivotModels() {
 		return array(
 		);
 	}
 
 	public function attributeLabels() {
 		return array(
-			'ID' => Yii::t('app', 'ID'),
-			'Viet' => Yii::t('app', 'Tên Việt'),
-			'Latin' => Yii::t('app', 'Tên Latin'),
-			'Loai' => Yii::t('app', 'Loài'),
-			'Ho' => Yii::t('app', 'Họ'),
-			'Bo' => Yii::t('app', 'Bộ'),
-			'Nhom' => Yii::t('app', 'Nhóm'),
-			'Description' => Yii::t('app', 'Mô tả'),
-			'Img' => Yii::t('app', 'Ảnh'),
-			'Author' => Yii::t('app', 'Tác giả'),
-			'AuthorName' => Yii::t('app', 'Tên tác giả'),
+				'ID' => Yii::t('app', 'ID'),
+				'Viet' => Yii::t('app', 'Tên Việt'),
+				'Latin' => Yii::t('app', 'Tên Latin'),
+				'Loai' => Yii::t('app', 'Loài'),
+				'Ho' => Yii::t('app', 'Họ'),
+				'Bo' => Yii::t('app', 'Bộ'),
+				'Nhom' => Yii::t('app', 'Nhóm'),
+				'Description' => Yii::t('app', 'Mô tả'),
+				'Img' => Yii::t('app', 'Ảnh'),
+				'Author' => Yii::t('app', 'Tác giả'),
+				'AuthorName' => Yii::t('app', 'Tên tác giả'),
 		);
 	}
 

@@ -90,4 +90,18 @@ class Threads extends BaseThreads
 	
 		parent::afterDelete();
 	}
+public function countpost($id) {
+		$criteria = new CDbCriteria;
+		$model = new Posts;
+		
+		$criteria->select = array(
+				'*',
+				'count(*) as posts_count',
+		);
+		$criteria->compare('thread_id', $id);
+		
+		$data = $model->find($criteria);
+		
+		return $data;
+	}
 }
