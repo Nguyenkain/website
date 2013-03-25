@@ -591,7 +591,7 @@ ul.style2 a:hover
 	float: left;
 	clear: left;
 	position: relative;
-	top: 2px;
+	top: -1px;
 }
 
 #kingdom_choose label
@@ -600,7 +600,7 @@ ul.style2 a:hover
 	font-size: 11px;
 	display: block;
 	float: left;
-	margin: 5px 0 5px 3px;
+	margin: 0px 0 5px 3px;
 }
 
 #search_input
@@ -925,4 +925,16 @@ ul.style2 a:hover
 .list-view 
 {
 	padding: 0;
+}
+
+/* Loading  */
+.hasLoading {
+    background-color: #eee;
+    background-image: url('../images/loading.gif');
+    background-position:  center center;
+    background-repeat: no-repeat;
+    opacity: 1;
+}
+.hasloading * {
+    opacity: .8;
 }
