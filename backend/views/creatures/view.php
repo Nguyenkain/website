@@ -20,10 +20,10 @@ $this->menu=array(
 	'attributes'=>array(
 		'Viet',
 		'Latin',
-		'Loai',
-		'Ho',
-		'Bo',
-		'Nhom',
+		'rLoai',
+		'rHo',
+		'rBo',
+		'rNhom',
 		array(
 		'label'=>'Mô tả',
 		'type'=>'raw',
