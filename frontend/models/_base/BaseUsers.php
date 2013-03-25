@@ -43,7 +43,7 @@ abstract class BaseUsers extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('facebook_id, name, ban_status', 'required'),
+			array('facebook_id, name', 'required'),
 			array('last_time_login, ban_status', 'numerical', 'integerOnly'=>true),
 			array('facebook_id, username, user_address, user_email, user_avatar, name', 'length', 'max'=>255),
 			array('user_dob', 'length', 'max'=>20),
