@@ -14,7 +14,7 @@ class CreaturesController extends Controller
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
+				'accessControl', // perform access control for CRUD operations
 		);
 	}
 
@@ -26,21 +26,21 @@ class CreaturesController extends Controller
 	public function accessRules()
 	{
 		return array(
-		array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-		),
-		array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','upload','dynamicbo','dynamicho','dynamicauthor'),
-				'users'=>array('@'),
-		),
-		array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-		),
-		array('deny',  // deny all users
-				'users'=>array('*'),
-		),
+				array('allow',  // allow all users to perform 'index' and 'view' actions
+						'actions'=>array('index','view','listcreatures'),
+						'users'=>array('*'),
+				),
+				array('allow', // allow authenticated user to perform 'create' and 'update' actions
+						'actions'=>array('create','update','upload','dynamicbo','dynamicho','dynamicauthor'),
+						'users'=>array('@'),
+				),
+				array('allow', // allow admin user to perform 'admin' and 'delete' actions
+						'actions'=>array('admin','delete'),
+						'users'=>array('admin'),
+				),
+				array('deny',  // deny all users
+						'users'=>array('*'),
+				),
 		);
 	}
 
@@ -49,10 +49,24 @@ class CreaturesController extends Controller
 	 * @param integer $id the ID of the model to be displayed
 	 */
 	public function actionView($id)
-	{		$dataProvider=new CActiveDataProvider('Creatures');
+	{
+		$dataProvider=new CActiveDataProvider('Creatures');
+					
+		
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+				'model'=>$this->loadModel($id),
 				'dataProvider'=>$dataProvider
+		));
+	}
+	public function actionListcreatures()
+	{
+		$model=new Creatures('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Creatures']))
+			$model->attributes=$_GET['Creatures'];
+
+		$this->render('listcreatures',array(
+				'model'=>$model,
 		));
 	}
 	public function actionViewDetail($id)
@@ -77,11 +91,11 @@ class CreaturesController extends Controller
 		{
 			$model->attributes=$_POST['Creatures'];
 			if($model->save())
-			$this->redirect(array('view','id'=>$model->ID));
+				$this->redirect(array('view','id'=>$model->ID));
 		}
 
 		$this->render('create',array(
-			'model'=>$model,
+				'model'=>$model,
 		));
 	}
 	public function actionUpload()
@@ -100,12 +114,12 @@ class CreaturesController extends Controller
 	{
 		$ho = Ho::model()->findByPk((int) $_POST['Ho']);
 		$data = Bo::model()->findAll('ID=:parent_id',
-		array(':parent_id'=>(int) $ho->Bo));
-		
+				array(':parent_id'=>(int) $ho->Bo));
+
 		$data2 = Nhom::model()->findAll('ID=:parent_id',
-		array(':parent_id'=>(int)$data[0]->Nhom));
+				array(':parent_id'=>(int)$data[0]->Nhom));
 		$data3 = Loai::model()->findAll('ID=:parent_id',
-		array(':parent_id'=>(int)$data2[0]->Loai));
+				array(':parent_id'=>(int)$data2[0]->Loai));
 
 
 		$data = CHtml::listData($data,'ID','Viet');
@@ -115,20 +129,20 @@ class CreaturesController extends Controller
 		$Loai='';
 		foreach($data as $ID => $value)
 
-		$Bo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-	
+			$Bo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+
 
 		foreach($data2 as $ID => $value)
 
-		$Nhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+			$Nhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
 		foreach($data3 as $ID => $value)
-		
+
 			$Loai.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
 
 		echo CJSON::encode(array(
-	            		'dropdownBo'=>$Bo,
-	            		'dropdownNhom'=>$Nhom,
-						'dropdownLoai'=>$Loai
+				'dropdownBo'=>$Bo,
+				'dropdownNhom'=>$Nhom,
+				'dropdownLoai'=>$Loai
 		));
 	}
 	public function actionCreatdataforLoai($data,$row)
@@ -141,7 +155,7 @@ class CreaturesController extends Controller
 	{
 		$data=Author::model()->findAll('ID=:parent_id',
 				array(':parent_id'=>(int) $_POST['Author']));
-		
+
 		$data=CHtml::listData($data,'id','name');
 		foreach($data as $value=>$name)
 		{
@@ -166,11 +180,11 @@ class CreaturesController extends Controller
 		{
 			$model->attributes=$_POST['Creatures'];
 			if($model->save())
-			$this->redirect(array('view','id'=>$model->ID));
+				$this->redirect(array('view','id'=>$model->ID));
 		}
 
 		$this->render('update',array(
-			'model'=>$model,
+				'model'=>$model,
 		));
 	}
 
@@ -188,18 +202,19 @@ class CreaturesController extends Controller
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
 		else
-		throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
 	/**
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{	$model = new Creatures;
-		
+	{
+		$model = new Creatures;
+
 		$dataProvider=new CActiveDataProvider('Creatures');
 		$this->render('index',array(
 				'model'=> $model,
@@ -215,10 +230,10 @@ class CreaturesController extends Controller
 		$model=new Creatures('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Creatures']))
-		$model->attributes=$_GET['Creatures'];
+			$model->attributes=$_GET['Creatures'];
 
 		$this->render('admin',array(
-			'model'=>$model,
+				'model'=>$model,
 		));
 	}
 
@@ -231,7 +246,7 @@ class CreaturesController extends Controller
 	{
 		$model=Creatures::model()->findByPk($id);
 		if($model===null)
-		throw new CHttpException(404,'The requested page does not exist.');
+			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
 
