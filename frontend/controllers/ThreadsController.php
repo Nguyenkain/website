@@ -56,6 +56,7 @@ class ThreadsController extends Controller
 		$model->thread_search = $thread->thread_title;
 		$dataProvider=new CActiveDataProvider('Posts');
 		$this->render('view',array(
+				'dataProvider'=>$dataProvider,
 				'post_model'=>$model,
 				'model' => $thread,
 				'thread_title'=>$thread->thread_title,
