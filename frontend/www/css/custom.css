@@ -772,3 +772,26 @@ ul.style2 a:hover
 	position: relative;
 	left: -4px;
 }
+
+/* KCarousel Overide CSs */
+.jcarousel-skin-tango .jcarousel-container-horizontal {
+    width: 845px;
+    padding: 20px 40px;
+}
+.jcarousel-skin-tango .jcarousel-clip-horizontal {
+    height: 135px;
+    width: 245px;
+}
+element.style {
+    float: left;
+    list-style: none outside none;
+    width: 189px;
+}
+.jcarousel-skin-tango .jcarousel-item {
+    width: 175px;
+    height: 175px;
+}
+.jcarousel-skin-tango .jcarousel-item img
+{
+	}
+}

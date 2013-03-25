@@ -21,17 +21,23 @@
                             <div class="filter_item">
                                 <label for="filter_lop" class="filter_label">
                                     Tra cứu theo Lớp (nhóm)</label>
-                                <?php echo $form->dropDownList($model,'Nhom',CHtml::listData(Nhom::model()->findAll(), 'ID', 'Viet' ), array('id' => 'filter_lop', 'class' => 'filter_ddl') ); ?>
+                                <?php echo $form->dropDownList($model,'Nhom',CHtml::listData(Nhom::model()->findAll(), 'ID', 'Viet' ), array(
+                                		'empty'=>'--Chọn lớp muốn tìm--',
+                                		'id' => 'filter_lop', 'class' => 'filter_ddl') ); ?>
                             </div>
                             <div class="filter_item">
                                 <label for="filter_bo" class="filter_label">
                                     Tra cứu theo Bộ</label>
-                                <?php echo $form->dropDownList($model,'Bo',CHtml::listData(Bo::model()->findAll(), 'ID', 'Viet' ), array('id' => 'filter_bo', 'class' => 'filter_ddl')); ?>
+                                <?php echo $form->dropDownList($model,'Bo',CHtml::listData(Bo::model()->findAll(), 'ID', 'Viet' ), array(
+                                		'empty'=>'--Chọn bộ muốn tìm--',
+                                		'id' => 'filter_bo', 'class' => 'filter_ddl')); ?>
                             </div>
                             <div class="filter_item">
                                 <label for="filter_ho" class="filter_label">
                                     Tra cứu Họ</label>
-                                <?php echo $form->dropDownList($model,'Ho',CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet' ), array('id' => 'filter_ho', 'class' => 'filter_ddl') ); ?>
+                                <?php echo $form->dropDownList($model,'Ho',CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet' ), array(
+                                		'empty'=>'--Chọn họ muốn tìm--',
+                                		'id' => 'filter_ho', 'class' => 'filter_ddl') ); ?>
                             </div>
                             <div id="kingdom_choose">
                                 <?php echo CHtml::radioButtonList('radio','Loai',CHtml::listData(Loai::model()->findAll(),'ID','Loai'));?>
@@ -40,7 +46,10 @@
                         <div id="search_text">
                             <div id="search_input">
                                 <?php echo $form->textField($model,'Viet',array('placeholder' => 'Tìm Kiếm')); ?>
-                                <?php echo CHtml::submitButton('', array('class' => 'search_btn',)); ?>
+                                <?php echo CHtml::submitButton('', array(
+                                		'class' => 'search_btn',
+                                		'submit'=> 'listcreatures'
+                                		)); ?>
                             </div>
                             <div class="decoration">
                                 <label class="hint">
