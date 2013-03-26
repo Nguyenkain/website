@@ -12,6 +12,7 @@
                                 		'empty'=>'--Chọn họ muốn tìm--',
                                 		'id' => 'filter_ho', 'class' => 'filter_ddl') ); ?>
   <?php echo $form->radioButtonList($model,'Loai',CHtml::listData(Loai::model()->findAll(),'ID','Loai'));?>
+  <?php echo $form->textField($model,'Viet',array('placeholder' => 'Tìm Kiếm')); ?>
   <div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType' => 'submit',
