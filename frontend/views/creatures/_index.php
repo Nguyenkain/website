@@ -16,7 +16,21 @@ echo $form->dropDownList($model,'Bo',CHtml::listData(Bo::model()->findAll('ID=:p
 echo $form->labelEx($model,'Nhom');
 		echo $form->dropDownList($model,'Nhom',CHtml::listData(Nhom::model()->findAll('ID=:parent_id',
 								array(':parent_id'=>(int) $model->Nhom)), 'ID', 'Viet' )); ?>
-<?php echo CHtml::radioButtonList($data,'Loai',CHtml::listData(Loai::model()->findAll(),'ID','Loai'),array('onchange' => 'menuTypeChange(this.value);'));?>
+<?php echo CHtml::radioButtonList($data,'Loai',CHtml::listData(Loai::model()->findAll(),'ID','Loai'),array(
+		
+		'onclick'=>CHtml::ajax( array(
+				'type' => 'POST',
+				'dataType' => 'json',
+				'data' => array('Loai' => 'js:$(this).val()'),
+		
+				'url' => CController::createUrl('creatures/dynamicloai'),
+				'success' => 'function(data){
+		$("#Creatures_Bo").html(data.dropdownBo);
+		$("#Creatures_Nhom").html(data.dropdownNhom);
+		$("#Creatures_Ho").html(data.dropdownHo);
+		}
+	))); 
+				?>
 
 
 
