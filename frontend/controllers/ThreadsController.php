@@ -27,7 +27,7 @@ class ThreadsController extends Controller
 	{
 		return array(
 				array('allow',  // allow all users to perform 'index' and 'view' actions
-						'actions'=>array('index','view'),
+						'actions'=>array('index','view','post'),
 						'users'=>array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -146,8 +146,13 @@ class ThreadsController extends Controller
 		$dataProvider=new CActiveDataProvider('Threads',array(
 				'criteria'=>$criteria,
 				'pagination'=>array(
-                'pageSize'=>6,
-            ),));
+                	'pageSize'=>6,
+            	),
+				'sort'=>array(
+					'defaultOrder'=>'last_posted_time DESC',
+				)
+			)
+		);
 		$this->render('index',array(
 				'dataProvider'=>$dataProvider,
 		));
@@ -221,6 +226,31 @@ class ThreadsController extends Controller
 				'post_model' => $model->search(),
 		));
 	}
+	
+	public function actionPost()
+	{
+		//EQuickDlgs::render('_post',array());
+		$fbId = Yii::app()->request->getQuery("id");
+		
+		$criteria = new CDbCriteria();
+		$criteria->compare('facebook_id', $fbId, true);
+		$data = Users::model()->find($criteria);
+		
+		$model = new Threads;
+		$model->user_id = $data->user_id;
+		
+		if(isset($_POST['Threads']))
+		{
+			$model->attributes=$_POST['Threads'];
+			$model->thread_created_time = time();
+			$model->last_posted_time = time();
+			if($model->save())
+				EQuickDlgs::checkDialogJsScript();
+            	$this->redirect(array('index'));
+		}
+		
+		$this->renderPartial('post', array("model" => $model, "data" => $data));
+	}
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
@@ -247,4 +277,6 @@ class ThreadsController extends Controller
 			Yii::app()->end();
 		}
 	}
+	
+	
 }
