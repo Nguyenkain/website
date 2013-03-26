@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Coordinations'=>array('index'),
+	'Địa điểm phân bố'=>array('index'),
 	'Tạo mới',
 );
 
@@ -10,6 +10,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Tạo mới Coordinations</h1>
+<h1>Tạo mới địa điểm phân bố</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Coordinations'=>array('index'),
+	'Địa điểm phân bố'=>array('index'),
 	$model->province_id=>array('view','id'=>$model->province_id),
 	'Cập nhật',
 );
@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Cập nhật Coordinations <?php echo $model->province_id; ?></h1>
+<h1>Cập nhật địa điểm phân bố <?php echo $model->province_name; ?></h1>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
