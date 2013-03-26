@@ -107,6 +107,7 @@ class CreaturesController extends Controller
 
 		$data = CHtml::listData($data,'ID','Viet');
 		$data2 = CHtml::listData($data2,'ID','Viet');
+		$data3 = CHtml::listData($data3,'ID','Loai');
 		$Bo='';
 		$Nhom='';
 		$Loai='';
@@ -125,7 +126,7 @@ class CreaturesController extends Controller
 		echo CJSON::encode(array(
 				'dropdownBo'=>$Bo,
 				'dropdownNhom'=>$Nhom,
-				'dropdownLoai'=>$Loai
+				'dropdownLoai'=>$Loai,
 		));
 	}
 	public function actionCreatdataforLoai($data,$row)

@@ -18,8 +18,7 @@
 
 	$this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'creatures-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
+	'dataProvider'=>$dataProvider,
 	'template'=>'{summary}{pager}{items}{pager}',
 	'pagerCssClass'=>'pagination pagination-right',
 	'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',

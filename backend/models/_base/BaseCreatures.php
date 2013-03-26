@@ -86,6 +86,10 @@ abstract class BaseCreatures extends GxActiveRecord {
 				'Img' => Yii::t('app', 'Ảnh'),
 				'Author' => Yii::t('app', 'Tác giả'),
 				'AuthorName' => Yii::t('app', 'Tên tác giả'),
+				'rNhom'=>Yii::t('app', 'Nhóm'),
+				'rHo'=>Yii::t('app', 'Họ'),
+				'rBo'=>Yii::t('app', 'Bộ'),
+				'rLoai'=>Yii::t('app', 'Loài'),
 		);
 	}
 
