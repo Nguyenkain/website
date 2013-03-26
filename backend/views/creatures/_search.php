@@ -3,9 +3,9 @@
 	'method'=>'get',
 )); ?>
 
-	<?php echo $form->textFieldRow($model,'Viet',array('class'=>'span5','maxlength'=>50)); ?>
+	<?php 	echo $form->textFieldRow($model,'Viet',array('class'=>'span5','maxlength'=>50)); ?>
 
-	<?php echo $form->textFieldRow($model,'Latin',array('class'=>'span5','maxlength'=>50)); ?>
+	<?php	echo $form->textFieldRow($model,'Latin',array('class'=>'span5','maxlength'=>50)); ?>
 
 	<?php 	echo $form->labelEx($model,'Ho');
 			echo $form->dropDownList($model,'Ho',CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--',));?>
@@ -22,14 +22,16 @@
 
 	<?php //echo $form->textFieldRow($model,'Author',array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldRow($model,'AuthorName',array('class'=>'span5','maxlength'=>50)); ?>
+		<?php 	echo $form->labelEx($model,'AuthorName');
+			echo $form->dropDownList($model,'Author',CHtml::listData(Author::model()->findAll(), 'ID', 'Name' ), array('empty'=>'--please select--',));?>
 
-	<div class="form-actions">
+	    <div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType' => 'submit',
 			'type'=>'primary',
 			'label'=>'Tìm kiếm',
 		)); ?>
-	</div>
+		</div>
 
 <?php $this->endWidget(); ?>
+

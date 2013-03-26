@@ -40,7 +40,7 @@
                                 		'id' => 'filter_ho', 'class' => 'filter_ddl') ); ?>
                             </div>
                             <div id="kingdom_choose">
-                                <?php echo CHtml::radioButtonList('radio','Loai',CHtml::listData(Loai::model()->findAll(),'ID','Loai'));?>
+                                <?php echo $form->radioButtonList($model,'Loai',CHtml::listData(Loai::model()->findAll(),'ID','Loai'));?>
                             </div>
                         </div>
                         <div id="search_text">

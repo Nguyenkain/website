@@ -1,20 +1,25 @@
-  	<?php $form=$this->beginWidget('CActiveForm',array(
-								'id'=>'creatures-form',
-								'enableAjaxValidation'=>false,
-						)); ?>
-  <?php echo $form->dropDownList($model,'Nhom',CHtml::listData(Nhom::model()->findAll(), 'ID', 'Viet' ), array(
-                                		'empty'=>'--Chọn lớp muốn tìm--',
-                                		'id' => 'filter_lop', 'class' => 'filter_ddl') ); ?>
-  <?php echo $form->dropDownList($model,'Bo',CHtml::listData(Bo::model()->findAll(), 'ID', 'Viet' ), array(
-                                		'empty'=>'--Chọn bộ muốn tìm--',
-                                		'id' => 'filter_bo', 'class' => 'filter_ddl')); ?>
-  <?php echo $form->dropDownList($model,'Ho',CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet' ), array(
-                                		'empty'=>'--Chọn họ muốn tìm--',
-                                		'id' => 'filter_ho', 'class' => 'filter_ddl') ); ?>
-  <?php echo CHtml::radioButtonList('radio','Loai',CHtml::listData(Loai::model()->findAll(),'ID','Loai'));?>
-</div><!-- search-form -->
-<?php $this->endWidget(); ?>
+<?php
+Yii::app()->clientScript->registerScript('search', "
+$('.search-button').click(function(){
+	$('.search-form').toggle();
+	return false;
+});
+$('.search-form form').submit(function(){
+	$.fn.yiiGridView.update('creatures-grid', {
+		data: $(this).serialize()
+	});
+	return false;
+});
+");
+?>
+<div class="search-form" style="display:true">
+<?php $this->renderPartial('_search',array(
+	'model'=>$model,
+)); ?>
+</div>
+<!-- search-form -->
 <?php 
+
 
 	$this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'creatures-grid',
@@ -27,11 +32,11 @@
 			array(
 					'class' => 'bootstrap.widgets.TbImageColumn',
 					'header' => 'Ảnh',
-					'imagePathExpression' => 'Yii::app()->request->getBaseUrl(true) . "/images/forumpic/" . $data->Img . ".jpg"',
+					'imagePathExpression' => 'Yii::app()->request->getBaseUrl(true) . "/images/images" . $data->Img . ".jpg"',
 					'htmlOptions' => array('width'=>'60px'),
 			),
 			
-		array(
+			array(
 	'name'=>'Viet',
 	'header'=>'Tên Việt/Tên Latin',
 	'value'=>'$data->Viet."/".$data->Latin',

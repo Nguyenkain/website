@@ -58,11 +58,12 @@ class CreaturesController extends Controller
 				'dataProvider'=>$dataProvider
 		));
 	}
-	public function actionListcreatures($Ho,$Bo,$Nhom,$Viet,$Latin)
+	public function actionListcreatures($Loai,$Ho,$Bo,$Nhom,$Viet,$Latin)
 	{
 		$model = Creatures::model();
 		$criteria = new CDbCriteria;
 		
+		$criteria->compare('Loai', $Loai, true);
 		$criteria->compare('Ho', $Ho, true);
 		$criteria->compare('Bo', $Bo, true);
 		$criteria->compare('Nhom', $Nhom, true);
@@ -71,10 +72,16 @@ class CreaturesController extends Controller
 
 		$dataProvider = new CActiveDataProvider('Creatures', array(
 				'criteria'=>$criteria));
+		if(isset($_GET['Creatures'])){
+			
+			$model->attributes=$_GET['Creatures'];
+			$dataProvider= $model->search();
+		}
 		$this->render('listcreatures',array(
 				'dataProvider'=>$dataProvider,
 				'model'=>$model,
 		));
+		
 	}
 	public function actionViewDetail($id)
 	{
@@ -227,7 +234,9 @@ class CreaturesController extends Controller
 		{
 			$model->attributes=$_POST['Creatures'];
 
-			$this->redirect(array('listcreatures','Ho'=>$model->Ho,
+			$this->redirect(array('listcreatures',
+				'Loai'=>$model->Loai,
+				'Ho'=>$model->Ho,
 				'Bo'=>$model->Bo,
 				'Nhom'=>$model->Nhom,
 				'Viet'=>$model->Viet,

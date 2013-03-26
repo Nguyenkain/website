@@ -29,13 +29,15 @@ $('.search-form form').submit(function(){
 Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi giá trị tìm kiếm để tăng độ chính xác của kết quả tìm kiếm.
 </p>
 
+
 <?php echo CHtml::link('Tìm kiếm nâng cao','#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
+		'dataProvider'=>$dataProvider
 )); ?>
-</div><!-- search-form -->
-
+</div>
+<!-- search-form -->
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'creatures-grid',
 	'dataProvider'=>$model->search(),
@@ -79,7 +81,7 @@ array(
 		'header'=>'Họ',
 		'filter' => CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet'),
 		'value'=>'$data->rHo',
-'htmlOptions'=>array(
+		'htmlOptions'=>array(
 		'width'=>'130px',
 )),
 	/*	'Description',*/
