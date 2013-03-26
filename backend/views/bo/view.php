@@ -21,6 +21,6 @@ $this->menu=array(
 		'ID',
 		'Viet',
 		'LaTin',
-		'Nhom',
+		'rNhom',
 	),
 )); ?>

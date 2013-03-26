@@ -21,7 +21,7 @@ $this->menu=array(
 		'ID',
 		'Viet',
 		'LaTin',
-		'Loai',
+		'rLoai',
 		'icon',
 	),
 )); ?>

@@ -61,6 +61,7 @@ abstract class BaseHo extends GxActiveRecord {
 			'Viet' => Yii::t('app', 'Tên Việt'),
 			'LaTin' => Yii::t('app', 'Tên La Tin'),
 			'Bo' => Yii::t('app', 'Bộ'),
+				'rBo'=>Yii::t('app', 'Bộ'),
 		);
 	}
 

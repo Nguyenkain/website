@@ -55,6 +55,7 @@ abstract class BaseLoai extends GxActiveRecord {
 		return array(
 			'ID' => Yii::t('app', 'ID'),
 			'Loai' => Yii::t('app', 'Loai'),
+				'rLoai'=>Yii::t('app', 'Loài'),
 		);
 	}
 
