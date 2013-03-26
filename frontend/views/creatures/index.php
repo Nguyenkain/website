@@ -48,7 +48,6 @@
                                 <?php echo $form->textField($model,'Viet',array('placeholder' => 'Tìm Kiếm')); ?>
                                 <?php echo CHtml::submitButton('', array(
                                 		'class' => 'search_btn',
-                                		'submit'=> 'listcreatures'
                                 		)); ?>
                             </div>
                             <div class="decoration">

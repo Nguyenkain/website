@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php 
 $userid = Yii::app()->facebook->getUser();
 
@@ -39,8 +38,28 @@ else {
 <div id="discussion_content" class="page_content">
 	<div id="action_nav">
 		<a id="post_button" href="#"><span>Thêm chủ đề</span> </a>
-		<h4>Danh mục chủ đề</h4>
-		<?php echo CHtml::link('', $url, array('id'=>'facebook_button')); ?>
+		<h4>Các chủ đề thảo luận</h4>
+		<?php
+		if(!$userid)
+		{
+			echo CHtml::link('', $url, array('id'=>'facebook_button'));
+		}
+		else {
+		?>
+
+		<div id="profile_container">
+			<div id="profile">
+				<?php echo CHtml::image("http://graph.facebook.com/". $userid ."/picture?type=normal"); ?>
+				<label><?php echo $user_info['name']?></label>
+			</div>
+			<div class="ver_line"></div>
+			<div id="notification">
+				<label>Thông báo</label>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+
+		<?php }?>
 
 		<div class="clearfix"></div>
 	</div>
@@ -71,25 +90,3 @@ else {
 
 	</div>
 </div>
-=======
-<div id="discussion_content" class="page_content">
-	<div id="action_nav">
-		<a id="post_button" href="#"><span>Thêm chủ đề</span> </a>
-		<h4>Danh mục chủ đề</h4>
-		<a id="facebook_button" href="#"></a>
-		<div class="clearfix"></div>
-	</div>
-	<div class="hoz_line long"></div>
-	<div id="thread_container">
-
-		<?php $this->widget('zii.widgets.CListView',array(
-				'dataProvider'=>$dataProvider,
-				'itemView'=>'_index',
-				'summaryText'=>false,
-				'emptyText'=>'Hiện thảo luận chưa có bài viết nào, hãy đóng góp bài viết cho chúng tôi',
-		));
-		?>
-
-	</div>
-</div>
->>>>>>> c86b13133db37751c27142d9c3d4de94cd0fcda0
