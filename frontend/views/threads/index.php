@@ -40,15 +40,25 @@ else {
 		<a id="post_button" href="#"><span>Thêm chủ đề</span> </a>
 		<h4>Các chủ đề thảo luận</h4>
 		<?php
+$this->widget('ext.tooltipster.tooltipster',
+          array(
+            'identifier'=>'#profile',
+            'options'=>array(        'animation'=>'grow',
+        'offsetY'=>'60',
+        'interactive'=>true,
+        'interactiveTolerance'=>'10000',
+        'timer'=>'10000',
+        'position'=>'top')
+    ));
 		if(!$userid)
 		{
 			echo CHtml::link('', $url, array('id'=>'facebook_button'));
 		}
 		else {
 		?>
-
+</td>
 		<div id="profile_container">
-			<div id="profile">
+			<div id="profile" title="<img src='http://graph.facebook.com/<?php echo $userid ?>/picture?type=normal' width='100' height='100' /> <?php echo $user_info['name']?><br><a href='<?php echo $url?>'> Log out</a>">
 				<?php echo CHtml::image("http://graph.facebook.com/". $userid ."/picture?type=normal"); ?>
 				<label><?php echo $user_info['name']?></label>
 			</div>
@@ -66,7 +76,9 @@ else {
 	<div class="hoz_line long"></div>
 	<div id="thread_container">
 
-		<?php $this->widget('bootstrap.widgets.TbListView',array(
+		<?php
+
+ $this->widget('bootstrap.widgets.TbListView',array(
 				'dataProvider'=>$dataProvider,
 				'itemView'=>'_index',
 				'summaryText'=>false,
