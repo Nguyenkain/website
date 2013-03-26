@@ -13,10 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>
-	Xem Sinh Vật
-	<?php echo $model->Viet; ?>
-</h1>
+<h1>Thông tin của <?php echo $model->Viet; ?></h1>
 
 <?php 
 $position='';

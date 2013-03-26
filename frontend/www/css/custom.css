@@ -1108,3 +1108,87 @@ element.style {
 {
 	margin: 20px 0;
 }
+
+/*POST DIALOG*/
+#post_container
+{
+	width: 460px;
+	height: 280px;
+	background: #FFFFFF;
+}
+
+#post_container .action_bar
+{
+	height: 30px;
+	display: block;
+	background: #07B800;
+}
+#post_container .action_bar .title
+{
+	font-weight: bold;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-shadow: 0 -1px 0 rgba(0, 30, 84, .3);
+	white-space: nowrap;
+	font-size: 16px;
+	line-height: 25px;
+	color: #FFF;
+	float: left;
+}
+#post_container .close_button
+{
+	float: right;
+	border-left: 1px solid 
+}
+
+#post_container .close_button img
+{
+	width: 28px;
+	height: 28px;
+}
+
+#post_container .ver_line
+{
+	width: 2px;
+	height: 28px;
+	background: url("images/ver_divider.gif") no-repeat;
+	float: right;
+}
+.post_title label
+{
+	display: block;
+	font-size: 14px;
+	font-weight: 800;
+}
+#post_container .post_title
+{
+	margin-left: 10px;
+	float: left;
+}
+
+#post_container .post_title input
+{
+	width: 370px;
+}
+#post_container .post_content
+{
+	position: relative;
+}
+#post_container .post_content textarea
+{
+	width: 100%;
+	height: 140px;
+}
+#post_container .info_content
+{
+	padding: 10px 0;
+}
+#post_container .button-menu
+{
+	height: 40px;
+}
+#post_container .button-menu button
+{
+	float: right;
+	
+}

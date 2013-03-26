@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Xem tác giả #<?php echo $model->ID; ?></h1>
+<h1>Xem tác giả #<?php echo $model->Name; ?></h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,

@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Xem Họ #<?php echo $model->ID; ?></h1>
+<h1>Thông tin của Họ<?php echo $model->Viet; ?></h1>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,

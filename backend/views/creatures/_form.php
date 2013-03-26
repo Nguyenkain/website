@@ -21,9 +21,9 @@
 
 <?php //echo $form->textFieldRow($model,'Nhom',array('class'=>'span5')); ?>
 <?php echo $form->labelEx($model, 'Ho');
-echo $form->dropDownList($model, 'Ho', CHtml::listData(Ho::model()->findAll(),
-		'ID', 'Viet'), array('empty' => '--please select--', 'ajax' => array(
-				'type' => 'POST',
+echo $form->dropDownList($model, 'Ho', CHtml::listData(Ho::model()->findAll(),'ID', 'Viet'), 
+				array('empty' => '--Chọn họ cho sinh vật--', 'ajax' => array(
+			 	'type' => 'POST',
 				'dataType' => 'json',
 				'data' => array('Ho' => 'js:$(this).val()'),
 
@@ -76,7 +76,7 @@ echo $form->dropDownList($model, 'Loai', CHtml::listData(Loai::model()->findAll
 <?php //echo $form->textFieldRow($model,'Author',array('class'=>'span5')); ?>
 <?php echo $form->labelEx($model, 'Author');
 echo $form->dropDownList($model, 'Author', CHtml::listData(Author::model()->
-		findAll(), 'ID', 'Name'), array('empty' => '--please select--', 'onChange' => "$('#AuthorName').val($('#Creatures_Author option:selected').text());")); ?>
+		findAll(), 'ID', 'Name'), array('empty' => '--Chọn tác giả--', 'onChange' => "$('#AuthorName').val($('#Creatures_Author option:selected').text());")); ?>
 
 <?php echo $form->textField($model, 'AuthorName', array(
 		'class' => 'span5',

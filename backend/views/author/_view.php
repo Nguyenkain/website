@@ -8,8 +8,8 @@
 	<?php echo CHtml::encode($data->Name); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('DOB')); ?>:</b>
-	<?php echo CHtml::encode($data->DOB); ?>
+	<b><?php //echo CHtml::encode($data->getAttributeLabel('DOB')); ?>:</b>
+	<?php //echo CHtml::encode($data->DOB); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('Address')); ?>:</b>
