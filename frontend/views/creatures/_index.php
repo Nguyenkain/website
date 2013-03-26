@@ -16,7 +16,8 @@ echo $form->dropDownList($model,'Bo',CHtml::listData(Bo::model()->findAll('ID=:p
 echo $form->labelEx($model,'Nhom');
 		echo $form->dropDownList($model,'Nhom',CHtml::listData(Nhom::model()->findAll('ID=:parent_id',
 								array(':parent_id'=>(int) $model->Nhom)), 'ID', 'Viet' )); ?>
-<?php echo CHtml::radioButtonList($data,'Loai',CHtml::listData(Loai::model()->findAll(),'ID','Loai'),array('onchange' => 'menuTypeChange(this.value);'));?>
+<?php echo CHtml::radioButtonList($data,'Loai',CHtml::listData(Loai::model()->findAll(),'ID','Loai'));
+				?>
 
 
 

@@ -37,7 +37,20 @@ else {
 
 <div id="discussion_content" class="page_content">
 	<div id="action_nav">
-		<a id="post_button" href="#"><span>Thêm chủ đề</span> </a>
+		<?php EQuickDlgs::ajaxLink(
+            array(
+                'controllerRoute' => 'post', //'member/view'
+                'actionParams' => array('id'=>$userid), //array('id'=>$model->member->id),
+                'dialogTitle' => "Viết bài mới",
+                'dialogWidth' => 490,
+                'dialogHeight' => 370,
+                'openButtonText' => '<span>Thêm chủ đề</span>',
+                'closeButtonText' => false,
+                'closeOnAction' => true, //important to invoke the close action in the actionCreate
+                'openButtonHtmlOptions' => array('id' => 'post_button'),
+            )
+        );
+        ?>
 		<h4>Các chủ đề thảo luận</h4>
 		<?php
 $this->widget('ext.tooltipster.tooltipster',
