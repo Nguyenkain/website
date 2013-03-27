@@ -87,12 +87,13 @@ class News extends CActiveRecord
 	{
 		return array(
 				'news_id' => 'News',
-				'category_id' => 'Category',
+				'category_id' => 'Danh mục',
 				'short_description' => 'Miêu tả ngắn',
 				'news_content' => 'Nội dung',
 				'created_time' => 'Thời gian tạo',
 				'title' => 'Tiêu đề',
 				'image' => 'Ảnh minh họa',
+				'categories' => 'Danh Mục',
 		);
 	}
 

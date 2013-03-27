@@ -23,7 +23,7 @@ Yii::app()->clientScript->registerScript('search', "
 		");
 ?>
 
-<h1>Quản lý chủ đề</h1>
+<h3>Quản lý chủ đề</h3>
 
 <p>
 	Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>,
@@ -43,8 +43,11 @@ Yii::app()->clientScript->registerScript('search', "
 		'id'=>'threads-grid',
 		'dataProvider'=>$model->search(),
 		'filter'=>$model,
-		'beforeAjaxUpdate' => 'js:function(){
-			alert("asdsad");
+		'beforeAjaxUpdate' => 'js:function(id,data){
+			$("#threads-grid").addClass("hasLoading");
+		}',
+		'afterAjaxUpdate' => 'js:function(id,options){
+			$("#threads-grid").removeClass("hasLoading");
 		}',
 		'template'=>'{summary}{pager}{items}{pager}',
 		'pagerCssClass'=>'pagination pagination-right',
