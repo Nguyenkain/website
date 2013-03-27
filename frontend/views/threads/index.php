@@ -38,60 +38,68 @@ else {
 <div id="discussion_content" class="page_content">
 	<div id="action_nav">
 		<?php EQuickDlgs::ajaxLink(
-            array(
-                'controllerRoute' => 'post', //'member/view'
-                'actionParams' => array('id'=>$userid), //array('id'=>$model->member->id),
-                'dialogTitle' => "Viết bài mới",
-                'dialogWidth' => 490,
-                'dialogHeight' => 370,
-                'openButtonText' => '<span>Thêm chủ đề</span>',
-                'closeButtonText' => false,
-                'closeOnAction' => true, //important to invoke the close action in the actionCreate
-                'openButtonHtmlOptions' => array('id' => 'post_button'),
-            )
-        );
-        ?>
+		array(
+			'controllerRoute' => 'post', //'member/view'
+			'actionParams' => array('id'=>$userid), //array('id'=>$model->member->id),
+			'dialogTitle' => "Viết bài mới",
+			'dialogWidth' => 490,
+			'dialogHeight' => 370,
+			'openButtonText' => '<span>Thêm chủ đề</span>',
+			'closeButtonText' => false,
+			'closeOnAction' => true, //important to invoke the close action in the actionCreate
+			'openButtonHtmlOptions' => array('id' => 'post_button'),
+			)
+		);
+		?>
 		<h4>Các chủ đề thảo luận</h4>
 		<?php
-$this->widget('ext.tooltipster.tooltipster',
-          array(
-            'identifier'=>'#profile',
-            'options'=>array(        'animation'=>'grow',
-        'offsetY'=>'60',
-        'interactive'=>true,
-        'interactiveTolerance'=>'10000',
-        'timer'=>'10000',
-        'position'=>'top')
-    ));
+		$this->widget('ext.tooltipster.tooltipster',
+	        array(
+	            'identifier'=>'.tooptipster',
+	            'options'=>array(        
+					'animation'=>'grow',
+			        'interactive'=>true,
+			        'interactiveTolerance'=>'10000',
+			        'timer'=>'10000',
+			        'position'=>'top',
+					'onlyOne' => true,
+				),
+	    	)
+		);
 		if(!$userid)
 		{
 			echo CHtml::link('', $url, array('id'=>'facebook_button'));
 		}
 		else {
 		?>
-</td>
+		</td>
 		<div id="profile_container">
-			<div id="profile" title="<img src='http://graph.facebook.com/<?php echo $userid ?>/picture?type=normal' width='100' height='100' /> <?php echo $user_info['name']?><br><a href='<?php echo $url?>'> Log out</a>">
-				<?php echo CHtml::image("http://graph.facebook.com/". $userid ."/picture?type=normal"); ?>
-				<label><?php echo $user_info['name']?></label>
-			</div>
-			<div class="ver_line"></div>
-			<div id="notification">
-				<label>Thông báo</label>
-			</div>
+			<div id="profile" class="tooptipster" title="<img src='http://graph.facebook.com/<?php echo $userid ?>/picture?type=normal'
+				width='100' height='100' />
+			<?php echo $user_info['name']?>
+			<br> <a href='<?php echo $url?>'> Log out</a>">
+			<?php echo CHtml::image("http://graph.facebook.com/". $userid ."/picture?type=normal"); ?>
+			<label><?php echo $user_info['name']?> </label>
 			<div class="clearfix"></div>
 		</div>
-
-		<?php }?>
-
+		<div class="ver_line"></div>
+		<div id="notification">
+			<label>Thông báo</label>
+		</div>
 		<div class="clearfix"></div>
 	</div>
-	<div class="hoz_line long"></div>
-	<div id="thread_container">
 
-		<?php
+	<?php }?>
 
- $this->widget('bootstrap.widgets.TbListView',array(
+	<div class="clearfix"></div>
+</div>
+<div class="hoz_line long"></div>
+<div id="thread_container">
+
+	<?php
+
+	$this->widget('bootstrap.widgets.TbListView',array(
+				'id' => 'thread_list',
 				'dataProvider'=>$dataProvider,
 				'itemView'=>'_index',
 				'summaryText'=>false,
@@ -113,5 +121,5 @@ $this->widget('ext.tooltipster.tooltipster',
 		));
 		?>
 
-	</div>
+</div>
 </div>
