@@ -35,11 +35,11 @@ abstract class BaseCoordinations extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('province_id, province_name, longitude, latitude', 'required'),
-			array('province_id', 'numerical', 'integerOnly'=>true),
-			array('longitude, latitude', 'numerical'),
-			array('province_name', 'length', 'max'=>50),
-			array('province_id, province_name, longitude, latitude', 'safe', 'on'=>'search'),
+				array('province_id, province_name, longitude, latitude', 'required'),
+				array('province_id', 'numerical', 'integerOnly'=>true),
+				array('longitude, latitude', 'numerical'),
+				array('province_name', 'length', 'max'=>50),
+				array('province_id, province_name, longitude, latitude', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,10 +55,10 @@ abstract class BaseCoordinations extends GxActiveRecord {
 
 	public function attributeLabels() {
 		return array(
-			'province_id' => Yii::t('app', 'Province'),
-			'province_name' => Yii::t('app', 'Province Name'),
-			'longitude' => Yii::t('app', 'Longitude'),
-			'latitude' => Yii::t('app', 'Latitude'),
+				'province_id' => Yii::t('app', 'ID'),
+				'province_name' => Yii::t('app', 'Tên địa điểm phân bố'),
+				'longitude' => Yii::t('app', 'Kinh độ'),
+				'latitude' => Yii::t('app', 'Vĩ độ'),
 		);
 	}
 
@@ -71,7 +71,10 @@ abstract class BaseCoordinations extends GxActiveRecord {
 		$criteria->compare('latitude', $this->latitude);
 
 		return new CActiveDataProvider($this, array(
-			'criteria' => $criteria,
+				'criteria' => $criteria,
+				'sort'=>array(
+						'defaultOrder'=>'province_name ASC',
+				)
 		));
 	}
 }

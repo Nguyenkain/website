@@ -3,8 +3,6 @@
 	'method'=>'get',
 )); ?>
 
-	<?php echo $form->textFieldRow($model,'province_id',array('class'=>'span5')); ?>
-
 	<?php echo $form->textFieldRow($model,'province_name',array('class'=>'span5','maxlength'=>50)); ?>
 
 	<?php echo $form->textFieldRow($model,'longitude',array('class'=>'span5')); ?>

@@ -50,8 +50,12 @@ class CreaturesController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$model=$this->loadModel($id);
+		$coordinations=$model->rProvince;
+		
 		$this->render('view',array(
-				'model'=>$this->loadModel($id),
+				'model'=>$model,
+				'coordinations'=>$coordinations,
 		));
 	}
 

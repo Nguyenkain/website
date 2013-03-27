@@ -4,6 +4,9 @@
 function setLatLngToClass() {
 	if (document.getElementById('NationalParks_latitude')) document.getElementById('NationalParks_latitude').value = map.getCenter().lat();
 	if (document.getElementById('NationalParks_longitude')) document.getElementById('NationalParks_longitude').value = map.getCenter().lng();
+	
+	if (document.getElementById('Coordinations_latitude')) document.getElementById('Coordinations_latitude').value = map.getCenter().lat();
+	if (document.getElementById('Coordinations_longitude')) document.getElementById('Coordinations_longitude').value = map.getCenter().lng();
 }
 //
 // function to get Centered Latitude and Longitude points
