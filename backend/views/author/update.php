@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Cập nhật thông tin tác giả <?php echo $model->ID; ?></h1>
+<h3>Cập nhật thông tin tác giả <?php echo $model->ID; ?></h3>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

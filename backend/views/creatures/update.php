@@ -13,9 +13,9 @@ $this->menu=array(
 );
 ?>
 
-<h1>
-	Update Creatures
+<h3>
+	Cập nhật sinh vật :
 	<?php echo $model->Viet; ?>
-</h1>
+</h3>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model,'coordinations'=>$coordinations)); ?>

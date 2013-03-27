@@ -10,6 +10,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Tạo sinh vật mới</h1>
+<h3>Tạo sinh vật mới</h3>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model,'coordinations'=>$coordinations)); ?>
