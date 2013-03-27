@@ -58,7 +58,7 @@ class CreaturesController extends Controller
 				'dataProvider'=>$dataProvider
 		));
 	}
-	public function actionListcreatures($Loai,$Ho,$Bo,$Nhom,$Viet,$Latin)
+	public function actionListcreatures($Loai,$Ho,$Bo,$Nhom,$Viet)
 	{
 		$model = Creatures::model();
 		$criteria = new CDbCriteria;
@@ -68,7 +68,6 @@ class CreaturesController extends Controller
 		$criteria->compare('Bo', $Bo, true);
 		$criteria->compare('Nhom', $Nhom, true);
 		$criteria->compare('Viet', $Viet, true);
-		$criteria->compare('Latin', $Latin, true);
 
 		$dataProvider = new CActiveDataProvider('Creatures', array(
 				'criteria'=>$criteria));
