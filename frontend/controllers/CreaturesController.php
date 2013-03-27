@@ -60,7 +60,7 @@ class CreaturesController extends Controller
 	}
 	public function actionListcreatures($Loai,$Ho,$Bo,$Nhom,$Viet,$Latin)
 	{
-		$model = Creatures::model();
+		$model =  Creatures::model();
 		$criteria = new CDbCriteria;
 		
 		$criteria->compare('Loai', $Loai, true);
@@ -72,6 +72,7 @@ class CreaturesController extends Controller
 
 		$dataProvider = new CActiveDataProvider('Creatures', array(
 				'criteria'=>$criteria));
+	
 		if(isset($_GET['Creatures'])){
 			
 			$model->attributes=$_GET['Creatures'];

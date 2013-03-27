@@ -25,7 +25,7 @@ Yii::app()->clientScript->registerScript('search', "
 
 	$this->widget('bootstrap.widgets.TbGridView',array(
 			'id'=>'creatures-grid',
-			'dataProvider'=>$dataProvider,
+			'dataProvider'=>$dataProvider,	
 			'template'=>'{summary}{pager}{items}{pager}',
 			'pagerCssClass'=>'pagination pagination-right',
 			'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
@@ -34,7 +34,7 @@ Yii::app()->clientScript->registerScript('search', "
 					array(
 							'class' => 'bootstrap.widgets.TbImageColumn',
 							'header' => 'Ảnh',
-							'imagePathExpression' => 'Yii::app()->request->getBaseUrl(true) . "/images/images" . $data->Img . ".jpg"',
+							'imagePathExpression' => 'Yii::app()->request->getBaseUrl(true) . "/images/pictures" . $data->Img . ".jpg"',
 							'htmlOptions' => array('width'=>'60px'),
 					),
 
