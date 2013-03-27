@@ -81,3 +81,11 @@ Yii::app()->clientScript->registerScript('search', "
 			),
 )); ?>
 </div>
+
+
+<div id="footer" class="normal">
+			<div id="copyright">
+				<p>Copyright &copy; 2003-2013 Ghi rõ nguồn 'Sinh vật rừng Việt Nam'
+					khi bạn phát hành lại thông tin từ Website này</p>
+			</div>
+		</div>
