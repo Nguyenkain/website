@@ -10,6 +10,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Tạo mới Nhóm</h1>
+<h3>Tạo mới Nhóm</h3>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Quản lý Bộ</h1>
+<h3>Quản lý Bộ</h3>
 
 
 </p>

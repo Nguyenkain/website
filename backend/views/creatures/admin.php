@@ -1,38 +1,40 @@
 <?php
 $this->breadcrumbs=array(
-		'Creatures'=>array('index'),
-		'Manage',
+	'Creatures'=>array('index'),
+	'Manage',
 );
 
 $this->menu=array(
-		array('label'=>'List Creatures','url'=>array('index')),
-		array('label'=>'Create Creatures','url'=>array('create')),
+	array('label'=>'List Creatures','url'=>array('index')),
+	array('label'=>'Create Creatures','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
-		$('.search-button').click(function(){
-		$('.search-form').toggle();
-		return false;
+$('.search-button').click(function(){
+	$('.search-form').toggle();
+	return false;
 });
-		$('.search-form form').submit(function(){
-		$.fn.yiiGridView.update('creatures-grid', {
+$('.search-form form').submit(function(){
+	$.fn.yiiGridView.update('creatures-grid', {
 		data: $(this).serialize()
+	});
+	return false;
 });
-		return false;
-});
-		");
+");
 ?>
 
-<h1>Quản lý Sinh Vật</h1>
+<h3>Quản lý Sinh Vật</h3>
 
-<p>Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi giá
-	trị tìm kiếm để tăng độ chính xác của kết quả tìm kiếm.</p>
+<p>
+Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi giá trị tìm kiếm để tăng độ chính xác của kết quả tìm kiếm.
+</p>
 
 
 <?php echo CHtml::link('Tìm kiếm nâng cao','#',array('class'=>'search-button btn')); ?>
-<div class="search-form" style="display: none">
-	<?php $this->renderPartial('_search',array(
-			'model'=>$model,
+<div class="search-form" style="display:none">
+<?php $this->renderPartial('_search',array(
+	'model'=>$model,
+	
 )); ?>
 </div>
 <!-- search-form -->

@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Quản lý Họ</h1>
+<h3>Quản lý Họ</h3>
 
 <p>
 </p>
