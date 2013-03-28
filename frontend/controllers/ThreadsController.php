@@ -27,7 +27,7 @@ class ThreadsController extends Controller
 	{
 		return array(
 				array('allow',  // allow all users to perform 'index' and 'view' actions
-						'actions'=>array('index','view','post'),
+						'actions'=>array('index','view','post','getNotification'),
 						'users'=>array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -225,6 +225,25 @@ class ThreadsController extends Controller
 		$this->renderPartial('_relational', array(
 				'post_model' => $model->search(),
 		));
+	}
+	
+	public function actionGetNotification()
+	{
+		$user_id = $_POST['facebook_id'];
+		$user = Users::model()->findByAttributes(array('facebook_id'=> $user_id));
+		$criteria = new CDbCriteria();
+		$criteria->join='Join Threads ON t.thread_id=Threads.thread_id';
+		$criteria->group = 'viewed_status,thread_id';
+		$criteria->compare('t.user_id', $user->user_id, true);
+		$criteria->order = 'viewed_status, last_posted_time';
+		$model = Notifications::model()->findAll($criteria);
+		
+		for ($i = 0; $i != sizeof($model); $i++){
+			$model[$i] = $model[$i]->toJSON(); //I use the EJsonBehavior.php!
+		}
+		
+		$model = CJavaScript::jsonEncode($model);
+        echo $model;
 	}
 	
 	public function actionPost()

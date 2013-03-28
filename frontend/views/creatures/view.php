@@ -17,14 +17,14 @@ $this->menu=array(
 
 <?php 
 	
-	$this->widget('ext.JCarousel.JCarousel', array(
+	/* $this->widget('ext.JCarousel.JCarousel', array(
     'dataProvider' => $dataProvider,
     'thumbUrl' => 'Yii::app()->request->getBaseUrl(true) . "/images/pictures/insect/" . $data->Img . ".jpg"',
     'imageUrl' => 'Yii::app()->request->getBaseUrl(true) . "/images/pictures/insect/" . $data->Img . ".jpg"',
     'vertical' =>false,
 	'visible'=>5,
 	'scroll'=>5,
-)); ?>
+));  */?>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
