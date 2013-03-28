@@ -1,12 +1,5 @@
 <?php
-Yii::app()->clientScript->registerScript('search', "
-		$('.search_container form').submit(function(){
-		$.fn.yiiGridView.update('creatures-grid', {
-		data: $(this).serialize()
-});
-		return false;
-});
-		");
+
 function getImageUrl($loai,$img){
 	if($loai==1)
 		return Yii::app()->request->getBaseUrl(true) . "/images/pictures/animal/" . $img . ".jpg";

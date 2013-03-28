@@ -48,10 +48,12 @@ class CreaturesController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+	public function actionView()
 	{
-		if(isset($_GET['Creatures'])){
-			$model->attributes=$_GET['Creatures'];
+		$id = Yii::app()->request->getQuery("id");
+		if(isset($_POST['Creatures'])){
+			$model =  Creatures::model();
+			$model->attributes=$_POST['Creatures'];
 			$this->redirect(array('listcreatures',
 					'Loai'=>$model->Loai,
 					'Ho'=>$model->Ho,
@@ -70,6 +72,7 @@ class CreaturesController extends Controller
 	public function actionListcreatures($Loai,$Ho,$Bo,$Nhom,$Viet)
 	{
 		$model =  Creatures::model();
+		$search = new Creatures;
 		$criteria = new CDbCriteria;
 		
 		$criteria->compare('Loai', $Loai, true);
@@ -77,9 +80,17 @@ class CreaturesController extends Controller
 		$criteria->compare('Bo', $Bo, true);
 		$criteria->compare('Nhom', $Nhom, true);
 		$criteria->compare('Viet', $Viet, true);
+		$criteria->compare('Latin', $Viet, true);
+		
 
 		$dataProvider = new CActiveDataProvider('Creatures', array(
 				'criteria'=>$criteria));
+		
+		$search->Loai = $Loai;
+		$search->Ho = $Ho;
+		$search->Bo = $Bo;
+		$search->Nhom = $Nhom;
+		$search->Viet = $Viet;
 	
 		if(isset($_GET['Creatures'])){
 			
@@ -89,6 +100,7 @@ class CreaturesController extends Controller
 		$this->render('listcreatures',array(
 				'dataProvider'=>$dataProvider,
 				'model'=>$model,
+				'search' => $search,
 		));
 		
 	}
@@ -248,8 +260,7 @@ class CreaturesController extends Controller
 				'Ho'=>$model->Ho,
 				'Bo'=>$model->Bo,
 				'Nhom'=>$model->Nhom,
-				'Viet'=>$model->Viet,
-				'Latin'=>$model->Viet));
+				'Viet'=>$model->Viet,));
 		}
 		$this->render('index',array(
 				'model'=> $model,
