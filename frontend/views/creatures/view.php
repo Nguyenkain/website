@@ -41,17 +41,17 @@ function getImageUrl($loai,$img){
 				</div>
 				<div class="name_item">
 					<div class="name">Họ:</div>
-					<div class="normal_name"><?php echo $model->rHo->Viet?></div>
+					<div class="normal_name"><?php echo $model->rHo?></div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="name_item">
 					<div class="name">Bộ:</div>
-					<div class="normal_name"><?php echo $model->rBo->Viet?></div>
+					<div class="normal_name"><?php echo $model->rBo?></div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="name_item">
 					<div class="name">Lớp (nhóm):</div>
-					<div class="normal_name"><?php echo $model->rNhom->Viet?></div>
+					<div class="normal_name"><?php echo $model->rNhom?></div>
 					<div class="clearfix"></div>
 				</div>
 			</div>
