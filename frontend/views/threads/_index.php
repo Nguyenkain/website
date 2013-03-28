@@ -1,3 +1,5 @@
+<?php $model = Users::model()->findByPk($data->user_id);?>
+
 <div class="thread_item">
 	<div class="avatar">
 		<?php echo CHtml::image("http://graph.facebook.com/". $data->users->user_avatar ."/picture?type=normal"); ?>
@@ -12,7 +14,7 @@
 		</div>
 		<div class="thread_content">
 			<p class="content">
-				<?php echo CHtml::link($data->thread_title,array('threads/view&id='.$data->thread_id)); ?>
+				<?php echo CHtml::link($data->thread_title,array('threads/view&id='.$data->thread_id.'&userid='.$data->user_id)); ?>
 			</p>
 		</div>
 		<div class="thread_stats">

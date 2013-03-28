@@ -32,6 +32,14 @@ abstract class BaseNotifications extends GxActiveRecord {
 	public static function representingColumn() {
 		return 'notification_id';
 	}
+	
+	public function behaviors() {
+		return array(
+				'EJsonBehavior'=>array(
+						'class'=>'frontend.behaviors.EJsonBehavior'
+				),
+		);
+	}
 
 	public function rules() {
 		return array(

@@ -1208,3 +1208,69 @@ element.style {
 	float: right;
 	
 }
+
+/* Creature Detail */
+#creature_content
+{
+	padding: 20px 20px;
+}
+#creature_content .big_images
+{
+	float: left;
+	width: 295px;
+	height: 195px;
+}
+
+#creature_content .big_images img 
+{
+	width: 295px;
+	height: 195px;
+}
+
+#creature_content .creature_info
+{
+	float: left;
+	margin: 0 0 0 20px;
+}
+#creature_content .creature_info .name_item
+{
+	display: block;
+	height: 25px;
+	line-height: 25px;
+	font-weight: 800;
+}
+
+#creature_content .creature_info .name_item .name
+{
+	display: block;
+	width: 150px;
+	font-weight: 800;
+	font-size: 13px;
+	float: left;
+}
+
+#creature_content .creature_info .name_item .vn_name
+{
+	color: #006600;
+	font-size: 14px;
+	text-transform: uppercase;
+	font-weight: 800;
+}
+
+#creature_content .creature_info .name_item .latin_name
+{
+	font-size: 13px;
+	color: #990000;
+	font-style: italic;
+}
+
+.normal_name,.vn_name, .latin_name
+{
+	float: left;
+}
+
+#creature_content .creature_content
+{
+	display: block;
+	padding: 0 20px;
+}
