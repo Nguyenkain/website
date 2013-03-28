@@ -50,12 +50,21 @@ class CreaturesController extends Controller
 	 */
 	public function actionView($id)
 	{
+		if(isset($_GET['Creatures'])){
+			$model->attributes=$_GET['Creatures'];
+			$this->redirect(array('listcreatures',
+					'Loai'=>$model->Loai,
+					'Ho'=>$model->Ho,
+					'Bo'=>$model->Bo,
+					'Nhom'=>$model->Nhom,
+					'Viet'=>$model->Viet,
+					'Latin'=>$model->Viet));
+		}
 		$dataProvider=new CActiveDataProvider('Creatures');
-			
+		
 
 		$this->render('view',array(
 				'model'=>$this->loadModel($id),
-				'dataProvider'=>$dataProvider
 		));
 	}
 	public function actionListcreatures($Loai,$Ho,$Bo,$Nhom,$Viet)
