@@ -127,36 +127,53 @@ class CreaturesController extends Controller
 	public function actionDynamicbo()
 	{
 		$ho = Ho::model()->findByPk((int) $_POST['Ho']);
-		$data = Bo::model()->findAll('ID=:parent_id',
-		array(':parent_id'=>(int) $ho->Bo));
-
-		$data2 = Nhom::model()->findAll('ID=:parent_id',
-		array(':parent_id'=>(int)$data[0]->Nhom));
-		$data3 = Loai::model()->findAll('ID=:parent_id',
-		array(':parent_id'=>(int)$data2[0]->Loai));
-
+		$data = Bo::model()->findAll();
+		$data2 = Nhom::model()->findAll();
+		$data3 = Loai::model()->findAll();
+		$data4 = Bo::model()->find('ID=:parent_id',
+				array(':parent_id'=>(int) $ho->Bo));
+		$data5 = Nhom::model()->find('ID=:parent_id',
+				array(':parent_id'=>(int)$data4->Nhom));
+		$data6 = Loai::model()->find('ID=:parent_id',
+				array(':parent_id'=>(int)$data5->Loai));
 
 		$data = CHtml::listData($data,'ID','Viet');
 		$data2 = CHtml::listData($data2,'ID','Viet');
+		$data3 = CHtml::listData($data3,'ID','Loai');
+		
 		$Bo='';
 		$Nhom='';
 		$Loai='';
+		
 		foreach($data as $ID => $value)
-
-		$Bo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-
-
+		{
+			if ($ID == $data4->ID)
+				$Bo.= CHtml::tag('option',array('value' => $ID,
+											'selected' => 'selected'),CHtml::encode($value),true);
+			else
+				$Bo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+		}
 		foreach($data2 as $ID => $value)
-
-		$Nhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+		{
+			if ($ID == $data5->ID)
+				$Nhom.= CHtml::tag('option',array('value' => $ID,
+											'selected' => 'selected'),CHtml::encode($value),true);
+			else
+				$Nhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+		}
 		foreach($data3 as $ID => $value)
-
-		$Loai.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+		{
+			if ($ID == $data6->ID)
+				$Loai.= CHtml::tag('option',array('value' => $ID,
+											'selected' => 'selected'),CHtml::encode($value),true);
+			else
+				$Loai.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+		}
 
 		echo CJSON::encode(array(
 				'dropdownBo'=>$Bo,
 				'dropdownNhom'=>$Nhom,
-				'dropdownLoai'=>$Loai
+				'dropdownLoai'=>$Loai,
 		));
 	}
 	public function actionCreatdataforLoai($data,$row)
@@ -229,7 +246,15 @@ class CreaturesController extends Controller
 	{
 		$model = new Creatures;
 
-		$dataProvider=new CActiveDataProvider('Creatures');
+		$dataProvider = new CActiveDataProvider('Creatures');
+		
+		$criteria = new CDbCriteria;
+		$criteria->order = 'news_id DESC';
+		$criteria->limit = 3;
+
+		$dataProviderNews = new CActiveDataProvider('News',array(
+				'pagination'=>false,
+            	'criteria'=>$criteria));
 		if(isset($_POST['Creatures']))
 		{
 			$model->attributes=$_POST['Creatures'];
@@ -244,7 +269,8 @@ class CreaturesController extends Controller
 		}
 		$this->render('index',array(
 				'model'=> $model,
-				'dataProvider'=>$dataProvider
+				'dataProvider'=>$dataProvider,
+				'dataProviderNews'=>$dataProviderNews
 		));
 	}
 

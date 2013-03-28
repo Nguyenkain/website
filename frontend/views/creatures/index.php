@@ -74,48 +74,14 @@
 		<div id="news_container">
 			<h4>Tin mới</h4>
 			<div id="news_list">
-				<div class="news_item">
-					<div class="images">
-						<img alt="" src="css/images/news_test.png">
-					</div>
-					<div class="news_info">
-						<a href="#" class="news_title">Cầy tai trắng- Ninja của rừng già</a>
-						<p class="news_content">So với những người anh em trong họ Cầy
-							Viverridae, Cầy tai trắng có kích thước thuộc dạng trung bình.,
-							phần sống mũi có sọc trắng mờ, đôi tai to tròn, mỏng phủ lớp lông
-							ngắn màu trắng, hai mắt to, phần lông quanh mắt có màu sậm, trông
-							như một chiếc mặt nạ của các ninja trên phim ảnh.</p>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="news_item">
-					<div class="images">
-						<img alt="" src="css/images/news_test.png">
-					</div>
-					<div class="news_info">
-						<a href="#" class="news_title">Cầy tai trắng- Ninja của rừng già</a>
-						<p class="news_content">So với những người anh em trong họ Cầy
-							Viverridae, Cầy tai trắng có kích thước thuộc dạng trung bình.,
-							phần sống mũi có sọc trắng mờ, đôi tai to tròn, mỏng phủ lớp lông
-							ngắn màu trắng, hai mắt to, phần lông quanh mắt có màu sậm, trông
-							như một chiếc mặt nạ của các ninja trên phim ảnh.</p>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="news_item">
-					<div class="images">
-						<img alt="" src="css/images/news_test.png">
-					</div>
-					<div class="news_info">
-						<a href="#" class="news_title">Cầy tai trắng- Ninja của rừng già</a>
-						<p class="news_content">So với những người anh em trong họ Cầy
-							Viverridae, Cầy tai trắng có kích thước thuộc dạng trung bình.,
-							phần sống mũi có sọc trắng mờ, đôi tai to tròn, mỏng phủ lớp lông
-							ngắn màu trắng, hai mắt to, phần lông quanh mắt có màu sậm, trông
-							như một chiếc mặt nạ của các ninja trên phim ảnh.</p>
-					</div>
-					<div class="clearfix"></div>
-				</div>
+			<?php
+				$this->widget('zii.widgets.CListView',array(
+					'dataProvider'=>$dataProviderNews,
+					'itemView'=>'listnews',
+					'summaryText'=>false,
+					'emptyText'=>false
+				));
+			?>
 			</div>
 		</div>
 		<div class="clearfix"></div>
