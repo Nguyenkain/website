@@ -131,6 +131,13 @@ $this->widget( 'xupload.XUpload', array(
                 'htmlOptions' => array('id'=>'creatures-form'),
                 'attribute' => 'file',
                 'multiple' => true,
+				'autoUpload' => true,
+				'options'=>array(
+		            'maxNumberOfFiles'=> 4,
+		            'acceptFileTypes' => "js:/(\.|\/)(jpe?g|png)$/i",
+					'sequentialUploads' => true,
+					'limitMultiFileUploads' => 4,
+		        ),
                 //Note that we are using a custom view for our widget
                 //Thats becase the default widget includes the 'form'
                 //which we don't want here
