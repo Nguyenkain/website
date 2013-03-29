@@ -1,37 +1,25 @@
-<?php
-$this->breadcrumbs=array(
-		$model->title,
-);
+<script type="text/javascript">
+	function replaceImages() {
+		$('#news_content img').each(function() {
+			var link = $(this).attr('src');
+			if(link.indexOf("forumpic") != -1) {
+				link = "images/" + link;
+			}
+			$(this).attr('src',link);
+		});
 
-$this->menu=array(
-		array('label'=>'List News','url'=>array('index')),
-		array('label'=>'Create News','url'=>array('create')),
-		array('label'=>'Update News','url'=>array('update','id'=>$model->news_id)),
-		array('label'=>'Delete News','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->news_id),'confirm'=>'Are you sure you want to delete this item?')),
-		array('label'=>'Manage News','url'=>array('admin')),
-);
-?>
+		$('p.Heading02').remove();
+	}
+</script>
 
-<h1>
-	Xem tin
-	<?php echo $model->title; ?>
-</h1>
+<?php Yii::app()->clientScript->registerScript('replace', "replaceImages();");?>
 
-<?php $this->widget('bootstrap.widgets.TbDetailView',array(
-		'data'=>$model,
-		'attributes'=>array(
-			'news_id',
-			'category_id',
-			'short_description',
-			array( 
-				'label'=>'Nội dung',
-				'type'=>'raw',
-				'value'=>$model->news_content,
-			),
-			array(
-			'name'=>'created_time',
-        	'value'=>date("d/m/y", $model->created_time)),
-			'title',
-			'image',
-		),
-)); ?>
+<div id="news_content" class="page_content">
+
+	<h3><?php echo $model->title?></h3>
+	
+	<div class='hoz_line long'></div>
+	
+	<?php echo $model->news_content?>
+
+</div>

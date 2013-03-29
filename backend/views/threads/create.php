@@ -12,4 +12,4 @@ $this->menu=array(
 
 <h1>Tạo mới Threads</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model, 'photo'=>$photo)); ?>
