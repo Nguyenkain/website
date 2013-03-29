@@ -31,7 +31,7 @@ class CreaturesController extends Controller
 						'users'=>array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'actions'=>array('create','update','dynamicbo','dynamicho','dynamicauthor'),
+						'actions'=>array('create','update','dynamicbo','dynamicho','dynamicauthor','change'),
 						'users'=>array('@'),
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -96,6 +96,32 @@ class CreaturesController extends Controller
 				'coordinations'=>Coordinations::model(),
 				'photo'=>$photos,
 		));
+	}
+	
+	public function actionChange($id,$name) {
+		$model = $this->loadModel($id);
+		$url ="";
+		if($model->Loai == 1) {
+			$url = 'animal';
+		}
+		else if($model->Loai == 2) {
+			$url = 'plant';
+		}
+		else if($model->Loai == 3) {
+			$url = 'insect';
+		}
+		$path = Yii::app( )->getBasePath( )."/../frontend/www/images/pictures/$url/";
+		$publicPath = Yii::app( )->getBaseUrl( )."/../web/images/pictures/$url/";
+		$file = CUploadedFile::getInstanceByName('file');
+		// Do your business ... save on file system for example,
+		// and/or do some db operations for example
+		$fileOld = $path.$model->ID.'jpg';
+		if(is_file($fileOld)) {
+			unlink($fileOld);
+		}
+		$file->saveAs($path.$model->ID.'jpg');
+		// return the new file path
+		echo $publicPath.$file->$model->ID.'jpg';
 	}
 	
 	public function actionUpload( ) {

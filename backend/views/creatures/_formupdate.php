@@ -7,6 +7,21 @@
 	Trường có kí hiệu <span class="required">*</span> là bắt buộc.
 </p>
 
+<?php 
+
+$url ="";
+if($model->Loai == 1) {
+	$url = 'animal';
+}
+else if($model->Loai == 2) {
+	$url = 'plant';
+}
+else if($model->Loai == 3) {
+	$url = 'insect';
+}
+
+?>
+
 <?php echo $form->errorSummary($model); ?>
 
 
@@ -21,7 +36,7 @@
 
 <?php //echo $form->textFieldRow($model,'Nhom',array('class'=>'span5')); ?>
 <?php echo $form->labelEx($model, 'Ho');
-echo $form->dropDownList($model, 'Ho', CHtml::listData(Ho::model()->findAll(),'ID', 'Viet'), 
+echo $form->dropDownList($model, 'Ho', CHtml::listData(Ho::model()->findAll(),'ID', 'Viet'),
 				array('empty' => '--Chọn họ cho sinh vật--', 'ajax' => array(
 			 	'type' => 'POST',
 				'dataType' => 'json',
@@ -74,8 +89,7 @@ echo $form->dropDownList($model, 'Loai', CHtml::listData(Loai::model()->findAll
 		'style' => 'display:none')); ?>
 
 <?php echo $form->labelEx($model, 'rRelation'); ?>
-<?php $data = CHtml::listData(Coordinations::model()->findAll(array('order' =>
-		'province_name')), 'province_id', 'province_name');
+<?php $data = CHtml::listData(Coordinations::model()->findAll(array('order' =>'province_name')), 'province_id', 'province_name');
 $this->widget('ext.EchMultiSelect.EchMultiSelect', array(
 		'model' => Coordinations::model(),
 		'dropDownAttribute' => 'province_id',
@@ -102,49 +116,14 @@ echo $form->dropDownList($model, 'Author', CHtml::listData(Author::model()->
 		'id' => 'AuthorName')); ?>
 <?php //echo $form->textFieldRow($model,'AuthorName',array('class'=>'span5','maxlength'=>50)); ?>
 <?php echo $form->labelEx($model, 'Img'); ?>
-<?php /* $this->widget('ext.EAjaxUpload.EAjaxUpload', array('id' => 'uploadFile',
-		'config' => array(
-				'action' => Yii::app()->createUrl('creatures/upload'),
-				'allowedExtensions' => array("jpg", "png"), //array("jpg","jpeg","gif","exe","mov" and etc...
-				'sizeLimit' => 10 * 1024 * 1024, // maximum file size in bytes
-				'minSizeLimit' => 2 * 1024, // minimum file size in bytes
-				'onComplete' => "js:function(id, fileName, responseJSON){
-				var fileNameReal = responseJSON['filename'];
-				fileNameReal= fileNameReal.replace('.jpg','').replace('.png','');
-				$('#Creatures_Img').val(fileNameReal); }",
-				//'messages'=>array(
-				//                  'typeError'=>"{file} has invalid extension. Only {extensions} are allowed.",
-				//                  'sizeError'=>"{file} is too large, maximum file size is {sizeLimit}.",
-				//                  'minSizeError'=>"{file} is too small, minimum file size is {minSizeLimit}.",
-				//                  'emptyError'=>"{file} is empty, please select files again without it.",
-				//                  'onLeave'=>"The files are being uploaded, if you leave now the upload will be cancelled."
-				//                 ),
-				//'showMessage'=>"js:function(message){ alert(message); }"
-			))); */ ?>
-			
+
 <?php
-$this->widget( 'xupload.XUpload', array(
-                'url' => Yii::app( )->createUrl( "/creatures/upload"),
-                //our XUploadForm
-                'model' => $photo,
-                //We set this for the widget to be able to target our own form
-                'htmlOptions' => array('id'=>'creatures-form'),
-                'attribute' => 'file',
-                'multiple' => true,
-				'autoUpload' => true,
-				'options'=>array(
-		            'maxNumberOfFiles'=> 4,
-		            'acceptFileTypes' => "js:/(\.|\/)(jpe?g|png)$/i",
-					'sequentialUploads' => true,
-					'limitMultiFileUploads' => 4,
-		        ),
-                //Note that we are using a custom view for our widget
-                //Thats becase the default widget includes the 'form'
-                //which we don't want here
-                'formView' => 'backend.views.creatures.xuploadform',
-				'downloadView' => 'backend.views.creatures._download',
-         )
-);
+$this->widget('ext.imageSelect.ImageSelect',  array(
+        'path'=>'../web/images/pictures/'.$url.'/'.$model->ID.'.jpg',
+        'alt'=>'alt text',
+        'uploadUrl'=>$this->createUrl('change', array('id'=>$model->ID,'name'=>$model->ID)),
+        'htmlOptions'=>array()
+   ));
 ?>
 
 <div class="form-actions">
