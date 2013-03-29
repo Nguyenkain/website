@@ -1,34 +1,24 @@
-﻿<?php 	$this->breadcrumbs = array(
-		'Vườn Quốc Gia' => array('index'),
-		$model->id,
-		);
+﻿<div class="view">
 
-	$this->menu = array(
-		array('label' => 'Liệt kê Vườn Quốc Gia', 'url' => array('index')),
-		array('label' => 'Tạo mới Vườn Quốc Gia', 'url' => array('create')),
-		array('label' => 'Cập nhật Vườn Quốc Gia', 'url' => array('update', 'id' => $model->
-					id)),
-		array(
-			'label' => 'Xóa Vườn Quốc Gia',
-			'url' => '#',
-			'linkOptions' => array('submit' => array('delete', 'id' => $model->id),
-					'confirm' => 'Are you sure you want to delete this item?')),
-		array('label' => 'Quản lý Vườn Quốc Gia', 'url' => array('admin')),
-		); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
+	<?php echo CHtml::link(CHtml::encode($data->id),array('view','id'=>$data->id)); ?>
+	<br />
 
-<h1>Xem Vườn Quốc Gia <?php echo $model->park_name; ?></h1>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('park_name')); ?>:</b>
+	<?php echo CHtml::encode($data->park_name); ?>
+	<br />
 
-<?php $this->widget('bootstrap.widgets.TbDetailView', array(
-		'data' => $model,
-		'attributes' => array(
-			'id',
-			'park_name',
-			array(
-				'label' => $model->getAttributeLabel('park_description'),
-				'type' => 'raw',
-				'value' => $model->park_description,
-				),
-			'longitude',
-			'latitude',
-			),
-		)); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('park_description')); ?>:</b>
+	<?php echo CHtml::encode(substr($data->park_description,0,600)); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('longitude')); ?>:</b>
+	<?php echo CHtml::encode($data->longitude); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('latitude')); ?>:</b>
+	<?php echo CHtml::encode($data->latitude); ?>
+	<br />
+
+
+</div>
