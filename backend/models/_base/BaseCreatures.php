@@ -98,8 +98,8 @@ abstract class BaseCreatures extends GxActiveRecord {
 		$sort = new CSort;
 		$sort->defaultOrder = 'ID DESC';
 		$criteria->compare('ID', $this->ID);
-		$criteria->compare('Viet', $this->Viet, true);
-		$criteria->compare('Latin', $this->Latin, true);
+		$criteria->compare('Viet', strtolower($this->Viet), true);
+		$criteria->compare('Latin', strtolower($this->Latin), true);
 		$criteria->compare('Loai', $this->Loai);
 		$criteria->compare('Ho', $this->Ho);
 		$criteria->compare('Bo', $this->Bo);

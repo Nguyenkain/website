@@ -79,8 +79,8 @@ class CreaturesController extends Controller
 		$criteria->compare('Ho', $Ho, true);
 		$criteria->compare('Bo', $Bo, true);
 		$criteria->compare('Nhom', $Nhom, true);
-		$criteria->compare('Viet', $Viet, true);
-		$criteria->compare('Latin', $Viet, true);
+		$criteria->compare('LOWER(Viet)', $Viet, true, 'OR');
+		$criteria->compare('Latin', $Viet, true, 'OR');
 		
 
 		$dataProvider = new CActiveDataProvider('Creatures', array(
@@ -95,7 +95,7 @@ class CreaturesController extends Controller
 		if(isset($_GET['Creatures'])){
 			
 			$model->attributes=$_GET['Creatures'];
-			$dataProvider= $model->search();
+			$dataProvider= $model->searchFront();
 		}
 		$this->render('listcreatures',array(
 				'dataProvider'=>$dataProvider,
