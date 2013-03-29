@@ -27,11 +27,11 @@ class CreaturesController extends Controller
 	{
 		return array(
 		array('allow',  // allow all users to perform 'index' and 'view' actions
-						'actions'=>array('index','view','listcreatures'),
+						'actions'=>array('index','view','listcreatures','dynamicloai','dynamicnhom','dynamicbo'),
 						'users'=>array('*'),
 		),
 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'actions'=>array('create','update','upload','dynamicbo','dynamicho','dynamicauthor'),
+						'actions'=>array('create','update','upload','dynamicauthor'),
 						'users'=>array('@'),
 		),
 		array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -133,6 +133,7 @@ class CreaturesController extends Controller
 				'model'=>$model,
 		));
 	}
+	
 	public function actionUpload()
 	{
 		Yii::import("ext.EAjaxUpload.qqFileUploader");
@@ -145,58 +146,100 @@ class CreaturesController extends Controller
 		$result=htmlspecialchars(json_encode($result), ENT_NOQUOTES);
 		echo $result;// it's array
 	}
-	public function actionDynamicbo()
+	
+	public function actionDynamicloai()
 	{
-		$ho = Ho::model()->findByPk((int) $_POST['Ho']);
-		$data = Bo::model()->findAll();
-		$data2 = Nhom::model()->findAll();
-		$data3 = Loai::model()->findAll();
-		$data4 = Bo::model()->find('ID=:parent_id',
-				array(':parent_id'=>(int) $ho->Bo));
-		$data5 = Nhom::model()->find('ID=:parent_id',
-				array(':parent_id'=>(int)$data4->Nhom));
-		$data6 = Loai::model()->find('ID=:parent_id',
-				array(':parent_id'=>(int)$data5->Loai));
+		$loai = Loai::model()->findByPk((int) $_POST['ID']);	
+		$nhom = Nhom::model()->findAll('Loai=:parent_id',
+				array(':parent_id'=>(int) $loai->ID));
+		$bo = Bo::model()->findAll('Nhom=:parent_id',
+				array(':parent_id'=>(int)$nhom[0]->ID));
+		$ho = Ho::model()->findAll('Bo=:parent_id',
+				array(':parent_id'=>(int)$bo[0]->ID));
 
-		$data = CHtml::listData($data,'ID','Viet');
-		$data2 = CHtml::listData($data2,'ID','Viet');
-		$data3 = CHtml::listData($data3,'ID','Loai');
+		$nhom = CHtml::listData($nhom,'ID','Viet');
+		$bo = CHtml::listData($bo,'ID','Viet');
+		$ho = CHtml::listData($ho,'ID','Viet');
 		
-		$Bo='';
-		$Nhom='';
-		$Loai='';
+		$listNhom='';
+		$listBo='';
+		$listHo='';
 		
-		foreach($data as $ID => $value)
+		foreach($nhom as $ID => $value)
 		{
-			if ($ID == $data4->ID)
-				$Bo.= CHtml::tag('option',array('value' => $ID,
-											'selected' => 'selected'),CHtml::encode($value),true);
-			else
-				$Bo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+
+				$listNhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
 		}
-		foreach($data2 as $ID => $value)
+		foreach($bo as $ID => $value)
 		{
-			if ($ID == $data5->ID)
-				$Nhom.= CHtml::tag('option',array('value' => $ID,
-											'selected' => 'selected'),CHtml::encode($value),true);
-			else
-				$Nhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+
+				$listBo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
 		}
-		foreach($data3 as $ID => $value)
+		foreach($ho as $ID => $value)
 		{
-			if ($ID == $data6->ID)
-				$Loai.= CHtml::tag('option',array('value' => $ID,
-											'selected' => 'selected'),CHtml::encode($value),true);
-			else
-				$Loai.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+
+				$listHo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
 		}
 
 		echo CJSON::encode(array(
-				'dropdownBo'=>$Bo,
-				'dropdownNhom'=>$Nhom,
-				'dropdownLoai'=>$Loai,
+				'dropdownNhom'=>$listNhom,
+				'dropdownBo'=>$listBo,
+				'dropdownHo'=>$listHo,
 		));
 	}
+	
+	public function actionDynamicnhom()
+	{
+		$nhom = Nhom::model()->findByPk((int) $_POST['ID']);	
+		$bo = Bo::model()->findAll('Nhom=:parent_id',
+				array(':parent_id'=>(int)$nhom->ID));
+		$ho = Ho::model()->findAll('Bo=:parent_id',
+				array(':parent_id'=>(int)$bo[0]->ID));
+
+		$bo = CHtml::listData($bo,'ID','Viet');
+		$ho = CHtml::listData($ho,'ID','Viet');
+		
+		$listBo='';
+		$listHo='';
+		
+		foreach($bo as $ID => $value)
+		{
+
+				$listBo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+		}
+		foreach($ho as $ID => $value)
+		{
+
+				$listHo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+		}
+
+		echo CJSON::encode(array(
+				'dropdownBo'=>$listBo,
+				'dropdownHo'=>$listHo,
+		));
+	}
+	
+	public function actionDynamicbo()
+	{
+		$bo = Bo::model()->findByPk((int) $_POST['ID']);	
+		$ho = Ho::model()->findAll('Bo=:parent_id',
+				array(':parent_id'=>(int)$bo->ID));
+
+		$ho = CHtml::listData($ho,'ID','Viet');
+		
+		$listHo='';
+		
+		foreach($ho as $ID => $value)
+		{
+
+				$listHo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+		}
+
+		echo CJSON::encode(array(
+				'dropdownHo'=>$listHo,
+		));
+	}
+	
 	public function actionCreatdataforLoai($data,$row)
 	{
 
