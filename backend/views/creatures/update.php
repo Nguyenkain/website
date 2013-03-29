@@ -18,4 +18,4 @@ $this->menu=array(
 	<?php echo $model->Viet; ?>
 </h3>
 
-<?php echo $this->renderPartial('_form',array('model'=>$model,'coordinations'=>$coordinations)); ?>
+<?php echo $this->renderPartial('_formupdate',array('model'=>$model,'coordinations'=>$coordinations)); ?>
