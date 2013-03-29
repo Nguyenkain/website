@@ -90,6 +90,7 @@ abstract class BaseCreatures extends GxActiveRecord {
 				'rHo'=>Yii::t('app', 'Họ'),
 				'rBo'=>Yii::t('app', 'Bộ'),
 				'rLoai'=>Yii::t('app', 'Loài'),
+				'rRelation'=>Yii::t('app', 'Địa điểm'),
 		);
 	}
 

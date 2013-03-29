@@ -73,6 +73,11 @@ class XUpload extends CJuiInputWidget {
      * @var bool whether form tag should be used at widget
      */
     public $showForm = true;
+    
+    /**
+     * @var number of file allow to upload
+     */
+    public $filenum = false;
 
     /**
      * Publishes the required assets
@@ -115,6 +120,9 @@ class XUpload extends CJuiInputWidget {
         if (!$this->multiple) {
             $this->options['maxNumberOfFiles'] = 1;
         }
+        
+        if(!$this->filenum)
+        	$this->options['maxNumberOfFiles'] = $this->filenum;
 
         $options = CJavaScript::encode($this -> options);
 
