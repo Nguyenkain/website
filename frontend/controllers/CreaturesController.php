@@ -27,11 +27,11 @@ class CreaturesController extends Controller
 	{
 		return array(
 		array('allow',  // allow all users to perform 'index' and 'view' actions
-						'actions'=>array('index','view','listcreatures'),
+						'actions'=>array('index','view','listcreatures','dynamicloai','dynamicnhom','dynamicbo'),
 						'users'=>array('*'),
 		),
 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'actions'=>array('create','update','upload','dynamicbo','dynamicho','dynamicauthor'),
+						'actions'=>array('create','update','upload','dynamicauthor'),
 						'users'=>array('@'),
 		),
 		array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -48,10 +48,12 @@ class CreaturesController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+	public function actionView()
 	{
-		if(isset($_GET['Creatures'])){
-			$model->attributes=$_GET['Creatures'];
+		$id = Yii::app()->request->getQuery("id");
+		if(isset($_POST['Creatures'])){
+			$model =  Creatures::model();
+			$model->attributes=$_POST['Creatures'];
 			$this->redirect(array('listcreatures',
 					'Loai'=>$model->Loai,
 					'Ho'=>$model->Ho,
@@ -70,25 +72,35 @@ class CreaturesController extends Controller
 	public function actionListcreatures($Loai,$Ho,$Bo,$Nhom,$Viet)
 	{
 		$model =  Creatures::model();
+		$search = new Creatures;
 		$criteria = new CDbCriteria;
 		
 		$criteria->compare('Loai', $Loai, true);
 		$criteria->compare('Ho', $Ho, true);
 		$criteria->compare('Bo', $Bo, true);
 		$criteria->compare('Nhom', $Nhom, true);
-		$criteria->compare('Viet', $Viet, true);
+		$criteria->compare('LOWER(Viet)', $Viet, true, 'OR');
+		$criteria->compare('Latin', $Viet, true, 'OR');
+		
 
 		$dataProvider = new CActiveDataProvider('Creatures', array(
 				'criteria'=>$criteria));
+		
+		$search->Loai = $Loai;
+		$search->Ho = $Ho;
+		$search->Bo = $Bo;
+		$search->Nhom = $Nhom;
+		$search->Viet = $Viet;
 	
 		if(isset($_GET['Creatures'])){
 			
 			$model->attributes=$_GET['Creatures'];
-			$dataProvider= $model->search();
+			$dataProvider= $model->searchFront();
 		}
 		$this->render('listcreatures',array(
 				'dataProvider'=>$dataProvider,
 				'model'=>$model,
+				'search' => $search,
 		));
 		
 	}
@@ -121,6 +133,7 @@ class CreaturesController extends Controller
 				'model'=>$model,
 		));
 	}
+	
 	public function actionUpload()
 	{
 		Yii::import("ext.EAjaxUpload.qqFileUploader");
@@ -133,41 +146,100 @@ class CreaturesController extends Controller
 		$result=htmlspecialchars(json_encode($result), ENT_NOQUOTES);
 		echo $result;// it's array
 	}
-	public function actionDynamicbo()
+	
+	public function actionDynamicloai()
 	{
-		$ho = Ho::model()->findByPk((int) $_POST['Ho']);
-		$data = Bo::model()->findAll('ID=:parent_id',
-		array(':parent_id'=>(int) $ho->Bo));
+		$loai = Loai::model()->findByPk((int) $_POST['ID']);	
+		$nhom = Nhom::model()->findAll('Loai=:parent_id',
+				array(':parent_id'=>(int) $loai->ID));
+		$bo = Bo::model()->findAll('Nhom=:parent_id',
+				array(':parent_id'=>(int)$nhom[0]->ID));
+		$ho = Ho::model()->findAll('Bo=:parent_id',
+				array(':parent_id'=>(int)$bo[0]->ID));
 
-		$data2 = Nhom::model()->findAll('ID=:parent_id',
-		array(':parent_id'=>(int)$data[0]->Nhom));
-		$data3 = Loai::model()->findAll('ID=:parent_id',
-		array(':parent_id'=>(int)$data2[0]->Loai));
+		$nhom = CHtml::listData($nhom,'ID','Viet');
+		$bo = CHtml::listData($bo,'ID','Viet');
+		$ho = CHtml::listData($ho,'ID','Viet');
+		
+		$listNhom='';
+		$listBo='';
+		$listHo='';
+		
+		foreach($nhom as $ID => $value)
+		{
 
+				$listNhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+		}
+		foreach($bo as $ID => $value)
+		{
 
-		$data = CHtml::listData($data,'ID','Viet');
-		$data2 = CHtml::listData($data2,'ID','Viet');
-		$Bo='';
-		$Nhom='';
-		$Loai='';
-		foreach($data as $ID => $value)
+				$listBo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+		}
+		foreach($ho as $ID => $value)
+		{
 
-		$Bo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-
-
-		foreach($data2 as $ID => $value)
-
-		$Nhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-		foreach($data3 as $ID => $value)
-
-		$Loai.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+				$listHo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+		}
 
 		echo CJSON::encode(array(
-				'dropdownBo'=>$Bo,
-				'dropdownNhom'=>$Nhom,
-				'dropdownLoai'=>$Loai
+				'dropdownNhom'=>$listNhom,
+				'dropdownBo'=>$listBo,
+				'dropdownHo'=>$listHo,
 		));
 	}
+	
+	public function actionDynamicnhom()
+	{
+		$nhom = Nhom::model()->findByPk((int) $_POST['ID']);	
+		$bo = Bo::model()->findAll('Nhom=:parent_id',
+				array(':parent_id'=>(int)$nhom->ID));
+		$ho = Ho::model()->findAll('Bo=:parent_id',
+				array(':parent_id'=>(int)$bo[0]->ID));
+
+		$bo = CHtml::listData($bo,'ID','Viet');
+		$ho = CHtml::listData($ho,'ID','Viet');
+		
+		$listBo='';
+		$listHo='';
+		
+		foreach($bo as $ID => $value)
+		{
+
+				$listBo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+		}
+		foreach($ho as $ID => $value)
+		{
+
+				$listHo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+		}
+
+		echo CJSON::encode(array(
+				'dropdownBo'=>$listBo,
+				'dropdownHo'=>$listHo,
+		));
+	}
+	
+	public function actionDynamicbo()
+	{
+		$bo = Bo::model()->findByPk((int) $_POST['ID']);	
+		$ho = Ho::model()->findAll('Bo=:parent_id',
+				array(':parent_id'=>(int)$bo->ID));
+
+		$ho = CHtml::listData($ho,'ID','Viet');
+		
+		$listHo='';
+		
+		foreach($ho as $ID => $value)
+		{
+
+				$listHo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+		}
+
+		echo CJSON::encode(array(
+				'dropdownHo'=>$listHo,
+		));
+	}
+	
 	public function actionCreatdataforLoai($data,$row)
 	{
 
@@ -238,7 +310,15 @@ class CreaturesController extends Controller
 	{
 		$model = new Creatures;
 
-		$dataProvider=new CActiveDataProvider('Creatures');
+		$dataProvider = new CActiveDataProvider('Creatures');
+		
+		$criteria = new CDbCriteria;
+		$criteria->order = 'news_id DESC';
+		$criteria->limit = 3;
+
+		$dataProviderNews = new CActiveDataProvider('News',array(
+				'pagination'=>false,
+            	'criteria'=>$criteria));
 		if(isset($_POST['Creatures']))
 		{
 			$model->attributes=$_POST['Creatures'];
@@ -248,12 +328,12 @@ class CreaturesController extends Controller
 				'Ho'=>$model->Ho,
 				'Bo'=>$model->Bo,
 				'Nhom'=>$model->Nhom,
-				'Viet'=>$model->Viet,
-				'Latin'=>$model->Viet));
+				'Viet'=>$model->Viet,));
 		}
 		$this->render('index',array(
 				'model'=> $model,
-				'dataProvider'=>$dataProvider
+				'dataProvider'=>$dataProvider,
+				'dataProviderNews'=>$dataProviderNews
 		));
 	}
 

@@ -20,7 +20,7 @@ Yii::app()->clientScript->registerScript('search', "
 <div id="list-creature" class="page_content">
 	<div class="search_container" >
 		<?php $this->renderPartial('_search',array(
-				'model'=>$model,
+				'model'=>$search,
 		));
 		?>
 	</div>

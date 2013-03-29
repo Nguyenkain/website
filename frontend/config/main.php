@@ -104,7 +104,7 @@ return CMap::mergeArray(
 				'password' => $params['db.password'],
 				'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
 				'enableParamLogging' => YII_DEBUG,
-				'charset' => 'latin1'
+				'charset' => 'utf8'
 			),
 // 			'urlManager' => array(
 // 				'urlFormat' => 'path',

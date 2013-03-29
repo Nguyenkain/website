@@ -106,4 +106,5 @@ abstract class BaseCreatures extends GxActiveRecord {
 				),
 		));
 	}
+	
 }

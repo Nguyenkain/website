@@ -73,6 +73,23 @@ echo $form->dropDownList($model, 'Loai', CHtml::listData(Loai::model()->findAll
 		'maxlength' => 255,
 		'style' => 'display:none')); ?>
 
+<?php echo $form->labelEx($model, 'rRelation'); ?>
+<?php $data = CHtml::listData(Coordinations::model()->findAll(array('order' =>
+		'province_name')), 'province_id', 'province_name');
+$this->widget('ext.EchMultiSelect.EchMultiSelect', array(
+		'model' => Coordinations::model(),
+		'dropDownAttribute' => 'province_id',
+		'data' => $data,
+		'value'=> Coordinations::model()->province_id=CHtml::listData($coordinations, 'province_id', 'province_id'),
+		'dropDownHtmlOptions' => array('style' => 'width:400px;', ),
+		'options' => array(
+				'minWidth' => 350,
+				'position' => array('my' => 'left top', 'at' => 'left top'),
+				'filter' => true,
+		),
+		'filterOptions' => array('width' => 70,),
+)); ?>
+
 <?php //echo $form->textFieldRow($model,'Author',array('class'=>'span5')); ?>
 <?php echo $form->labelEx($model, 'Author');
 echo $form->dropDownList($model, 'Author', CHtml::listData(Author::model()->
@@ -85,7 +102,7 @@ echo $form->dropDownList($model, 'Author', CHtml::listData(Author::model()->
 		'id' => 'AuthorName')); ?>
 <?php //echo $form->textFieldRow($model,'AuthorName',array('class'=>'span5','maxlength'=>50)); ?>
 <?php echo $form->labelEx($model, 'Img'); ?>
-<?php $this->widget('ext.EAjaxUpload.EAjaxUpload', array('id' => 'uploadFile',
+<?php /* $this->widget('ext.EAjaxUpload.EAjaxUpload', array('id' => 'uploadFile',
 		'config' => array(
 				'action' => Yii::app()->createUrl('creatures/upload'),
 				'allowedExtensions' => array("jpg", "png"), //array("jpg","jpeg","gif","exe","mov" and etc...
@@ -103,23 +120,25 @@ echo $form->dropDownList($model, 'Author', CHtml::listData(Author::model()->
 				//                  'onLeave'=>"The files are being uploaded, if you leave now the upload will be cancelled."
 				//                 ),
 				//'showMessage'=>"js:function(message){ alert(message); }"
-			))); ?>
-
-<?php $data = CHtml::listData(Coordinations::model()->findAll(array('order' =>
-		'province_name')), 'province_id', 'province_name');
-$this->widget('ext.EchMultiSelect.EchMultiSelect', array(
-		'model' => Coordinations::model(),
-		'dropDownAttribute' => 'province_id',
-		'data' => $data,
-		'value'=> Coordinations::model()->province_id=CHtml::listData($coordinations, 'province_id', 'province_id'),
-		'dropDownHtmlOptions' => array('style' => 'width:400px;', ),
-		'options' => array(
-				'minWidth' => 350,
-				'position' => array('my' => 'left top', 'at' => 'left top'),
-				'filter' => true,
-		),
-		'filterOptions' => array('width' => 70,),
-)); ?>
+			))); */ ?>
+			
+<?php
+$this->widget( 'xupload.XUpload', array(
+                'url' => Yii::app( )->createUrl( "/creatures/upload"),
+                //our XUploadForm
+                'model' => $photo,
+                //We set this for the widget to be able to target our own form
+                'htmlOptions' => array('id'=>'creatures-form'),
+                'attribute' => 'file',
+                'multiple' => true,
+                //Note that we are using a custom view for our widget
+                //Thats becase the default widget includes the 'form'
+                //which we don't want here
+                'formView' => 'backend.views.creatures.xuploadform',
+				'downloadView' => 'backend.views.creatures._download',
+         )
+);
+?>
 
 <div class="form-actions">
 	<?php $this->widget('bootstrap.widgets.TbButton', array(

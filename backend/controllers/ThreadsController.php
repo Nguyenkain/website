@@ -27,7 +27,7 @@ class ThreadsController extends Controller
 	{
 		return array(
 				array('allow',  // allow all users to perform 'index' and 'view' actions
-						'actions'=>array('index','view'),
+						'actions'=>array('index','view','upload'),
 						'users'=>array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -72,19 +72,33 @@ class ThreadsController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
+		
+		Yii::import( "xupload.models.XUploadForm" );
+		$photos = new XUploadForm;
 
 		if(isset($_POST['Threads']))
 		{
 			$model->attributes=$_POST['Threads'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->thread_id));
+			
+			$transaction = Yii::app( )->db->beginTransaction( );
+			try {
+				//Save the model to the database
+				if($model->save()){
+					$transaction->commit();
+					$this->redirect(array('view','id'=>$model->thread_id));
+				}
+			} catch(Exception $e) {
+				$transaction->rollback( );
+				Yii::app( )->handleException( $e );
+			}
 		}
 
 		$this->render('create',array(
 				'model'=>$model,
+				'photo'=>$photos,
 		));
 	}
-
+	
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -147,6 +161,7 @@ class ThreadsController extends Controller
 	{
 		$model=new Threads('search');
 		$model->unsetAttributes();  // clear any default values
+		
 		if(isset($_GET['Threads']))
 			$model->attributes=$_GET['Threads'];
 

@@ -1,12 +1,5 @@
 <?php
-Yii::app()->clientScript->registerScript('search', "
-		$('.search_container form').submit(function(){
-		$.fn.yiiGridView.update('creatures-grid', {
-		data: $(this).serialize()
-});
-		return false;
-});
-		");
+
 function getImageUrl($loai,$img){
 	if($loai==1)
 		return Yii::app()->request->getBaseUrl(true) . "/images/pictures/animal/" . $img . ".jpg";
@@ -48,17 +41,17 @@ function getImageUrl($loai,$img){
 				</div>
 				<div class="name_item">
 					<div class="name">Họ:</div>
-					<div class="normal_name"><?php echo $model->rHo->Viet?></div>
+					<div class="normal_name"><?php echo $model->rHo?></div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="name_item">
 					<div class="name">Bộ:</div>
-					<div class="normal_name"><?php echo $model->rBo->Viet?></div>
+					<div class="normal_name"><?php echo $model->rBo?></div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="name_item">
 					<div class="name">Lớp (nhóm):</div>
-					<div class="normal_name"><?php echo $model->rNhom->Viet?></div>
+					<div class="normal_name"><?php echo $model->rNhom?></div>
 					<div class="clearfix"></div>
 				</div>
 			</div>

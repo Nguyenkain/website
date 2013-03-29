@@ -35,6 +35,7 @@ Yii::app()->clientScript->registerScript('search', "
 <div class="search-form" style="display: none">
 	<?php $this->renderPartial('_search',array(
 			'model'=>$model,
+			
 )); ?>
 </div>
 <!-- search-form -->
