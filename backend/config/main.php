@@ -66,6 +66,12 @@ return CMap::mergeArray(
 			'application.models.*',
 			'application.extensions.CAdvancedArBehavior'
 		),
+			'aliases' => array(
+					//If you used composer your path should be
+					//'xupload' => 'ext.vendor.Asgaroth.xupload'
+					//If you manually installed it
+					'xupload' => 'common.extensions.xupload'
+			),
 		/* uncomment and set if required */
 		// @see http://www.yiiframework.com/doc/api/1.1/CModule#setModules-detail
 		'modules' => array(
@@ -97,7 +103,7 @@ return CMap::mergeArray(
 				'password' => $params['db.password'],
 				'schemaCachingDuration' => YII_DEBUG ? 0 : 86400000, // 1000 days
 				'enableParamLogging' => YII_DEBUG,
-				'charset' => 'latin1'
+				'charset' => 'utf8'
 			),
 			'request' => array(
 			),
