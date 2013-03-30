@@ -7,10 +7,10 @@ Yii::app()->clientScript->registerScript('search', "
 		return false;
 });
 		");
+
  function getImageUrl($loai,$img){
 	if($loai==1)
 		return Yii::app()->request->getBaseUrl(true) . "/images/pictures/animal/" . $img . ".jpg";
-	
 	if($loai==2)
 		return Yii::app()->request->getBaseUrl(true) . "/images/pictures/plant/" . $img . ".jpg";
 	if($loai==3)
@@ -27,7 +27,7 @@ Yii::app()->clientScript->registerScript('search', "
 	<!-- search-form -->
 	<?php 
 
-
+	
 	$this->widget('bootstrap.widgets.TbGridView',array(
 			'id'=>'creatures-grid',
 			'dataProvider'=>$dataProvider,

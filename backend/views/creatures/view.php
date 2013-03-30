@@ -11,6 +11,16 @@ $this->menu=array(
 		array('label'=>'Delete Creatures','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->ID),'confirm'=>'Are you sure you want to delete this item?')),
 		array('label'=>'Manage Creatures','url'=>array('admin')),
 );
+function getImageUrl($loai){
+	if($loai==1)
+		return Yii::app()->request->getBaseUrl(true) . "/../web/images/pictures/animal/";
+
+	if($loai==2)
+		return Yii::app()->request->getBaseUrl(true) . "/../web/images/pictures/plant/";
+	if($loai==3)
+		return Yii::app()->request->getBaseUrl(true) . "/../web/images/pictures/insect/";
+}
+
 ?>
 
 <h3>Thông tin của <?php echo $model->Viet; ?></h3>
@@ -21,6 +31,7 @@ foreach ($coordinations as $place){
 	$st = $place->province_name;
 	$position = $position .' ,' .$st;
 };
+
 $this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,
 		'attributes'=>array(
@@ -36,12 +47,45 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 						'value'=>$model->Description,
 
 				),
-				'Img',
+					array(
+					
+					'header' => 'Ảnh',
+					'label'=>'Ảnh minh họa',
+					'type'=>'raw',
+					'value' => ''
+					.CHtml::image(getImageUrl($model->Loai).$model->Img.".jpg",'',$htmlOptions=array(
+						
+							'style'=>'margin-right:10px;height:90px'
+							))
+					.CHtml::image(getImageUrl($model->Loai).$model->Img."_1".".jpg",'',$htmlOptions=array(
+						'style'=>'margin-right:10px;height:90px'
+							))	
+					.CHtml::image(getImageUrl($model->Loai).$model->Img."_2".".jpg",'',$htmlOptions=array(
+						'style'=>'margin-right:10px;height:90px'
+							))
+					.CHtml::image(getImageUrl($model->Loai).$model->Img."_3".".jpg",'',$htmlOptions=array(
+						'style'=>'margin-right:10px;height:90px'
+							))
+							
+
+,
+						/* 'imagePathExpression' => 'Yii::app()->request->getBaseUrl(true) . "/images/pictures/" . $data->Img . ".jpg"', */
+					'imageOptions'=>array('width'=>'90px'),
+						
+					
+				),
 				'rAuthor',
-				'AuthorName',
+				
 				array(
 						'label'=>'Địa điểm phân bố',
 						'value'=>$position,
 				),
 	),
-)); ?>
+));
+  $this->widget('ext.FlexPictureSlider.FlexPictureSlider',
+  array(
+    'imageBlockSelector' => '#myslider', //the jquery selector
+   
+    
+ 
+   )); ?>
