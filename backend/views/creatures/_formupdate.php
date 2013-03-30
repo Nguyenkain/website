@@ -1,12 +1,3 @@
-<?php $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
-		'id' => 'creatures-form',
-		'enableAjaxValidation' => false,
-		));?>
-
-<p class="help-block">
-	Trường có kí hiệu <span class="required">*</span> là bắt buộc.
-</p>
-
 <?php 
 
 $url ="";
@@ -21,6 +12,28 @@ else if($model->Loai == 3) {
 }
 
 ?>
+
+<?php echo CHtml::label('Ảnh','',array())?>
+
+<?php
+$this->widget('ext.imageSelect.ImageSelect',  array(
+		'id' => 'image_upload',
+        'path'=>'../web/images/pictures/'.$url.'/'.$model->ID.'.jpg',
+        'alt'=>'alt text',
+        'uploadUrl'=>Yii::app()->createUrl('creatures/change',array('id'=>$model->ID)),
+        'htmlOptions'=>array('width'=>'200px', 'height'=> '150px'),
+   ));
+?>
+<br/>
+<?php $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+		'id' => 'creatures-form',
+		'enableAjaxValidation' => false,
+		));?>
+
+<p class="help-block">
+	Trường có kí hiệu <span class="required">*</span> là bắt buộc.
+</p>
+
 
 <?php echo $form->errorSummary($model); ?>
 
@@ -115,16 +128,6 @@ echo $form->dropDownList($model, 'Author', CHtml::listData(Author::model()->
 		'style' => 'display:none',
 		'id' => 'AuthorName')); ?>
 <?php //echo $form->textFieldRow($model,'AuthorName',array('class'=>'span5','maxlength'=>50)); ?>
-<?php echo $form->labelEx($model, 'Img'); ?>
-
-<?php
-$this->widget('ext.imageSelect.ImageSelect',  array(
-        'path'=>'../web/images/pictures/'.$url.'/'.$model->ID.'.jpg',
-        'alt'=>'alt text',
-        'uploadUrl'=>$this->createUrl('change', array('id'=>$model->ID,'name'=>$model->ID)),
-        'htmlOptions'=>array()
-   ));
-?>
 
 <div class="form-actions">
 	<?php $this->widget('bootstrap.widgets.TbButton', array(
