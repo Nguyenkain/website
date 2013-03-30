@@ -1092,12 +1092,24 @@ element.style {
 #creature_content .big_images {
 	float: left;
 	width: 295px;
-	height: 195px;
+	height: 200px;
+	text-align: center;
 }
 
 #creature_content .big_images img {
-	width: 295px;
-	height: 195px;
+	width: auto;
+	height: 200px;
+	margin: 0 auto;
+}
+
+#creature_content .small_images {
+	height: 78px;
+}
+
+#creature_content .small_images img {
+	height: 78px;
+	width: auto;
+	margin: 0 10px 0 0 ;
 }
 
 #creature_content .creature_info {

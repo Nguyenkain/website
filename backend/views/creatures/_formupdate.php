@@ -1,4 +1,33 @@
 <?php 
+function checkUrl($url) {
+	$url = @parse_url($url);
+	if (!$url) return false;
+
+	$url = array_map('trim', $url);
+	$url['port'] = (!isset($url['port'])) ? 80 : (int)$url['port'];
+
+	$path = (isset($url['path'])) ? $url['path'] : '/';
+	$path .= (isset($url['query'])) ? "?$url[query]" : '';
+
+	if (isset($url['host']) && $url['host'] != gethostbyname($url['host'])) {
+
+		$fp = fsockopen($url['host'], $url['port'], $errno, $errstr, 30);
+
+		if (!$fp) return false; //socket not opened
+
+		fputs($fp, "HEAD $path HTTP/1.1\r\nHost: $url[host]\r\n\r\n"); //socket opened
+		$headers = fread($fp, 4096);
+		fclose($fp);
+
+		if(preg_match('#^HTTP/.*\s+[(200|301|302)]+\s#i', $headers)){//matching header
+			return true;
+		}
+		else return false;
+
+	} // if parse url
+}?>
+
+<?php 
 
 $url ="";
 if($model->Loai == 1) {
@@ -13,18 +42,33 @@ else if($model->Loai == 3) {
 
 ?>
 
-<?php echo CHtml::label('Ảnh','',array())?>
+<?php 
+echo CHtml::label('Ảnh','',array());
 
-<?php
-$this->widget('ext.imageSelect.ImageSelect',  array(
-		'id' => 'image_upload',
-        'path'=>'../web/images/pictures/'.$url.'/'.$model->ID.'.jpg',
-        'alt'=>'alt text',
-        'uploadUrl'=>Yii::app()->createUrl('creatures/change',array('id'=>$model->ID)),
-        'htmlOptions'=>array('width'=>'200px', 'height'=> '150px'),
-   ));
+for($i = 0; $i <= 4; $i++) {
+	$urlcheck = Yii::app()->getBaseUrl(true);
+	if($i != 0) {
+		$urlcheck .= '/../web/images/pictures/'.$url.'/'.$model->ID.'_'.$i.'.jpg';
+	}
+	else {
+		$urlcheck .= '/../web/images/pictures/'.$url.'/'.$model->ID.'.jpg';
+	}
+	if(checkUrl($urlcheck)) {
+
+		$this->widget('ext.imageSelect.ImageSelect',  array(
+				'id' => 'image_upload',
+		        'path'=> $urlcheck,
+		        'alt'=>'alt text',
+				'text' => 'Đổi Ảnh',
+		        'uploadUrl'=>Yii::app()->createUrl('creatures/change',array('id'=>$model->ID)),
+		        'htmlOptions'=>array('style' => "width:auto; height:150px; margin-right: 10px;"),
+		   ));
+	}
+}
+
 ?>
-<br/>
+<div style="clear:both;">
+<br />
 <?php $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 		'id' => 'creatures-form',
 		'enableAjaxValidation' => false,
