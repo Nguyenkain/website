@@ -37,7 +37,7 @@ class ImageSelect extends CWidget{
 	}
 
 	public function run(){
-		echo '<div style="text-align: center; position: relative;">';
+		echo '<div style="text-align: center; position: relative; float:left;">';
 		echo '<div class="image-select-loading" id="image-select-loading-'.$this->id.'" style="display: none;">text</div>';
 		echo '<div id="div_image_select_'.$this->id.'" style="display: inline-block; margin-left: auto; margin-right: auto; position: relative; direction: ltr;">';
 			echo CHtml::image($this->path, $this->alt, $this->htmlOptions);
