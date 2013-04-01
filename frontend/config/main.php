@@ -56,7 +56,8 @@ return CMap::mergeArray(
 			/* 'common.extensions.validators.*', */
 			'application.components.*',
 			'application.controllers.*',
-			'application.models.*'
+			'application.models.*',
+			'application.widgets.*',
 		),
 		/* uncomment and set if required */
 		// @see http://www.yiiframework.com/doc/api/1.1/CModule#setModules-detail

@@ -33,7 +33,7 @@ $js->registerScriptFile($baseUrl . '/js/egmap_handle.js');
 		<div id="map">
 			<div id="map_canvas"></div>
 			<div id="crosshair"></div>
-			<?php Yii::import('ext.EGMap.*');
+			<?php Yii::import('common.extensions.EGMap.*');
 			$gMap = new EGMap();
 			$gMap->setJsName('map');
 

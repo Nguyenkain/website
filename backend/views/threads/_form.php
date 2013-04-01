@@ -17,9 +17,17 @@ echo $form->labelEx($model,'user_id');
 
 <?php echo $form->textAreaRow($model,'thread_content',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
+<div class="form-actions">
+	<?php $this->widget('bootstrap.widgets.TbButton', array(
+			'buttonType'=>'submit',
+			'type'=>'primary',
+			'label'=>$model->isNewRecord ? 'Lưu mới' : 'Lưu',
+		)); ?>
+</div>
+
 <?php
 $this->widget( 'xupload.XUpload', array(
-                'url' => Yii::app( )->createUrl( "/threads/upload"),
+                'url' => Yii::app( )->createUrl( "/creatures/upload"),
                 //our XUploadForm
                 'model' => $photo,
                 //We set this for the widget to be able to target our own form
@@ -29,18 +37,10 @@ $this->widget( 'xupload.XUpload', array(
                 //Note that we are using a custom view for our widget
                 //Thats becase the default widget includes the 'form'
                 //which we don't want here
-                'formView' => 'backend.views.threads.xuploadform',
-				'downloadView' => 'backend.views.threads._download',
+                'formView' => 'backend.views.creatures.xuploadform',
+				'downloadView' => 'backend.views.creatures._download',
                 )
             );
-            ?>
-
-<div class="form-actions">
-	<?php $this->widget('bootstrap.widgets.TbButton', array(
-			'buttonType'=>'submit',
-			'type'=>'primary',
-			'label'=>$model->isNewRecord ? 'Lưu mới' : 'Lưu',
-		)); ?>
-</div>
+?>
 
 <?php $this->endWidget(); ?>

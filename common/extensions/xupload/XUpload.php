@@ -73,6 +73,11 @@ class XUpload extends CJuiInputWidget {
      * @var bool whether form tag should be used at widget
      */
     public $showForm = true;
+    
+    /**
+     * @var number of file allow to upload
+     */
+    public $filenum = false;
 
     /**
      * Publishes the required assets
@@ -115,6 +120,9 @@ class XUpload extends CJuiInputWidget {
         if (!$this->multiple) {
             $this->options['maxNumberOfFiles'] = 1;
         }
+        
+        if(!$this->filenum)
+        	$this->options['maxNumberOfFiles'] = $this->filenum;
 
         $options = CJavaScript::encode($this -> options);
 
@@ -164,17 +172,17 @@ class XUpload extends CJuiInputWidget {
             $messages = CJavaScript::encode(array(
                 'fileupload' => array(
                     'errors' => array(
-                        "maxFileSize" => $this->t('File is too big'),
-                        "minFileSize" => $this->t('File is too small'),
-                        "acceptFileTypes" => $this->t('Filetype not allowed'),
-                        "maxNumberOfFiles" => $this->t('Max number of files exceeded'),
-                        "uploadedBytes" => $this->t('Uploaded bytes exceed file size'),
-                        "emptyResult" => $this->t('Empty file upload result'),
+                        "maxFileSize" => $this->t('Tệp quá lớn'),
+                        "minFileSize" => $this->t('Tệp quá nhỏ'),
+                        "acceptFileTypes" => $this->t('Định dạng không được cho phép'),
+                        "maxNumberOfFiles" => $this->t('Vượt quá số lượng tệp được tải lên'),
+                        "uploadedBytes" => $this->t('Vượt quá dung lượng được tải lên'),
+                        "emptyResult" => $this->t('Tệp rỗng'),
                     ),
-                    'error' => $this->t('Error'),
-                    'start' => $this->t('Start'),
-                    'cancel' => $this->t('Cancel'),
-                    'destroy' => $this->t('Delete'),
+                    'error' => $this->t('Lỗi'),
+                    'start' => $this->t('Bắt đầu'),
+                    'cancel' => $this->t('Hủy'),
+                    'destroy' => $this->t('Xóa'),
                 ),
             ));
             $js = "window.locale = {$messages}";
