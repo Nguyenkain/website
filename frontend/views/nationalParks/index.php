@@ -1,16 +1,20 @@
 <script>
 	// global marker counter
-	var n = 1;
-	function generateListElement( marker ){
+	function generateListElement(marker){
 	    var ul = document.getElementById('side_container');
 	    var li = document.createElement('li');
 	    var aSel = document.createElement('a');
 	    aSel.href = 'javascript:void(0);';
-	    aSel.innerHTML = 'Open Marker #' + n++;
+	    aSel.innerHTML = marker.title;
 	    aSel.onclick = function(){ google.maps.event.trigger(marker, 'click')};
 	    li.appendChild(aSel);
 	    ul.appendChild(li);
 	}
+	function getParkName(place) {
+		var name = place;
+		return name;
+	}	
+	
 </script>
 
 <div
@@ -32,7 +36,8 @@
 		$icon->setOrigin(0, 0);
 
 		// Add marker
-		$markers = array();
+		$afterInit = array();
+
 		foreach ($model->findAll() as $place){
 			$long = $place->longitude;
 			$lat = $place->latitude;
@@ -42,8 +47,10 @@
 			$detail = Yii::app()->baseUrl ."/index.php?r=nationalParks/view&id=" .$place->id;
 			$info_window = new EGMapInfoWindow('<div> Vườn quốc gia ' .$place->park_name .' </br> --> <a href="' .$detail .'">Xem chi tiết!</a></div>');
 			$marker->addHtmlInfoWindow($info_window);
-			$markers[] = $marker;
 			$gMap->addMarker($marker);
+
+			//Build side-menu
+			$afterInit[] = 'generateListElement('.$marker->getJsName().');'.PHP_EOL;
 		}
 
 		// center the map
@@ -57,17 +64,7 @@
 		$gMap->zoom = 7;
 		$gMap->appendMapTo('#map_canvas');
 
-		$afterInit = array();
-		//
-		// loop through markers and
-		// call global function to generate
-		// the element that will hold the
-		// callback trigger event
-		foreach($markers as $marker){
-			$afterInit[] = 'generateListElement('.$marker->getJsName().');'.PHP_EOL;
-		}
-
-			$gMap->renderMap($afterInit);	?>
+		$gMap->renderMap($afterInit);	?>
 	</div>
 	<div class="clearfix"></div>
 </div>
