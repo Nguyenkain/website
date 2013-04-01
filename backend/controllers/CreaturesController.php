@@ -100,6 +100,7 @@ class CreaturesController extends Controller
 	
 	public function actionChange() {
 		$id = Yii::app()->request->getQuery("id");
+		$name = Yii::app()->request->getQuery("name");
 		$model = $this->loadModel($id);
 		$url ="";
 		if($model->Loai == 1) {
@@ -116,13 +117,13 @@ class CreaturesController extends Controller
 		$file = CUploadedFile::getInstanceByName('file');
 		// Do your business ... save on file system for example,
 		// and/or do some db operations for example
-		$fileOld = $path.$model->ID.'.jpg';
+		$fileOld = $path.$name.'.jpg';
 		if(is_file($fileOld)) {
 			unlink($fileOld);
 		}
-		$file->saveAs($path.$model->ID.'.jpg');
+		$file->saveAs($path.$name.'.jpg');
 		// return the new file path
-		echo $publicPath.$model->ID.'.jpg';
+		echo $publicPath.$name.'.jpg';
 	}
 	
 	public function actionUpload( ) {

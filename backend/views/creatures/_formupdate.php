@@ -47,11 +47,14 @@ echo CHtml::label('Ảnh','',array());
 
 for($i = 0; $i <= 4; $i++) {
 	$urlcheck = Yii::app()->getBaseUrl(true);
+	$name = "";
 	if($i != 0) {
-		$urlcheck .= '/../web/images/pictures/'.$url.'/'.$model->ID.'_'.$i.'.jpg';
+		$name = $model->ID.'_'.$i;
+		$urlcheck .= '/../web/images/pictures/'.$url.'/'.$name.'.jpg';
 	}
 	else {
-		$urlcheck .= '/../web/images/pictures/'.$url.'/'.$model->ID.'.jpg';
+		$name = $model->ID;
+		$urlcheck .= '/../web/images/pictures/'.$url.'/'.$name.'.jpg';
 	}
 	if(checkUrl($urlcheck)) {
 
@@ -60,7 +63,7 @@ for($i = 0; $i <= 4; $i++) {
 		        'path'=> $urlcheck,
 		        'alt'=>'alt text',
 				'text' => 'Đổi Ảnh',
-		        'uploadUrl'=>Yii::app()->createUrl('creatures/change',array('id'=>$model->ID)),
+		        'uploadUrl'=>Yii::app()->createUrl('creatures/change',array('id'=>$model->ID, 'name' =>$name)),
 		        'htmlOptions'=>array('style' => "width:auto; height:150px; margin-right: 10px;"),
 		   ));
 	}
