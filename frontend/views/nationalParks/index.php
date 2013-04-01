@@ -39,7 +39,9 @@
 			// Add Gmaker
 			$marker = new EGMapMarker($lat, $long, array('title' => 'Vườn Quốc Gia ' .$place->
 					park_name, 'icon' => $icon));
-			$info_window = new EGMapInfoWindow('<div> Vườn quốc gia ' .$place->park_name .'</div>');
+			//$detail = Yii::app()->baseUrl ."/index.php?r=nationalParks/view&id=" .$place->id;
+			$detail = "http://localhost/admin/index.php?r=nationalParks/view&id=" .$place->id;
+			$info_window = new EGMapInfoWindow('<div> Vườn quốc gia ' .$place->park_name .' </br> --> <a href="' .$detail .'">Xem chi tiết!</a></div>');
 			$marker->addHtmlInfoWindow($info_window);
 			$markers[] = $marker;
 			$gMap->addMarker($marker);
