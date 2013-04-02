@@ -64,9 +64,17 @@ class CreaturesController extends Controller
 		}
 		$dataProvider=new CActiveDataProvider('Creatures');
 		
+		$listNhom = CHtml::listData(Nhom::model()->findAll(),'ID','Viet');
+			
+		$listBo = CHtml::listData(Bo::model()->findAll(),'ID','Viet');
+		
+		$listHo = CHtml::listData(Ho::model()->findAll(),'ID','Viet');
 
 		$this->render('view',array(
 				'model'=>$this->loadModel($id),
+				'listNhom' => $listNhom,
+				'listBo' => $listBo,
+				'listHo' => $listHo,
 		));
 	}
 	public function actionListcreatures($Loai,$Ho,$Bo,$Nhom,$Viet)
@@ -75,12 +83,14 @@ class CreaturesController extends Controller
 		$search = new Creatures;
 		$criteria = new CDbCriteria;
 		
+		$sort = new CSort;
+		$sort->defaultOrder = 'ID DESC';
+		$criteria->compare('Viet', $Viet, true, 'OR');
+		$criteria->compare('Latin', $Viet, true, 'OR');
 		$criteria->compare('Loai', $Loai, false);
 		$criteria->compare('Ho', $Ho, false);
 		$criteria->compare('Bo', $Bo, false);
 		$criteria->compare('Nhom', $Nhom, false);
-		$criteria->compare('LOWER(Viet)', $Viet, true, 'OR');
-		$criteria->compare('Latin', $Viet, true, 'OR');
 		
 
 		$dataProvider = new CActiveDataProvider('Creatures', array(
