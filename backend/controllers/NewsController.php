@@ -32,7 +32,7 @@ class NewsController extends Controller
 						'users'=>array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
-						'actions'=>array('create','update','upload'),
+						'actions'=>array('create','update','upload','change'),
 						'users'=>array('@'),
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -67,6 +67,24 @@ class NewsController extends Controller
 		$result = $uploader->handleUpload($folder);
 		$result=htmlspecialchars(json_encode($result), ENT_NOQUOTES);
 		echo $result;// it's array
+	}
+	
+	public function actionChange() {
+		$id = Yii::app()->request->getQuery("id");
+		$model = $this->loadModel($id);
+		$name = $model->image;
+		$path = Yii::app( )->getBasePath( )."/../frontend/www/images/forumpic/";
+		$publicPath = Yii::app( )->getBaseUrl( )."/../web/images/forumpic/";
+		$file = CUploadedFile::getInstanceByName('file');
+		// Do your business ... save on file system for example,
+		// and/or do some db operations for example
+		$fileOld = $path.$name.'.jpg';
+		if(is_file($fileOld)) {
+			unlink($fileOld);
+		}
+		$file->saveAs($path.$name.'.jpg');
+		// return the new file path
+		echo $publicPath.$name.'.jpg';
 	}
 	
 	

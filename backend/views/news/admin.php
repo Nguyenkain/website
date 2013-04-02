@@ -71,7 +71,13 @@ Yii::app()->clientScript->registerScript('search', "
 				'width'=>'180px',
 			),
 		),
-		'short_description',
+		array(
+			'name'=>'short_description',
+			'value'=> 'substr($data->short_description,0,150)."..."',
+			'htmlOptions'=>array(
+					'width'=>'180px',
+			),
+		),
 		array(
 			'name'=>'created_time',
         	'value'=>'date("d/m/y", $data->created_time)',
