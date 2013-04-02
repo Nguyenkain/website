@@ -53,7 +53,23 @@ Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi 
 					
 		'name'=>'Loai',
 		
-		'filter' => CHtml::listData(Loai::model()->findAll(), 'ID', 'Loai'),
+		'filter' => CHtml::ActiveDropDownList($model, 'Loai', CHtml::listData(Loai::model()->findAll(), 'ID', 'Loai'), array('empty'=>'',
+				'ajax' => array(
+			 	'type' => 'POST',
+				'dataType' => 'json',
+				'data' => array('ID' => 'js:$(this).val()'),
+		
+
+				'url' => CController::createUrl('creatures/dynamicloai'),
+				'success' => 'function(data){		
+				$("#Nhom_Creatures").html(data.dropdownNhom);
+				$("#Bo_Creatures").html(data.dropdownBo);
+				$("#Ho_Creatures").html(data.dropdownHo);
+				$.fn.yiiGridView.update("creatures-grid");
+}',
+				)
+			)
+		),
 		'value'=>'$data->rLoai',
 		'htmlOptions'=>array(
 		'width'=>'110px',
@@ -62,7 +78,20 @@ Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi 
 		array(
 		'name'=>'Nhom',
 		
-		'filter' => CHtml::listData(Nhom::model()->findAll(), 'ID', 'Viet'),
+		'filter' => CHtml::ActiveDropDownList($model, 'Nhom', CHtml::listData(Nhom::model()->findAll(), 'ID', 'Viet'), array('empty'=>'',
+				'id'=>'Nhom_Creatures',
+				'ajax' => array(
+			 	'type' => 'POST',
+				'dataType' => 'json',
+				'data' => array('ID' => 'js:$(this).val()'),
+
+				'url' => CController::createUrl('creatures/dynamicnhom'),
+				'success' => 'function(data){
+				$("#Bo_Creatures").html(data.dropdownBo);
+				$("#Ho_Creatures").html(data.dropdownHo);
+				$.fn.yiiGridView.update("creatures-grid");
+
+}'	,))),
 		'value'=>'$data->rNhom',
 		'htmlOptions'=>array(
 		'width'=>'130px',
@@ -70,7 +99,19 @@ Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi 
 		array(
 		'name'=>'Bo',
 		
-		'filter' => CHtml::listData(Bo::model()->findAll(), 'ID', 'Viet'),
+		'filter' => CHtml::ActiveDropDownList($model, 'Bo', CHtml::listData(Bo::model()->findAll(), 'ID', 'Viet'), array('empty'=>'',
+		'id'=>'Bo_Creatures',
+		'ajax' => array(
+			 	'type' => 'POST',
+				'dataType' => 'json',
+				'data' => array('ID' => 'js:$(this).val()'),
+
+				'url' => CController::createUrl('creatures/dynamicbo'),
+				'success' => 'function(data){
+				$("#Ho_Creatures").html(data.dropdownHo);
+				$.fn.yiiGridView.update("creatures-grid");
+
+}'))),
 		'value'=>'$data->rBo',
 		'htmlOptions'=>array(
 		'width'=>'130px',
@@ -78,7 +119,7 @@ Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi 
 		
 array(
 		'name' => 'Ho',
-		'header'=>'Họ',
+
 		'filter' => CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet'),
 		'value'=>'$data->rHo',
 		'htmlOptions'=>array(

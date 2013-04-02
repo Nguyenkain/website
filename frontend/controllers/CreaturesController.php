@@ -149,36 +149,28 @@ class CreaturesController extends Controller
 	
 	public function actionDynamicloai()
 	{
+		$listNhom = CHtml::tag('option',array('value' => '', 'selected'=>'selected'),CHtml::encode('--Chọn lớp muốn tìm--'),true);
+		$listBo = CHtml::tag('option',array('value' => '', 'selected'=>'selected'),CHtml::encode('--Chọn bộ muốn tìm--'),true);
+		$listHo = CHtml::tag('option',array('value' => '', 'selected'=>'selected'),CHtml::encode('--Chọn họ muốn tìm--'),true);
+
 		$loai = Loai::model()->findByPk((int) $_POST['ID']);	
 		$nhom = Nhom::model()->findAll('Loai=:parent_id',
 				array(':parent_id'=>(int) $loai->ID));
-		$bo = Bo::model()->findAll('Nhom=:parent_id',
-				array(':parent_id'=>(int)$nhom[0]->ID));
-		$ho = Ho::model()->findAll('Bo=:parent_id',
-				array(':parent_id'=>(int)$bo[0]->ID));
-
 		$nhom = CHtml::listData($nhom,'ID','Viet');
-		$bo = CHtml::listData($bo,'ID','Viet');
-		$ho = CHtml::listData($ho,'ID','Viet');
-		
-		$listNhom='';
-		$listBo='';
-		$listHo='';
-		
-		foreach($nhom as $ID => $value)
-		{
-
-				$listNhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-		}
-		foreach($bo as $ID => $value)
-		{
-
+						
+		foreach ($nhom as $ID => $value){
+			$listNhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+			$bo = Bo::model()->findAll('Nhom=:parent_id',array(':parent_id'=>$ID));
+			$bo = CHtml::listData($bo,'ID','Viet');
+			foreach($bo as $ID => $value){
 				$listBo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-		}
-		foreach($ho as $ID => $value)
-		{
-
-				$listHo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+				$ho = Ho::model()->findAll('Bo=:parent_id',array(':parent_id'=>$ID));
+				$ho = CHtml::listData($ho,'ID','Viet');
+				foreach($ho as $ID => $value)
+				{
+					$listHo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+				}
+			}
 		}
 
 		echo CJSON::encode(array(
@@ -199,8 +191,8 @@ class CreaturesController extends Controller
 		$bo = CHtml::listData($bo,'ID','Viet');
 		$ho = CHtml::listData($ho,'ID','Viet');
 		
-		$listBo='';
-		$listHo='';
+		$listBo = CHtml::tag('option',array('value' => '', 'selected'=>'selected'),CHtml::encode('--Chọn bộ muốn tìm--'),true);
+		$listHo = CHtml::tag('option',array('value' => '', 'selected'=>'selected'),CHtml::encode('--Chọn họ muốn tìm--'),true);
 		
 		foreach($bo as $ID => $value)
 		{
@@ -227,7 +219,7 @@ class CreaturesController extends Controller
 
 		$ho = CHtml::listData($ho,'ID','Viet');
 		
-		$listHo='';
+		$listHo = CHtml::tag('option',array('value' => '', 'selected'=>'selected'),CHtml::encode('--Chọn họ muốn tìm--'),true);
 		
 		foreach($ho as $ID => $value)
 		{

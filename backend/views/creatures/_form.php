@@ -27,7 +27,7 @@ echo $form->dropDownList($model, 'Ho', CHtml::listData(Ho::model()->findAll(),'I
 				'dataType' => 'json',
 				'data' => array('Ho' => 'js:$(this).val()'),
 
-				'url' => CController::createUrl('creatures/dynamicbo'),
+				'url' => CController::createUrl('creatures/dynamiccreate'),
 				'success' => 'function(data){
 				$("#Creatures_Bo").html(data.dropdownBo);
 				$("#Creatures_Nhom").html(data.dropdownNhom);
