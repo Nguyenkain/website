@@ -108,7 +108,7 @@ function getImageUrl($loai,$img){
 				if($model->Loai==1)
 					$icon = new EGMapMarkerImage("http://".$_SERVER['HTTP_HOST'].Yii::app()->baseUrl."/images/bird.png");
 				if($model->Loai==2)
-					$icon = new EGMapMarkerImage("http://google-maps-icons.googlecode.com/files/forest.png");
+					$icon = new EGMapMarkerImage("http://".$_SERVER['HTTP_HOST'].Yii::app()->baseUrl."/images/forest.png");
 				if($model->Loai==3)
 					$icon = new EGMapMarkerImage("http://".$_SERVER['HTTP_HOST'].Yii::app()->baseUrl."/images/bee.png");
 				

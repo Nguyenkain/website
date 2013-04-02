@@ -27,7 +27,7 @@
 		$gMap = new EGMap();
 
 		// Setting up an icon for marker.
-		$icon = new EGMapMarkerImage("http://google-maps-icons.googlecode.com/files/forest.png");
+		$icon = new EGMapMarkerImage("http://".$_SERVER['HTTP_HOST'].Yii::app()->baseUrl."/images/forest.png");
 		$icon->setSize(32, 37);
 		$icon->setAnchor(16, 16.5);
 		$icon->setOrigin(0, 0);
