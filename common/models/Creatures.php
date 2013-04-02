@@ -15,10 +15,10 @@ class Creatures extends BaseCreatures
 		$criteria->compare('ID', $this->ID);
 		$criteria->compare('Viet', $this->Viet, true, 'OR');
 		$criteria->compare('Latin', $this->Viet, true, 'OR');
-		$criteria->compare('Loai', $this->Loai);
-		$criteria->compare('Ho', $this->Ho);
-		$criteria->compare('Bo', $this->Bo);
-		$criteria->compare('Nhom', $this->Nhom);
+		$criteria->compare('Loai', $this->Loai, false);
+		$criteria->compare('Ho', $this->Ho, false);
+		$criteria->compare('Bo', $this->Bo, false);
+		$criteria->compare('Nhom', $this->Nhom, false);
 		$criteria->compare('Description', $this->Description, true);
 		$criteria->compare('Img', $this->Img, true);
 		$criteria->compare('Author', $this->Author);
