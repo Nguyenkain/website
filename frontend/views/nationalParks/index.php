@@ -34,7 +34,7 @@
 
 		// Add marker
 		$afterInit = array();
-
+		
 		foreach ($model->findAll() as $place){
 			$long = $place->longitude;
 			$lat = $place->latitude;
@@ -45,7 +45,6 @@
 			$info_window = new EGMapInfoWindow('<div> <a href="' .$detail .'">Vườn quốc gia ' .$place->park_name .'</a></div>');
 			$marker->addHtmlInfoWindow($info_window);
 			$gMap->addMarker($marker);
-
 			//Build side-menu
 			$afterInit[] = 'generateListElement('.$marker->getJsName().');'.PHP_EOL;
 		}
@@ -59,9 +58,9 @@
 		$gMap->height = '100%';
 		$gMap->setCenter($latitude, $longitude);
 		$gMap->zoom = 7;
-		$gMap->appendMapTo('#map_canvas');
-
-		$gMap->renderMap($afterInit);	?>
+		$gMap->appendMapTo('#map_canvas');	
+		$gMap->renderMap($afterInit);
+		?>
 	</div>
 	<div class="clearfix"></div>
 </div>

@@ -21,5 +21,7 @@
 	<div class='hoz_line long'></div>
 
 	<?php echo $model->park_description?>
+	
+	<div class="clearfix"></div>
 
 </div>
