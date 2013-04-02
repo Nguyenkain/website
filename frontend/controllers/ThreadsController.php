@@ -27,7 +27,7 @@ class ThreadsController extends Controller
 	{
 		return array(
 				array('allow',  // allow all users to perform 'index' and 'view' actions
-						'actions'=>array('index','view','post','getNotification'),
+						'actions'=>array('index','view','post','getNotification','report','postToFacebook','newPost'),
 						'users'=>array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -48,18 +48,20 @@ class ThreadsController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+	public function actionView($id,$userid)
 	{
 		//$model=Posts::model()->findAllByAttributes(array('thread_id'=>$id));
 		$model = Posts::model();
 		$thread = $this->loadModel($id);
 		$model->thread_search = $thread->thread_title;
 		$dataProvider=new CActiveDataProvider('Posts');
+		$newPost = new Posts;
 		$this->render('view',array(
 				'dataProvider'=>$dataProvider,
 				'post_model'=>$model,
 				'model' => $thread,
 				'thread_title'=>$thread->thread_title,
+				'newPost' => $newPost,
 		));
 	}
 
@@ -136,22 +138,22 @@ class ThreadsController extends Controller
 	public function actionIndex()
 	{
 		$criteria = new CDbCriteria;
-		
+
 		$criteria->select = array(
 				'*',
 				'count(*) as posts_count',
 		);
 		$criteria->group = 'thread_id';
-		
+
 		$dataProvider=new CActiveDataProvider('Threads',array(
 				'criteria'=>$criteria,
 				'pagination'=>array(
-                	'pageSize'=>6,
-            	),
+						'pageSize'=>6,
+				),
 				'sort'=>array(
-					'defaultOrder'=>'last_posted_time DESC',
+						'defaultOrder'=>'last_posted_time DESC',
 				)
-			)
+		)
 		);
 		$this->render('index',array(
 				'dataProvider'=>$dataProvider,
@@ -226,7 +228,7 @@ class ThreadsController extends Controller
 				'post_model' => $model->search(),
 		));
 	}
-	
+
 	public function actionGetNotification()
 	{
 		$user_id = $_POST['facebook_id'];
@@ -237,27 +239,27 @@ class ThreadsController extends Controller
 		$criteria->compare('t.user_id', $user->user_id, true);
 		$criteria->order = 'viewed_status, last_posted_time';
 		$model = Notifications::model()->findAll($criteria);
-		
+
 		for ($i = 0; $i != sizeof($model); $i++){
 			$model[$i] = $model[$i]->toJSON(); //I use the EJsonBehavior.php!
 		}
-		
+
 		$model = CJavaScript::jsonEncode($model);
-        echo $model;
+		echo $model;
 	}
-	
+
 	public function actionPost()
 	{
 		//EQuickDlgs::render('_post',array());
 		$fbId = Yii::app()->request->getQuery("id");
-		
+
 		$criteria = new CDbCriteria();
 		$criteria->compare('facebook_id', $fbId, true);
 		$data = Users::model()->find($criteria);
-		
+
 		$model = new Threads;
 		$model->user_id = $data->user_id;
-		
+
 		if(isset($_POST['Threads']))
 		{
 			$model->attributes=$_POST['Threads'];
@@ -265,10 +267,122 @@ class ThreadsController extends Controller
 			$model->last_posted_time = time();
 			if($model->save())
 				EQuickDlgs::checkDialogJsScript();
-            	$this->redirect(array('index'));
+			$this->redirect(array('index'));
+		}
+
+		$this->renderPartial('post', array("model" => $model, "data" => $data));
+	}
+
+	public function actionNewPost() {
+		if(isset($_POST['Posts']))
+		{
+			$model = new Posts;
+			$model->attributes=$_POST['Posts'];
+			$thread_id = Yii::app()->request->getQuery("thread_id");
+			$fbid = Yii::app()->request->getQuery("fbid");
+			$criteria = new CDbCriteria();
+			$criteria->compare('facebook_id', $fbid, true);
+			$data = Users::model()->find($criteria);
+			$model->thread_id = $thread_id;
+			$model->user_id = $data->user_id;
+			$model->post_created_time = time();
+			if($model->save())
+				echo 'success';
+			else
+				echo 'error';
 		}
 		
-		$this->renderPartial('post', array("model" => $model, "data" => $data));
+	}
+
+	public function actionReport()
+	{
+		//EQuickDlgs::render('_post',array());
+		$fbId = Yii::app()->request->getQuery("user_id");
+		$threadId = Yii::app()->request->getQuery("thread_id");
+
+		$criteria = new CDbCriteria();
+		$criteria->compare('facebook_id', $fbId, true);
+		$data = Users::model()->find($criteria);
+
+		$model = new Reports;
+		$model->user_id = $data->user_id;
+		$model->thread_id = $threadId;
+
+		if(isset($_POST['Reports']))
+		{
+			$model->attributes=$_POST['Reports'];
+			if($model->save())
+				EQuickDlgs::checkDialogJsScript();
+			$this->redirect(array('view','id'=>$model->thread_id,'userid'=>$model->user_id,'success'=>true));
+		}
+
+		$this->renderPartial('report', array("model" => $model, "data" => $data));
+	}
+
+	public function actionLogin() {
+		$facebookID = Yii::app()->facebook->getUser();
+		$accessToken = Yii::app()->facebook->getAccessToken();
+		$loginUrl = Yii::app()->facebook->getLoginUrl(array(
+				'scope'	=> 'read_stream, publish_stream, user_birthday, user_location, email, user_hometown, user_photos',
+		));
+
+		if($facebookID == 0 || $facebookID == "") {
+			echo '<script>
+					window.location="'.$loginUrl.'"
+							</script>';
+
+		} else {
+			$record = Users::model()->findByAttributes(array('facebook_id'=>$facebookID));
+				
+			if($record===null) {
+				try
+				{
+					$userInfo = Yii::app()->facebook->api('/me');
+
+					$model = new Users;
+					$model->facebook_id = $userid;
+					$model->name = $user_info['name'];
+					$model->username = $user_info['username'];
+					$model->user_avatar = $userid;
+					$model->user_email = $user_info['email'];
+					$model->user_dob = $user_info['birthday'];
+					if(isset($user_info['location']))
+						$model->user_address = $user_info['location']['name'];
+					$model->addNewUser();
+				}
+				catch(FacebookApiException $e){
+					$facebookID = NULL;
+				}
+			}
+
+
+			echo "<script>
+					window.close();
+					window.opener.location.reload();
+					</script>";
+		}
+	}
+
+	public function actionPostToFacebook()
+	{
+		$fbId = $_POST['facebook_id'];
+		$threadId = $_POST['thread_id'];
+		$thread = $this->loadModel($threadId);
+		$user = $thread->users;
+		try{
+			$publishStream = Yii::app()->facebook->api("/$fbId/feed", 'post', array(
+					'message'		=> 'Từ bài viết '.$thread->thread_title.' của '.$user->name,
+					'link'			=> 'http://vncreatures.net',
+					'picture'		=> 'https://raw.github.com/fbsamples/ios-3.x-howtos/master/Images/iossdk_logo.png',
+					'name'			=> 'VnCreatures',
+					'caption'		=> 'Từ bài viết '.$thread->thread_title.' của '.$user->name,
+					'description'	=> $thread->thread_content,
+			));
+		}catch(FacebookApiException $e){
+			error_log($e);
+			echo 'error';
+		}
+		echo 'success';
 	}
 
 	/**
@@ -296,6 +410,6 @@ class ThreadsController extends Controller
 			Yii::app()->end();
 		}
 	}
-	
-	
+
+
 }
