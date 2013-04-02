@@ -24,6 +24,9 @@ function getImageUrl($loai,$img){
 	<div class="search_container">
 		<?php $this->renderPartial('_search',array(
 				'model'=>$model,
+				'listNhom'=>$listNhom,
+				'listBo' => $listBo,
+				'listHo' => $listHo,
 		));
 		?>
 	</div>
