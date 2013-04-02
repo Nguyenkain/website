@@ -7,8 +7,6 @@
 			}
 			$(this).attr('src',link);
 		});
-
-		$('p.Heading02').remove();
 	}
 </script>
 
@@ -23,5 +21,7 @@
 	<div class='hoz_line long'></div>
 
 	<?php echo $model->park_description?>
+	
+	<div class="clearfix"></div>
 
 </div>

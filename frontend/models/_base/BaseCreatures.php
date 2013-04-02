@@ -58,6 +58,8 @@ abstract class BaseCreatures extends GxActiveRecord {
 			'rNhom' => array(self::BELONGS_TO, 'Nhom', 'Nhom'),
 			'rLoai' => array(self::BELONGS_TO, 'Loai', 'Loai'),
 			'rAuthor'=>array(self::BELONGS_TO,'Author','Author'),
+			'rProvince' => array(self::MANY_MANY, 'Coordinations', 'creatures_provinces_relation(creature_id, province_id)'),
+			'rRelation' => array(self::HAS_MANY, 'CreaturesProvincesRelation', 'creature_id'),
 		);
 	}
 
