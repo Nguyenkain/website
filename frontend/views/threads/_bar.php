@@ -38,32 +38,13 @@ if ($userid)
 	try
 	{
 		$fbuid = Yii::app()->facebook->getUser();
-		$me = Yii::app()->facebook->api('/me');
+		$user_info	= Yii::app()->facebook->getInfo();
+		$url = Yii::app()->facebook->getLogoutUrl();
 	}
 	catch(FacebookApiException $e){
 		$userid = NULL;
+		Yii::app()->facebook->destroySession();
 	}
-}
-
-if($userid) {
-	$url = Yii::app()->facebook->getLogoutUrl();
-	$user_info	= Yii::app()->facebook->api('/' . $userid);
-	$model = new Users;
-	$model->facebook_id = $userid;
-	$model->name = $user_info['name'];
-	$model->username = $user_info['username'];
-	$model->user_avatar = $userid;
-	$model->user_email = $user_info['email'];
-	$model->user_dob = $user_info['birthday'];
-	if(isset($user_info['location']))
-		$model->user_address = $user_info['location']['name'];
-	$model->addNewUser();
-	//Yii::app()->clientScript->registerScript('search', "getNotification($userid);");
-}
-else {
-	$url = Yii::app()->facebook->getLoginUrl(array(
-			'scope'	=> 'read_stream, publish_stream, user_birthday, user_location, email, user_hometown, user_photos',
-	));
 }
 
 
@@ -110,7 +91,9 @@ else {
 		<?php
 		if(!$userid)
 		{
-			echo CHtml::link('', $url, array('id'=>'facebook_button'));
+			echo CHtml::link('', "", array(
+						'id'=>'facebook_button',
+						'onclick'=>'javascript: window.open("'.$this->createUrl('threads/login').'");'));
 		}
 		else {
 		Yii::app()->clientScript->registerScript('search', "getNotification($userid);");
@@ -143,11 +126,7 @@ else {
 		?>
 		</td>
 		<div id="profile_container">
-			<div id="profile" class="tooptipster" title="<img 
-				
-				
-				
-				src='http://graph.facebook.com/<?php echo $userid ?>/picture?type=normal'
+			<div id="profile" class="tooptipster" title="<img src='http://graph.facebook.com/<?php echo $userid ?>/picture?type=normal'
 				width='100' height='100' />
 			<?php echo $user_info['name']?>
 			<br> <a href='<?php echo $url?>'> Log out</a>">
