@@ -81,6 +81,9 @@ if ($userid)
 		<div class="clearfix"></div>
 		<div class="thread_control">
 
+			<?php 
+			if($userid) { ?>
+
 			<div class="button">
 
 				<a
@@ -108,6 +111,8 @@ if ($userid)
 
 			</div>
 
+			<?php }?>
+
 		</div>
 	</div>
 
@@ -118,17 +123,22 @@ if ($userid)
 			'summaryText'=>false,
 			'emptyText'=>false,
 			'afterAjaxUpdate' => 'js:function(id, data) {
-				$("#submitButton").removeAttr("disabled");
-				$("#post_listview").removeClass("hasLoading");
-				$(".comment_editor textarea").val("");
-			}',
+			$("#submitButton").removeAttr("disabled");
+			$("#post_listview").removeClass("hasLoading");
+			$(".comment_editor textarea").val("");
+}',
 			'beforeAjaxUpdate' => 'js:function(id) {
-				$("#post_listview").addClass("hasLoading");
-				$("#submitButton").attr("disabled","disabled");
-			}',
+			$("#post_listview").addClass("hasLoading");
+			$("#submitButton").attr("disabled","disabled");
+}',
 	))?>
 
 </div>
+
+<?php 
+if($userid) {
+
+?>
 
 <div class="comment_container">
 
@@ -160,7 +170,7 @@ if ($userid)
 				'buttonType' => 'ajaxSubmit',
 				'ajaxOptions' => array(
 			            'type' => 'POST',
-			            'success' => 'function(data) { 
+			            'success' => 'function(data) {
 								$.fn.yiiListView.update("post_listview");
 						}',
 						'error' => 'function(err) {}',
@@ -187,5 +197,7 @@ if ($userid)
 	</div>
 	<?php $this->endWidget(); ?>
 </div>
+
+<?php }?>
 
 </div>
