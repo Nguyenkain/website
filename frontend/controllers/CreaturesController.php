@@ -121,14 +121,14 @@ class CreaturesController extends Controller
 				$listHo += CHtml::listData(Ho::model()->findAll('Bo=:parent_id',array(':parent_id'=>$ID)),'ID','Viet');
 			}	
 		}
-		else 
+		else if ($Loai == null)
 			$listBo = CHtml::listData(Bo::model()->findAll(),'ID','Viet');
 		
 		if ($Bo != null)
 		{
 			$listHo = CHtml::listData(Ho::model()->findAll('Bo=:parent_id',array(':parent_id'=>$Bo)),'ID','Viet');
 		}
-		else
+		else if ($Loai == null && $Bo == null)
 			$listHo = CHtml::listData(Ho::model()->findAll(),'ID','Viet');
 					
 		$this->render('listcreatures',array(
