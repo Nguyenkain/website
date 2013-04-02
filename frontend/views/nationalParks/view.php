@@ -1,24 +1,27 @@
-﻿<div class="view">
+﻿<script type="text/javascript">
+	function replaceImages() {
+		$('#nationalParks_content img').each(function() {
+			var link = $(this).attr('src');
+			if(link.indexOf("forumpic") != -1 || link.indexOf("vqgpic") != -1) {
+				link = "images/" + link;
+			}
+			$(this).attr('src',link);
+		});
+	}
+</script>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id),array('view','id'=>$data->id)); ?>
-	<br />
+<?php Yii::app()->clientScript->registerScript('replace', "replaceImages();");?>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('park_name')); ?>:</b>
-	<?php echo CHtml::encode($data->park_name); ?>
-	<br />
+<div id="nationalParks_content" class="page_content">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('park_description')); ?>:</b>
-	<?php echo CHtml::encode(substr($data->park_description,0,600)); ?>
-	<br />
+	<h3>
+		<?php echo $model->park_name?>
+	</h3>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('longitude')); ?>:</b>
-	<?php echo CHtml::encode($data->longitude); ?>
-	<br />
+	<div class='hoz_line long'></div>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('latitude')); ?>:</b>
-	<?php echo CHtml::encode($data->latitude); ?>
-	<br />
-
+	<?php echo $model->park_description?>
+	
+	<div class="clearfix"></div>
 
 </div>

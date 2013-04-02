@@ -15,27 +15,58 @@
 <div id="type_filter">
 	<div class="filter_item">
 		<label for="filter_lop" class="filter_label"> Tra cứu theo Lớp (nhóm)</label>
-		<?php echo $form->dropDownList($model,'Nhom',CHtml::listData(Nhom::model()->findAll(), 'ID', 'Viet' ), array(
-				'empty'=>'--Chọn lớp muốn tìm--',
-				'id' => 'filter_lop', 'class' => 'filter_ddl') );
+			<?php	echo $form->dropDownList($model,'Nhom',$listNhom, array(
+						'empty'=>'--Chọn lớp muốn tìm--',
+						'id' => 'filter_lop', 'class' => 'filter_ddl',
+		                                		'ajax' => array(
+					 	'type' => 'POST',
+						'dataType' => 'json',
+						'data' => array('ID' => 'js:$(this).val()'),
+		
+						'url' => CController::createUrl('creatures/dynamicnhom'),
+						'success' => 'function(data){
+						$("#filter_bo").html(data.dropdownBo);
+						$("#filter_ho").html(data.dropdownHo);
+}')));
 		?>
 	</div>
 	<div class="filter_item">
 		<label for="filter_bo" class="filter_label"> Tra cứu theo Bộ</label>
-		<?php echo $form->dropDownList($model,'Bo',CHtml::listData(Bo::model()->findAll(), 'ID', 'Viet' ), array(
-				'empty'=>'--Chọn bộ muốn tìm--',
-				'id' => 'filter_bo', 'class' => 'filter_ddl'));
+			<?php 	echo $form->dropDownList($model,'Bo',$listBo, array(
+						'empty'=>'--Chọn bộ muốn tìm--',
+						'id' => 'filter_bo', 'class' => 'filter_ddl',
+		                                		'ajax' => array(
+					 	'type' => 'POST',
+						'dataType' => 'json',
+						'data' => array('ID' => 'js:$(this).val()'),
+		
+						'url' => CController::createUrl('creatures/dynamicbo'),
+						'success' => 'function(data){
+						$("#filter_ho").html(data.dropdownHo);
+}')));
 		?>
 	</div>
 	<div class="filter_item">
 		<label for="filter_ho" class="filter_label"> Tra cứu Họ</label>
-		<?php echo $form->dropDownList($model,'Ho',CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet' ), array(
+		<?php echo $form->dropDownList($model,'Ho',$listHo, array(
 				'empty'=>'--Chọn họ muốn tìm--',
 				'id' => 'filter_ho', 'class' => 'filter_ddl') );
 		?>
 	</div>
 	<div id="kingdom_choose">
-		<?php echo $form->radioButtonList($model,'Loai',CHtml::listData(Loai::model()->findAll(),'ID','Loai'));?>
+		<?php echo $form->radioButtonList($model,'Loai',CHtml::listData(Loai::model()->findAll(),'ID','Loai'),
+				array('onclick' => CHtml::ajax(array(
+			 	'type' => 'POST',
+				'dataType' => 'json',
+				'data' => array('ID' => 'js:$(this).val()'),
+
+				'url' => CController::createUrl('creatures/dynamicloai'),
+				'success' => 'function(data){		
+				$("#filter_lop").html(data.dropdownNhom);
+				$("#filter_bo").html(data.dropdownBo);
+				$("#filter_ho").html(data.dropdownHo);
+
+}'))));?>
 	</div>
 </div>
 <div id="search_text">

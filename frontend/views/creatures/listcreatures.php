@@ -21,6 +21,9 @@ Yii::app()->clientScript->registerScript('search', "
 	<div class="search_container" >
 		<?php $this->renderPartial('_search',array(
 				'model'=>$search,
+				'listNhom'=>$listNhom,
+				'listBo' => $listBo,
+				'listHo' => $listHo,
 		));
 		?>
 	</div>

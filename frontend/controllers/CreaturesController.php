@@ -75,10 +75,10 @@ class CreaturesController extends Controller
 		$search = new Creatures;
 		$criteria = new CDbCriteria;
 		
-		$criteria->compare('Loai', $Loai, true);
-		$criteria->compare('Ho', $Ho, true);
-		$criteria->compare('Bo', $Bo, true);
-		$criteria->compare('Nhom', $Nhom, true);
+		$criteria->compare('Loai', $Loai, false);
+		$criteria->compare('Ho', $Ho, false);
+		$criteria->compare('Bo', $Bo, false);
+		$criteria->compare('Nhom', $Nhom, false);
 		$criteria->compare('LOWER(Viet)', $Viet, true, 'OR');
 		$criteria->compare('Latin', $Viet, true, 'OR');
 		
@@ -97,10 +97,47 @@ class CreaturesController extends Controller
 			$model->attributes=$_GET['Creatures'];
 			$dataProvider= $model->searchFront();
 		}
+		
+		$listBo = array();
+		$listHo = array();
+		
+		if ($Loai != null)
+		{
+			$listNhom = CHtml::listData(Nhom::model()->findAll('Loai=:parent_id',array(':parent_id'=>$Loai)),'ID','Viet');
+			foreach ($listNhom as $ID => $value){
+				$listBo += CHtml::listData(Bo::model()->findAll('Nhom=:parent_id',array(':parent_id'=>$ID)),'ID','Viet');
+			}
+			foreach ($listBo as $ID => $value){
+				$listHo += CHtml::listData(Ho::model()->findAll('Bo=:parent_id',array(':parent_id'=>$ID)),'ID','Viet');
+			}
+		}
+		else
+			$listNhom = CHtml::listData(Nhom::model()->findAll(),'ID','Viet');
+			
+		if ($Nhom != null)
+		{
+			$listBo = CHtml::listData(Bo::model()->findAll('Nhom=:parent_id',array(':parent_id'=>$Nhom)),'ID','Viet');
+			foreach ($listBo as $ID => $value){
+				$listHo += CHtml::listData(Ho::model()->findAll('Bo=:parent_id',array(':parent_id'=>$ID)),'ID','Viet');
+			}	
+		}
+		else 
+			$listBo = CHtml::listData(Bo::model()->findAll(),'ID','Viet');
+		
+		if ($Bo != null)
+		{
+			$listHo = CHtml::listData(Ho::model()->findAll('Bo=:parent_id',array(':parent_id'=>$Bo)),'ID','Viet');
+		}
+		else
+			$listHo = CHtml::listData(Ho::model()->findAll(),'ID','Viet');
+					
 		$this->render('listcreatures',array(
 				'dataProvider'=>$dataProvider,
 				'model'=>$model,
 				'search' => $search,
+				'listNhom' => $listNhom,
+				'listBo' => $listBo,
+				'listHo' => $listHo,
 		));
 		
 	}
@@ -149,36 +186,24 @@ class CreaturesController extends Controller
 	
 	public function actionDynamicloai()
 	{
+		$listNhom = CHtml::tag('option',array('value' => '', 'selected'=>'selected'),CHtml::encode('--Chọn lớp muốn tìm--'),true);
+		$listBo = CHtml::tag('option',array('value' => '', 'selected'=>'selected'),CHtml::encode('--Chọn bộ muốn tìm--'),true);
+		$listHo = CHtml::tag('option',array('value' => '', 'selected'=>'selected'),CHtml::encode('--Chọn họ muốn tìm--'),true);
+
 		$loai = Loai::model()->findByPk((int) $_POST['ID']);	
-		$nhom = Nhom::model()->findAll('Loai=:parent_id',
-				array(':parent_id'=>(int) $loai->ID));
-		$bo = Bo::model()->findAll('Nhom=:parent_id',
-				array(':parent_id'=>(int)$nhom[0]->ID));
-		$ho = Ho::model()->findAll('Bo=:parent_id',
-				array(':parent_id'=>(int)$bo[0]->ID));
-
-		$nhom = CHtml::listData($nhom,'ID','Viet');
-		$bo = CHtml::listData($bo,'ID','Viet');
-		$ho = CHtml::listData($ho,'ID','Viet');
-		
-		$listNhom='';
-		$listBo='';
-		$listHo='';
-		
-		foreach($nhom as $ID => $value)
-		{
-
-				$listNhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-		}
-		foreach($bo as $ID => $value)
-		{
-
+		$nhom = CHtml::listData(Nhom::model()->findAll('Loai=:parent_id',array(':parent_id'=>(int) $loai->ID)),'ID','Viet');
+						
+		foreach ($nhom as $ID => $value){
+			$listNhom.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+			$bo = CHtml::listData(Bo::model()->findAll('Nhom=:parent_id',array(':parent_id'=>$ID)),'ID','Viet');
+			foreach($bo as $ID => $value){
 				$listBo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-		}
-		foreach($ho as $ID => $value)
-		{
-
-				$listHo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+				$ho = CHtml::listData(Ho::model()->findAll('Bo=:parent_id',array(':parent_id'=>$ID)),'ID','Viet');
+				foreach($ho as $ID => $value)
+				{
+					$listHo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+				}
+			}
 		}
 
 		echo CJSON::encode(array(
@@ -190,27 +215,20 @@ class CreaturesController extends Controller
 	
 	public function actionDynamicnhom()
 	{
+		$listBo = CHtml::tag('option',array('value' => '', 'selected'=>'selected'),CHtml::encode('--Chọn bộ muốn tìm--'),true);
+		$listHo = CHtml::tag('option',array('value' => '', 'selected'=>'selected'),CHtml::encode('--Chọn họ muốn tìm--'),true);
+		
 		$nhom = Nhom::model()->findByPk((int) $_POST['ID']);	
-		$bo = Bo::model()->findAll('Nhom=:parent_id',
-				array(':parent_id'=>(int)$nhom->ID));
-		$ho = Ho::model()->findAll('Bo=:parent_id',
-				array(':parent_id'=>(int)$bo[0]->ID));
+		$bo = CHtml::listData(Bo::model()->findAll('Nhom=:parent_id',array(':parent_id'=>(int)$nhom->ID)),'ID','Viet');
 
-		$bo = CHtml::listData($bo,'ID','Viet');
-		$ho = CHtml::listData($ho,'ID','Viet');
-		
-		$listBo='';
-		$listHo='';
-		
 		foreach($bo as $ID => $value)
 		{
-
-				$listBo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
-		}
-		foreach($ho as $ID => $value)
-		{
-
+			$listBo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+			$ho = CHtml::listData(Ho::model()->findAll('Bo=:parent_id',array(':parent_id'=>$ID)),'ID','Viet');
+			foreach($ho as $ID => $value)
+			{
 				$listHo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+			}
 		}
 
 		echo CJSON::encode(array(
@@ -221,18 +239,14 @@ class CreaturesController extends Controller
 	
 	public function actionDynamicbo()
 	{
-		$bo = Bo::model()->findByPk((int) $_POST['ID']);	
-		$ho = Ho::model()->findAll('Bo=:parent_id',
-				array(':parent_id'=>(int)$bo->ID));
-
-		$ho = CHtml::listData($ho,'ID','Viet');
+		$listHo = CHtml::tag('option',array('value' => '', 'selected'=>'selected'),CHtml::encode('--Chọn họ muốn tìm--'),true);
 		
-		$listHo='';
+		$bo = Bo::model()->findByPk((int) $_POST['ID']);	
+		$ho = CHtml::listData(Ho::model()->findAll('Bo=:parent_id',array(':parent_id'=>(int)$bo->ID)),'ID','Viet');
 		
 		foreach($ho as $ID => $value)
 		{
-
-				$listHo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
+			$listHo.= CHtml::tag('option',array('value' => $ID),CHtml::encode($value),true);
 		}
 
 		echo CJSON::encode(array(
