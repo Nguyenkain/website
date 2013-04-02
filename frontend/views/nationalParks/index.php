@@ -6,15 +6,12 @@
 	    var aSel = document.createElement('a');
 	    aSel.href = 'javascript:void(0);';
 	    aSel.innerHTML = marker.title;
-	    aSel.onclick = function(){ google.maps.event.trigger(marker, 'click')};
+	    aSel.onclick = function(){ 
+		    google.maps.event.trigger(marker, 'click');
+		    };
 	    li.appendChild(aSel);
 	    ul.appendChild(li);
 	}
-	function getParkName(place) {
-		var name = place;
-		return name;
-	}	
-	
 </script>
 
 <div
@@ -42,10 +39,10 @@
 			$long = $place->longitude;
 			$lat = $place->latitude;
 			// Add Gmaker
-			$marker = new EGMapMarker($lat, $long, array('title' => 'Vườn Quốc Gia ' .$place->
+			$marker = new EGMapMarker($lat, $long, array('title' => 'Vườn quốc gia ' .$place->
 					park_name, 'icon' => $icon));
 			$detail = Yii::app()->baseUrl ."/index.php?r=nationalParks/view&id=" .$place->id;
-			$info_window = new EGMapInfoWindow('<div> Vườn quốc gia ' .$place->park_name .' </br> --> <a href="' .$detail .'">Xem chi tiết!</a></div>');
+			$info_window = new EGMapInfoWindow('<div> <a href="' .$detail .'">Vườn quốc gia ' .$place->park_name .'</a></div>');
 			$marker->addHtmlInfoWindow($info_window);
 			$gMap->addMarker($marker);
 

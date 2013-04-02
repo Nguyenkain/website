@@ -7,8 +7,6 @@
 			}
 			$(this).attr('src',link);
 		});
-
-		$('p.Heading02').remove();
 	}
 </script>
 
