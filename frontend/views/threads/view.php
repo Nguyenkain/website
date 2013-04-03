@@ -42,16 +42,15 @@ function setNotification($userid,$threadid)
 
 <?php 
 
-if(isset($success)) {
-	Yii::app()->user->setFlash('success', '<strong>Thành công!</strong> Thông báo của bạn sẽ được gửi tới Admin và xử lý trong thời gian sớm nhất.');
-	$this->widget('bootstrap.widgets.TbAlert', array(
-		'block'=>true, // display a larger alert block?
-		'fade'=>true, // use transitions?
-		'closeText'=>'×', // close link text - if set to false, no close link is displayed
-		'alerts'=>array( // configurations per alert type
-				'success'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // success, info, warning, error or danger
-		),
-));
+if(!empty($success)) {
+	$this->widget('application.extensions.PNotify.PNotify',array(
+		'options'=>array(
+				'title'=>'You did it!',
+				'text'=>'This notification is awesome! Awesome like you!',
+				'type'=>'success',
+				'closer'=>false,
+				'hide'=>false))
+	);
 }
 
 ?>
