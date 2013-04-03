@@ -20,7 +20,7 @@ function postToFacebook($fbId,$threadId)
 
 <script>
 
-function getNotification($userid,$threadid)
+function setNotification($userid,$threadid)
 {
 	$.ajax({
 	      type: "POST",
@@ -28,7 +28,6 @@ function getNotification($userid,$threadid)
 	      data:  {'facebook_id':$userid,'thread_id':$threadid},
 	      async: false,
 	      success: function(msg){
-		      	debugger;
 	      },
 	      error: function(xhr){
 	      }
