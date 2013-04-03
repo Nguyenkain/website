@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Nhom'=>array('index'),
+	'Nhóm'=>array('admin'),
 	'Tạo mới',
 );
 

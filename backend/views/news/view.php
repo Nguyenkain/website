@@ -13,10 +13,10 @@ $this->menu=array(
 );
 ?>
 
-<h1>
+<h3>
 	Xem tin
 	<?php echo $model->title; ?>
-</h1>
+</h3>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 		'data'=>$model,

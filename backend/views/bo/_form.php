@@ -3,8 +3,6 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="help-block">Trường có ký hiệu <span class="required">*</span> là bắt buộc.</p>
-
 	<?php echo $form->errorSummary($model); ?>
 
 	<?php //echo $form->textFieldRow($model,'ID',array('class'=>'span5')); ?>
@@ -15,7 +13,7 @@
 
 	<?php 
 		echo $form->labelEx($model,'Nhom');
-		echo $form->dropDownList($model,'Nhom',CHtml::listData(Nhom::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--'
+		echo $form->dropDownList($model,'Nhom',CHtml::listData(Nhom::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--Chọn nhóm--'
 								
 				)); ?>
 
@@ -23,7 +21,7 @@
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'type'=>'primary',
-			'label'=>$model->isNewRecord ? 'Lưu mới' : 'LÆ°u',
+			'label'=>$model->isNewRecord ? 'Tạo mới' : 'Lưu',
 		)); ?>
 	</div>
 

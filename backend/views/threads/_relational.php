@@ -22,14 +22,18 @@ $this->widget('bootstrap.widgets.TbGridView',array(
         'value'=>'date("d/m/y H:i:s", $data->post_created_time)'),
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
+			'template'=>'{view}{update}{delete}',
 			'buttons'=>array(
 					'update'=>array(
+							'label'=>'Cập nhật',
 							'url'=>'Yii::app()->createUrl("/posts/update", array("id"=>$data->post_id))',
 					),
 					'delete'=>array(
+							'label'=>'Xóa',
 							'url'=>'Yii::app()->createUrl("/posts/delete", array("id"=>$data->post_id))',
 					),
 					'view'=>array(
+							'label'=>'Xem',
 							'url'=>'Yii::app()->createUrl("/posts/view", array("id"=>$data->post_id))',
 					),
 			),

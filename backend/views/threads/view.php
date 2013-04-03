@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Thông tin bài <?php echo $thread_title; ?></h1>
+<h3>Thông tin chủ đề <?php echo $thread_title; ?></h3>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
@@ -26,7 +26,7 @@ $this->breadcrumbs=array(
 	),
 )); ?>
 
-<h3>Các bài viết trong bài <?php echo $thread_title; ?></h3>
+<h3>Các bài viết trong chủ đề <?php echo $thread_title; ?></h3>
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'posts-grid',
@@ -50,12 +50,15 @@ $this->breadcrumbs=array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 			'buttons'=>array(
 					'update'=>array(
+							'label'=>'Cập nhật',
 							'url'=>'Yii::app()->createUrl("/posts/update", array("id"=>$data->post_id))',
 					),
 					'delete'=>array(
+							'label'=>'Xóa',
 							'url'=>'Yii::app()->createUrl("/posts/delete", array("id"=>$data->post_id))',
 					),
 					'view'=>array(
+							'label'=>'Xem',
 							'url'=>'Yii::app()->createUrl("/posts/view", array("id"=>$data->post_id))',
 					),
 			),

@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Authors'=>array('index'),
+	'Tác giả'=>array('admin'),
 	$model->Name=>array('view','id'=>$model->ID),
 	'Cập nhật',
 );
@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h3>Cập nhật thông tin tác giả <?php echo $model->ID; ?></h3>
+<h3>Cập nhật tác giả <?php echo $model->Name; ?></h3>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

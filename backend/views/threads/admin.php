@@ -84,9 +84,19 @@ Yii::app()->clientScript->registerScript('search', "
 */
 				array(
 					'class'=>'bootstrap.widgets.TbButtonColumn',
+					'template'=>'{view}{update}{delete}',
+					'buttons'=>array(
+							'view'=>array(
+									'label'=>'Xem',
+							),
+							'update'=>array(
+									'label'=>'Cập nhật',
+							),
+							'delete'=>array(
+									'label'=>'Xóa',
+							),
+					),
 					'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
 		),
 	),
 )); ?>
-
-<?php Yii::app()->getClientScript()->registerCoreScript( 'jquery.ui' );?>

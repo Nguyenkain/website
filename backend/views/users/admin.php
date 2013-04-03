@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Users'=>array('index'),
+	'Thành viên'=>array('admin'),
 	'Quản lý',
 );
 
@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Quản lý Thành viên</h1>
+<h3>Quản lý Thành viên</h3>
 
 <p>
 Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -48,9 +48,12 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 	'emptyText' => 'Không có kết quả nào được tìm thấy',
 	'columns'=>array(
 		array(
-				'class'=>'bootstrap.widgets.TbImageColumn',
-				'header' => 'Ảnh đại diện',
-				'imagePathExpression' => '"http://graph.facebook.com/". $data->user_avatar ."/picture?type=normal"',
+			'class'=>'bootstrap.widgets.TbImageColumn',
+			'header' => 'Ảnh đại diện',
+			'imagePathExpression' => '"http://graph.facebook.com/". $data->user_avatar ."/picture?type=normal"',
+	        'htmlOptions'=>array(
+				'width'=>'100px',
+			),
 		),
 		'name',
 		'user_dob',
@@ -61,12 +64,10 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
             'class'=>'bootstrap.widgets.TbToggleColumn',
             'toggleAction'=>'site/toggleBan/',
             'name' => 'ban_status',
-            'header' => 'Trạng thái ban'
+            'header' => 'Trạng thái ban',
+            'htmlOptions'=>array(
+					'width'=>'100px',
+			),
         ),
-		array(
-			'class'=>'bootstrap.widgets.TbButtonColumn',
-			'template'=>'{delete}',
-			'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
-		),
 	),
 )); ?>

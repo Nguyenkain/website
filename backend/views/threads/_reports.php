@@ -23,14 +23,16 @@ $this->widget('bootstrap.widgets.TbGridView',array(
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 			'template'=>'{update}{delete}',
-				'buttons'=>array(
-						'update'=>array(
-								'url'=>'Yii::app()->createUrl("/reports/update", array("id"=>$data->report_id))',
-						),
-						'delete'=>array(
-								'url'=>'Yii::app()->createUrl("/reports/delete", array("id"=>$data->report_id))',
-						),
-				),
+			'buttons'=>array(
+					'update'=>array(
+							'label'=>'Cập nhật',
+							'url'=>'Yii::app()->createUrl("/reports/update", array("id"=>$data->report_id))',
+					),
+					'delete'=>array(
+							'label'=>'Xóa',
+							'url'=>'Yii::app()->createUrl("/reports/delete", array("id"=>$data->report_id))',
+					),
+			),
 			'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
 		),
 	),

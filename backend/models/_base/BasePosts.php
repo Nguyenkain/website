@@ -69,7 +69,7 @@ abstract class BasePosts extends GxActiveRecord {
 	public function attributeLabels() {
 		return array(
 				'post_id' => Yii::t('app', 'Bài viết'),
-				'user_id' => null,
+				'user_id' => Yii::t('app', 'Người viết'),
 				'thread_id' => Yii::t('app', 'Chủ đề'),
 				'post_content' => Yii::t('app', 'Nội dung'),
 				'post_created_time' => Yii::t('app', 'Ngày tạo'),
