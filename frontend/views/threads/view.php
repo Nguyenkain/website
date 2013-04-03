@@ -18,6 +18,25 @@ function postToFacebook($fbId,$threadId)
 
 </script>
 
+<script>
+
+function getNotification($userid,$threadid)
+{
+	$.ajax({
+	      type: "POST",
+	      url:    "<? echo Yii::app()->createUrl('threads/setNotification'); ?>",
+	      data:  {'facebook_id':$userid,'thread_id':$threadid},
+	      async: false,
+	      success: function(msg){
+		      	debugger;
+	      },
+	      error: function(xhr){
+	      }
+	    });
+}
+
+</script>
+
 <?php $this->renderPartial('_bar',array(
 ));
 ?>
@@ -47,10 +66,12 @@ if ($userid)
 	try
 	{
 		$fbuid = Yii::app()->facebook->getUser();
-		$me = Yii::app()->facebook->api('/me');
+		$user_info	= Yii::app()->facebook->getInfo();
+		$url = Yii::app()->facebook->getLogoutUrl();
 	}
 	catch(FacebookApiException $e){
 		$userid = NULL;
+		Yii::app()->facebook->destroySession();
 	}
 }
 ?>

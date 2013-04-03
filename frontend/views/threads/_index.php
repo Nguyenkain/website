@@ -14,7 +14,7 @@
 		</div>
 		<div class="thread_content">
 			<p class="content">
-				<?php echo CHtml::link($data->thread_title,array('threads/view&id='.$data->thread_id.'&userid='.$data->user_id)); ?>
+				<?php echo CHtml::link($data->thread_title,array('threads/view&id='.$data->thread_id)); ?>
 			</p>
 		</div>
 		<div class="thread_stats">
