@@ -1297,9 +1297,14 @@ element.style {
 	text-align: center;
 }
 
-.notification_item.newNoti
+.notification_item
 {
-	background: #C0000 !important;
+	border-bottom: 1px solid #e4ebf3;
+}
+
+.newNoti
+{
+	background-color: #C0000 !important;
 }
 
 /*REPLY SECTION*/

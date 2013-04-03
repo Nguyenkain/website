@@ -125,8 +125,8 @@ if ($userid)
 				'options'=>array(
 						'animation'=>'grow',
 						'interactive'=>true,
-						'interactiveTolerance'=>'10000',
-						'timer'=>'10000',
+						'interactiveTolerance'=>'1110000',
+						'timer'=>'1110000',
 						'position'=>'top',
 						'onlyOne' => true,
 						),
