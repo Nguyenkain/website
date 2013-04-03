@@ -75,7 +75,7 @@ if ($userid)
 	}
 }
 
-Yii::app()->clientScript->registerScript('setNoti', "setNotification($userid,$data->thread_id);");
+Yii::app()->clientScript->registerScript('setNoti', "setNotification($userid,$model->thread_id);");
 
 ?>
 
