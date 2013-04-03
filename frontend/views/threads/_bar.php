@@ -11,13 +11,21 @@ function getNotification($userid)
 		      	var object = $.parseJSON(msg)
 		  		var length = object.length;
 		  		var notiHtml="";
+		  		var countNoti = 0;
 		  		for(var i = 0; i< length; i++) {
 		  			var noti = $.parseJSON($.parseJSON(msg)[i]);
 		  			var html = $('#notification_panel').html();
+		  			if(noti.viewed_status == 0){
+			  			countNoti++;
+		  			}
 		  			$('#notification_panel .thread_title_noti').text(noti.threads.thread_title);
 		  			$('#notification_panel a').attr('href','<? echo Yii::app()->createUrl('threads/view')?>&id='+noti.threads.thread_id);
 		  			notiHtml += $('#notification_panel').html();
 		  			$('#notification_panel').html(html);
+		  		}
+		  		if(countNoti > 0) {
+			  		$('#notification .noti_number').show();
+			  		$('#notification .noti_number').text(countNoti);
 		  		}
 		  		$('#notification').attr('title',notiHtml);
 	      },
@@ -137,6 +145,7 @@ if ($userid)
 		<div class="ver_line"></div>
 		<div id="notification">
 			<label>Thông báo</label>
+			<span class="noti_number" style="display:none"></span>
 		</div>
 		<div class="clearfix"></div>
 	</div>
