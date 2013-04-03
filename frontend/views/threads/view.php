@@ -74,6 +74,9 @@ if ($userid)
 		Yii::app()->facebook->destroySession();
 	}
 }
+
+Yii::app()->clientScript->registerScript('setNoti', "setNotification($userid,$data->thread_id);");
+
 ?>
 
 <div id="thread_detail_container">
