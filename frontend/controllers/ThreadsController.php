@@ -418,6 +418,14 @@ class ThreadsController extends Controller
 			error_log($e);
 			echo 'error';
 		}
+		$this->widget('application.extensions.PNotify.PNotify',array(
+				'options'=>array(
+						'title'=>'Thành công!',
+						'text'=>'Bài viết của bạn đã được đăng trên facebook!',
+						'type'=>'success',
+						'closer'=>true,
+						'hide'=>true))
+		);
 		echo 'success';
 	}
 

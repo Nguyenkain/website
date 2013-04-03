@@ -39,20 +39,6 @@ function setNotification($userid,$threadid)
 ));
 ?>
 
-<?php 
-
-if(!empty($success)) {
-	$this->widget('application.extensions.PNotify.PNotify',array(
-		'options'=>array(
-				'title'=>'You did it!',
-				'text'=>'This notification is awesome! Awesome like you!',
-				'type'=>'success',
-				'closer'=>true,
-				'hide'=>true))
-	);
-}
-
-?>
 
 <?php 
 //Yii::app()->clientScript->registerScript('search', "getNotification();");
