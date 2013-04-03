@@ -8,6 +8,7 @@ function getNotification($userid)
 	      data:  {'facebook_id':$userid},
 	      async: false,
 	      success: function(msg){
+		      	debugger;
 		      	var object = $.parseJSON(msg)
 		  		var length = object.length;
 		  		var notiHtml="";
@@ -22,6 +23,7 @@ function getNotification($userid)
 		  		$('#notification').attr('title',notiHtml);
 	      },
 	      error: function(xhr){
+		      debugger;
 	      }
 	    });
 }
