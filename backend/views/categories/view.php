@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Xem danh mục <?php echo $model->category_name; ?></h1>
+<h3>Xem danh mục <?php echo $model->category_name; ?></h3>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,

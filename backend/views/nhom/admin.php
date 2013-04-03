@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Nhom'=>array('index'),
+	'Nhóm'=>array('admin'),
 	'Quản lý',
 );
 
@@ -50,6 +50,19 @@ Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi 
 		
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
+			'template'=>'{view}{update}{delete}',
+			'buttons'=>array(
+					'view'=>array(
+							'label'=>'Xem',
+					),
+					'update'=>array(
+							'label'=>'Cập nhật',
+					),
+					'delete'=>array(
+							'label'=>'Xóa',
+					),
+			),
+			'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
 		),
 	),
 )); ?>

@@ -1,8 +1,8 @@
 <?php
 $this->breadcrumbs=array(
-		'Creatures'=>array('index'),
-		$model->ID=>array('view','id'=>$model->ID),
-		'Update',
+		'Sinh vật'=>array('admin'),
+		$model->Viet=>array('view','id'=>$model->ID),
+		'Cập nhật',
 );
 
 $this->menu=array(
@@ -14,8 +14,7 @@ $this->menu=array(
 ?>
 
 <h3>
-	Cập nhật sinh vật :
-	<?php echo $model->Viet; ?>
+	Cập nhật sinh vật <?php echo $model->Viet; ?>
 </h3>
 
 <?php echo $this->renderPartial('_formupdate',array('model'=>$model,'coordinations'=>$coordinations)); ?>

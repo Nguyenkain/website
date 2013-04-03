@@ -57,11 +57,6 @@ for($i = 0; $i <= 4; $i++) {
 		'enableAjaxValidation' => false,
 		));?>
 
-<p class="help-block">
-	Trường có kí hiệu <span class="required">*</span> là bắt buộc.
-</p>
-
-
 <?php echo $form->errorSummary($model); ?>
 
 
@@ -160,7 +155,7 @@ echo $form->dropDownList($model, 'Author', CHtml::listData(Author::model()->
 	<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType' => 'submit',
 			'type' => 'primary',
-			'label' => $model->isNewRecord ? 'Tạo mới' : 'Save',
+			'label' => $model->isNewRecord ? 'Tạo mới' : 'Lưu',
 		)); ?>
 </div>
 

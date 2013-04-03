@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Cập nhật tin tức <?php echo $model->title; ?></h1>
+<h3>Cập nhật tin tức <?php echo $model->title; ?></h3>
 
 <?php echo $this->renderPartial('_formupdate',array('model'=>$model)); ?>

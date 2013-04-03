@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-		'Creatures'=>array('index'),
-		'Create',
+		'Sinh vật'=>array('admin'),
+		'Tạo mới',
 );
 
 $this->menu=array(

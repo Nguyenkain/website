@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Authors'=>array('index'),
+	'Tác giả'=>array('admin'),
 	$model->Name,
 );
 
@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h3>Xem tác giả #<?php echo $model->Name; ?></h3>
+<h3>Thông tin tác giả <?php echo $model->Name; ?></h3>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,

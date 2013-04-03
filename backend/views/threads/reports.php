@@ -23,7 +23,7 @@ Yii::app()->clientScript->registerScript('search', "
 		");
 ?>
 
-<h1>Quản lý các chủ đề bị báo cáo</h1>
+<h3>Quản lý các chủ đề bị báo cáo</h3>
 
 <p>
 	Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>,
@@ -84,6 +84,12 @@ Yii::app()->clientScript->registerScript('search', "
 									return r;
 	                         }',
 							
+						),
+						'update'=>array(
+								'label'=>'Cập nhật',
+						),
+						'delete'=>array(
+								'label'=>'Xóa',
 						),
 					),
 		),

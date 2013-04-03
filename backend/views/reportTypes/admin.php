@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Quản lý loại báo cáo</h1>
+<h3>Quản lý loại báo cáo</h3>
 
 <p>
 	Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>,
@@ -50,6 +50,18 @@ $('.search-form form').submit(function(){
 		'report_type',
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
+			'template'=>'{view}{update}{delete}',
+			'buttons'=>array(
+					'view'=>array(
+							'label'=>'Xem',
+					),
+					'update'=>array(
+							'label'=>'Cập nhật',
+					),
+					'delete'=>array(
+							'label'=>'Xóa',
+					),
+			),
 			'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
 		),
 	),

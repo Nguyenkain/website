@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Cập nhật danh mục <?php echo $model->category_name; ?></h1>
+<h3>Cập nhật danh mục <?php echo $model->category_name; ?></h3>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

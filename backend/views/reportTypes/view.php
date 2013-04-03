@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Report Types'=>array('index'),
-	$model->report_type_id,
+	'Báo cáo'=>array('admin'),
+	$model->report_type,
 );
 
 $this->menu=array(
@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>View ReportTypes #<?php echo $model->report_type_id; ?></h1>
+<h3>Thông tin báo cáo <?php echo $model->report_type; ?></h3>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,

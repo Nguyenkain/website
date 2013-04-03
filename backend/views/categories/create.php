@@ -10,5 +10,5 @@ $this->menu=array(
 );
 ?>
 
-<h1>Tạo mới Danh Mục</h1>
+<h3>Tạo mới Danh Mục</h3>
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

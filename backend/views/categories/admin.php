@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Quản lý Danh Mục</h1>
+<h3>Quản lý Danh Mục</h3>
 
 <p>
 Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -51,6 +51,18 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 		'description',
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
+			'template'=>'{view}{update}{delete}',
+			'buttons'=>array(
+					'view'=>array(
+							'label'=>'Xem',
+					),
+					'update'=>array(
+							'label'=>'Cập nhật',
+					),
+					'delete'=>array(
+							'label'=>'Xóa',
+					),
+			),
 			'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
 		),
 	),
