@@ -8,13 +8,13 @@
 	<?php	echo $form->textFieldRow($model,'Latin',array('class'=>'span5','maxlength'=>50)); ?>
 
 	<?php 	echo $form->labelEx($model,'Ho');
-			echo $form->dropDownList($model,'Ho',CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--',));?>
+			echo $form->dropDownList($model,'Ho',CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--Chọn họ--',));?>
 	<?php 	echo $form->labelEx($model,'Bo');
-			echo $form->dropDownList($model,'Bo',CHtml::listData(Bo::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--',));?>
+			echo $form->dropDownList($model,'Bo',CHtml::listData(Bo::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--Chọn bộ--',));?>
 	<?php 	echo $form->labelEx($model,'Nhom');
-			echo $form->dropDownList($model,'Nhom',CHtml::listData(Nhom::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--please select--',));?>
+			echo $form->dropDownList($model,'Nhom',CHtml::listData(Nhom::model()->findAll(), 'ID', 'Viet' ), array('empty'=>'--Chọn nhóm--',));?>
 	<?php 	echo $form->labelEx($model,'Loai');
-			echo $form->dropDownList($model,'Loai',CHtml::listData(Loai::model()->findAll(), 'ID', 'Loai' ), array('empty'=>'--please select--',));?>
+			echo $form->dropDownList($model,'Loai',CHtml::listData(Loai::model()->findAll(), 'ID', 'Loai' ), array('empty'=>'--Chọn loài--',));?>
 	<?php 
 			echo $form->textAreaRow($model,'Description',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 

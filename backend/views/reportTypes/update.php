@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Report Types'=>array('index'),
-	$model->report_type_id=>array('view','id'=>$model->report_type_id),
+	'Báo cáo'=>array('admin'),
+	$model->report_type=>array('view','id'=>$model->report_type_id),
 	'Cập nhật',
 );
 
@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Cập nhật ReportTypes <?php echo $model->report_type_id; ?></h1>
+<h3>Cập nhật báo cáo <?php echo $model->report_type; ?></h3>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

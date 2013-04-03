@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Hos'=>array('index'),
-	'Tạo mới họ',
+	'Họ'=>array('index'),
+	'Tạo mới',
 );
 
 $this->menu=array(

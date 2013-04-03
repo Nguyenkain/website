@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Posts'=>array('index'),
-	$model->post_id,
+	'Bài viết'=>array('admin'),
+	'Thông tin',
 );
 
 $this->menu=array(
@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Xem bài viết</h1>
+<h3>Thông tin bài viết</h3>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,

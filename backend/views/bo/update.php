@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Bo'=>array('index'),
-	$model->ID=>array('view','id'=>$model->ID),
+	'Bộ'=>array('admin'),
+	$model->Viet=>array('view','id'=>$model->ID),
 	'Cập nhật',
 );
 
@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h3>Cập nhật Bộ <?php echo $model->Viet; ?></h3>
+<h3>Cập nhật bộ <?php echo $model->Viet; ?></h3>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

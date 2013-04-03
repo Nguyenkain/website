@@ -11,7 +11,7 @@
 
 <?php //echo $form->textFieldRow($model,'category_id',array('class'=>'span5'));
 echo $form->labelEx($model,'category_id');
-		echo $form->dropDownList($model,'category_id', CHtml::listData(Categories::model()->findAll(), 'category_id', 'category_name'), array('empty'=>'--please select--')); ?>
+		echo $form->dropDownList($model,'category_id', CHtml::listData(Categories::model()->findAll(), 'category_id', 'category_name'), array('empty'=>'--Chọn danh mục--')); ?>
 
 <?php echo $form->textFieldRow($model,'title',array('class'=>'span5','maxlength'=>255)); ?>
 

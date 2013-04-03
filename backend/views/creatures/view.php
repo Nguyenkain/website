@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-		'Creatures'=>array('index'),
+		'Sinh vật'=>array('admin'),
 		$model->Viet,
 );
 

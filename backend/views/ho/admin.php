@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Họ'=>array('index'),
+	'Họ'=>array('admin'),
 	'Quản lý',
 );
 
@@ -49,6 +49,19 @@ $('.search-form form').submit(function(){
 ),
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
+			'template'=>'{view}{update}{delete}',
+			'buttons'=>array(
+					'view'=>array(
+							'label'=>'Xem',
+					),
+					'update'=>array(
+							'label'=>'Cập nhật',
+					),
+					'delete'=>array(
+							'label'=>'Xóa',
+					),
+			),
+			'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
 		),
 	),
 )); ?>
