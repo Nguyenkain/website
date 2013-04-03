@@ -39,7 +39,6 @@ function getNotification($userid)
 
 
 <?php 
-//Yii::app()->clientScript->registerScript('search', "getNotification();");
 $userid = Yii::app()->facebook->getUser();
 
 if ($userid)
