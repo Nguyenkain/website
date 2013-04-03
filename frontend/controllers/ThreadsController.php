@@ -333,6 +333,13 @@ class ThreadsController extends Controller
 			if($model->save())
 				EQuickDlgs::checkDialogJsScript();
 			$this->redirect(array('view','id'=>$model->thread_id,'userid'=>$model->user_id,'success'=>true));
+			$this->widget('application.extensions.PNotify.PNotify',array(
+					'options'=>array(
+							'title'=>'Thành công!',
+							'text'=>'Báo cáo của bạn đã được gửi tới admin và sẽ được xử lý trong thời gian sớm nhất!',
+							'type'=>'success',
+							'closer'=>true,))
+			);
 		}
 
 		$this->renderPartial('report', array("model" => $model, "data" => $data));

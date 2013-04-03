@@ -3,7 +3,6 @@
 
 function postToFacebook($fbId,$threadId)
 {
-	alert("ádsadsad");
 	$.ajax({
 	      type: "POST",
 	      url:    "<? echo Yii::app()->createUrl('threads/postToFacebook'); ?>",
@@ -48,8 +47,8 @@ if(!empty($success)) {
 				'title'=>'You did it!',
 				'text'=>'This notification is awesome! Awesome like you!',
 				'type'=>'success',
-				'closer'=>false,
-				'hide'=>false))
+				'closer'=>true,
+				'hide'=>true))
 	);
 }
 
