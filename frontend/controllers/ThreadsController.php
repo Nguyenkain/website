@@ -408,23 +408,27 @@ class ThreadsController extends Controller
 								'closer'=>true,
 								'hide'=>true))
 				);
+				EQuickDlgs::checkDialogJsScript();
 			}
 		}
 		else
 		{
-			$this->loadModel($threadId)->delete();
-			$this->redirect(array('index'));
-			$this->widget('application.extensions.PNotify.PNotify',array(
-					'options'=>array(
-							'title'=>'Thành công!',
-							'text'=>'Bạn đã xóa thành công bài viết của bạn',
-							'type'=>'success',
-							'closer'=>true,
-							'hide'=>true))
-			);
+			if($this->loadModel($threadId)->delete())
+			{
+				EQuickDlgs::checkDialogJsScript();
+				$this->redirect(array('index'));
+				$this->widget('application.extensions.PNotify.PNotify',array(
+						'options'=>array(
+								'title'=>'Thành công!',
+								'text'=>'Bạn đã xóa thành công bài viết của bạn',
+								'type'=>'success',
+								'closer'=>true,
+								'hide'=>true))
+				);
+			}
 		}
 
-		
+
 	}
 
 	public function actionLogin() {

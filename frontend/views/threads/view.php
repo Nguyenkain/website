@@ -94,10 +94,10 @@ if(isset(Yii::app()->session['userid']))
 						array(
 							'controllerRoute' => 'delete', //'member/view'
 							'actionParams' => array('user_id'=>$user_id,'thread_id'=>$model->thread_id), //array('id'=>$model->member->id),
-							'dialogTitle' => "Báo cáo chủ đề",
+							'dialogTitle' => "Xóa",
 							'dialogWidth' => 490,
 							'dialogHeight' => 370,
-							'openButtonText' => '<span>Báo cáo</span>',
+							'openButtonText' => '<span>Xóa</span>',
 							'closeButtonText' => false,
 							'closeOnAction' => true, //important to invoke the close action in the actionCreate
 							'openButtonHtmlOptions' => array(),
