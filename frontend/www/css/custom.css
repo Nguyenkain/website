@@ -1079,7 +1079,7 @@ element.style {
 }
 
 #post_container .post_title input {
-	width: 370px;
+	width: 360px;
 }
 
 #post_container .post_content {
@@ -1087,7 +1087,7 @@ element.style {
 }
 
 #post_container .post_content textarea {
-	width: 100%;
+	width: 450px;
 	height: 140px;
 }
 
