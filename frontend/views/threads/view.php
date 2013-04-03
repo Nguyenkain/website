@@ -195,9 +195,10 @@ if($userid) {
 				'ajaxOptions' => array(
 			            'type' => 'POST',
 			            'success' => 'function(data) {
+								debugger;
 								$.fn.yiiListView.update("post_listview");
 						}',
-						'error' => 'function(err) {}',
+						'error' => 'function(err) {debugger;}',
 			            'processData' => false,
 			    ),
 				'htmlOptions' => array(
