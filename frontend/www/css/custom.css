@@ -1299,7 +1299,7 @@ element.style {
 
 .notification_item.newNoti
 {
-	background: #C0000 solid;
+	background: #C0000 solid !important;
 }
 
 /*REPLY SECTION*/
