@@ -1,5 +1,5 @@
 <?php $this->breadcrumbs = array(
-		'Vườn Quốc Gia' => array('index'),
+		'Vườn Quốc Gia' => array('admin'),
 		'Tạo mới',
 		);
 
@@ -8,5 +8,5 @@
 		array('label' => 'Quản lý Vườn Quốc Gia', 'url' => array('admin')),
 		); ?>
 
-<h1>Tạo mới Vườn Quốc Gia</h1>
+<h3>Tạo mới Vườn Quốc Gia</h3>
 <?php echo $this->renderPartial('_form', array('model' => $model)); ?>
