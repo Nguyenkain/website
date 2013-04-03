@@ -42,24 +42,10 @@ function setNotification($userid,$threadid)
 
 <?php 
 //Yii::app()->clientScript->registerScript('search', "getNotification();");
-$userid = Yii::app()->facebook->getUser();
-
-if ($userid)
-{
-	try
-	{
-		$fbuid = Yii::app()->facebook->getUser();
-		$user_info	= Yii::app()->facebook->getInfo();
-		$url = Yii::app()->facebook->getLogoutUrl();
-	}
-	catch(FacebookApiException $e){
-		$userid = NULL;
-		Yii::app()->facebook->destroySession();
-	}
-}
 
 Yii::app()->clientScript->registerScript('setNoti', "setNotification($userid,$model->thread_id);");
-
+if(isset(Yii::app()->session['userid']))
+	$user_id = Yii::app()->session['userid'];
 ?>
 
 <div id="thread_detail_container">
@@ -101,19 +87,38 @@ Yii::app()->clientScript->registerScript('setNoti', "setNotification($userid,$mo
 
 			<div class="button">
 
-				<?php EQuickDlgs::ajaxLink(
-				array(
-				'controllerRoute' => 'report', //'member/view'
-				'actionParams' => array('user_id'=>$userid,'thread_id'=>$model->thread_id), //array('id'=>$model->member->id),
-				'dialogTitle' => "Báo cáo chủ đề",
-				'dialogWidth' => 490,
-				'dialogHeight' => 370,
-				'openButtonText' => '<span>Báo cáo</span>',
-				'closeButtonText' => false,
-				'closeOnAction' => true, //important to invoke the close action in the actionCreate
-				'openButtonHtmlOptions' => array(),
-				)
-				);
+				<?php 
+				
+				if($user_id == $model->user_id) {
+					EQuickDlgs::ajaxLink(
+						array(
+							'controllerRoute' => 'delete', //'member/view'
+							'actionParams' => array('user_id'=>$user_id,'thread_id'=>$model->thread_id), //array('id'=>$model->member->id),
+							'dialogTitle' => "Báo cáo chủ đề",
+							'dialogWidth' => 490,
+							'dialogHeight' => 370,
+							'openButtonText' => '<span>Báo cáo</span>',
+							'closeButtonText' => false,
+							'closeOnAction' => true, //important to invoke the close action in the actionCreate
+							'openButtonHtmlOptions' => array(),
+						)
+					);
+				}
+				else {
+					EQuickDlgs::ajaxLink(
+						array(
+							'controllerRoute' => 'report', //'member/view'
+							'actionParams' => array('user_id'=>$userid,'thread_id'=>$model->thread_id), //array('id'=>$model->member->id),
+							'dialogTitle' => "Báo cáo chủ đề",
+							'dialogWidth' => 490,
+							'dialogHeight' => 370,
+							'openButtonText' => '<span>Báo cáo</span>',
+							'closeButtonText' => false,
+							'closeOnAction' => true, //important to invoke the close action in the actionCreate
+							'openButtonHtmlOptions' => array(),
+						)
+					);
+				}
 				?>
 
 			</div>
