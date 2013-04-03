@@ -30,11 +30,11 @@ for($i = 0; $i <= 4; $i++) {
 	$name = "";
 	if($i != 0) {
 		$name = $model->ID.'_'.$i;
-		$urlcheck .= '/../web/images/pictures/'.$url.'/'.$name.'.jpg';
+		$urlcheck .= '/../web/images/pictures/'.$url.'/'.$name.'s.jpg';
 	}
 	else {
 		$name = $model->ID;
-		$urlcheck .= '/../web/images/pictures/'.$url.'/'.$name.'.jpg';
+		$urlcheck .= '/../web/images/pictures/'.$url.'/'.$name.'s.jpg';
 	}
 	if(checkUrl($urlcheck)) {
 

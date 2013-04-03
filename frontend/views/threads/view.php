@@ -18,22 +18,39 @@ function postToFacebook($fbId,$threadId)
 
 </script>
 
+<script>
+
+function setNotification($userid,$threadid)
+{
+	$.ajax({
+	      type: "POST",
+	      url:    "<? echo Yii::app()->createUrl('threads/setNotification'); ?>",
+	      data:  {'facebook_id':$userid,'thread_id':$threadid},
+	      async: false,
+	      success: function(msg){
+	      },
+	      error: function(xhr){
+	      }
+	    });
+}
+
+</script>
+
 <?php $this->renderPartial('_bar',array(
 ));
 ?>
 
 <?php 
 
-if(isset($success)) {
-	Yii::app()->user->setFlash('success', '<strong>Thành công!</strong> Thông báo của bạn sẽ được gửi tới Admin và xử lý trong thời gian sớm nhất.');
-	$this->widget('bootstrap.widgets.TbAlert', array(
-		'block'=>true, // display a larger alert block?
-		'fade'=>true, // use transitions?
-		'closeText'=>'×', // close link text - if set to false, no close link is displayed
-		'alerts'=>array( // configurations per alert type
-				'success'=>array('block'=>true, 'fade'=>true, 'closeText'=>'×'), // success, info, warning, error or danger
-		),
-));
+if(!empty($success)) {
+	$this->widget('application.extensions.PNotify.PNotify',array(
+		'options'=>array(
+				'title'=>'You did it!',
+				'text'=>'This notification is awesome! Awesome like you!',
+				'type'=>'success',
+				'closer'=>false,
+				'hide'=>false))
+	);
 }
 
 ?>
@@ -47,12 +64,17 @@ if ($userid)
 	try
 	{
 		$fbuid = Yii::app()->facebook->getUser();
-		$me = Yii::app()->facebook->api('/me');
+		$user_info	= Yii::app()->facebook->getInfo();
+		$url = Yii::app()->facebook->getLogoutUrl();
 	}
 	catch(FacebookApiException $e){
 		$userid = NULL;
+		Yii::app()->facebook->destroySession();
 	}
 }
+
+Yii::app()->clientScript->registerScript('setNoti', "setNotification($userid,$model->thread_id);");
+
 ?>
 
 <div id="thread_detail_container">
@@ -171,9 +193,10 @@ if($userid) {
 				'ajaxOptions' => array(
 			            'type' => 'POST',
 			            'success' => 'function(data) {
+								debugger;
 								$.fn.yiiListView.update("post_listview");
 						}',
-						'error' => 'function(err) {}',
+						'error' => 'function(err) {debugger;}',
 			            'processData' => false,
 			    ),
 				'htmlOptions' => array(

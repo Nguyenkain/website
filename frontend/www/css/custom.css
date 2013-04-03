@@ -850,6 +850,7 @@ ul.style2 a:hover {
 
 #profile,#notification {
 	float: left;
+	position: relative;
 }
 
 #profile img {
@@ -891,6 +892,24 @@ ul.style2 a:hover {
 #notification label {
 	margin: 0;
 	padding: 0;
+}
+
+#notification .noti_number
+{
+	position: absolute;
+	padding: 2px;
+	background: red;
+	color: #fff;
+	line-height: 1;
+	font-size: 10px;
+	right: -7px;
+	top: -5px;
+	background-color: #f03d25;
+	border: 1px solid #d83722;
+	border-bottom: 1px solid #c0311e;
+	border-top: 1px solid #e23923;
+	-webkit-border-radius: 2px;
+	-webkit-box-shadow: 0 1px 0 rgba(0, 39, 121, .77);
 }
 
 /* Loading  */
@@ -1270,6 +1289,29 @@ element.style {
 	border-left: 1px solid #e4ebf3;
 	padding: 5px 5px;
 	text-align: center;
+}
+
+.notification_item
+{
+	border-bottom: 1px solid #e4ebf3;
+}
+
+.notification_item a
+{
+	color: #fff;
+}
+
+.newNoti
+{
+	background-color: #C0000 !important;
+	border: 1px solid #C0000;
+	font-weight: bold;
+	color: #2f5607;
+}
+
+.notification_item.newNoti a
+{
+	color: #2f5607;
 }
 
 /*REPLY SECTION*/

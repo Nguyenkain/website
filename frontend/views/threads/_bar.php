@@ -11,13 +11,22 @@ function getNotification($userid)
 		      	var object = $.parseJSON(msg)
 		  		var length = object.length;
 		  		var notiHtml="";
+		  		var countNoti = 0;
 		  		for(var i = 0; i< length; i++) {
 		  			var noti = $.parseJSON($.parseJSON(msg)[i]);
 		  			var html = $('#notification_panel').html();
+		  			if(noti.viewed_status == 0){
+			  			countNoti++;
+			  			$('#notification_panel .notification_item').addClass('newNoti');
+		  			}
 		  			$('#notification_panel .thread_title_noti').text(noti.threads.thread_title);
 		  			$('#notification_panel a').attr('href','<? echo Yii::app()->createUrl('threads/view')?>&id='+noti.threads.thread_id);
 		  			notiHtml += $('#notification_panel').html();
 		  			$('#notification_panel').html(html);
+		  		}
+		  		if(countNoti > 0) {
+			  		$('#notification .noti_number').show();
+			  		$('#notification .noti_number').text(countNoti);
 		  		}
 		  		$('#notification').attr('title',notiHtml);
 	      },
@@ -30,7 +39,6 @@ function getNotification($userid)
 
 
 <?php 
-//Yii::app()->clientScript->registerScript('search', "getNotification();");
 $userid = Yii::app()->facebook->getUser();
 
 if ($userid)
@@ -38,32 +46,13 @@ if ($userid)
 	try
 	{
 		$fbuid = Yii::app()->facebook->getUser();
-		$me = Yii::app()->facebook->api('/me');
+		$user_info	= Yii::app()->facebook->getInfo();
+		$url = Yii::app()->facebook->getLogoutUrl();
 	}
 	catch(FacebookApiException $e){
 		$userid = NULL;
+		Yii::app()->facebook->destroySession();
 	}
-}
-
-if($userid) {
-	$url = Yii::app()->facebook->getLogoutUrl();
-	$user_info	= Yii::app()->facebook->api('/' . $userid);
-	$model = new Users;
-	$model->facebook_id = $userid;
-	$model->name = $user_info['name'];
-	$model->username = $user_info['username'];
-	$model->user_avatar = $userid;
-	$model->user_email = $user_info['email'];
-	$model->user_dob = $user_info['birthday'];
-	if(isset($user_info['location']))
-		$model->user_address = $user_info['location']['name'];
-	$model->addNewUser();
-	//Yii::app()->clientScript->registerScript('search', "getNotification($userid);");
-}
-else {
-	$url = Yii::app()->facebook->getLoginUrl(array(
-			'scope'	=> 'read_stream, publish_stream, user_birthday, user_location, email, user_hometown, user_photos',
-	));
 }
 
 
@@ -75,7 +64,7 @@ else {
 		style="display: block; height: 30px; line-height: 30px;">
 
 		<a href="#"
-			style="color: #fff; text-decoration: none; font-size: 12px;">Có người
+			style="text-decoration: none; font-size: 12px;">Có người
 			đã viết bài mới trong chủ đề : <span
 			style="color: #fff; margin: 0; padding: 0; display: inline; font-size: 12px;"
 			class="thread_title_noti"></span>
@@ -110,7 +99,9 @@ else {
 		<?php
 		if(!$userid)
 		{
-			echo CHtml::link('', $url, array('id'=>'facebook_button'));
+			echo CHtml::link('', "", array(
+						'id'=>'facebook_button',
+						'onclick'=>'javascript: window.open("'.$this->createUrl('threads/login').'");'));
 		}
 		else {
 		Yii::app()->clientScript->registerScript('search', "getNotification($userid);");
@@ -133,8 +124,8 @@ else {
 				'options'=>array(
 						'animation'=>'grow',
 						'interactive'=>true,
-						'interactiveTolerance'=>'10000',
-						'timer'=>'10000',
+						'interactiveTolerance'=>'1110000',
+						'timer'=>'1110000',
 						'position'=>'top',
 						'onlyOne' => true,
 						),
@@ -143,11 +134,7 @@ else {
 		?>
 		</td>
 		<div id="profile_container">
-			<div id="profile" class="tooptipster" title="<img 
-				
-				
-				
-				src='http://graph.facebook.com/<?php echo $userid ?>/picture?type=normal'
+			<div id="profile" class="tooptipster" title="<img src='http://graph.facebook.com/<?php echo $userid ?>/picture?type=normal'
 				width='100' height='100' />
 			<?php echo $user_info['name']?>
 			<br> <a href='<?php echo $url?>'> Log out</a>">
@@ -158,6 +145,7 @@ else {
 		<div class="ver_line"></div>
 		<div id="notification">
 			<label>Thông báo</label>
+			<span class="noti_number" style="display:none"></span>
 		</div>
 		<div class="clearfix"></div>
 	</div>
