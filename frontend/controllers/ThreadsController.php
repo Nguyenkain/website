@@ -398,6 +398,7 @@ class ThreadsController extends Controller
 			$model->user_id = $data->user_id;
 			$model->thread_id = $threadId;
 			$model->report_type_id = $reportTypes->report_type_id;
+			$model->comment = "Người viết yêu cầu xóa";
 			if($model->save())
 			{
 				$this->widget('application.extensions.PNotify.PNotify',array(
