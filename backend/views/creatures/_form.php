@@ -134,7 +134,7 @@ $this->widget( 'xupload.XUpload', array(
 				'autoUpload' => true,
 				'options'=>array(
 		            'maxNumberOfFiles'=> 4,
-		            'acceptFileTypes' => "js:/(\.|\/)(jpe?g|png)$/i",
+		            'acceptFileTypes' => "js:/(\.|\/)(jpg)$/i",
 					'sequentialUploads' => true,
 					'limitMultiFileUploads' => 4,
 		        ),

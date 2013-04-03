@@ -11,12 +11,12 @@ function checkUrl($url) {
 
 function getImageUrl($loai,$img){
 	if($loai==1)
-		return Yii::app()->request->getBaseUrl(true) . "/images/pictures/animal/" . $img . ".jpg";
+		return Yii::app()->request->getBaseUrl(true) . "/images/pictures/animal/" . $img . "s.jpg";
 
 	if($loai==2)
-		return Yii::app()->request->getBaseUrl(true) . "/images/pictures/plant/" . $img . ".jpg";
+		return Yii::app()->request->getBaseUrl(true) . "/images/pictures/plant/" . $img . "s.jpg";
 	if($loai==3)
-		return Yii::app()->request->getBaseUrl(true) . "/images/pictures/insect/" . $img . ".jpg";
+		return Yii::app()->request->getBaseUrl(true) . "/images/pictures/insect/" . $img . "s.jpg";
 }
 ?>
 
