@@ -1297,7 +1297,7 @@ element.style {
 	text-align: center;
 }
 
-#notification_panel .notification_item.newNoti
+.notification_item.newNoti
 {
 	background: #C0000 solid;
 }
