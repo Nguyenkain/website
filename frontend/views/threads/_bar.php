@@ -17,6 +17,7 @@ function getNotification($userid)
 		  			var html = $('#notification_panel').html();
 		  			if(noti.viewed_status == 0){
 			  			countNoti++;
+			  			$('#notification_panel .notification_item').addClass('newNoti');
 		  			}
 		  			$('#notification_panel .thread_title_noti').text(noti.threads.thread_title);
 		  			$('#notification_panel a').attr('href','<? echo Yii::app()->createUrl('threads/view')?>&id='+noti.threads.thread_id);
