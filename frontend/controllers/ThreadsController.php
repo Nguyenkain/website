@@ -234,7 +234,7 @@ class ThreadsController extends Controller
 		$user_id = $_POST['facebook_id'];
 		$user = Users::model()->findByAttributes(array('facebook_id'=> $user_id));
 		$criteria = new CDbCriteria();
-		$criteria->join='Join Threads ON t.thread_id=Threads.thread_id';
+		$criteria->join='Join threads ON t.thread_id=threads.thread_id';
 		$criteria->group = 'viewed_status,thread_id';
 		$criteria->compare('t.user_id', $user->user_id, true);
 		$criteria->order = 'viewed_status, last_posted_time';
