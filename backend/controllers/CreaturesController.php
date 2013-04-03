@@ -117,13 +117,13 @@ class CreaturesController extends Controller
 		$file = CUploadedFile::getInstanceByName('file');
 		// Do your business ... save on file system for example,
 		// and/or do some db operations for example
-		$fileOld = $path.$name.'.jpg';
+		$fileOld = $path.$name.'s.jpg';
 		if(is_file($fileOld)) {
 			unlink($fileOld);
 		}
-		$file->saveAs($path.$name.'.jpg');
+		$file->saveAs($path.$name.'s.jpg');
 		// return the new file path
-		echo $publicPath.$name.'.jpg';
+		echo $publicPath.$name.'s.jpg';
 	}
 	
 	public function actionUpload( ) {

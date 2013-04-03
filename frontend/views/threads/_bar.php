@@ -11,13 +11,22 @@ function getNotification($userid)
 		      	var object = $.parseJSON(msg)
 		  		var length = object.length;
 		  		var notiHtml="";
+		  		var countNoti = 0;
 		  		for(var i = 0; i< length; i++) {
 		  			var noti = $.parseJSON($.parseJSON(msg)[i]);
 		  			var html = $('#notification_panel').html();
+		  			if(noti.viewed_status == 0){
+			  			countNoti++;
+			  			$('#notification_panel .notification_item').addClass('newNoti');
+		  			}
 		  			$('#notification_panel .thread_title_noti').text(noti.threads.thread_title);
 		  			$('#notification_panel a').attr('href','<? echo Yii::app()->createUrl('threads/view')?>&id='+noti.threads.thread_id);
 		  			notiHtml += $('#notification_panel').html();
 		  			$('#notification_panel').html(html);
+		  		}
+		  		if(countNoti > 0) {
+			  		$('#notification .noti_number').show();
+			  		$('#notification .noti_number').text(countNoti);
 		  		}
 		  		$('#notification').attr('title',notiHtml);
 	      },
@@ -30,7 +39,6 @@ function getNotification($userid)
 
 
 <?php 
-//Yii::app()->clientScript->registerScript('search', "getNotification();");
 $userid = Yii::app()->facebook->getUser();
 
 if ($userid)
@@ -56,7 +64,7 @@ if ($userid)
 		style="display: block; height: 30px; line-height: 30px;">
 
 		<a href="#"
-			style="color: #fff; text-decoration: none; font-size: 12px;">Có người
+			style="text-decoration: none; font-size: 12px;">Có người
 			đã viết bài mới trong chủ đề : <span
 			style="color: #fff; margin: 0; padding: 0; display: inline; font-size: 12px;"
 			class="thread_title_noti"></span>
@@ -116,8 +124,8 @@ if ($userid)
 				'options'=>array(
 						'animation'=>'grow',
 						'interactive'=>true,
-						'interactiveTolerance'=>'10000',
-						'timer'=>'10000',
+						'interactiveTolerance'=>'1110000',
+						'timer'=>'1110000',
 						'position'=>'top',
 						'onlyOne' => true,
 						),
@@ -137,6 +145,7 @@ if ($userid)
 		<div class="ver_line"></div>
 		<div id="notification">
 			<label>Thông báo</label>
+			<span class="noti_number" style="display:none"></span>
 		</div>
 		<div class="clearfix"></div>
 	</div>

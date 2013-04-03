@@ -67,10 +67,10 @@ class Creatures extends BaseCreatures
 			foreach( $userImages as $image ) {
 				if( is_file( $image["path"] ) ) {
 					if($i == 0)
-						$image["filename"] = $this->ID.".".$image['ext'];
+						$image["filename"] = $this->ID."s.".$image['ext'];
 					else
 					{
-						$image["filename"] = $this->ID."_".$i.".".$image['ext'];
+						$image["filename"] = $this->ID."_".$i."s.".$image['ext'];
 					}
 					$i++;
 					if( rename( $image["path"], $path.$image["filename"] ) ) {
