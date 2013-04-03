@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Vườn Quốc Gia'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
+	'Vườn Quốc Gia'=>array('admin'),
+	$model->park_name=>array('view','id'=>$model->id),
 	'Cập nhật',
 );
 
@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Cập nhật Vườn Quốc Gia <?php echo $model->park_name; ?></h1>
+<h3>Cập nhật Vườn Quốc Gia <?php echo $model->park_name; ?></h3>
 
 <?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

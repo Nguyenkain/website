@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Địa điểm phân bố'=>array('index'),
-	$model->province_id,
+	'Địa điểm phân bố'=>array('admin'),
+	$model->province_name,
 );
 
 $this->menu=array(
@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Địa điểm phân bố <?php echo $model->province_name; ?></h1>
+<h3>Thông tin địa điểm phân bố <?php echo $model->province_name; ?></h3>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,

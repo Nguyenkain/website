@@ -116,7 +116,7 @@ $js->registerScriptFile($baseUrl . '/js/egmap_handle.js');
 	<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType' => 'submit',
 			'type' => 'primary',
-			'label' => $model->isNewRecord ? 'Lưu mới' : 'Lưu',
+			'label' => $model->isNewRecord ? 'Tạo mới' : 'Lưu',
 		)); ?>
 </div>
 <?php $this->endWidget(); ?>

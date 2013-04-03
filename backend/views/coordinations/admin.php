@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-		'Coordinations'=>array('index'),
+		'Địa điểm phân bố'=>array('admin'),
 		'Quản lý',
 );
 
@@ -23,7 +23,7 @@ Yii::app()->clientScript->registerScript('search', "
 		");
 ?>
 
-<h1>Quản lý địa điểm phân bố</h1>
+<h3>Quản lý địa điểm phân bố</h3>
 
 <p>
 	Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>,
@@ -53,6 +53,18 @@ Yii::app()->clientScript->registerScript('search', "
 				'latitude',
 				array(
 						'class'=>'bootstrap.widgets.TbButtonColumn',
+						'template'=>'{view}{update}{delete}',
+						'buttons'=>array(
+								'view'=>array(
+										'label'=>'Xem',
+								),
+								'update'=>array(
+										'label'=>'Cập nhật',
+								),
+								'delete'=>array(
+										'label'=>'Xóa',
+								),
+						),
 						'deleteConfirmation'=>"js:'Bạn có chắc chắn muốn xóa dữ liệu này?'",
 				),
 		),
