@@ -56,6 +56,22 @@ class ThreadsController extends Controller
 		$model->thread_search = $thread->thread_title;
 		$dataProvider=new CActiveDataProvider('Posts');
 		$newPost = new Posts;
+		$success = false;
+		if(isset($_GET['success']))
+		{
+			$success = $_GET['success'];
+		}
+		if($success) {
+			$this->widget('application.extensions.PNotify.PNotify',array(
+					'options'=>array(
+							'title'=>'Thành công!',
+							'text'=>'Thông báo của bạn đã được gửi tới admin và sẽ được chúng tôi xử lý trong thời gian sớm nhất!',
+							'type'=>'success',
+							'closer'=>true,
+							'hide'=>true))
+			);
+		}
+
 		$this->render('view',array(
 				'dataProvider'=>$dataProvider,
 				'post_model'=>$model,
@@ -247,7 +263,7 @@ class ThreadsController extends Controller
 		$model = CJavaScript::jsonEncode($model);
 		echo $model;
 	}
-	
+
 	public function actionSetNotification()
 	{
 		$user_id = $_POST['facebook_id'];
@@ -310,7 +326,7 @@ class ThreadsController extends Controller
 			else
 				echo 'error';
 		}
-		
+
 	}
 
 	public function actionReport()
@@ -332,14 +348,8 @@ class ThreadsController extends Controller
 			$model->attributes=$_POST['Reports'];
 			if($model->save())
 				EQuickDlgs::checkDialogJsScript();
-			$this->redirect(array('view','id'=>$model->thread_id,'userid'=>$model->user_id,'success'=>true));
-			$this->widget('application.extensions.PNotify.PNotify',array(
-					'options'=>array(
-							'title'=>'Thành công!',
-							'text'=>'Báo cáo của bạn đã được gửi tới admin và sẽ được xử lý trong thời gian sớm nhất!',
-							'type'=>'success',
-							'closer'=>true,))
-			);
+
+			$this->redirect(array('view','id'=>$model->thread_id,'success'=>true));
 		}
 
 		$this->renderPartial('report', array("model" => $model, "data" => $data));
@@ -359,7 +369,7 @@ class ThreadsController extends Controller
 
 		} else {
 			$record = Users::model()->findByAttributes(array('facebook_id'=>$facebookID));
-				
+
 			if($record===null) {
 				try
 				{
