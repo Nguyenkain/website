@@ -1,3 +1,42 @@
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+<script
+	src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script
+	src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+<script>
+$('document').ready(function() {
+	window.setTimeout(function() {
+        $('#map_form').css('display', 'none').css('visibility', 'visible');
+      }, 500);
+	
+    $("#map_form" ).dialog({
+      autoOpen: false,
+    });
+    
+    $("#opener" ).click(function() {
+      $("#map_form" ).dialog( "open" );
+      $("#map_form" ).dialog({
+          title: "Bản đồ phân bố",
+          show: {
+            effect: "blind",
+            duration: 1000
+          },
+          hide: {
+            effect: "blind",
+            duration: 1000
+          },
+          resizable: false,
+          height: 500,
+          width: 500,
+        });
+    });
+  });
+</script>
+
+<button id="opener">Open Dialog</button>
+
 <?php 
 function checkUrl($url) {
 	@$headers = get_headers($url);
@@ -102,7 +141,7 @@ function getImageUrl($loai,$img){
 
 		<div class="creature_map">
 			<!-- display map -->
-			<div id="map_form">
+			<div id="map_form" style="height: 500px; visibility: hidden; width: 500px;">
 				<div id="map_canvas"></div>
 				<?php Yii::import('common.extensions.EGMap.*');
 				$gMap = new EGMap();
@@ -114,7 +153,7 @@ function getImageUrl($loai,$img){
 					$icon = new EGMapMarkerImage("http://".$_SERVER['HTTP_HOST'].Yii::app()->baseUrl."/images/forest.png");
 				if($model->Loai==3)
 					$icon = new EGMapMarkerImage("http://".$_SERVER['HTTP_HOST'].Yii::app()->baseUrl."/images/bee.png");
-				
+
 				$icon->setSize(32, 37);
 				$icon->setAnchor(16, 16.5);
 				$icon->setOrigin(0, 0);
@@ -144,7 +183,6 @@ function getImageUrl($loai,$img){
 				$gMap->renderMap();
 				?>
 			</div>
-			<div class="clearfix"></div>
 		</div>
 
 	</div>

@@ -680,7 +680,7 @@ ul.style2 a:hover {
 	padding: 5px;
 }
 
-#map_canvas {
+#nationalParks_content #map_canvas {
 	float: left;
 	width: 772px;
 	height: 500px;
