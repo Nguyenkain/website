@@ -1,41 +1,22 @@
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
-<script
-	src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script
-	src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+<script type="text/javascript"	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+
+<script	type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 
 <script>
-$('document').ready(function() {
-	window.setTimeout(function() {
-        $('#map_form').css('display', 'none').css('visibility', 'visible');
-      }, 500);
-	
-    $("#map_form" ).dialog({
-      autoOpen: false,
-    });
-    
-    $("#opener" ).click(function() {
-      $("#map_form" ).dialog( "open" );
-      $("#map_form" ).dialog({
-          title: "Bản đồ phân bố",
-          show: {
-            effect: "blind",
-            duration: 1000
-          },
-          hide: {
-            effect: "blind",
-            duration: 1000
-          },
-          resizable: false,
-          height: 500,
-          width: 500,
-        });
-    });
-  });
+$(document).ready(function() {
+	$("#opener").fancybox({
+		'width' : '75%',
+        'height' : '75%',
+        'autoScale' : false,
+        'transitionIn' : 'none',
+        'transitionOut' : 'none',
+        'type' : 'iframe'
+	});
+	});
 </script>
 
-<button id="opener">Open Dialog</button>
+<button id="opener" href="http://www.google.com/maps/place?source=uds&q=88&cid=2273293873063803114">Open Dialog</button>
 
 <?php 
 function checkUrl($url) {
@@ -141,7 +122,8 @@ function getImageUrl($loai,$img){
 
 		<div class="creature_map">
 			<!-- display map -->
-			<div id="map_form" style="height: 500px; visibility: hidden; width: 500px;">
+			<div id="map_form"
+				style="height: 500px; visibility: hidden; width: 500px;">
 				<div id="map_canvas"></div>
 				<?php Yii::import('common.extensions.EGMap.*');
 				$gMap = new EGMap();
