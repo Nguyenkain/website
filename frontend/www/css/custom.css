@@ -1270,6 +1270,24 @@ element.style {
 	padding: 10px;
 }
 
+/*Edit Form*/
+#thread_detail_container .post_body .post_edit_content
+{
+	padding: 10px;
+}
+
+#thread_detail_container .post_body .post_edit_content textarea
+{
+	width: 100%;
+}
+
+#thread_detail_container .post_body .post_edit_content .action_container
+{
+	padding: 10px 5px;
+	text-align: center;
+}
+
+
 #thread_detail_container .thread_control
 {
 	background-image: url("images/gradient-bg.png");

@@ -27,7 +27,7 @@ class ThreadsController extends Controller
 	{
 		return array(
 				array('allow',  // allow all users to perform 'index' and 'view' actions
-						'actions'=>array('index','view','post','getNotification','report','postToFacebook','newPost','login','setNotification','delete'),
+						'actions'=>array('index','view','post','getNotification','report','postToFacebook','newPost','login','setNotification','delete','editThread','editPost'),
 						'users'=>array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -354,6 +354,39 @@ class ThreadsController extends Controller
 		}
 
 	}
+	
+	public function actionEditThread() {
+		if(isset($_POST['Threads']))
+		{
+			$model = new Threads;
+			$model->attributes=$_POST['Threads'];
+			$thread_id = Yii::app()->request->getQuery("thread_id");
+			$thread = $this->loadModel($thread_id);
+			if($thread->saveAttributes(array('thread_content'=>$model->thread_content,'last_modified_time'=>time()))) {
+					echo $thread->toJSON();
+			}
+			else 
+				echo 'failed';
+		}
+	
+	}
+	
+	public function actionEditPost() {
+		if(isset($_POST['Posts']))
+		{
+			$post_id = $_POST['Posts']['post_id'];
+			$model = new Posts;
+			$model->attributes=$_POST['Posts'];
+			$post = Posts::model()->findByPk($post_id);
+			if($post->saveAttributes(array('post_content'=>$model->post_content))) {
+				echo $post->toJSON();
+			}
+			else
+				echo 'failed';
+		}
+	
+	}
+	
 
 	public function actionReport()
 	{
