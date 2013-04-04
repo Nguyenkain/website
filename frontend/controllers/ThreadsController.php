@@ -27,7 +27,7 @@ class ThreadsController extends Controller
 	{
 		return array(
 				array('allow',  // allow all users to perform 'index' and 'view' actions
-						'actions'=>array('index','view','post','getNotification','report','postToFacebook','newPost','login','setNotification'),
+						'actions'=>array('index','view','post','getNotification','report','postToFacebook','newPost','login','setNotification','delete'),
 						'users'=>array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -35,7 +35,7 @@ class ThreadsController extends Controller
 						'users'=>array('*'),
 				),
 				array('allow', // allow admin user to perform 'admin' and 'delete' actions
-						'actions'=>array('admin','delete'),
+						'actions'=>array('admin'),
 						'users'=>array('*'),
 				),
 				array('deny',  // deny all users
@@ -56,12 +56,53 @@ class ThreadsController extends Controller
 		$model->thread_search = $thread->thread_title;
 		$dataProvider=new CActiveDataProvider('Posts');
 		$newPost = new Posts;
+		$success = false;
+
+		//Check Facebook Login
+
+		$userid = Yii::app()->facebook->getUser();
+		if ($userid)
+		{
+			try
+			{
+				$record = Users::model()->findByAttributes(array('facebook_id'=>$userid));
+				$user_info	= Yii::app()->facebook->getInfo();
+				$url = Yii::app()->facebook->getLogoutUrl();
+				if($record!=null) {
+					Yii::app()->session['userid'] = $record->user_id;
+				}
+			}
+			catch(FacebookApiException $e){
+				$userid = NULL;
+				unset(Yii::app()->session['userid']);
+				Yii::app()->facebook->destroySession();
+			}
+		}
+
+		//END CHECK
+
+		if(isset($_GET['success']))
+		{
+			$success = $_GET['success'];
+		}
+		if($success) {
+			$this->widget('application.extensions.PNotify.PNotify',array(
+					'options'=>array(
+							'title'=>'Thành công!',
+							'text'=>'Thông báo của bạn đã được gửi tới admin và sẽ được chúng tôi xử lý trong thời gian sớm nhất!',
+							'type'=>'success',
+							'closer'=>true,
+							'hide'=>true))
+			);
+		}
+
 		$this->render('view',array(
 				'dataProvider'=>$dataProvider,
 				'post_model'=>$model,
 				'model' => $thread,
 				'thread_title'=>$thread->thread_title,
 				'newPost' => $newPost,
+				'userid' => $userid,
 		));
 	}
 
@@ -112,31 +153,32 @@ class ThreadsController extends Controller
 		));
 	}
 
-	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
-	 */
-	public function actionDelete($id)
-	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('reports'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
 
 	/**
 	 * Lists all models.
 	 */
 	public function actionIndex()
 	{
+		$userid = Yii::app()->facebook->getUser();
+
+		if ($userid)
+		{
+			try
+			{
+				$record = Users::model()->findByAttributes(array('facebook_id'=>$userid));
+				$user_info	= Yii::app()->facebook->getInfo();
+				$url = Yii::app()->facebook->getLogoutUrl();
+				if($record!=null) {
+					Yii::app()->session['userid'] = $record->user_id;
+				}
+			}
+			catch(FacebookApiException $e){
+				$userid = NULL;
+				unset(Yii::app()->session['userid']);
+				Yii::app()->facebook->destroySession();
+			}
+		}
+
 		$criteria = new CDbCriteria;
 
 		$criteria->select = array(
@@ -247,7 +289,7 @@ class ThreadsController extends Controller
 		$model = CJavaScript::jsonEncode($model);
 		echo $model;
 	}
-	
+
 	public function actionSetNotification()
 	{
 		$user_id = $_POST['facebook_id'];
@@ -310,7 +352,7 @@ class ThreadsController extends Controller
 			else
 				echo 'error';
 		}
-		
+
 	}
 
 	public function actionReport()
@@ -332,17 +374,62 @@ class ThreadsController extends Controller
 			$model->attributes=$_POST['Reports'];
 			if($model->save())
 				EQuickDlgs::checkDialogJsScript();
-			$this->redirect(array('view','id'=>$model->thread_id,'userid'=>$model->user_id,'success'=>true));
-			$this->widget('application.extensions.PNotify.PNotify',array(
-					'options'=>array(
-							'title'=>'Thành công!',
-							'text'=>'Báo cáo của bạn đã được gửi tới admin và sẽ được xử lý trong thời gian sớm nhất!',
-							'type'=>'success',
-							'closer'=>true,))
-			);
+
+			$this->redirect(array('view','id'=>$model->thread_id,'success'=>true));
 		}
 
 		$this->renderPartial('report', array("model" => $model, "data" => $data));
+	}
+
+	public function actionDelete()
+	{
+		//EQuickDlgs::render('_post',array());
+		$userid = Yii::app()->request->getQuery("user_id");
+		$threadId = Yii::app()->request->getQuery("thread_id");
+
+		$data = Users::model()->findByPk($userid);
+
+		$reportTypes = ReportTypes::model()->findByAttributes(array('report_type' => 'Xóa'));
+		$posts = Posts::model()->findByAttributes(array('thread_id' => $threadId));
+
+		if(count($posts) > 0)
+		{
+			$model = new Reports;
+			$model->user_id = $data->user_id;
+			$model->thread_id = $threadId;
+			$model->report_type_id = $reportTypes->report_type_id;
+			$model->comment = "Người viết yêu cầu xóa";
+			if($model->save())
+			{
+				$this->widget('application.extensions.PNotify.PNotify',array(
+						'options'=>array(
+								'title'=>'Thành công!',
+								'text'=>'Yêu cầu xóa của bạn đã được gửi đến admin, admin sẽ xử lý trong thời gian sớm nhất',
+								'type'=>'success',
+								'closer'=>true,
+								'hide'=>true))
+				);
+				EQuickDlgs::checkDialogJsScript();
+			}
+		}
+		else
+		{
+			if($this->loadModel($threadId)->delete())
+			{
+				EQuickDlgs::checkDialogJsScript();
+				$this->redirect(array('index'));
+				$this->widget('application.extensions.PNotify.PNotify',array(
+						'options'=>array(
+								'title'=>'Thành công!',
+								'text'=>'Bạn đã xóa thành công bài viết của bạn',
+								'type'=>'success',
+								'closer'=>true,
+								'hide'=>true))
+				);
+			}
+		}
+
+
 	}
 
 	public function actionLogin() {
@@ -359,7 +446,7 @@ class ThreadsController extends Controller
 
 		} else {
 			$record = Users::model()->findByAttributes(array('facebook_id'=>$facebookID));
-				
+
 			if($record===null) {
 				try
 				{
@@ -374,7 +461,10 @@ class ThreadsController extends Controller
 					$model->user_dob = $user_info['birthday'];
 					if(isset($user_info['location']))
 						$model->user_address = $user_info['location']['name'];
-					$model->addNewUser();
+					if($model->save()) {
+						$userid = $model->user_id;
+						Yii::app()->session['userid'] = $userid;
+					}
 				}
 				catch(FacebookApiException $e){
 					$facebookID = NULL;
@@ -408,6 +498,14 @@ class ThreadsController extends Controller
 			error_log($e);
 			echo 'error';
 		}
+		$this->widget('application.extensions.PNotify.PNotify',array(
+				'options'=>array(
+						'title'=>'Thành công!',
+						'text'=>'Bài viết của bạn đã được đăng trên facebook!',
+						'type'=>'success',
+						'closer'=>true,
+						'hide'=>true))
+		);
 		echo 'success';
 	}
 
