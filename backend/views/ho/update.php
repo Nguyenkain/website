@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Họ'=>array('index'),
-	$model->ID=>array('view','id'=>$model->ID),
+	$model->Viet=>array('view','id'=>$model->ID),
 	'Cập nhật',
 );
 
