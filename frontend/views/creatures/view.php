@@ -102,11 +102,11 @@ function getImageUrl($loai,$img){
 
 				// Setting up an icon for marker.
 				if($model->Loai==1)
-					$icon = new EGMapMarkerImage("http://".$_SERVER['HTTP_HOST'].Yii::app()->baseUrl."/images/bird.png");
+					$icon = new EGMapMarkerImage(Yii::app()->baseUrl."/images/bird.png");
 				if($model->Loai==2)
-					$icon = new EGMapMarkerImage("http://".$_SERVER['HTTP_HOST'].Yii::app()->baseUrl."/images/forest.png");
+					$icon = new EGMapMarkerImage(Yii::app()->baseUrl."/images/forest.png");
 				if($model->Loai==3)
-					$icon = new EGMapMarkerImage("http://".$_SERVER['HTTP_HOST'].Yii::app()->baseUrl."/images/bee.png");
+					$icon = new EGMapMarkerImage(Yii::app()->baseUrl."/images/bee.png");
 
 				$icon->setSize(32, 37);
 				$icon->setAnchor(16, 16.5);
@@ -119,8 +119,6 @@ function getImageUrl($loai,$img){
 					$lat = $place->latitude;
 					// Add Gmaker
 					$marker = new EGMapMarker($lat, $long, array('title' => $place->province_name, 'icon' => $icon));
-					$info_window = new EGMapInfoWindow($place->province_name);
-					$marker->addHtmlInfoWindow($info_window);
 					$gMap->addMarker($marker);
 				}
 
@@ -133,6 +131,8 @@ function getImageUrl($loai,$img){
 				$gMap->height = '200';
 				$gMap->setCenter($latitude, $longitude);
 				$gMap->zoom = 4;
+				$gMap->mapTypeId = EGMap::TYPE_HYBRID;
+				$gMap->disableDefaultUI = 'true';
 				$gMap->appendMapTo('#mini_canvas');
 				$gMap->renderMap();
 				?>
@@ -157,11 +157,11 @@ function getImageUrl($loai,$img){
 
 				// Setting up an icon for marker.
 				if($model->Loai==1)
-					$icon = new EGMapMarkerImage("http://".$_SERVER['HTTP_HOST'].Yii::app()->baseUrl."/images/bird.png");
+					$icon = new EGMapMarkerImage(Yii::app()->baseUrl."/images/bird.png");
 				if($model->Loai==2)
-					$icon = new EGMapMarkerImage("http://".$_SERVER['HTTP_HOST'].Yii::app()->baseUrl."/images/forest.png");
+					$icon = new EGMapMarkerImage(Yii::app()->baseUrl."/images/forest.png");
 				if($model->Loai==3)
-					$icon = new EGMapMarkerImage("http://".$_SERVER['HTTP_HOST'].Yii::app()->baseUrl."/images/bee.png");
+					$icon = new EGMapMarkerImage(Yii::app()->baseUrl."/images/bee.png");
 
 				$icon->setSize(32, 37);
 				$icon->setAnchor(16, 16.5);
@@ -186,6 +186,7 @@ function getImageUrl($loai,$img){
 
 				$gMap->width = '450';
 				$gMap->height = '600';
+				$gMap->mapTypeId = EGMap::TYPE_HYBRID;
 				$gMap->setCenter($latitude, $longitude);
 				$gMap->zoom = 6;
 				$gMap->appendMapTo('#map_canvas');
