@@ -1164,6 +1164,31 @@ element.style {
 	font-style: italic;
 }
 
+#creature_content .creature_map {
+	opacity: 0; 
+	position: absolute; 
+	left:-1000px; 
+	visibility:hidden;
+}
+
+#creature_mini_map{
+	position: relative;
+	float: right;
+	height: 200px;
+	width: 200px;
+	margin-right: 21px;
+}
+
+#creature_content #view_map_large {
+	float: center;
+	color: #0a6ba0;
+	text-align: right;
+	text-decoration: none;
+	font-weight: bold;
+	width: 200px;
+	background: url("../images/icon_fullsize.png") no-repeat scroll 1px 0px transparent;
+}
+
 .normal_name,.vn_name,.latin_name {
 	float: left;
 }
