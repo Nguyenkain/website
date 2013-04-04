@@ -57,20 +57,18 @@ function editPost(btn)
 
 function deletePost(btn)
 {
-	var form = $(btn).parents('form');
+	var form = $(btn).parents('.thread_block').find('form');
 	var postid = $(form).find('.postid').val();
 	$.ajax({
 	      type: "POST",
 	      url:   "<? echo Yii::app()->createUrl('threads/deletePost'); ?>",
 	      data:  {'post_id':postid},
 	      success: function(data){
-		      debugger;
 	    	  	if(data == 'success') {
 	    	  		$.fn.yiiListView.update("post_listview");
 	    	  	}
 	      },
 	      error: function(xhr){
-		      debugger;
 	      }
 	    });
 }
@@ -295,11 +293,11 @@ if(isset(Yii::app()->session['userid']))
 			'emptyText'=>false,
 			'afterAjaxUpdate' => 'js:function(id, data) {
 			$("#submitButton").removeAttr("disabled");
-			$("#post_listview").removeClass("hasLoading");
+			$("#thread_detail_container").removeClass("hasLoading");
 			$(".comment_editor textarea").val("");
 }',
 			'beforeAjaxUpdate' => 'js:function(id) {
-			$("#post_listview").addClass("hasLoading");
+			$("#thread_detail_container").addClass("hasLoading");
 			$("#submitButton").attr("disabled","disabled");
 }',
 	))?>
@@ -342,7 +340,6 @@ if($userid) {
 				'ajaxOptions' => array(
 			            'type' => 'POST',
 			            'success' => 'function(data) {
-								debugger;
 								$.fn.yiiListView.update("post_listview");
 						}',
 						'error' => 'function(err) {debugger;}',

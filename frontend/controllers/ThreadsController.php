@@ -474,7 +474,6 @@ class ThreadsController extends Controller
 
 		if(Posts::model()->findByPk($postId)->delete())
 		{
-			EQuickDlgs::checkDialogJsScript();
 			$this->widget('application.extensions.PNotify.PNotify',array(
 					'options'=>array(
 							'title'=>'Thành công!',
