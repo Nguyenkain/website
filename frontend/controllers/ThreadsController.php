@@ -470,7 +470,7 @@ class ThreadsController extends Controller
 	public function actionDeletePost()
 	{
 		//EQuickDlgs::render('_post',array());
-		$postId = Yii::app()->request->getQuery("post_id");
+		$postId = $_POST['post_id'];
 
 		if(Posts::model()->findByPk($postId)->delete())
 		{

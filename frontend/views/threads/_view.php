@@ -30,8 +30,8 @@
 				?>
 				
 				<?php echo $form->textArea($data,'post_content',array('rows'=>6, 'cols'=>50, 'placeholder'=>'Nhập nội dung'));
-				echo $form->hiddenField($data,'user_id');
-				echo $form->hiddenField($data,'post_id');
+				echo $form->hiddenField($data,'user_id',array('class'=>'userid'));
+				echo $form->hiddenField($data,'post_id',array('class'=>'postid'));
 				?>
 				
 				<div class="action_container">
@@ -79,6 +79,9 @@
 			?>
 		<div class="button">
 			<a href="javascript:;" onclick="showEditor(this);">Sửa</a>
+		</div>
+		<div class="button">
+			<a href="javascript:;" onclick="deletePost(this);">Xóa</a>
 		</div>
 		<?php }?>
 	</div>

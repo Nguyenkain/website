@@ -55,6 +55,26 @@ function editPost(btn)
 	    });
 }
 
+function deletePost(btn)
+{
+	var form = $(btn).parents('form');
+	var postid = $(form).find('.postid').val();
+	$.ajax({
+	      type: "POST",
+	      url:   "<? echo Yii::app()->createUrl('threads/deletePost'); ?>",
+	      data:  {'post_id':postid},
+	      success: function(data){
+		      debugger;
+	    	  	if(data == 'success') {
+	    	  		$.fn.yiiListView.update("post_listview");
+	    	  	}
+	      },
+	      error: function(xhr){
+		      debugger;
+	      }
+	    });
+}
+
 </script>
 
 <script>
