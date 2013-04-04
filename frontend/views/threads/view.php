@@ -117,6 +117,20 @@ if(isset(Yii::app()->session['userid']))
 					if(checkUrl($link))
 						echo CHtml::imageButton($link,array('style' => 'width:80px;height:auto;margin-right:10px'));
 				}
+				
+				// import the extension
+				Yii::import('ext.jqPrettyPhoto');
+				
+				$options = array(
+						'slideshow'=>5000,
+						'autoplay_slideshow'=>false,
+						'show_title'=>false,
+						'default_width' => 500,
+						'allow_resize' => true,
+				);
+				// call addPretty static function
+				jqPrettyPhoto::addPretty('.post_entry_image input',jqPrettyPhoto::PRETTY_GALLERY,jqPrettyPhoto::THEME_FACEBOOK, $options);
+				
 				?>
 			</div>
 			<div class="post_edit_content" style="display:none">

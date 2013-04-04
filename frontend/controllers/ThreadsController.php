@@ -27,7 +27,7 @@ class ThreadsController extends Controller
 	{
 		return array(
 				array('allow',  // allow all users to perform 'index' and 'view' actions
-						'actions'=>array('index','view','post','getNotification','report','postToFacebook','newPost','login','setNotification','delete','editThread','editPost'),
+						'actions'=>array('index','view','post','getNotification','report','postToFacebook','newPost','login','setNotification','delete','editThread','editPost','deletePost'),
 						'users'=>array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -356,7 +356,7 @@ class ThreadsController extends Controller
 		}
 
 	}
-	
+
 	public function actionEditThread() {
 		if(isset($_POST['Threads']))
 		{
@@ -365,14 +365,14 @@ class ThreadsController extends Controller
 			$thread_id = Yii::app()->request->getQuery("thread_id");
 			$thread = $this->loadModel($thread_id);
 			if($thread->saveAttributes(array('thread_content'=>$model->thread_content,'last_modified_time'=>time()))) {
-					echo $thread->toJSON();
+				echo $thread->toJSON();
 			}
-			else 
+			else
 				echo 'failed';
 		}
-	
+
 	}
-	
+
 	public function actionEditPost() {
 		if(isset($_POST['Posts']))
 		{
@@ -386,9 +386,9 @@ class ThreadsController extends Controller
 			else
 				echo 'failed';
 		}
-	
+
 	}
-	
+
 
 	public function actionReport()
 	{
@@ -425,7 +425,7 @@ class ThreadsController extends Controller
 		$data = Users::model()->findByPk($userid);
 
 		$reportTypes = ReportTypes::model()->findByAttributes(array('report_type' => 'Xóa'));
-		$posts = Posts::model()->findByAttributes(array('thread_id' => $threadId));
+		$posts = Posts::model()->findAllByAttributes(array('thread_id' => $threadId));
 
 		if(count($posts) > 0)
 		{
@@ -462,6 +462,28 @@ class ThreadsController extends Controller
 								'hide'=>true))
 				);
 			}
+		}
+
+
+	}
+
+	public function actionDeletePost()
+	{
+		//EQuickDlgs::render('_post',array());
+		$postId = Yii::app()->request->getQuery("post_id");
+
+		if(Posts::model()->findByPk($postId)->delete())
+		{
+			EQuickDlgs::checkDialogJsScript();
+			$this->widget('application.extensions.PNotify.PNotify',array(
+					'options'=>array(
+							'title'=>'Thành công!',
+							'text'=>'Bạn đã xóa thành công bài viết của bạn',
+							'type'=>'success',
+							'closer'=>true,
+							'hide'=>true))
+			);
+			echo 'success';
 		}
 
 
