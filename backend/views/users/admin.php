@@ -65,6 +65,8 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
             'toggleAction'=>'site/toggleBan/',
             'name' => 'ban_status',
             'header' => 'Trạng thái ban',
+			'checkedButtonLabel' => 'Bỏ ban',
+			'uncheckedButtonLabel' => 'Ban',
             'htmlOptions'=>array(
 					'width'=>'100px',
 			),

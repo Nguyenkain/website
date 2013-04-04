@@ -11,7 +11,11 @@ $this->widget('bootstrap.widgets.TbGridView',array(
 	'emptyText' => 'Không có kết quả nào được tìm thấy',
 	'columns'=>array(
 		'post_id',
-		'user_id',
+		array(
+			'name' => 'user_search',
+			'header'=>'Người viết',
+			'value'=>'$data->users',
+        ),
 		array(
 			'name' => 'thread_search',
 			'header' => 'Chủ đề',

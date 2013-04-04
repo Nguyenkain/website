@@ -1,3 +1,13 @@
+<?php 
+function checkUrl($url) {
+	@$headers = get_headers($url);
+	if (preg_match('/^HTTP\/\d\.\d\s+(200|301|302)/', $headers[0])){
+		return true;
+	}
+	else return false;
+}?>
+
+
 <script>
 
 
@@ -41,6 +51,24 @@ function editPost(btn)
 	      },
 	      error: function(xhr){
 		      debugger;
+	      }
+	    });
+}
+
+function deletePost(btn)
+{
+	var form = $(btn).parents('.thread_block').find('form');
+	var postid = $(form).find('.postid').val();
+	$.ajax({
+	      type: "POST",
+	      url:   "<? echo Yii::app()->createUrl('threads/deletePost'); ?>",
+	      data:  {'post_id':postid},
+	      success: function(data){
+	    	  	if(data == 'success') {
+	    	  		$.fn.yiiListView.update("post_listview");
+	    	  	}
+	      },
+	      error: function(xhr){
 	      }
 	    });
 }
@@ -99,6 +127,34 @@ if(isset(Yii::app()->session['userid']))
 		<div class="post_body">
 			<div class="post_entry_content">
 				<?php echo $model->thread_content; ?>
+			</div>
+			<div class="post_entry_image">
+				<?php foreach ($images as $image)
+				{
+					$link = Yii::app()->request->getBaseUrl(true).$image->image_link;
+					if(checkUrl($link))
+				?>
+					<a class="image_thread" href="<?php echo $link?>">
+					<?php 
+						echo CHtml::image($link,"Ảnh chủ đề",array('style' => 'width:80px;height:auto;margin-right:10px'));
+					?>
+					</a>
+				<?php }
+				
+				// import the extension
+				Yii::import('ext.jqPrettyPhoto');
+				
+				$options = array(
+						'slideshow'=>5000,
+						'autoplay_slideshow'=>false,
+						'show_title'=>false,
+						'default_width' => 500,
+						'allow_resize' => true,
+				);
+				// call addPretty static function
+				jqPrettyPhoto::addPretty('.post_entry_image a.image_thread',jqPrettyPhoto::PRETTY_GALLERY,jqPrettyPhoto::THEME_FACEBOOK, $options);
+				
+				?>
 			</div>
 			<div class="post_edit_content" style="display:none">
 			<?php if($userid && ($user_id==$model->user_id)) 
@@ -237,11 +293,11 @@ if(isset(Yii::app()->session['userid']))
 			'emptyText'=>false,
 			'afterAjaxUpdate' => 'js:function(id, data) {
 			$("#submitButton").removeAttr("disabled");
-			$("#post_listview").removeClass("hasLoading");
+			$("#thread_detail_container").removeClass("hasLoading");
 			$(".comment_editor textarea").val("");
 }',
 			'beforeAjaxUpdate' => 'js:function(id) {
-			$("#post_listview").addClass("hasLoading");
+			$("#thread_detail_container").addClass("hasLoading");
 			$("#submitButton").attr("disabled","disabled");
 }',
 	))?>
@@ -284,7 +340,6 @@ if($userid) {
 				'ajaxOptions' => array(
 			            'type' => 'POST',
 			            'success' => 'function(data) {
-								debugger;
 								$.fn.yiiListView.update("post_listview");
 						}',
 						'error' => 'function(err) {debugger;}',

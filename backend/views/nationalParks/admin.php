@@ -43,20 +43,16 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 		'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 		'emptyText' => 'Không có kết quả nào được tìm thấy',
 		'columns' => array(
-			'id',
+			array(
+				'name' => 'id',
+				'htmlOptions' => array('width' => '30px'),
+				),
 			array(
 				'name' => 'park_name',
 				'value' => '$data->park_name',
 				'htmlOptions' => array('width' => '140px'),
 				),
-			array(
-				'name' => 'park_description',
-				'value' => 'substr($data->park_description, 0, 600)',
-				),
-			array(
-				'name' => 'longitude',
-				'htmlOptions' => array('width' => '60px'),
-				),
+			'longitude',
 			'latitude',
 			array('class' => 'bootstrap.widgets.TbButtonColumn',
 				'template'=>'{view}{update}{delete}',

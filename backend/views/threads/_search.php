@@ -5,8 +5,6 @@
 
 	<?php echo $form->textFieldRow($model,'thread_id',array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldRow($model,'last_modified_time',array('class'=>'span5')); ?>
-
 	<?php echo $form->textFieldRow($model,'user_id',array('class'=>'span5')); ?>
 
 	<?php echo $form->textFieldRow($model,'thread_title',array('class'=>'span5','maxlength'=>150)); ?>
