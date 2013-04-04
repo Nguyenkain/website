@@ -54,6 +54,7 @@ Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi 
 		'name'=>'Loai',
 		
 		'filter' => CHtml::ActiveDropDownList($model, 'Loai', CHtml::listData(Loai::model()->findAll(), 'ID', 'Loai'), array('empty'=>'',
+				'id'=>'Loai_Creatures',
 				'ajax' => array(
 			 	'type' => 'POST',
 				'dataType' => 'json',
