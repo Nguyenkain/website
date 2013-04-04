@@ -116,7 +116,7 @@ if(isset(Yii::app()->session['userid']))
 					$link = Yii::app()->request->getBaseUrl(true).$image->image_link;
 					if(checkUrl($link))
 				?>
-					<a href="<?php echo $link?>">
+					<a class="image_thread" href="<?php echo $link?>">
 					<?php 
 						echo CHtml::image($link,"Ảnh chủ đề",array('style' => 'width:80px;height:auto;margin-right:10px'));
 					?>
@@ -134,7 +134,7 @@ if(isset(Yii::app()->session['userid']))
 						'allow_resize' => true,
 				);
 				// call addPretty static function
-				jqPrettyPhoto::addPretty('.post_entry_image a',jqPrettyPhoto::PRETTY_GALLERY,jqPrettyPhoto::THEME_FACEBOOK, $options);
+				jqPrettyPhoto::addPretty('.post_entry_image a.image_thread',jqPrettyPhoto::PRETTY_GALLERY,jqPrettyPhoto::THEME_FACEBOOK, $options);
 				
 				?>
 			</div>
