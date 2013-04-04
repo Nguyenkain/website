@@ -1,23 +1,3 @@
-
-<script type="text/javascript"	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-
-<script	type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-
-<script>
-$(document).ready(function() {
-	$("#opener").fancybox({
-		'width' : '75%',
-        'height' : '75%',
-        'autoScale' : false,
-        'transitionIn' : 'none',
-        'transitionOut' : 'none',
-        'type' : 'iframe'
-	});
-	});
-</script>
-
-<button id="opener" href="http://www.google.com/maps/place?source=uds&q=88&cid=2273293873063803114">Open Dialog</button>
-
 <?php 
 function checkUrl($url) {
 	@$headers = get_headers($url);
@@ -122,8 +102,7 @@ function getImageUrl($loai,$img){
 
 		<div class="creature_map">
 			<!-- display map -->
-			<div id="map_form"
-				style="height: 500px; visibility: hidden; width: 500px;">
+			<div id="map_form">
 				<div id="map_canvas"></div>
 				<?php Yii::import('common.extensions.EGMap.*');
 				$gMap = new EGMap();
@@ -166,6 +145,15 @@ function getImageUrl($loai,$img){
 				?>
 			</div>
 		</div>
+
+		<?php
+		//put fancybox on page
+		$this->widget('application.extensions.fancybox.EFancyBox', array(
+				'target'=>'.test',
+				'config'=>array(),
+		));
+		?>
+		<button class="test" href="#map_canvas">TEST</button>
 
 	</div>
 </div>
