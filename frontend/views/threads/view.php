@@ -1,3 +1,13 @@
+<?php 
+function checkUrl($url) {
+	@$headers = get_headers($url);
+	if (preg_match('/^HTTP\/\d\.\d\s+(200|301|302)/', $headers[0])){
+		return true;
+	}
+	else return false;
+}?>
+
+
 <script>
 
 
@@ -99,6 +109,15 @@ if(isset(Yii::app()->session['userid']))
 		<div class="post_body">
 			<div class="post_entry_content">
 				<?php echo $model->thread_content; ?>
+			</div>
+			<div class="post_entry_image">
+				<?php foreach ($images as $image)
+				{
+					$link = Yii::app()->request->getBaseUrl(true).$image->image_link;
+					if(checkUrl($link))
+						echo CHtml::imageButton($link,array('style' => 'width:80px;height:auto;margin-right:10px'));
+				}
+				?>
 			</div>
 			<div class="post_edit_content" style="display:none">
 			<?php if($userid && ($user_id==$model->user_id)) 

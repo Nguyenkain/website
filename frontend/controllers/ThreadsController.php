@@ -53,6 +53,7 @@ class ThreadsController extends Controller
 		//$model=Posts::model()->findAllByAttributes(array('thread_id'=>$id));
 		$model = Posts::model();
 		$thread = $this->loadModel($id);
+		$images = Thread_images::model()->findAllByAttributes(array('thread_id' => $thread->thread_id));
 		$model->thread_search = $thread->thread_title;
 		$dataProvider=new CActiveDataProvider('Posts');
 		$newPost = new Posts;
@@ -92,7 +93,7 @@ class ThreadsController extends Controller
 							'text'=>'Thông báo của bạn đã được gửi tới admin và sẽ được chúng tôi xử lý trong thời gian sớm nhất!',
 							'type'=>'success',
 							'closer'=>true,
-							'hide'=>true))
+							'hide'=>true,))
 			);
 		}
 
@@ -103,6 +104,7 @@ class ThreadsController extends Controller
 				'thread_title'=>$thread->thread_title,
 				'newPost' => $newPost,
 				'userid' => $userid,
+				'images' => $images,
 		));
 	}
 
