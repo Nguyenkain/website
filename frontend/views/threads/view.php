@@ -115,8 +115,13 @@ if(isset(Yii::app()->session['userid']))
 				{
 					$link = Yii::app()->request->getBaseUrl(true).$image->image_link;
 					if(checkUrl($link))
-						echo CHtml::imageButton($link,array('style' => 'width:80px;height:auto;margin-right:10px'));
-				}
+				?>
+					<a href="<?php echo $link?>">
+					<?php 
+						echo CHtml::image($link,array('style' => 'width:80px;height:auto;margin-right:10px'));
+					?>
+					</a>
+				<?php }
 				
 				// import the extension
 				Yii::import('ext.jqPrettyPhoto');
@@ -129,7 +134,7 @@ if(isset(Yii::app()->session['userid']))
 						'allow_resize' => true,
 				);
 				// call addPretty static function
-				jqPrettyPhoto::addPretty('.post_entry_image input',jqPrettyPhoto::PRETTY_GALLERY,jqPrettyPhoto::THEME_FACEBOOK, $options);
+				jqPrettyPhoto::addPretty('.post_entry_image a',jqPrettyPhoto::PRETTY_GALLERY,jqPrettyPhoto::THEME_FACEBOOK, $options);
 				
 				?>
 			</div>
