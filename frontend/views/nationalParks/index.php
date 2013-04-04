@@ -56,6 +56,7 @@
 
 		$gMap->width = '100%';
 		$gMap->height = '100%';
+		$gMap->mapTypeId = EGMap::TYPE_HYBRID;
 		$gMap->setCenter($latitude, $longitude);
 		$gMap->zoom = 7;
 		$gMap->appendMapTo('#map_canvas');	

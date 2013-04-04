@@ -1,3 +1,11 @@
+<script type="text/javascript">
+		function genmap(){ 
+		   setTimeout( function() {
+		          google.maps.event.trigger( $('#map_canvas'), 'resize'); }, 1000
+		           );
+		       }
+</script>
+
 <?php 
 function checkUrl($url) {
 	@$headers = get_headers($url);
@@ -92,6 +100,52 @@ function getImageUrl($loai,$img){
 
 		</div>
 
+		<div id="creature_mini_map">
+			<!-- display map -->
+			<div id="mini_canvas"></div>
+			<?php 
+			Yii::import('common.extensions.EGMap.*');
+			$gMap = new EGMap();
+
+			// Setting up an icon for marker.
+			if($model->Loai==1)
+				$icon = new EGMapMarkerImage(Yii::app()->baseUrl."/images/bird.png");
+			if($model->Loai==2)
+				$icon = new EGMapMarkerImage(Yii::app()->baseUrl."/images/forest.png");
+			if($model->Loai==3)
+				$icon = new EGMapMarkerImage(Yii::app()->baseUrl."/images/bee.png");
+
+			$icon->setSize(32, 37);
+			$icon->setAnchor(16, 16.5);
+			$icon->setOrigin(0, 0);
+
+			// Add marker
+			$coordinations=$model->rProvince;
+			foreach ($coordinations as $place){
+				$long = $place->longitude;
+				$lat = $place->latitude;
+				// Add Gmaker
+				$marker = new EGMapMarker($lat, $long, array('title' => $place->province_name, 'icon' => $icon));
+				$gMap->addMarker($marker);
+			}
+
+			// center the map
+			// wherever you want
+			$latitude = 16.043609024612344;
+			$longitude = 105.80669254999998;
+
+			$gMap->width = '200';
+			$gMap->height = '200';
+			$gMap->setCenter($latitude, $longitude);
+			$gMap->zoom = 4;
+			$gMap->mapTypeId = EGMap::TYPE_HYBRID;
+			$gMap->disableDefaultUI = 'true';
+			$gMap->appendMapTo('#mini_canvas');
+			$gMap->renderMap();
+			?>
+			<button id="view_map_large" href="#map_canvas">Xem bản đồ phân bố lớn</button>
+		</div>
+
 		<div class="clearfix"></div>
 
 		<div class="creature_content">
@@ -102,51 +156,55 @@ function getImageUrl($loai,$img){
 
 		<div class="creature_map">
 			<!-- display map -->
-			<div id="map_form">
-				<div id="map_canvas"></div>
-				<?php Yii::import('common.extensions.EGMap.*');
-				$gMap = new EGMap();
+			<div id="map_canvas"></div>
+			<?php 
+			Yii::import('common.extensions.EGMap.*');
+			$gMap = new EGMap();
 
-				// Setting up an icon for marker.
-				if($model->Loai==1)
-					$icon = new EGMapMarkerImage("http://".$_SERVER['HTTP_HOST'].Yii::app()->baseUrl."/images/bird.png");
-				if($model->Loai==2)
-					$icon = new EGMapMarkerImage("http://".$_SERVER['HTTP_HOST'].Yii::app()->baseUrl."/images/forest.png");
-				if($model->Loai==3)
-					$icon = new EGMapMarkerImage("http://".$_SERVER['HTTP_HOST'].Yii::app()->baseUrl."/images/bee.png");
-				
-				$icon->setSize(32, 37);
-				$icon->setAnchor(16, 16.5);
-				$icon->setOrigin(0, 0);
+			// Setting up an icon for marker.
+			if($model->Loai==1)
+				$icon = new EGMapMarkerImage(Yii::app()->baseUrl."/images/bird.png");
+			if($model->Loai==2)
+				$icon = new EGMapMarkerImage(Yii::app()->baseUrl."/images/forest.png");
+			if($model->Loai==3)
+				$icon = new EGMapMarkerImage(Yii::app()->baseUrl."/images/bee.png");
 
-				// Add marker
-				$coordinations=$model->rProvince;
-				foreach ($coordinations as $place){
-					$long = $place->longitude;
-					$lat = $place->latitude;
-					// Add Gmaker
-					$marker = new EGMapMarker($lat, $long, array('title' => $place->province_name, 'icon' => $icon));
-					$info_window = new EGMapInfoWindow($place->province_name);
-					$marker->addHtmlInfoWindow($info_window);
-					$gMap->addMarker($marker);
-				}
+			$icon->setSize(32, 37);
+			$icon->setAnchor(16, 16.5);
+			$icon->setOrigin(0, 0);
 
-				// center the map
-				// wherever you want
-				$latitude = 16.043609024612344;
-				$longitude = 105.80669254999998;
+			// Add marker
+			$coordinations=$model->rProvince;
+			foreach ($coordinations as $place){
+				$long = $place->longitude;
+				$lat = $place->latitude;
+				// Add Gmaker
+				$marker = new EGMapMarker($lat, $long, array('title' => $place->province_name, 'icon' => $icon));
+				$info_window = new EGMapInfoWindow($place->province_name);
+				$marker->addHtmlInfoWindow($info_window);
+				$gMap->addMarker($marker);
+			}
 
-				$gMap->width = '100%';
-				$gMap->height = '100%';
-				$gMap->setCenter($latitude, $longitude);
-				$gMap->zoom = 6;
-				$gMap->appendMapTo('#map_canvas');
-				$gMap->renderMap();
-				?>
-			</div>
-			<div class="clearfix"></div>
+			// center the map
+			// wherever you want
+			$latitude = 16.043609024612344;
+			$longitude = 105.80669254999998;
+
+			$gMap->width = '450';
+			$gMap->height = '600';
+			$gMap->mapTypeId = EGMap::TYPE_HYBRID;
+			$gMap->setCenter($latitude, $longitude);
+			$gMap->zoom = 6;
+			$gMap->appendMapTo('#map_canvas');
+			$gMap->renderMap();
+
+			//put fancybox on page
+			$this->widget('application.extensions.fancybox.EFancyBox', array(
+					'target'=>'#view_map_large',
+					'config'=>array(),
+			));
+			?>
 		</div>
-
 	</div>
 </div>
 
