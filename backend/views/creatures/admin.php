@@ -53,7 +53,8 @@ Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi 
 					
 		'name'=>'Loai',
 		
-		'filter' => CHtml::ActiveDropDownList($model, 'Loai', CHtml::listData(Loai::model()->findAll(), 'ID', 'Loai'), array('empty'=>'',
+		/* 'filter' => CHtml::ActiveDropDownList($model, 'Loai', CHtml::listData(Loai::model()->findAll(), 'ID', 'Loai'), array('empty'=>'',
+				'id'=>'Loai_Creatures',
 				'ajax' => array(
 			 	'type' => 'POST',
 				'dataType' => 'json',
@@ -69,7 +70,7 @@ Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi 
 }',
 				)
 			)
-		),
+		), */
 		'value'=>'$data->rLoai',
 		'htmlOptions'=>array(
 		'width'=>'110px',
@@ -78,7 +79,7 @@ Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi 
 		array(
 		'name'=>'Nhom',
 		
-		'filter' => CHtml::ActiveDropDownList($model, 'Nhom', CHtml::listData(Nhom::model()->findAll(), 'ID', 'Viet'), array('empty'=>'',
+		/* 'filter' => CHtml::ActiveDropDownList($model, 'Nhom', CHtml::listData(Nhom::model()->findAll(), 'ID', 'Viet'), array('empty'=>'',
 				'id'=>'Nhom_Creatures',
 				'ajax' => array(
 			 	'type' => 'POST',
@@ -91,7 +92,7 @@ Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi 
 				$("#Ho_Creatures").html(data.dropdownHo);
 				$.fn.yiiGridView.update("creatures-grid");
 
-}'	,))),
+}'	,))), */
 		'value'=>'$data->rNhom',
 		'htmlOptions'=>array(
 		'width'=>'130px',
@@ -99,7 +100,7 @@ Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi 
 		array(
 		'name'=>'Bo',
 		
-		'filter' => CHtml::ActiveDropDownList($model, 'Bo', CHtml::listData(Bo::model()->findAll(), 'ID', 'Viet'), array('empty'=>'',
+		/* 'filter' => CHtml::ActiveDropDownList($model, 'Bo', CHtml::listData(Bo::model()->findAll(), 'ID', 'Viet'), array('empty'=>'',
 		'id'=>'Bo_Creatures',
 		'ajax' => array(
 			 	'type' => 'POST',
@@ -111,7 +112,7 @@ Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi 
 				$("#Ho_Creatures").html(data.dropdownHo);
 				$.fn.yiiGridView.update("creatures-grid");
 
-}'))),
+}'))), */
 		'value'=>'$data->rBo',
 		'htmlOptions'=>array(
 		'width'=>'130px',
@@ -120,7 +121,7 @@ Có thể nhập các phép so sánh (<, <=, >, >=, <> hoặc =) trước mỗi 
 array(
 		'name' => 'Ho',
 
-		'filter' => CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet'),
+		/* 'filter' => CHtml::listData(Ho::model()->findAll(), 'ID', 'Viet'), */
 		'value'=>'$data->rHo',
 		'htmlOptions'=>array(
 		'width'=>'130px',
