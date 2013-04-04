@@ -1,3 +1,13 @@
+<?php 
+function checkUrl($url) {
+	@$headers = get_headers($url);
+	if (preg_match('/^HTTP\/\d\.\d\s+(200|301|302)/', $headers[0])){
+		return true;
+	}
+	else return false;
+}?>
+
+
 <script>
 
 
@@ -11,6 +21,56 @@ function postToFacebook($fbId,$threadId)
 	      success: function(msg){
 	      },
 	      error: function(xhr){
+	      }
+	    });
+}
+
+function showEditor(btn)
+{
+	$(btn).parents('.thread_block').find('.post_entry_content').hide();
+	$(btn).parents('.thread_block').find('.post_edit_content').show();
+}
+
+function closeEditor(btn)
+{
+	$(btn).parents('.thread_block').find('.post_entry_content').show();
+	$(btn).parents('.thread_block').find('.post_edit_content').hide();
+}
+
+function editPost(btn)
+{
+	var form = $(btn).parents('form');
+	$.ajax({
+	      type: "POST",
+	      url:    form.attr("action"),
+	      data:  form.serialize(),
+	      success: function(data){
+	    	  	$model = $.parseJSON(data);
+				$(btn).parents(".thread_block").find(".post_entry_content").html($model.post_content);
+				closeEditor(btn);
+	      },
+	      error: function(xhr){
+		      debugger;
+	      }
+	    });
+}
+
+function deletePost(btn)
+{
+	var form = $(btn).parents('form');
+	var postid = $(form).find('.postid').val();
+	$.ajax({
+	      type: "POST",
+	      url:   "<? echo Yii::app()->createUrl('threads/deletePost'); ?>",
+	      data:  {'post_id':postid},
+	      success: function(data){
+		      debugger;
+	    	  	if(data == 'success') {
+	    	  		$.fn.yiiListView.update("post_listview");
+	    	  	}
+	      },
+	      error: function(xhr){
+		      debugger;
 	      }
 	    });
 }
@@ -70,6 +130,93 @@ if(isset(Yii::app()->session['userid']))
 			<div class="post_entry_content">
 				<?php echo $model->thread_content; ?>
 			</div>
+			<div class="post_entry_image">
+				<?php foreach ($images as $image)
+				{
+					$link = Yii::app()->request->getBaseUrl(true).$image->image_link;
+					if(checkUrl($link))
+				?>
+					<a class="image_thread" href="<?php echo $link?>">
+					<?php 
+						echo CHtml::image($link,"Ảnh chủ đề",array('style' => 'width:80px;height:auto;margin-right:10px'));
+					?>
+					</a>
+				<?php }
+				
+				// import the extension
+				Yii::import('ext.jqPrettyPhoto');
+				
+				$options = array(
+						'slideshow'=>5000,
+						'autoplay_slideshow'=>false,
+						'show_title'=>false,
+						'default_width' => 500,
+						'allow_resize' => true,
+				);
+				// call addPretty static function
+				jqPrettyPhoto::addPretty('.post_entry_image a.image_thread',jqPrettyPhoto::PRETTY_GALLERY,jqPrettyPhoto::THEME_FACEBOOK, $options);
+				
+				?>
+			</div>
+			<div class="post_edit_content" style="display:none">
+			<?php if($userid && ($user_id==$model->user_id)) 
+			{
+			?>
+				<?php  $form = $this -> beginWidget('bootstrap.widgets.TbActiveForm', array(
+						'id' => 'thread_edit_form',
+						'type' => 'horizontal',
+				));
+				?>
+				
+				<?php echo $form->textArea($model,'thread_content',array('rows'=>6, 'cols'=>50, 'placeholder'=>'Nhập nội dung'));?>
+				
+				<div class="action_container">
+
+					<?php 
+		
+					$this->widget('bootstrap.widgets.TbButton',array(
+						'label' => 'Gửi',
+						'type' => 'primary',
+						'url' => Yii::app()->createUrl('threads/editThread', array('thread_id' => $model->thread_id, 'userid' => $user_id)),
+						'size' => 'small',
+						'buttonType' => 'ajaxSubmit',
+						'ajaxOptions' => array(
+					            'type' => 'POST',
+					            'success' => 'function(data) {
+										$model = $.parseJSON(data);
+										$("#submitEditButton").parents(".thread_block").find(".post_entry_content").html($model.thread_content);
+										closeEditor($("#submitEditButton"));
+								}',
+								'error' => 'function(err) {}',
+					            'processData' => false,
+					    ),
+						'htmlOptions' => array(
+							'id'=>'submitEditButton',
+						),
+				));
+		
+				?>
+				<?php 
+		
+					$this->widget('bootstrap.widgets.TbButton',array(
+						'label' => 'Hủy',
+						'size' => 'small',
+						'buttonType' => 'reset',
+						'htmlOptions' => array(
+								'onclick'=>'closeEditor(this)',
+						),
+				));
+		
+				?>
+		
+				</div>
+				
+				
+				
+				<?php $this->endWidget(); 
+				}?>
+			
+			</div>
 		</div>
 		<div class="clearfix"></div>
 		<div class="thread_control">
@@ -122,6 +269,18 @@ if(isset(Yii::app()->session['userid']))
 				?>
 
 			</div>
+			
+			<?php 
+				
+				if($user_id == $model->user_id) { ?>
+			
+			<div class="button">
+			
+				<a href="javascript:;" onclick="showEditor(this);">Sửa</a>
+			
+			</div>
+			
+				<?php }?>
 
 			<?php }?>
 

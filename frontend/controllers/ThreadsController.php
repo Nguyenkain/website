@@ -27,7 +27,7 @@ class ThreadsController extends Controller
 	{
 		return array(
 				array('allow',  // allow all users to perform 'index' and 'view' actions
-						'actions'=>array('index','view','post','getNotification','report','postToFacebook','newPost','login','setNotification','delete'),
+						'actions'=>array('index','view','post','getNotification','report','postToFacebook','newPost','login','setNotification','delete','editThread','editPost','deletePost'),
 						'users'=>array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -53,6 +53,7 @@ class ThreadsController extends Controller
 		//$model=Posts::model()->findAllByAttributes(array('thread_id'=>$id));
 		$model = Posts::model();
 		$thread = $this->loadModel($id);
+		$images = Thread_images::model()->findAllByAttributes(array('thread_id' => $thread->thread_id));
 		$model->thread_search = $thread->thread_title;
 		$dataProvider=new CActiveDataProvider('Posts');
 		$newPost = new Posts;
@@ -92,7 +93,7 @@ class ThreadsController extends Controller
 							'text'=>'Thông báo của bạn đã được gửi tới admin và sẽ được chúng tôi xử lý trong thời gian sớm nhất!',
 							'type'=>'success',
 							'closer'=>true,
-							'hide'=>true))
+							'hide'=>true,))
 			);
 		}
 
@@ -103,6 +104,7 @@ class ThreadsController extends Controller
 				'thread_title'=>$thread->thread_title,
 				'newPost' => $newPost,
 				'userid' => $userid,
+				'images' => $images,
 		));
 	}
 
@@ -355,6 +357,39 @@ class ThreadsController extends Controller
 
 	}
 
+	public function actionEditThread() {
+		if(isset($_POST['Threads']))
+		{
+			$model = new Threads;
+			$model->attributes=$_POST['Threads'];
+			$thread_id = Yii::app()->request->getQuery("thread_id");
+			$thread = $this->loadModel($thread_id);
+			if($thread->saveAttributes(array('thread_content'=>$model->thread_content,'last_modified_time'=>time()))) {
+				echo $thread->toJSON();
+			}
+			else
+				echo 'failed';
+		}
+
+	}
+
+	public function actionEditPost() {
+		if(isset($_POST['Posts']))
+		{
+			$post_id = $_POST['Posts']['post_id'];
+			$model = new Posts;
+			$model->attributes=$_POST['Posts'];
+			$post = Posts::model()->findByPk($post_id);
+			if($post->saveAttributes(array('post_content'=>$model->post_content))) {
+				echo $post->toJSON();
+			}
+			else
+				echo 'failed';
+		}
+
+	}
+
+
 	public function actionReport()
 	{
 		//EQuickDlgs::render('_post',array());
@@ -390,7 +425,7 @@ class ThreadsController extends Controller
 		$data = Users::model()->findByPk($userid);
 
 		$reportTypes = ReportTypes::model()->findByAttributes(array('report_type' => 'Xóa'));
-		$posts = Posts::model()->findByAttributes(array('thread_id' => $threadId));
+		$posts = Posts::model()->findAllByAttributes(array('thread_id' => $threadId));
 
 		if(count($posts) > 0)
 		{
@@ -427,6 +462,28 @@ class ThreadsController extends Controller
 								'hide'=>true))
 				);
 			}
+		}
+
+
+	}
+
+	public function actionDeletePost()
+	{
+		//EQuickDlgs::render('_post',array());
+		$postId = $_POST['post_id'];
+
+		if(Posts::model()->findByPk($postId)->delete())
+		{
+			EQuickDlgs::checkDialogJsScript();
+			$this->widget('application.extensions.PNotify.PNotify',array(
+					'options'=>array(
+							'title'=>'Thành công!',
+							'text'=>'Bạn đã xóa thành công bài viết của bạn',
+							'type'=>'success',
+							'closer'=>true,
+							'hide'=>true))
+			);
+			echo 'success';
 		}
 
 

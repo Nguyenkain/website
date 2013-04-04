@@ -55,6 +55,14 @@ abstract class BasePosts extends GxActiveRecord {
 		);
 	}
 	
+	public function behaviors() {
+		return array(
+				'EJsonBehavior'=>array(
+						'class'=>'frontend.behaviors.EJsonBehavior'
+				),
+		);
+	}
+	
 	function defaultScope()
 	{
 		return array(
