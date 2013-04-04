@@ -67,18 +67,27 @@ Yii::app()->clientScript->registerScript('search', "
 						'name' => 'thread_id',
 						'url' => Yii::app()->createUrl('threads/relational',array('id'=>'$data->thread_id')),
 						'value'=> '$data->thread_id',	
+						'htmlOptions'=>array(
+							'width'=>'50px',
+					),
 				),
 				array(
 					'name' => 'user_search',
 					'header'=>'Người viết',
 					'value'=>'$data->users',
+					'htmlOptions'=>array(
+						'width'=>'80px',
+					),
 				),
 				'thread_title',
 				'thread_content',
 				array(
 					'name'=>'thread_created_time',
-			        'value'=>'date("d/m/y H:i:s", $data->thread_created_time)'),
-				'last_modified_time',
+			        'value'=>'date("d/m/y H:i:s", $data->thread_created_time)',
+					'htmlOptions'=>array(
+						'width'=>'70px',
+					),
+				),
 				/*
 				 'last_posted_time',
 */
