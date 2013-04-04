@@ -100,5 +100,3 @@ Yii::app()->clientScript->registerScript('search', "
 		),
 	),
 )); ?>
-
-<?php Yii::app()->getClientScript()->registerCoreScript( 'jquery.ui' );?>

@@ -524,7 +524,7 @@ ul.style2 a:hover {
 	font-size: 15px;
 	padding: 5px;
 	width: 267px;
-	height: 34px;
+	height: 25px;
 	margin: 0;
 }
 
@@ -1079,7 +1079,7 @@ element.style {
 }
 
 #post_container .post_title input {
-	width: 370px;
+	width: 360px;
 }
 
 #post_container .post_content {
@@ -1087,7 +1087,7 @@ element.style {
 }
 
 #post_container .post_content textarea {
-	width: 100%;
+	width: 450px;
 	height: 140px;
 }
 
@@ -1269,6 +1269,24 @@ element.style {
 	margin-top: 3px;
 	padding: 10px;
 }
+
+/*Edit Form*/
+#thread_detail_container .post_body .post_edit_content
+{
+	padding: 10px;
+}
+
+#thread_detail_container .post_body .post_edit_content textarea
+{
+	width: 100%;
+}
+
+#thread_detail_container .post_body .post_edit_content .action_container
+{
+	padding: 10px 5px;
+	text-align: center;
+}
+
 
 #thread_detail_container .thread_control
 {

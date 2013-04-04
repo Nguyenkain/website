@@ -37,6 +37,14 @@ abstract class BaseThreads extends GxActiveRecord {
 	public static function representingColumn() {
 		return 'thread_title';
 	}
+	
+	public function behaviors() {
+		return array(
+				'EJsonBehavior'=>array(
+						'class'=>'frontend.behaviors.EJsonBehavior'
+				),
+		);
+	}
 
 	public function rules() {
 		return array(

@@ -1,6 +1,6 @@
-﻿<?php 	$this->breadcrumbs = array(
-		'Vườn Quốc Gia' => array('index'),
-		$model->id,
+<?php 	$this->breadcrumbs = array(
+		'Vườn Quốc Gia' => array('admin'),
+		$model->park_name,
 		);
 
 	$this->menu = array(
@@ -16,7 +16,7 @@
 		array('label' => 'Quản lý Vườn Quốc Gia', 'url' => array('admin')),
 		); ?>
 
-<h1>Xem Vườn Quốc Gia <?php echo $model->park_name; ?></h1>
+<h3>Thông tin Vườn Quốc Gia <?php echo $model->park_name; ?></h3>
 
 <?php $this->widget('bootstrap.widgets.TbDetailView', array(
 		'data' => $model,

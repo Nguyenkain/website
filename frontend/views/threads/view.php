@@ -3,7 +3,6 @@
 
 function postToFacebook($fbId,$threadId)
 {
-	alert("ádsadsad");
 	$.ajax({
 	      type: "POST",
 	      url:    "<? echo Yii::app()->createUrl('threads/postToFacebook'); ?>",
@@ -12,6 +11,36 @@ function postToFacebook($fbId,$threadId)
 	      success: function(msg){
 	      },
 	      error: function(xhr){
+	      }
+	    });
+}
+
+function showEditor(btn)
+{
+	$(btn).parents('.thread_block').find('.post_entry_content').hide();
+	$(btn).parents('.thread_block').find('.post_edit_content').show();
+}
+
+function closeEditor(btn)
+{
+	$(btn).parents('.thread_block').find('.post_entry_content').show();
+	$(btn).parents('.thread_block').find('.post_edit_content').hide();
+}
+
+function editPost(btn)
+{
+	var form = $(btn).parents('form');
+	$.ajax({
+	      type: "POST",
+	      url:    form.attr("action"),
+	      data:  form.serialize(),
+	      success: function(data){
+	    	  	$model = $.parseJSON(data);
+				$(btn).parents(".thread_block").find(".post_entry_content").html($model.post_content);
+				closeEditor(btn);
+	      },
+	      error: function(xhr){
+		      debugger;
 	      }
 	    });
 }
@@ -40,41 +69,13 @@ function setNotification($userid,$threadid)
 ));
 ?>
 
-<?php 
-
-if(!empty($success)) {
-	$this->widget('application.extensions.PNotify.PNotify',array(
-		'options'=>array(
-				'title'=>'You did it!',
-				'text'=>'This notification is awesome! Awesome like you!',
-				'type'=>'success',
-				'closer'=>false,
-				'hide'=>false))
-	);
-}
-
-?>
 
 <?php 
 //Yii::app()->clientScript->registerScript('search', "getNotification();");
-$userid = Yii::app()->facebook->getUser();
-
-if ($userid)
-{
-	try
-	{
-		$fbuid = Yii::app()->facebook->getUser();
-		$user_info	= Yii::app()->facebook->getInfo();
-		$url = Yii::app()->facebook->getLogoutUrl();
-	}
-	catch(FacebookApiException $e){
-		$userid = NULL;
-		Yii::app()->facebook->destroySession();
-	}
-}
 
 Yii::app()->clientScript->registerScript('setNoti', "setNotification($userid,$model->thread_id);");
-
+if(isset(Yii::app()->session['userid']))
+	$user_id = Yii::app()->session['userid'];
 ?>
 
 <div id="thread_detail_container">
@@ -99,6 +100,65 @@ Yii::app()->clientScript->registerScript('setNoti', "setNotification($userid,$mo
 			<div class="post_entry_content">
 				<?php echo $model->thread_content; ?>
 			</div>
+			<div class="post_edit_content" style="display:none">
+			<?php if($userid && ($user_id==$model->user_id)) 
+			{
+			?>
+				<?php  $form = $this -> beginWidget('bootstrap.widgets.TbActiveForm', array(
+						'id' => 'thread_edit_form',
+						'type' => 'horizontal',
+				));
+				?>
+				
+				<?php echo $form->textArea($model,'thread_content',array('rows'=>6, 'cols'=>50, 'placeholder'=>'Nhập nội dung'));?>
+				
+				<div class="action_container">
+
+					<?php 
+		
+					$this->widget('bootstrap.widgets.TbButton',array(
+						'label' => 'Gửi',
+						'type' => 'primary',
+						'url' => Yii::app()->createUrl('threads/editThread', array('thread_id' => $model->thread_id, 'userid' => $user_id)),
+						'size' => 'small',
+						'buttonType' => 'ajaxSubmit',
+						'ajaxOptions' => array(
+					            'type' => 'POST',
+					            'success' => 'function(data) {
+										$model = $.parseJSON(data);
+										$("#submitEditButton").parents(".thread_block").find(".post_entry_content").html($model.thread_content);
+										closeEditor($("#submitEditButton"));
+								}',
+								'error' => 'function(err) {}',
+					            'processData' => false,
+					    ),
+						'htmlOptions' => array(
+							'id'=>'submitEditButton',
+						),
+				));
+		
+				?>
+				<?php 
+		
+					$this->widget('bootstrap.widgets.TbButton',array(
+						'label' => 'Hủy',
+						'size' => 'small',
+						'buttonType' => 'reset',
+						'htmlOptions' => array(
+								'onclick'=>'closeEditor(this)',
+						),
+				));
+		
+				?>
+		
+				</div>
+				
+				
+				
+				<?php $this->endWidget(); 
+				}?>
+			
+			</div>
 		</div>
 		<div class="clearfix"></div>
 		<div class="thread_control">
@@ -116,22 +176,53 @@ Yii::app()->clientScript->registerScript('setNoti', "setNotification($userid,$mo
 
 			<div class="button">
 
-				<?php EQuickDlgs::ajaxLink(
-				array(
-				'controllerRoute' => 'report', //'member/view'
-				'actionParams' => array('user_id'=>$userid,'thread_id'=>$model->thread_id), //array('id'=>$model->member->id),
-				'dialogTitle' => "Báo cáo chủ đề",
-				'dialogWidth' => 490,
-				'dialogHeight' => 370,
-				'openButtonText' => '<span>Báo cáo</span>',
-				'closeButtonText' => false,
-				'closeOnAction' => true, //important to invoke the close action in the actionCreate
-				'openButtonHtmlOptions' => array(),
-				)
-				);
+				<?php 
+				
+				if($user_id == $model->user_id) {
+					EQuickDlgs::ajaxLink(
+						array(
+							'controllerRoute' => 'delete', //'member/view'
+							'actionParams' => array('user_id'=>$user_id,'thread_id'=>$model->thread_id), //array('id'=>$model->member->id),
+							'dialogTitle' => "Xóa",
+							'dialogWidth' => 490,
+							'dialogHeight' => 370,
+							'openButtonText' => '<span>Xóa</span>',
+							'closeButtonText' => false,
+							'closeOnAction' => true, //important to invoke the close action in the actionCreate
+							'openButtonHtmlOptions' => array(),
+						)
+					);
+				}
+				else {
+					EQuickDlgs::ajaxLink(
+						array(
+							'controllerRoute' => 'report', //'member/view'
+							'actionParams' => array('user_id'=>$userid,'thread_id'=>$model->thread_id), //array('id'=>$model->member->id),
+							'dialogTitle' => "Báo cáo chủ đề",
+							'dialogWidth' => 490,
+							'dialogHeight' => 370,
+							'openButtonText' => '<span>Báo cáo</span>',
+							'closeButtonText' => false,
+							'closeOnAction' => true, //important to invoke the close action in the actionCreate
+							'openButtonHtmlOptions' => array(),
+						)
+					);
+				}
 				?>
 
 			</div>
+			
+			<?php 
+				
+				if($user_id == $model->user_id) { ?>
+			
+			<div class="button">
+			
+				<a href="javascript:;" onclick="showEditor(this);">Sửa</a>
+			
+			</div>
+			
+				<?php }?>
 
 			<?php }?>
 

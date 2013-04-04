@@ -21,7 +21,7 @@ $js->registerScriptFile($baseUrl . '/js/egmap_handle.js');
 			Tìm địa điểm trên bản đồ: <br>
 			<div id="search">
 				<input type="text" id="address" />
-				<button type="button" class="buttons" onclick="geocode()">Tìm kiếm</button>
+				<button type="button" class="btn btn-primary" onclick="geocode()">Tìm kiếm</button>
 			</div>
 			<ul>
 				<li>Kinh độ/Vĩ độ:&nbsp;<span id="latlng"></span>
@@ -92,7 +92,7 @@ $js->registerScriptFile($baseUrl . '/js/egmap_handle.js');
 		</div>
 		<br>
 		<div id="get_latlong">
-			<button type="button" class="buttons" onclick="setLatLngToClass()">Lấy
+			<button type="button" class="btn btn-primary" onclick="setLatLngToClass()">Lấy
 				giá trị kinh độ, vĩ độ</button>
 		</div>
 	</div>
@@ -106,7 +106,7 @@ $js->registerScriptFile($baseUrl . '/js/egmap_handle.js');
 	<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'type'=>'primary',
-			'label'=>$model->isNewRecord ? 'Lưu mới' : 'Lưu',
+			'label'=>$model->isNewRecord ? 'Tạo mới' : 'Lưu',
 		)); ?>
 </div>
 
