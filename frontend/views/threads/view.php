@@ -118,7 +118,7 @@ if(isset(Yii::app()->session['userid']))
 				?>
 					<a href="<?php echo $link?>">
 					<?php 
-						echo CHtml::image($link,array('style' => 'width:80px;height:auto;margin-right:10px'));
+						echo CHtml::image($link,"Ảnh chủ đề",array('style' => 'width:80px;height:auto;margin-right:10px'));
 					?>
 					</a>
 				<?php }
