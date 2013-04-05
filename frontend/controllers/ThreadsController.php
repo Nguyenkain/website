@@ -117,13 +117,19 @@ class ThreadsController extends Controller
 		$model=new Threads;
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
 		if(isset($_POST['Threads']))
 		{
 			$model->attributes=$_POST['Threads'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->thread_id));
+			$transaction = Yii::app( )->db->beginTransaction( );
+			try {
+				if($model->save())
+					$this->redirect(array('view','id'=>$model->thread_id));
+			} catch(Exception $e) {
+				$transaction->rollback( );
+				Yii::app( )->handleException( $e );
+			}
 		}
 
 		$this->render('create',array(
@@ -315,25 +321,51 @@ class ThreadsController extends Controller
 	{
 		//EQuickDlgs::render('_post',array());
 		$fbId = Yii::app()->request->getQuery("id");
-
+		//EQuickDlgs::checkDialogJsScript();
 		$criteria = new CDbCriteria();
 		$criteria->compare('facebook_id', $fbId, true);
 		$data = Users::model()->find($criteria);
 
 		$model = new Threads;
 		$model->user_id = $data->user_id;
+		$this->performAjaxValidation($model);
+		$flag=true;
 
 		if(isset($_POST['Threads']))
 		{
-			$model->attributes=$_POST['Threads'];
-			$model->thread_created_time = time();
-			$model->last_posted_time = time();
-			if($model->save())
-				EQuickDlgs::checkDialogJsScript();
-			$this->redirect(array('index'));
+			$flag=false;
+			$transaction = Yii::app( )->db->beginTransaction( );
+			try {
+				$model->attributes=$_POST['Threads'];
+				$model->thread_created_time = time();
+				$model->last_posted_time = time();
+				$valid=$model->validate();
+				if($valid) {
+					if($model->save())
+					{
+						echo CJSON::encode(array(
+							'status'=>'success'
+						));
+					}
+					
+					Yii::app()->end();
+				}
+				else{
+					$error = CActiveForm::validate($model);
+					if($error!='[]')
+						echo $error;
+					Yii::app()->end();
+				}
+			} catch(Exception $e) {
+				$transaction->rollback( );
+				Yii::app( )->handleException( $e );
+			}
 		}
-
-		$this->renderPartial('post', array("model" => $model, "data" => $data));
+		if($flag) {
+			Yii::app()->clientScript->scriptMap['jquery.js'] = false;
+			//EQuickDlgs::render('post', array("model" => $model, "data" => $data));
+			$this->renderPartial('dialog', array("model" => $model, "data" => $data),false,true);
+		}
 	}
 
 	public function actionNewPost() {

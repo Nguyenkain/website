@@ -5,8 +5,8 @@ html,body {
 body {
 	margin: 0px;
 	padding: 0px;
-	background: #22222D url(images/img01.png) repeat;
-	font-family: Tahoma, sans-serif;
+	background: #22222D url(images/img01.png) repeat !important;
+	font-family: Tahoma, sans-serif !important;
 	font-size: 13px;
 	color: #545454;
 }
@@ -877,7 +877,7 @@ ul.style2 a:hover {
 }
 
 .list-view {
-	padding: 0;
+	padding: 0 !important;
 }
 
 #profile_container {
@@ -1064,7 +1064,7 @@ element.style {
 /*POST DIALOG*/
 #post_container {
 	width: 460px;
-	height: 280px;
+	height: 308px;
 	background: #FFFFFF;
 }
 
@@ -1139,7 +1139,7 @@ element.style {
 	height: 40px;
 }
 
-#post_container .button-menu button {
+#post_container .button-menu .btn-primary {
 	float: right;
 }
 

@@ -12,7 +12,7 @@
 			</div>
 			<div class="post_title">
 				<label> <?php echo $data->name ?></label> 
-				<?php echo $form->dropDownList($model,'report_type_id',CHtml::listData(ReportTypes::model()->findAll(), 'report_type_id', 'report_type' ), array('empty'=>'--Chọn loại báo cáo--')) ?>
+				<?php echo $form->dropDownList($model,'report_type_id',CHtml::listData(ReportTypes::model()->findAll(), 'report_type_id', 'report_type' )) ?>
 			</div>
 			<div class="clearfix"></div>
 		</div>

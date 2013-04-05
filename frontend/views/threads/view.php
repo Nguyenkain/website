@@ -158,6 +158,7 @@ function setNotification($userid,$threadid)
 ?>
 
 
+
 <?php 
 //Yii::app()->clientScript->registerScript('search', "getNotification();");
 

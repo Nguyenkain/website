@@ -51,6 +51,8 @@ abstract class BaseThreads extends GxActiveRecord {
 			array('user_id, thread_title, thread_content, thread_created_time, last_posted_time', 'required'),
 			array('last_modified_time, user_id, thread_created_time, last_posted_time', 'numerical', 'integerOnly'=>true),
 			array('thread_title', 'length', 'max'=>150),
+			array('thread_title', 'length', 'min'=>8),
+			array('thread_content', 'length', 'min'=>8),
 			array('last_modified_time', 'default', 'setOnEmpty' => true, 'value' => null),
 			array('thread_id, last_modified_time, user_id, thread_title, thread_content, thread_created_time, last_posted_time, user_search', 'safe', 'on'=>'search'),
 		);
