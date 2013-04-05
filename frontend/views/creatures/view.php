@@ -180,7 +180,7 @@ function getImageUrl($loai,$img){
 				$lat = $place->latitude;
 				// Add Gmaker
 				$marker = new EGMapMarker($lat, $long, array('title' => $place->province_name, 'icon' => $icon));
-				$info_window = new EGMapInfoWindow($place->province_name);
+				$info_window = new EGMapInfoWindow('<div class="info_window">' .$place->province_name . '</div>');
 				$marker->addHtmlInfoWindow($info_window);
 				$gMap->addMarker($marker);
 			}
