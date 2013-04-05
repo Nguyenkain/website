@@ -54,7 +54,9 @@
 	<div id="wrapper">
 		<div id="header">
 			<div id="logo">
+				<a href="<?php echo Yii::app()->request->baseUrl?>">
 				<img alt="sinh vật rừng việt nam" src="css/images/logo.png">
+				</a>
 				<h1 class="logo">Sinh vật rừng Việt Nam</h1>
 			</div>
 			<div class="clearfix"></div>
