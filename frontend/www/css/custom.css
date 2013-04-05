@@ -1236,7 +1236,7 @@ element.style {
 	font-style: italic;
 }
 
-#creature_content .creature_map {
+#creature_content #creature_map {
 	opacity: 0; 
 	position: absolute; 
 	left:-1000px; 
