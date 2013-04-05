@@ -60,8 +60,8 @@ class News extends CActiveRecord
 				array('title', 'length', 'max'=>255,'message' => '{attribute} có số ký tự vượt quá {max} ký tự'),
 				array('image', 'length', 'max'=>225,'message' => '{attribute} có số ký tự vượt quá {max} ký tự'),
 				array('short_description, news_content', 'safe'),
-				array('picture', 'length', 'max' => 255, 'tooLong' => '{attribute} is too long (max {max} chars).', 'on' => 'upload'),
-				array('picture', 'file', 'types' => 'jpg,jpeg,gif,png', 'maxSize' => 1024 * 1024 * 2, 'tooLarge' => 'Size should be less then 2MB !!!', 'on' => 'upload'),
+				array('picture', 'length', 'max' => 255, 'tooLong' => '{attribute} có số ký tự vượt quá {max} ký tự', 'on' => 'upload'),
+				array('picture', 'file', 'types' => 'jpg,jpeg,gif,png', 'maxSize' => 1024 * 1024 * 2, 'tooLarge' => 'Dung lượng tối đa là 2MB !!!', 'on' => 'upload'),
 				// The following rule is used by search().
 		// Please remove those attributes that should not be searched.
 		array('news_id, category_id, short_description, news_content, created_time, title, image, category_search', 'safe', 'on'=>'search'),

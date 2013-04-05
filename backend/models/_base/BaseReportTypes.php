@@ -34,7 +34,8 @@ abstract class BaseReportTypes extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('report_type', 'required'),
+			array('report_type', 'required',
+						'message'=>'Hãy vui lòng nhập giá trị cho {attribute}.'),
 			array('report_type', 'length', 'max'=>255),
 			array('report_type_id, report_type', 'safe', 'on'=>'search'),
 		);

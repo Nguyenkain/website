@@ -41,7 +41,8 @@ abstract class BasePosts extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-				array('user_id, thread_id, post_content, post_created_time', 'required'),
+				array('user_id, thread_id, post_content, post_created_time', 'required',
+						'message'=>'Hãy vui lòng nhập giá trị cho {attribute}.'),
 				array('user_id, thread_id, post_created_time', 'numerical', 'integerOnly'=>true),
 				array('post_id, user_id, thread_id, post_content, post_created_time, thread_search, user_search', 'safe', 'on'=>'search'),
 		);
