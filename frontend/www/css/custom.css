@@ -726,6 +726,38 @@ ul.style2 a:hover {
 	height: 500px;
 }
 
+.info_window {
+	height: 54px;
+	width: 212px;
+	text-align: left;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 1.2em;
+	position:absolute;
+    left:50%;
+    top:50%;
+    margin-left: -106px;
+    margin-top: -27px;
+}
+
+.info_window a
+{
+	color: #15c;
+	font-size: 0.7em;
+	font-family: arial,sans-serif;
+	padding-left: 5px;
+}
+
+.info_window a:link
+{
+	text-decoration: none;
+}
+
+.info_window a:hover
+{
+	text-decoration: underline;
+}
+
 /*Discussion Page*/
 #post_button {
 	background: url("images/post_button.png") no-repeat center center;
@@ -1204,7 +1236,7 @@ element.style {
 	font-style: italic;
 }
 
-#creature_content .creature_map {
+#creature_content #creature_map {
 	opacity: 0; 
 	position: absolute; 
 	left:-1000px; 

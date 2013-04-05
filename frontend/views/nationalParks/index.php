@@ -42,7 +42,9 @@
 			$marker = new EGMapMarker($lat, $long, array('title' => 'Vườn quốc gia ' .$place->
 					park_name, 'icon' => $icon));
 			$detail = Yii::app()->baseUrl ."/index.php?r=nationalParks/view&id=" .$place->id;
-			$info_window = new EGMapInfoWindow('<div> <a href="' .$detail .'">Vườn quốc gia ' .$place->park_name .'</a></div>');
+			$info_window = new EGMapInfoWindow('<div class="info_window"> Vườn quốc gia ' .$place->park_name  .'<a href="' .$detail .'">    xem chi tiết</a></div>');
+			$info_window->pixelOffset = new EGMapSize('0','-140');
+			$info_window->maxWidth = '50';
 			$marker->addHtmlInfoWindow($info_window);
 			$gMap->addMarker($marker);
 			//Build side-menu
