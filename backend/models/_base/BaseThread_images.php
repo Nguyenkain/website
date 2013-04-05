@@ -34,7 +34,8 @@ abstract class BaseThread_images extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('image_link, thread_id', 'required'),
+			array('image_link, thread_id', 'required',
+						'message'=>'Hãy vui lòng nhập giá trị cho {attribute}.'),
 			array('thread_id', 'numerical', 'integerOnly'=>true),
 			array('image_link', 'length', 'max'=>255),
 			array('thread_image_id, image_link, thread_id', 'safe', 'on'=>'search'),

@@ -1,4 +1,3 @@
-<?php /* @var $this Controller */ ?>
 
 <?php
 function getImageUrl($loai,$img){
@@ -25,12 +24,13 @@ function getImageUrl($loai,$img){
 						'items' => 5,
 						'scroll' => array(
 								'items' => 1,
-								'easing' => 'cubic',
+								'easing' => 'elastic',
 								'duration' => 800,
 								'pauseDuration' => 1500,
 								'pauseOnHover' => true,
 								'fx' => 'directscroll',
 						),
+
 				),
 		));
 		?>
@@ -49,7 +49,9 @@ function getImageUrl($loai,$img){
 			
 			<a href="<?php echo Yii::app()->createUrl("news/view",array("id" => $data->news_id));?>">
 				<img alt="Ảnh con vật" src="<?php echo Yii::app()->request->getBaseUrl(true) . "/images/forumpic/" . $data->image . ".jpg";?>">
+				<div class=slide>
 				<h6><?php echo $data->title?></h6>
+				</div>
 			</a>
 			</div>
 			<?php }?>
@@ -69,7 +71,9 @@ function getImageUrl($loai,$img){
 			
 			<a href="<?php echo Yii::app()->createUrl("creatures/view",array("id" => $data->ID));?>">
 				<img alt="Ảnh con vật" src="<?php echo getImageUrl($data->Loai,$data->Img)?>">
+				<div class=slide>
 				<h6><?php echo $data->Viet?></h6>
+				</div>
 			</a>
 			
 			</div>

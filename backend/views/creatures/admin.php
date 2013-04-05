@@ -1,5 +1,6 @@
 <?php
 $this->breadcrumbs=array(
+	
 	'Sinh vật'=>array('admin'),
 	'Quản lý',
 );

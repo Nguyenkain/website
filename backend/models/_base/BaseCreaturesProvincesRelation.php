@@ -35,7 +35,8 @@ abstract class BaseCreaturesProvincesRelation extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('creature_id, province_id', 'required'),
+			array('creature_id, province_id', 'required',
+						'message'=>'Hãy vui lòng nhập giá trị cho {attribute}.'),
 			array('creature_id, province_id', 'numerical', 'integerOnly'=>true),
 			array('id, creature_id, province_id', 'safe', 'on'=>'search'),
 		);
