@@ -43,6 +43,7 @@ abstract class BasePosts extends GxActiveRecord {
 	public function rules() {
 		return array(
 				array('user_id, thread_id, post_content, post_created_time', 'required'),
+				array('post_content', 'length', 'min'=>8),
 				array('user_id, thread_id, post_created_time', 'numerical', 'integerOnly'=>true),
 				array('post_id, user_id, thread_id, post_content, post_created_time, thread_search, user_search', 'safe', 'on'=>'search'),
 		);

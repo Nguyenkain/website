@@ -50,8 +50,16 @@ function editPost(btn)
 	      data:  form.serialize(),
 	      success: function(data){
 	    	  	$model = $.parseJSON(data);
-				$(btn).parents(".thread_block").find(".post_entry_content").html($model.post_content);
-				closeEditor(btn);
+	    	  	if(typeof $model.post_content != "undefined") {
+					$(btn).parents(".thread_block").find(".post_entry_content").html($model.post_content);
+					closeEditor(btn);
+	    	  	}
+	    	  	else {
+	    	  		$.each($model, function(key, val) {
+                        form.find("#"+key+"_em_").text(val);                                                    
+                        form.find("#"+key+"_em_").show();
+                    });
+	    	  	}
 	      },
 	      error: function(xhr){
 		      debugger;
@@ -223,10 +231,13 @@ if(isset(Yii::app()->session['userid']))
 				<?php  $form = $this -> beginWidget('bootstrap.widgets.TbActiveForm', array(
 						'id' => 'thread_edit_form',
 						'type' => 'horizontal',
+						'enableAjaxValidation'=>true,
 				));
 				?>
 
-				<?php echo $form->textArea($model,'thread_content',array('rows'=>6, 'cols'=>50, 'placeholder'=>'Nhập nội dung'));?>
+				<?php echo $form->textArea($model,'thread_content',array('rows'=>6, 'cols'=>50, 'placeholder'=>'Nhập nội dung'));
+				echo $form->error($model,'thread_content');
+				?>
 
 				<div class="action_container">
 
@@ -242,8 +253,16 @@ if(isset(Yii::app()->session['userid']))
 					            'type' => 'POST',
 					            'success' => 'function(data) {
 										$model = $.parseJSON(data);
-										$("#submitEditButton").parents(".thread_block").find(".post_entry_content").html($model.thread_content);
-										closeEditor($("#submitEditButton"));
+										if(typeof $model.thread_content != "undefined") {
+											$("#submitEditButton").parents(".thread_block").find(".post_entry_content").html($model.thread_content);
+											closeEditor($("#submitEditButton"));
+										}
+										else {
+							    	  		$.each($model, function(key, val) {
+						                        $("#submitEditButton").parents(".thread_block").find("#"+key+"_em_").text(val);                                                    
+						                        $("#submitEditButton").parents(".thread_block").find("#"+key+"_em_").show();
+						                    });
+							    	  	}
 				}',
 								'error' => 'function(err) {}',
 					            'processData' => false,
