@@ -160,7 +160,7 @@ function getImageUrl($loai,$img){
 			<div class="clearfix"></div>
 		</div>
 
-		<div class="creature_map">
+		<div id="creature_map">
 			<!-- display map -->
 			<div id="map_canvas"></div>
 			<?php 

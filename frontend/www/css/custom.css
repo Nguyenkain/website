@@ -726,11 +726,10 @@ ul.style2 a:hover {
 	height: 500px;
 }
 
-.info_window 
-{
+.info_window {
 	height: 54px;
 	width: 212px;
-	text-align: center;
+	text-align: left;
 	text-decoration: none;
 	font-weight: bold;
 	font-size: 1.2em;
@@ -746,6 +745,7 @@ ul.style2 a:hover {
 	color: #15c;
 	font-size: 0.7em;
 	font-family: arial,sans-serif;
+	padding-left: 5px;
 }
 
 .info_window a:link
