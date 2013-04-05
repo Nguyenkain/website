@@ -42,14 +42,22 @@ function getImageUrl($loai,$img){
 	<div id="creature_content">
 
 		<div class="big_images">
-			<a href="<?php echo getImageUrl($model->Loai, $model->Img)?>"> <?php 
+			<?php 
 			$imageUrl = getImageUrl($model->Loai, $model->Img.'s');
-			if(checkUrl($imageUrl))
-				echo CHtml::image($imageUrl,"Ảnh con vật");
-			else
-				echo CHtml::image(getImageUrl($model->Loai, $model->Img),"Ảnh con vật");
-			?>
+			if(checkUrl($imageUrl)) {
+?>
+			<a href="<?php echo getImageUrl($model->Loai, $model->Img.'s')?>"> <?php
+			echo CHtml::image($imageUrl,"Ảnh con vật");
+				}
+				else {
+?> 
+			<a href="<?php echo getImageUrl($model->Loai, $model->Img)?>"> 
+<?php
+			echo CHtml::image(getImageUrl($model->Loai, $model->Img),"Ảnh con vật");
+				}
+				?>
 			</a>
+		
 		</div>
 
 		<div class="creature_info">
