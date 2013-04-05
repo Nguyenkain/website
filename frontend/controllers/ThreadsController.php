@@ -344,10 +344,10 @@ class ThreadsController extends Controller
 					if($model->save())
 					{
 						echo CJSON::encode(array(
-							'status'=>'success'
+								'status'=>'success'
 						));
 					}
-					
+
 					Yii::app()->end();
 				}
 				else{
@@ -372,6 +372,7 @@ class ThreadsController extends Controller
 		if(isset($_POST['Posts']))
 		{
 			$model = new Posts;
+			$this->performAjaxValidation($model);
 			$model->attributes=$_POST['Posts'];
 			$thread_id = Yii::app()->request->getQuery("thread_id");
 			$fbid = Yii::app()->request->getQuery("fbid");
@@ -381,10 +382,19 @@ class ThreadsController extends Controller
 			$model->thread_id = $thread_id;
 			$model->user_id = $data->user_id;
 			$model->post_created_time = time();
-			if($model->save())
-				echo 'success';
-			else
-				echo 'error';
+			$valid=$model->validate();
+			if($valid) {
+				if($model->save())
+					echo 'success';
+				else
+					echo 'error';
+			}
+			else {
+				$error = CActiveForm::validate($model);
+				if($error!='[]')
+					echo $error;
+				Yii::app()->end();
+			}
 		}
 
 	}
@@ -393,14 +403,25 @@ class ThreadsController extends Controller
 		if(isset($_POST['Threads']))
 		{
 			$model = new Threads;
-			$model->attributes=$_POST['Threads'];
+			$this->performAjaxValidation($model);
 			$thread_id = Yii::app()->request->getQuery("thread_id");
 			$thread = $this->loadModel($thread_id);
-			if($thread->saveAttributes(array('thread_content'=>$model->thread_content,'last_modified_time'=>time()))) {
-				echo $thread->toJSON();
+			$model = $thread;
+			$model->attributes=$_POST['Threads'];
+			$valid=$model->validate();
+			if($valid) {
+				if($thread->saveAttributes(array('thread_content'=>$model->thread_content,'last_modified_time'=>time()))) {
+					echo $thread->toJSON();
+				}
+				else
+					echo 'failed';
 			}
-			else
-				echo 'failed';
+			else {
+				$error = CActiveForm::validate($model);
+				if($error!='[]')
+					echo $error;
+				Yii::app()->end();
+			}
 		}
 
 	}
@@ -410,13 +431,25 @@ class ThreadsController extends Controller
 		{
 			$post_id = $_POST['Posts']['post_id'];
 			$model = new Posts;
+			$this->performAjaxValidation($model);
 			$model->attributes=$_POST['Posts'];
 			$post = Posts::model()->findByPk($post_id);
-			if($post->saveAttributes(array('post_content'=>$model->post_content))) {
-				echo $post->toJSON();
+			$model->post_created_time = $post->post_created_time;
+			$model->thread_id = $post->thread_id;
+			$valid=$model->validate();
+			if($valid) {
+				if($post->saveAttributes(array('post_content'=>$model->post_content))) {
+					echo $post->toJSON();
+				}
+				else
+					echo 'failed';
 			}
-			else
-				echo 'failed';
+			else {
+				$error = CActiveForm::validate($model);
+				if($error!='[]')
+					echo $error;
+				Yii::app()->end();
+			}
 		}
 
 	}
