@@ -40,6 +40,7 @@ class NewsController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$this->layout = '//layouts/layout_home';
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));

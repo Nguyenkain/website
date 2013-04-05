@@ -419,7 +419,7 @@ class ThreadsController extends Controller
 	public function actionDelete()
 	{
 		//EQuickDlgs::render('_post',array());
-		$userid = Yii::app()->request->getQuery("user_id");
+		$userid = $_POST['userid'];
 		$threadId = Yii::app()->request->getQuery("thread_id");
 
 		$data = Users::model()->findByPk($userid);
@@ -436,31 +436,14 @@ class ThreadsController extends Controller
 			$model->comment = "Người viết yêu cầu xóa";
 			if($model->save())
 			{
-				$this->widget('application.extensions.PNotify.PNotify',array(
-						'options'=>array(
-								'title'=>'Thành công!',
-								'text'=>'Yêu cầu xóa của bạn đã được gửi đến admin, admin sẽ xử lý trong thời gian sớm nhất',
-								'type'=>'success',
-								'closer'=>true,
-								'hide'=>true))
-				);
-				EQuickDlgs::checkDialogJsScript();
+				echo 'reported';
 			}
 		}
 		else
 		{
 			if($this->loadModel($threadId)->delete())
 			{
-				EQuickDlgs::checkDialogJsScript();
-				$this->redirect(array('index'));
-				$this->widget('application.extensions.PNotify.PNotify',array(
-						'options'=>array(
-								'title'=>'Thành công!',
-								'text'=>'Bạn đã xóa thành công bài viết của bạn',
-								'type'=>'success',
-								'closer'=>true,
-								'hide'=>true))
-				);
+				echo 'deleted';
 			}
 		}
 
@@ -474,7 +457,6 @@ class ThreadsController extends Controller
 
 		if(Posts::model()->findByPk($postId)->delete())
 		{
-			EQuickDlgs::checkDialogJsScript();
 			$this->widget('application.extensions.PNotify.PNotify',array(
 					'options'=>array(
 							'title'=>'Thành công!',

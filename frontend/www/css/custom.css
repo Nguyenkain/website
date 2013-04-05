@@ -213,6 +213,46 @@ hr {
 	color: #545454;
 }
 
+#footer .footer-info {
+	padding: 5px 30px 15px 30px;
+	overflow: hidden;
+}
+
+#footer h5 {
+	font-size: 15px;
+	color: #FFFFFF;
+	font-style: italic;
+	margin: 8px 0;
+}
+
+#foo .item
+{
+	width: 200px;
+	height: 118px;
+	float: left;
+}
+
+#foo .item a 
+{
+	text-decoration: none;
+	font-size: 12px;
+	color: #FFF;
+	text-align: center;
+	display: block;
+}
+
+#foo .item a img
+{
+	height: 90px;
+	width: auto;
+	display: block;
+	margin: 0 auto;
+}
+
+#foo .item a h6 {
+	margin: 5px 0;
+	padding: 0;
+}
 /* Three Column */
 #three-column {
 	overflow: hidden;
@@ -680,10 +720,42 @@ ul.style2 a:hover {
 	padding: 5px;
 }
 
-#map_canvas {
+#nationalParks_content #map_canvas {
 	float: left;
 	width: 772px;
 	height: 500px;
+}
+
+.info_window {
+	height: 54px;
+	width: 212px;
+	text-align: left;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 1.2em;
+	position:absolute;
+    left:50%;
+    top:50%;
+    margin-left: -106px;
+    margin-top: -27px;
+}
+
+.info_window a
+{
+	color: #15c;
+	font-size: 0.7em;
+	font-family: arial,sans-serif;
+	padding-left: 5px;
+}
+
+.info_window a:link
+{
+	text-decoration: none;
+}
+
+.info_window a:hover
+{
+	text-decoration: underline;
 }
 
 /*Discussion Page*/
@@ -913,16 +985,16 @@ ul.style2 a:hover {
 }
 
 /* Loading  */
-.hasLoading {
+div.hasLoading {
 	background-color: #eee;
 	background-image: url('../images/loading.gif');
 	background-position: center center;
 	background-repeat: no-repeat;
-	opacity: 1;
+	opacity: 0.6;
 }
 
-.hasloading * {
-	opacity: .8;
+div.hasloading * {
+	opacity: 0.8;
 }
 
 /* KCarousel Overide CSs */
@@ -1162,6 +1234,31 @@ element.style {
 	font-size: 13px;
 	color: #990000;
 	font-style: italic;
+}
+
+#creature_content .creature_map {
+	opacity: 0; 
+	position: absolute; 
+	left:-1000px; 
+	visibility:hidden;
+}
+
+#creature_mini_map{
+	position: relative;
+	float: right;
+	height: 200px;
+	width: 200px;
+	margin-right: 21px;
+}
+
+#creature_content #view_map_large {
+	float: center;
+	color: #0a6ba0;
+	text-align: right;
+	text-decoration: none;
+	font-weight: bold;
+	width: 200px;
+	background: url("../images/icon_fullsize.png") no-repeat scroll 1px 0px transparent;
 }
 
 .normal_name,.vn_name,.latin_name {

@@ -157,7 +157,6 @@ class CreaturesController extends Controller
 				'model'=>$this->loadModel($id),
 		));
 	}
-
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
