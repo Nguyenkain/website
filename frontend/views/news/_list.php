@@ -1,4 +1,4 @@
-<div class="news_item">
+<div class="news_item2">
 		<a href="<?php echo Yii::app()->createUrl("news/view",array("id"=>$data->news_id))?>"> 
 		<?php echo CHtml::image(Yii::app()->request->getBaseUrl(true) . "/images/forumpic/" . $data->image . ".jpg");?>
 		<p>

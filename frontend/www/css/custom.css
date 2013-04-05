@@ -1487,7 +1487,7 @@ element.style {
 }
 
 /*Category Content*/
-.news_item {
+.news_item2 {
 	width: 100%;
 	float: left;
 	padding: 0 0 10px 0;
@@ -1495,20 +1495,20 @@ element.style {
 	display: inline;
 	border-bottom: 1px dotted #c2c6c9;
 }
-.news_item img {
+.news_item2 img {
 	float: left;
 	margin: 0 10px 0 0;
 	display: inline;
 	width: 155px;
 	height: 116px;
 }
-.news_item p
+.news_item2 p
 {
 	padding: 0;
 	padding-bottom: 3px;
 	margin: 0;
 }
-.news_item a
+.news_item2 a
 {
 	font-weight: 800;
 	font-size: 14px;
