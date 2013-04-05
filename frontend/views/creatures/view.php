@@ -232,7 +232,7 @@ function getImageUrl($loai,$img){
 						'items' => 5,
 						'scroll' => array(
 								'items' => 1,
-								'easing' => 'quadratic',
+								'easing' => 'elastic',
 								'duration' => 800,
 								'pauseDuration' => 1500,
 								'pauseOnHover' => true,
@@ -240,7 +240,7 @@ function getImageUrl($loai,$img){
 						),
 						'sweep' => array(
 								'items' => 1,
-								'easing' => 'quadratic',
+								'easing' => 'elastic',
 								'duration' => 800,
 								'pauseDuration' => 1500,
 								'pauseOnHover' => true,
@@ -264,9 +264,11 @@ function getImageUrl($loai,$img){
 					href="<?php echo Yii::app()->createUrl("creatures/view",array("id" => $data->ID));?>">
 					<img alt="Ảnh con vật"
 					src="<?php echo getImageUrl($data->Loai,$data->Img)?>">
+					<div class="slide">
 					<h6>
 						<?php echo $data->Viet?>
 					</h6>
+					</div>
 				</a>
 
 			</div>
