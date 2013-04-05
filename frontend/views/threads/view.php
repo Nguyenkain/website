@@ -392,8 +392,9 @@ if($userid) {
 <div class="comment_container">
 
 	<?php  $form = $this -> beginWidget('bootstrap.widgets.TbActiveForm', array(
-			'id' => 'user-time-form',
+			'id' => 'user-comment-form',
 			'type' => 'horizontal',
+			'enableAjaxValidation'=>true,
 	));
 	?>
 
@@ -403,7 +404,9 @@ if($userid) {
 
 		<div class="comment_editor">
 
-			<?php echo $form->textArea($newPost,'post_content',array('rows'=>6, 'cols'=>50, 'placeholder'=>'Nhập nội dung trả lời'));?>
+			<?php echo $form->textArea($newPost,'post_content',array('rows'=>6, 'cols'=>50, 'placeholder'=>'Nhập nội dung trả lời'));
+			echo $form->error($newPost,'post_content');
+			?>
 
 		</div>
 
@@ -420,6 +423,14 @@ if($userid) {
 				'ajaxOptions' => array(
 			            'type' => 'POST',
 			            'success' => 'function(data) {
+							$model = $.parseJSON(data);
+				    	  	if(typeof $model.post_content == "undefined") {
+									$.each($model, function(key, val) {
+				                        $("#user-comment-form").find("#"+key+"_em_").text(val);                                                    
+				                        $("#user-comment-form").find("#"+key+"_em_").show();
+				                    });
+				    	  	}
+							else
 								$.fn.yiiListView.update("post_listview");
 						}',
 						'error' => 'function(err) {debugger;}',

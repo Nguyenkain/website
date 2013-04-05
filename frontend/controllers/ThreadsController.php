@@ -372,6 +372,7 @@ class ThreadsController extends Controller
 		if(isset($_POST['Posts']))
 		{
 			$model = new Posts;
+			$this->performAjaxValidation($model);
 			$model->attributes=$_POST['Posts'];
 			$thread_id = Yii::app()->request->getQuery("thread_id");
 			$fbid = Yii::app()->request->getQuery("fbid");
@@ -381,10 +382,19 @@ class ThreadsController extends Controller
 			$model->thread_id = $thread_id;
 			$model->user_id = $data->user_id;
 			$model->post_created_time = time();
-			if($model->save())
-				echo 'success';
-			else
-				echo 'error';
+			$valid=$model->validate();
+			if($valid) {
+				if($model->save())
+					echo 'success';
+				else
+					echo 'error';
+			}
+			else {
+				$error = CActiveForm::validate($model);
+				if($error!='[]')
+					echo $error;
+				Yii::app()->end();
+			}
 		}
 
 	}
