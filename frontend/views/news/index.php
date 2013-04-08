@@ -10,7 +10,8 @@ foreach ($modelCategories->findAll() as $value) {
 	<?php if (!is_null($newest)) { ?>
 	<div class="cateogory_item">
 		<div class="category_title">
-			<h4 class="title"><?php echo $value->category_name ?></h4>
+		<a href="<?php echo Yii::app()->createUrl("news/list",array("cat_id"=>$value->category_id))?>">
+			<h4 class="title"><?php echo $value->category_name ?></h4></a>
 			<div class="hoz_line"></div>
 		</div>
 		<div class="first_news">

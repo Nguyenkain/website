@@ -28,7 +28,7 @@ class NewsController extends Controller
 	{
 		return array(
 		array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','list'),
 				'users'=>array('*'),
 		),
 		);
@@ -62,6 +62,23 @@ class NewsController extends Controller
 			'modelNews'=>$modelNews
 		));
 
+	}
+	
+	public function actionList()
+	{
+		$catId = Yii::app()->request->getQuery("cat_id");
+		$category = Categories::model()->findByPk($catId);
+		$criteria = new CDbCriteria;
+		$criteria->compare('category_id', $catId, true);
+		$criteria->order = "news_id DESC";
+		$dataProvider = new CActiveDataProvider('News', array(
+				'criteria'=>$criteria));
+	
+		$this->render('lists',array(
+				'dataProvider' => $dataProvider,
+				'title' => $category->category_name,
+		));
+	
 	}
 
 	/**

@@ -83,9 +83,64 @@ Yii::app()->clientScript->registerScript('search', "
 			),
 )); ?>
 </div>
-
-
 <div id="footer" class="normal">
+
+	<div class="footer-info">
+		<?php $this->widget('ext.carouFredSel.ECarouFredSel', array(
+				'id' => 'carousel',
+				'target' => '#foo',
+				'config' => array(
+						'responsive' => true,
+						'items' => 5,
+						'scroll' => array(
+								'items' => 1,
+								'easing' => 'elastic',
+								'duration' => 800,
+								'pauseDuration' => 1500,
+								'pauseOnHover' => true,
+								'fx' => 'directscroll',
+						),
+						'sweep' => array(
+								'items' => 1,
+								'easing' => 'elastic',
+								'duration' => 800,
+								'pauseDuration' => 1500,
+								'pauseOnHover' => true,
+								'fx' => 'directscroll',
+								'onMouse'=>true,
+						),
+				),
+		));
+		?>
+
+		<h5>Sinh vật ngẫu nhiên</h5>
+		<div id="foo">
+			<?php 
+			$criteria=new CDbCriteria;
+			$criteria->order = 'rand()';
+			$creature = Creatures::model()->findAll($criteria);
+			for ($i = 0; $i<10 ; $i++) {
+			$data = $creature[$i];
+			?>
+			<div class="item">
+
+				<a
+					href="<?php echo Yii::app()->createUrl("creatures/view",array("id" => $data->ID));?>">
+					<img alt="Ảnh con vật"
+					src="<?php echo getImageUrl($data->Loai,$data->Img)?>">
+					<div class="slide">
+					<h6>
+						<?php echo $data->Viet?>
+					</h6>
+					</div>
+				</a>
+
+			</div>
+			<?php }?>
+
+		</div>
+	</div>
+
 	<div id="copyright">
 		<p>Copyright &copy; 2003-2013 Ghi rõ nguồn 'Sinh vật rừng Việt Nam'
 			khi bạn phát hành lại thông tin từ Website này</p>

@@ -9,5 +9,5 @@ $this->beginWidget('zii.widgets.jui.CJuiDialog',array(
                     'height'=>'auto',
                 ),
                 ));
-echo $this->renderPartial('post', array("model" => $model, "data" => $data)); ?>
+echo $this->renderPartial('post', array("model" => $model, "data" => $data, "photo" => $photo)); ?>
 <?php $this->endWidget('zii.widgets.jui.CJuiDialog');?>
