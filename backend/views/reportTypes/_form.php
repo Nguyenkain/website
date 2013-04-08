@@ -5,7 +5,7 @@
 
 	<p class="help-block">Trường với ký hiệu <span class="required">*</span> là bắt buộc.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+	<?php echo $form->errorSummary($model,'Vui lòng kiểm tra lại những lỗi sau:'); ?>
 
 	<?php echo $form->textFieldRow($model,'report_type',array('class'=>'span5','maxlength'=>255)); ?>
 

@@ -3,7 +3,7 @@
 		'enableAjaxValidation' => false,
 		));?>
 
-<?php echo $form->errorSummary($model); ?>
+<?php echo $form->errorSummary($model,'Vui lòng kiểm tra lại những lỗi sau:'); ?>
 
 
 

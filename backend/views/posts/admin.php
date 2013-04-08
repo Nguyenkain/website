@@ -65,11 +65,11 @@ Yii::app()->clientScript->registerScript('search', "
 	        array('name'=>'post_created_time',
 	        	'value'=>'date("d/m/y H:i:s", $data->post_created_time)',
 				'filter'=>$this->widget('zii.widgets.jui.CJuiDatepicker', array(
-				'model'=>$model, 
-				'attribute'=>'post_created_time', 
-				'htmlOptions' => array('id' => 'created_time_search'), 
-				'options' => array('dateFormat' => 'mm/dd/yy')), 
-				true
+					'model'=>$model, 
+					'attribute'=>'post_created_time', 
+					'htmlOptions' => array('id' => 'created_time_search'), 
+					'options' => array('dateFormat' => 'mm/dd/yy')), 
+					true
 			),),
 			array(
 				'class'=>'bootstrap.widgets.TbButtonColumn',
