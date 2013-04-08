@@ -35,7 +35,7 @@ abstract class BaseCoordinations extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-				array('province_name, longitude, latitude', 'required'),
+				array('province_name, longitude, latitude', 'required',
 						'message'=>'Hãy vui lòng nhập giá trị cho {attribute}.'),
 				array('province_id', 'numerical', 'integerOnly'=>true),
 				array('longitude, latitude', 'numerical'),
