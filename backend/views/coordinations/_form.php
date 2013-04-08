@@ -14,25 +14,17 @@ $js->registerScriptFile($baseUrl . '/js/egmap_handle.js');
 
 <?php echo $form->textFieldRow($model,'province_name',array('class'=>'span5','maxlength'=>50)); ?>
 
-<body style="background: white">
-	</br>
+<body>
 	<div class="map_form">
 		<div id="address_search">
-			Tìm địa điểm trên bản đồ: <br>
+			Tìm địa điểm trên bản đồ: <span class="required">*</span><br>
 			<div id="search">
 				<input type="text" id="address" />
 				<button type="button" class="btn btn-primary" onclick="geocode()">Tìm kiếm</button>
 			</div>
-			<ul>
-				<li>Kinh độ/Vĩ độ:&nbsp;<span id="latlng"></span>
-				</li>
-				<li>Địa điểm:&nbsp;<span id="formatedAddress"></span>
-				</li>
-			</ul>
 		</div>
 		<div id="map">
 			<div id="map_canvas"></div>
-			<div id="crosshair"></div>
 			<?php Yii::import('common.extensions.EGMap.*');
 			$gMap = new EGMap();
 			$gMap->setJsName('map');
@@ -45,17 +37,18 @@ $js->registerScriptFile($baseUrl . '/js/egmap_handle.js');
 			$icon->setSize(32, 37);
 			$icon->setAnchor(16, 16.5);
 			$icon->setOrigin(0, 0);
-
+			$jsAddMaker = '';
+			
 			if ($model->longitude != null && $model->latitude != null)
 			{
 				$longitude = $model->longitude;
 				$latitude = $model->latitude;
 				// Add Gmaker
 				$marker = new EGMapMarker($latitude, $longitude, array('title' => $model->
-						province_name, 'icon' => $icon));
+						province_name, 'icon' => $icon, 'draggable'=>true));
 				$marker->addHtmlInfoWindow($info_window);
+				$jsAddMaker = 'addMarker('.$marker->getJsName().');';
 				$gMap->addMarker($marker);
-
 			} else
 			{
 				// center the map
@@ -69,31 +62,13 @@ $js->registerScriptFile($baseUrl . '/js/egmap_handle.js');
 			$gMap->setCenter($latitude, $longitude);
 			$gMap->zoom = 7;
 			$gMap->addGlobalVariable('geocoder');
-			$gMap->addGlobalVariable('centerChangedLast');
-			$gMap->addGlobalVariable('reverseGeocodedLast');
-			$gMap->addGlobalVariable('currentReversGeocodeResponse');
 			$gMap->addEvent(new EGMapEvent('zoom_changed',
 					'document.getElementById("zoom_level").innerHTML = map.getZoom();'));
-			$gMap->addEvent(new EGMapEvent('center_changed', 'centerChanged', false));
-			$gEvent = new EGMapEvent('dblclick', 'map.setZoom(map.getZoom() +1)');
 			$gMap->appendMapTo('#map_canvas');
 			$gMap->renderMap(array(
 					'geocoder = new google.maps.Geocoder();',
-					$gEvent->getDomEventJs('crosshair'),
-					'reverseGeocodedLast= new Date();',
-					'centerChagedLast = new Date();',
-					'setInterval(function(){
-					if((new Date()).getSeconds() - centerChangedLast.getSeconds() > 1) {
-					if(reverseGeocodedLast.getTime() < centerChangedLast.getTime())
-					reverseGeocode();
-}
-},1000);',
-		'centerChanged();')); ?>
-		</div>
-		<br>
-		<div id="get_latlong">
-			<button type="button" class="btn btn-primary" onclick="setLatLngToClass()">Lấy
-				giá trị kinh độ, vĩ độ</button>
+					$jsAddMaker,
+					)); ?>
 		</div>
 	</div>
 </body>
@@ -107,6 +82,9 @@ $js->registerScriptFile($baseUrl . '/js/egmap_handle.js');
 			'buttonType'=>'submit',
 			'type'=>'primary',
 			'label'=>$model->isNewRecord ? 'Tạo mới' : 'Lưu',
+			'htmlOptions' => array(
+					 'onclick' => 'setLatLngToClass();'
+					),
 		)); ?>
 </div>
 

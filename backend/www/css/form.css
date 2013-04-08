@@ -133,39 +133,36 @@ div.wide.form .buttons,div.wide.form .hint,div.wide.form .errorMessage {
 	padding-left: 110px;
 }
 
-div.map_form {
+.map_form {
 	background: LightGray;
+	padding: 15px;
 }
 
-div.map_form input {
+.map_form input {
 	width: 456px;
 }
 
-div.map_form button {
+.map_form button {
 	height: 30px;
 	margin-bottom: 9px;
 }
 
-div#map {
+#map {
 	position: relative;
 }
 
-div#crosshair {
-	position: absolute;
-	/*
-         the top will be half of the width of the map
-         less 50% of its size more or less
-         to center the image correctly on the map
-    */
-	top: 192px;
-	height: 19px;
-	width: 19px;
-	left: 50%;
-	margin-left: -8px;
-	display: block;
-	/* we are going to borrow a crosshair gif from google */
-	background:
-		url(http://gmaps-samples-v3.googlecode.com/svn/trunk/geocoder/crosshair.gif);
-	background-position: center center;
-	background-repeat: no-repeat;
+#coordinations-form #Coordinations_latitude,
+#coordinations-form #Coordinations_longitude,
+#national-parks-form #NationalParks_latitude,
+#national-parks-form #NationalParks_longitude
+{
+	display: none;
+}
+
+#coordinations-form label[for=Coordinations_latitude],
+#coordinations-form label[for=Coordinations_longitude],
+#national-parks-form label[for=NationalParks_latitude],
+#national-parks-form label[for=NationalParks_longitude]
+{
+	display: none;
 }

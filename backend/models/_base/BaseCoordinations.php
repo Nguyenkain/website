@@ -35,11 +35,10 @@ abstract class BaseCoordinations extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-				array('province_id, province_name, longitude, latitude', 'required'),
-				array('province_id', 'numerical', 'integerOnly'=>true),
+				array('province_name, longitude, latitude', 'required'),
 				array('longitude, latitude', 'numerical'),
 				array('province_name', 'length', 'max'=>50),
-				array('province_id, province_name, longitude, latitude', 'safe', 'on'=>'search'),
+				array('province_name, longitude, latitude', 'safe', 'on'=>'search'),
 		);
 	}
 

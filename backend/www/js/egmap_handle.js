@@ -1,82 +1,17 @@
 ﻿// function to get the latitude and longitude
 // and place them on the test fields
 
+var markers = [];
+
 function setLatLngToClass() {
-	if (document.getElementById('NationalParks_latitude')) document.getElementById('NationalParks_latitude').value = map.getCenter().lat();
-	if (document.getElementById('NationalParks_longitude')) document.getElementById('NationalParks_longitude').value = map.getCenter().lng();
+	if (document.getElementById('NationalParks_latitude')) document.getElementById('NationalParks_latitude').value = markers[0].getPosition().lat();
+	if (document.getElementById('NationalParks_longitude')) document.getElementById('NationalParks_longitude').value = markers[0].getPosition().lng();
 	
-	if (document.getElementById('Coordinations_latitude')) document.getElementById('Coordinations_latitude').value = map.getCenter().lat();
-	if (document.getElementById('Coordinations_longitude')) document.getElementById('Coordinations_longitude').value = map.getCenter().lng();
-}
-//
-// function to get Centered Latitude and Longitude points
-
-function getCenterLatLngText() {
-	return '(' + map.getCenter().lng() + ', ' + map.getCenter().lat() + ')';
-}
-//
-// function to call when the center of the map
-// has changed. Center information will be
-// collected and displayed on the document
-// elements
-
-function centerChanged() {
-	centerChangedLast = new Date();
-	var latlng = getCenterLatLngText();
-	document.getElementById('latlng').innerHTML = latlng;
-	document.getElementById('formatedAddress').innerHTML = '';
-	currentReverseGeocodeResponse = reverseGeocode();
-}
-//
-// Collects reverse center location
-
-function reverseGeocode() {
-	reverseGeocodedLast = new Date();
-	geocoder.geocode({
-		latLng: map.getCenter()
-	}, reverseGeocodeResult);
-}
-//
-// Displays collected reverse geocoded results
-// and displays them on document elements
-
-function reverseGeocodeResult(results, status) {
-	currentReverseGeocodeResponse = results;
-	if (status == 'OK') {
-		if (results.length == 0) {
-			document.getElementById('formatedAddress').innerHTML = 'None';
-		} else {
-			document.getElementById('formatedAddress').innerHTML = results[0].formatted_address;
-		}
-	} else {
-		document.getElementById('formatedAddress').innerHTML = 'Error';
-	}
+	if (document.getElementById('Coordinations_latitude')) document.getElementById('Coordinations_latitude').value = markers[0].getPosition().lat();
+	if (document.getElementById('Coordinations_longitude')) document.getElementById('Coordinations_longitude').value = markers[0].getPosition().lng();
 }
 
-// adds marker to the center of the map
-  function addMarkerAtCenter() {
-    var marker = new google.maps.Marker({
-        position: map.getCenter(),
-        map: map
-    });
-    var text = 'Lat/Lng: ' + getCenterLatLngText();
-    if(currentReverseGeocodeResponse) {
-      var addr = '';
-      if(currentReverseGeocodeResponse.size == 0) {
-        addr = 'None';
-      } else {
-        addr = currentReverseGeocodeResponse[0].formatted_address;
-      }
-      text = text + '<br>' + 'address: <br>' + addr;
-    }
-    var infowindow = new google.maps.InfoWindow({ content: text });
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.open(map,marker);
-    });
-  }
-//
 // geocodes the address inserted
-
 function geocode() {
 	var address = document.getElementById("address").value;
 	geocoder.geocode({
@@ -87,8 +22,32 @@ function geocode() {
 
 function geocodeResult(results, status) {
 	if (status == 'OK' && results.length > 0) {
+		deleteAllMarkers();
+		var marker = new google.maps.Marker({
+	        position: results[0].geometry.location,
+	        map: map,
+	        draggable: true,
+	        animation: google.maps.Animation.DROP,
+	        icon: './images/forest.png',
+	    });
+		addMarker(marker);
 		map.fitBounds(results[0].geometry.viewport);
 	} else {
 		alert("Không tìm thấy địa điểm này: " + status);
 	}
+}
+
+function deleteAllMarkers() {
+	$.each(markers, function(index) {
+		deleteMarker(markers[index]);
+	});
+}
+
+function deleteMarker(marker) {
+	marker.setMap(null); 
+}
+
+function addMarker(marker){
+	markers = [];
+    markers.push(marker);
 }
