@@ -1110,9 +1110,26 @@ element.style {
 
 /*POST DIALOG*/
 #post_container {
-	width: 460px;
+	width: auto;
 	height: 308px;
 	background: #FFFFFF;
+}
+
+#post_container .content {
+	float:left;
+}
+
+#post_container .form_upload {
+	float:left;
+	margin: 25px 0 0 20px;
+}
+
+#post_container .form_upload .span7 {
+	width:410px;
+}
+
+#post_container .form_upload .span5 {
+	width: 220px;
 }
 
 #post_container label {
