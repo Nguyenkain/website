@@ -27,7 +27,7 @@ class ThreadsController extends Controller
 	{
 		return array(
 				array('allow',  // allow all users to perform 'index' and 'view' actions
-						'actions'=>array('index','view','post','getNotification','report','postToFacebook','newPost','login','setNotification','delete','editThread','editPost','deletePost'),
+						'actions'=>array('index','view','post','getNotification','report','postToFacebook','newPost','login','setNotification','delete','editThread','editPost','deletePost','upload'),
 						'users'=>array('*'),
 				),
 				array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -117,13 +117,19 @@ class ThreadsController extends Controller
 		$model=new Threads;
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
 		if(isset($_POST['Threads']))
 		{
 			$model->attributes=$_POST['Threads'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->thread_id));
+			$transaction = Yii::app( )->db->beginTransaction( );
+			try {
+				if($model->save())
+					$this->redirect(array('view','id'=>$model->thread_id));
+			} catch(Exception $e) {
+				$transaction->rollback( );
+				Yii::app( )->handleException( $e );
+			}
 		}
 
 		$this->render('create',array(
@@ -217,6 +223,104 @@ class ThreadsController extends Controller
 		$this->render('admin',array(
 				'model'=>$model,
 		));
+	}
+	
+	public function actionUpload( ) {
+		Yii::import( "xupload.models.XUploadForm" );
+		//Here we define the paths where the files will be stored temporarily
+		$path = realpath( Yii::app( )->getBasePath( )."/www/images/uploads/tmp/" )."/";
+		$publicPath = Yii::app( )->getBaseUrl( )."/images/uploads/tmp/";
+	
+		//This is for IE which doens't handle 'Content-type: application/json' correctly
+		header( 'Vary: Accept' );
+		if( isset( $_SERVER['HTTP_ACCEPT'] )
+		&& (strpos( $_SERVER['HTTP_ACCEPT'], 'application/json' ) !== false) ) {
+			header( 'Content-type: application/json' );
+		} else {
+			header( 'Content-type: text/plain' );
+		}
+	
+		//Here we check if we are deleting and uploaded file
+		if( isset( $_GET["_method"] ) ) {
+			if( $_GET["_method"] == "delete" ) {
+				if( $_GET["file"][0] !== '.' ) {
+					$file = $path.$_GET["file"];
+					if( is_file( $file ) ) {
+						unlink( $file );
+					}
+				}
+				echo json_encode( true );
+			}
+		} else {
+			$model = new XUploadForm;
+			$model->file = CUploadedFile::getInstance( $model, 'file' );
+			//We check that the file was successfully uploaded
+			if( $model->file !== null ) {
+				//Grab some data
+				$model->mime_type = $model->file->getType( );
+				$model->size = $model->file->getSize( );
+				$model->name = $model->file->getName( );
+				//(optional) Generate a random name for our file
+				$filename = md5( Yii::app( )->user->id.microtime( ).$model->name);
+				$filename .= ".".$model->file->getExtensionName( );
+				if( $model->validate( ) ) {
+					if( !is_dir( $path ) ) {
+						mkdir( $path, 0777, true );
+						chmod ( $path , 0777 );
+					}
+					//Move our file to our temporary dir
+					$model->file->saveAs( $path.$filename );
+					chmod( $path.$filename, 0777 );
+					//here you can also generate the image versions you need
+					//using something like PHPThumb
+	
+	
+					//Now we need to save this path to the user's session
+					if( Yii::app( )->user->hasState( 'images' ) ) {
+						$userImages = Yii::app( )->user->getState( 'images' );
+					} else {
+						$userImages = array();
+					}
+					$userImages[] = array(
+							"path" => $path.$filename,
+							//the same file or a thumb version that you generated
+							"thumb" => $path.$filename,
+							"filename" => $filename,
+							'size' => $model->size,
+							'mime' => $model->mime_type,
+							'name' => $model->name,
+							'ext' => $model->file->getExtensionName(),
+					);
+					Yii::app( )->user->setState( 'images', $userImages );
+	
+					//Now we need to tell our widget that the upload was succesfull
+					//We do so, using the json structure defined in
+					// https://github.com/blueimp/jQuery-File-Upload/wiki/Setup
+					echo json_encode( array( array(
+							"name" => $model->name,
+							"type" => $model->mime_type,
+							"size" => $model->size,
+							"url" => $publicPath.$filename,
+							"thumbnail_url" => $publicPath."$filename",
+							"delete_url" => $this->createUrl( "upload", array(
+									"_method" => "delete",
+									"file" => $filename
+							) ),
+							"delete_type" => "POST"
+					) ) );
+				} else {
+					//If the upload failed for some reason we log some data and let the widget know
+					echo json_encode( array(
+							array( "error" => $model->getErrors( 'file' ),
+							) ) );
+					Yii::log( "XUploadAction: ".CVarDumper::dumpAsString( $model->getErrors( ) ),
+					CLogger::LEVEL_ERROR, "xupload.actions.XUploadAction"
+							);
+				}
+			} else {
+				throw new CHttpException( 500, "Could not upload file" );
+			}
+		}
 	}
 
 	public function actionReports()
@@ -313,33 +417,63 @@ class ThreadsController extends Controller
 
 	public function actionPost()
 	{
+		Yii::import( "xupload.models.XUploadForm" );
+		$photos = new XUploadForm;
+		
 		//EQuickDlgs::render('_post',array());
 		$fbId = Yii::app()->request->getQuery("id");
-
+		//EQuickDlgs::checkDialogJsScript();
 		$criteria = new CDbCriteria();
 		$criteria->compare('facebook_id', $fbId, true);
 		$data = Users::model()->find($criteria);
-
 		$model = new Threads;
 		$model->user_id = $data->user_id;
+		//$this->performAjaxValidation($model);
+		$flag=true;
 
 		if(isset($_POST['Threads']))
 		{
-			$model->attributes=$_POST['Threads'];
-			$model->thread_created_time = time();
-			$model->last_posted_time = time();
-			if($model->save())
-				EQuickDlgs::checkDialogJsScript();
-			$this->redirect(array('index'));
-		}
+			$flag=false;
+			$transaction = Yii::app( )->db->beginTransaction( );
+			try {
+				$model->attributes=$_POST['Threads'];
+				$model->thread_created_time = time();
+				$model->last_posted_time = time();
+				$valid=$model->validate();
+				if($valid) {
+					if($model->save())
+					{
+						$transaction->commit();
+						echo CJSON::encode(array(
+								'status'=>'success'
+						));
+					}
 
-		$this->renderPartial('post', array("model" => $model, "data" => $data));
+					Yii::app()->end();
+				}
+				else{
+					$error = CActiveForm::validate($model);
+					if($error!='[]')
+						echo $error;
+					Yii::app()->end();
+				}
+			} catch(Exception $e) {
+				$transaction->rollback( );
+				Yii::app( )->handleException( $e );
+			}
+		}
+		if($flag) {
+			Yii::app()->clientScript->scriptMap['jquery.js'] = false;
+			//EQuickDlgs::render('post', array("model" => $model, "data" => $data));
+			$this->renderPartial('dialog', array("model" => $model, "data" => $data , 'photo'=>$photos,),false,true);
+		}
 	}
 
 	public function actionNewPost() {
 		if(isset($_POST['Posts']))
 		{
 			$model = new Posts;
+			$this->performAjaxValidation($model);
 			$model->attributes=$_POST['Posts'];
 			$thread_id = Yii::app()->request->getQuery("thread_id");
 			$fbid = Yii::app()->request->getQuery("fbid");
@@ -349,10 +483,19 @@ class ThreadsController extends Controller
 			$model->thread_id = $thread_id;
 			$model->user_id = $data->user_id;
 			$model->post_created_time = time();
-			if($model->save())
-				echo 'success';
-			else
-				echo 'error';
+			$valid=$model->validate();
+			if($valid) {
+				if($model->save())
+					echo 'success';
+				else
+					echo 'error';
+			}
+			else {
+				$error = CActiveForm::validate($model);
+				if($error!='[]')
+					echo $error;
+				Yii::app()->end();
+			}
 		}
 
 	}
@@ -361,14 +504,25 @@ class ThreadsController extends Controller
 		if(isset($_POST['Threads']))
 		{
 			$model = new Threads;
-			$model->attributes=$_POST['Threads'];
+			$this->performAjaxValidation($model);
 			$thread_id = Yii::app()->request->getQuery("thread_id");
 			$thread = $this->loadModel($thread_id);
-			if($thread->saveAttributes(array('thread_content'=>$model->thread_content,'last_modified_time'=>time()))) {
-				echo $thread->toJSON();
+			$model = $thread;
+			$model->attributes=$_POST['Threads'];
+			$valid=$model->validate();
+			if($valid) {
+				if($thread->saveAttributes(array('thread_content'=>$model->thread_content,'last_modified_time'=>time()))) {
+					echo $thread->toJSON();
+				}
+				else
+					echo 'failed';
 			}
-			else
-				echo 'failed';
+			else {
+				$error = CActiveForm::validate($model);
+				if($error!='[]')
+					echo $error;
+				Yii::app()->end();
+			}
 		}
 
 	}
@@ -378,13 +532,25 @@ class ThreadsController extends Controller
 		{
 			$post_id = $_POST['Posts']['post_id'];
 			$model = new Posts;
+			$this->performAjaxValidation($model);
 			$model->attributes=$_POST['Posts'];
 			$post = Posts::model()->findByPk($post_id);
-			if($post->saveAttributes(array('post_content'=>$model->post_content))) {
-				echo $post->toJSON();
+			$model->post_created_time = $post->post_created_time;
+			$model->thread_id = $post->thread_id;
+			$valid=$model->validate();
+			if($valid) {
+				if($post->saveAttributes(array('post_content'=>$model->post_content))) {
+					echo $post->toJSON();
+				}
+				else
+					echo 'failed';
 			}
-			else
-				echo 'failed';
+			else {
+				$error = CActiveForm::validate($model);
+				if($error!='[]')
+					echo $error;
+				Yii::app()->end();
+			}
 		}
 
 	}

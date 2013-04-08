@@ -35,7 +35,8 @@ abstract class BaseNotifications extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('thread_id, user_id', 'required'),
+			array('thread_id, user_id', 'required',
+						'message'=>'Hãy vui lòng nhập giá trị cho {attribute}.'),
 			array('thread_id, user_id, viewed_status', 'numerical', 'integerOnly'=>true),
 			array('viewed_status', 'default', 'setOnEmpty' => true, 'value' => null),
 			array('notification_id, thread_id, user_id, viewed_status', 'safe', 'on'=>'search'),

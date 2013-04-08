@@ -83,9 +83,13 @@ Yii::app()->clientScript->registerScript('search', "
 				'thread_content',
 				array(
 					'name'=>'thread_created_time',
-			        'value'=>'date("d/m/y H:i:s", $data->thread_created_time)',
-					'htmlOptions'=>array(
-						'width'=>'70px',
+		        	'value'=>'date("d/m/y H:i:s", $data->thread_created_time)',
+					'filter'=>$this->widget('zii.widgets.jui.CJuiDatepicker', array(
+						'model'=>$model, 
+						'attribute'=>'thread_created_time', 
+						'htmlOptions' => array('id' => 'created_time_search'), 
+						'options' => array('dateFormat' => 'mm/dd/yy')), 
+						true
 					),
 				),
 				/*

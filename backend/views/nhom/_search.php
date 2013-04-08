@@ -13,7 +13,7 @@
 
 	<?php echo $form->textFieldRow($model,'icon',array('class'=>'span5','maxlength'=>200)); ?>
 
-	<div class="form-actions">
+	<div>
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType' => 'submit',
 			'type'=>'primary',

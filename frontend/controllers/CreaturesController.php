@@ -83,6 +83,8 @@ class CreaturesController extends Controller
 		$search = new Creatures;
 		$criteria = new CDbCriteria;
 		
+		//$this->layout = "//layouts/layout_normal";
+		
 		$sort = new CSort;
 		$sort->defaultOrder = 'ID DESC';
 		$criteria->compare('Viet', $Viet, true, 'OR');

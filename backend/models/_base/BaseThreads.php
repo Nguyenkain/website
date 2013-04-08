@@ -40,7 +40,8 @@ abstract class BaseThreads extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('user_id, thread_title, thread_content, thread_created_time, last_posted_time', 'required'),
+			array('user_id, thread_title, thread_content, thread_created_time, last_posted_time', 'required',
+						'message'=>'Hãy vui lòng nhập giá trị cho {attribute}.'),
 			array('last_modified_time, user_id, thread_created_time, last_posted_time', 'numerical', 'integerOnly'=>true),
 			array('thread_title', 'length', 'max'=>150),
 			array('last_modified_time', 'default', 'setOnEmpty' => true, 'value' => null),

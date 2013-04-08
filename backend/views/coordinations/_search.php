@@ -3,7 +3,6 @@
 	'method'=>'get',
 )); ?>
 
-
 <?php echo $form->labelEx($model, 'province_name');
 	echo $form->dropDownList($model, 'province_name', CHtml::listData(Coordinations::
 		model()->findAll(array('order' => 'province_name')), 'province_name', 'province_name'),

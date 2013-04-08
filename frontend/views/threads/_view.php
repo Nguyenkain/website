@@ -26,10 +26,12 @@
 						'id' => 'post_edit_form',
 						'type' => 'horizontal',
 						'action'=>Yii::app()->createUrl('threads/editPost'),
+						'enableAjaxValidation'=>true,
 				));
 				?>
 				
-				<?php echo $form->textArea($data,'post_content',array('rows'=>6, 'cols'=>50, 'placeholder'=>'Nhập nội dung'));
+				<?php echo $form->textArea($data,'post_content',array('rows'=>6, 'cols'=>50, 'placeholder'=>'Nhập nội dung sửa'));
+				echo $form->error($data,'post_content');
 				echo $form->hiddenField($data,'user_id',array('class'=>'userid'));
 				echo $form->hiddenField($data,'post_id',array('class'=>'postid'));
 				?>

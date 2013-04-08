@@ -38,7 +38,8 @@ abstract class BaseReports extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('thread_id, user_id, report_type_id, comment', 'required'),
+			array('thread_id, user_id, report_type_id, comment', 'required',
+						'message'=>'Hãy vui lòng nhập giá trị cho {attribute}.'),
 			array('thread_id, user_id, report_type_id', 'numerical', 'integerOnly'=>true),
 			array('comment', 'length', 'max'=>255),
 			array('report_id, thread_id, user_id, report_type_id, comment', 'safe', 'on'=>'search'),

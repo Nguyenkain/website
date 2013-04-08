@@ -33,7 +33,7 @@
 						'items' => 5,
 						'scroll' => array(
 								'items' => 1,
-								'easing' => 'cubic',
+								'easing' => 'elastic',
 								'duration' => 800,
 								'pauseDuration' => 1500,
 								'pauseOnHover' => true,
@@ -54,7 +54,9 @@
 			
 			<a href="<?php echo Yii::app()->createUrl("news/view",array("id" => $data->news_id));?>">
 				<img alt="Ảnh tin tức" src="<?php echo Yii::app()->request->getBaseUrl(true) . "/images/forumpic/" . $data->image . ".jpg";?>">
+				<div class="slide">
 				<h6><?php echo $data->title?></h6>
+				</div>
 			</a>
 			
 			</div>

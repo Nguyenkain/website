@@ -59,6 +59,10 @@ return CMap::mergeArray(
 			'application.models.*',
 			'application.widgets.*',
 		),
+		'aliases' => array(
+				//If you manually installed it
+				'xupload' => 'common.extensions.xupload'
+		),
 		/* uncomment and set if required */
 		// @see http://www.yiiframework.com/doc/api/1.1/CModule#setModules-detail
 		/* 'modules' => array(), */
