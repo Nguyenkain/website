@@ -8,7 +8,7 @@
 		model()->findAll(array('order' => 'park_name')), 'park_name', 'park_name'),
 		array('empty' => '--Chọn tên Vườn Quốc Gia--', 'class' => 'span5')); ?>
 
-
+<div class="form-actions">
 <?php $this->widget('bootstrap.widgets.TbButton', array(
 		'buttonType' => 'submit',
 		'type' => 'primary',

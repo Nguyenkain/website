@@ -62,8 +62,7 @@ $js->registerScriptFile($baseUrl . '/js/egmap_handle.js');
 			$gMap->setCenter($latitude, $longitude);
 			$gMap->zoom = 7;
 			$gMap->addGlobalVariable('geocoder');
-			$gMap->addEvent(new EGMapEvent('zoom_changed',
-					'document.getElementById("zoom_level").innerHTML = map.getZoom();'));
+			
 			$gMap->appendMapTo('#map_canvas');
 			$gMap->renderMap(array(
 					'geocoder = new google.maps.Geocoder();',
