@@ -19,7 +19,7 @@
 
 	<?php echo $form->textAreaRow($model,'Description',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
-	<div class="form-actions">
+	<div>
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType' => 'submit',
 			'type'=>'primary',

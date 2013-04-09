@@ -1,23 +1,21 @@
 <div class="view">
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id),array('view','id'=>$data->id)); ?>
+	<h3>Thông tin Vườn Quốc Gia <?php echo $model->park_name; ?></h3>
+	<br />
+	
+	<b><?php echo CHtml::encode($model->getAttributeLabel('park_name')); ?>:</b>
+	<?php echo CHtml::encode($model->park_name); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('park_name')); ?>:</b>
-	<?php echo CHtml::encode($data->park_name); ?>
+	<b><?php echo CHtml::encode($model->getAttributeLabel('park_description')); ?>:</b>
+	<?php echo CHtml::encode($model->park_description); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('park_description')); ?>:</b>
-	<?php echo CHtml::encode(substr($data->park_description,0,600)); ?>
+	<b><?php echo CHtml::encode($model->getAttributeLabel('longitude')); ?>:</b>
+	<?php echo CHtml::encode($model->longitude); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('longitude')); ?>:</b>
-	<?php echo CHtml::encode($data->longitude); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('latitude')); ?>:</b>
-	<?php echo CHtml::encode($data->latitude); ?>
+	<b><?php echo CHtml::encode($model->getAttributeLabel('latitude')); ?>:</b>
+	<?php echo CHtml::encode($model->latitude); ?>
 	<br />
 
 

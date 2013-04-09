@@ -37,20 +37,15 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 <?php $this->widget('bootstrap.widgets.TbGridView', array(
 		'id' => 'national-parks-grid',
 		'dataProvider' => $model->search(),
-		'filter' => $model,
 		'template'=>'{summary}{pager}{items}{pager}',
 		'pagerCssClass'=>'pagination pagination-right',
 		'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 		'emptyText' => 'Không có kết quả nào được tìm thấy',
 		'columns' => array(
 			array(
-				'name' => 'id',
-				'htmlOptions' => array('width' => '30px'),
-				),
-			array(
 				'name' => 'park_name',
 				'value' => '$data->park_name',
-				'htmlOptions' => array('width' => '140px'),
+				'htmlOptions' => array('width' => '400px'),
 				),
 			'longitude',
 			'latitude',
