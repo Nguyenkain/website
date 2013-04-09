@@ -473,7 +473,7 @@ class ThreadsController extends Controller
 		if(isset($_POST['Posts']))
 		{
 			$model = new Posts;
-			$this->performAjaxValidation($model);
+			//$this->performAjaxValidation($model);
 			$model->attributes=$_POST['Posts'];
 			$thread_id = Yii::app()->request->getQuery("thread_id");
 			$fbid = Yii::app()->request->getQuery("fbid");

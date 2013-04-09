@@ -394,7 +394,6 @@ if($userid) {
 	<?php  $form = $this -> beginWidget('bootstrap.widgets.TbActiveForm', array(
 			'id' => 'user-comment-form',
 			'type' => 'horizontal',
-			'enableAjaxValidation'=>true,
 	));
 	?>
 
