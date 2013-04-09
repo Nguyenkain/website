@@ -42,14 +42,22 @@ function getImageUrl($loai,$img){
 	<div id="creature_content">
 
 		<div class="big_images">
-			<a href="<?php echo getImageUrl($model->Loai, $model->Img)?>"> <?php 
+			<?php 
 			$imageUrl = getImageUrl($model->Loai, $model->Img.'s');
-			if(checkUrl($imageUrl))
-				echo CHtml::image($imageUrl,"Ảnh con vật");
-			else
-				echo CHtml::image(getImageUrl($model->Loai, $model->Img),"Ảnh con vật");
-			?>
+			if(checkUrl($imageUrl)) {
+?>
+			<a href="<?php echo getImageUrl($model->Loai, $model->Img.'s')?>"> <?php
+			echo CHtml::image($imageUrl,"Ảnh con vật");
+				}
+				else {
+?> 
+			<a href="<?php echo getImageUrl($model->Loai, $model->Img)?>"> 
+<?php
+			echo CHtml::image(getImageUrl($model->Loai, $model->Img),"Ảnh con vật");
+				}
+				?>
 			</a>
+		
 		</div>
 
 		<div class="creature_info">
@@ -224,7 +232,7 @@ function getImageUrl($loai,$img){
 						'items' => 5,
 						'scroll' => array(
 								'items' => 1,
-								'easing' => 'quadratic',
+								'easing' => 'elastic',
 								'duration' => 800,
 								'pauseDuration' => 1500,
 								'pauseOnHover' => true,
@@ -232,7 +240,7 @@ function getImageUrl($loai,$img){
 						),
 						'sweep' => array(
 								'items' => 1,
-								'easing' => 'quadratic',
+								'easing' => 'elastic',
 								'duration' => 800,
 								'pauseDuration' => 1500,
 								'pauseOnHover' => true,
@@ -256,9 +264,11 @@ function getImageUrl($loai,$img){
 					href="<?php echo Yii::app()->createUrl("creatures/view",array("id" => $data->ID));?>">
 					<img alt="Ảnh con vật"
 					src="<?php echo getImageUrl($data->Loai,$data->Img)?>">
+					<div class="slide">
 					<h6>
 						<?php echo $data->Viet?>
 					</h6>
+					</div>
 				</a>
 
 			</div>

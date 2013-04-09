@@ -50,6 +50,21 @@
 	href="<?php echo Yii::app()->request->baseUrl; ?>/images/favicon.ico">
 </head>
 
+<?php /* @var $this Controller */
+Yii::app()->clientScript->registerScript('hover', "hoverScript();"); ?>
+<script>
+function hoverScript() {
+$(".item").hover(
+		
+	    function () { $(this).find('div.slide').slideDown(); },
+	
+	    function () { $(this).find('div.slide').slideUp(); }
+	
+	);
+}
+
+</script>
+
 <body>
 	<div id="wrapper">
 		<div id="header">

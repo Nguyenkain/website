@@ -58,7 +58,7 @@
 		<?php 	echo $form->labelEx($model,'AuthorName');
 			echo $form->dropDownList($model,'Author',CHtml::listData(Author::model()->findAll(), 'ID', 'Name' ), array('empty'=>'--Chọn tác giả--',));?>
 
-	    <div class="form-actions">
+	    <div>
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType' => 'submit',
 			'type'=>'primary',

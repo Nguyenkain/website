@@ -42,7 +42,6 @@ Yii::app()->clientScript->registerScript('search', "
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
 		'id'=>'coordinations-grid',
 		'dataProvider'=>$model->search(),
-		'filter'=> $model,
 		'template'=>'{summary}{pager}{items}{pager}',
 		'pagerCssClass'=>'pagination pagination-right',
 		'htmlOptions' => array('class' => 'grid-view rounded'),
