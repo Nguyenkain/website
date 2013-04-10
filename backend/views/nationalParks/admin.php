@@ -23,19 +23,9 @@ $('.search-form form').submit(function(){
 
 <h3>Quản lý Vườn Quốc Gia</h3>
 
-<p>
-Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính xác của kết quả tìm kiếm.
-</p>
-
-<?php echo CHtml::link('Tìm kiếm nâng cao', '#', array('class' =>
-		'search-button btn')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search', array('model' => $model, )); ?>
-</div><!-- search-form -->
-
 <?php $this->widget('bootstrap.widgets.TbGridView', array(
 		'id' => 'national-parks-grid',
+		'filter'=>$model,
 		'dataProvider' => $model->search(),
 		'template'=>'{summary}{pager}{items}{pager}',
 		'pagerCssClass'=>'pagination pagination-right',
@@ -45,10 +35,17 @@ hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ chính 
 			array(
 				'name' => 'park_name',
 				'value' => '$data->park_name',
+				'filter' => CHtml::listData(NationalParks::model()->findAll(), 'park_name', 'park_name'),
 				'htmlOptions' => array('width' => '400px'),
 				),
-			'longitude',
-			'latitude',
+			array(
+					'name' => 'longitude',
+					'filter' => false,
+			),
+			array(
+					'name' => 'latitude',
+					'filter' => false,
+			),
 			array('class' => 'bootstrap.widgets.TbButtonColumn',
 				'template'=>'{view}{update}{delete}',
 				'buttons'=>array(

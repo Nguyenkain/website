@@ -393,6 +393,7 @@ if($userid) {
 
 	<?php  $form = $this -> beginWidget('bootstrap.widgets.TbActiveForm', array(
 			'id' => 'user-comment-form',
+			'enableClientValidation'=>true,
 			'type' => 'horizontal',
 	));
 	?>
@@ -423,7 +424,7 @@ if($userid) {
 			            'type' => 'POST',
 			            'success' => 'function(data) {
 							$model = $.parseJSON(data);
-				    	  	if(typeof $model.post_content == "undefined") {
+				    	  	if(typeof $model.status == "undefined") {
 									$.each($model, function(key, val) {
 				                        $("#user-comment-form").find("#"+key+"_em_").text(val);                                                    
 				                        $("#user-comment-form").find("#"+key+"_em_").show();

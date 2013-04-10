@@ -485,10 +485,14 @@ class ThreadsController extends Controller
 			$model->post_created_time = time();
 			$valid=$model->validate();
 			if($valid) {
-				if($model->save())
-					echo 'success';
-				else
+				if($model->save()) {
+						echo CJSON::encode(array(
+								'status'=>'success'
+						));
+				}					
+				else {
 					echo 'error';
+				}
 			}
 			else {
 				$error = CActiveForm::validate($model);
