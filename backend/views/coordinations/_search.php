@@ -3,13 +3,12 @@
 	'method'=>'get',
 )); ?>
 
-	<?php echo $form->textFieldRow($model,'province_name',array('class'=>'span5','maxlength'=>50)); ?>
-
-	<?php echo $form->textFieldRow($model,'longitude',array('class'=>'span5')); ?>
-
-	<?php echo $form->textFieldRow($model,'latitude',array('class'=>'span5')); ?>
-
-	<div>
+<?php echo $form->labelEx($model, 'province_name');
+	echo $form->dropDownList($model, 'province_name', CHtml::listData(Coordinations::
+		model()->findAll(array('order' => 'province_name')), 'province_name', 'province_name'),
+		array('empty' => '--Chọn địa điểm phân bố--', 'class' => 'span5')); ?>
+		
+	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType' => 'submit',
 			'type'=>'primary',
