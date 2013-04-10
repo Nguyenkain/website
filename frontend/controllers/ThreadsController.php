@@ -662,17 +662,17 @@ class ThreadsController extends Controller
 					$userInfo = Yii::app()->facebook->api('/me');
 
 					$model = new Users;
-					$model->facebook_id = $userid;
-					$model->name = $user_info['name'];
-					$model->username = $user_info['username'];
-					$model->user_avatar = $userid;
-					$model->user_email = $user_info['email'];
-					$model->user_dob = $user_info['birthday'];
-					if(isset($user_info['location']))
-						$model->user_address = $user_info['location']['name'];
+					$model->facebook_id = $userInfo['id'];
+					$model->name = $userInfo['name'];
+					$model->username = $userInfo['username'];
+					$model->user_avatar = $userInfo['id'];
+					$model->user_email = $userInfo['email'];
+					$model->user_dob = $userInfo['birthday'];
+					if(isset($userInfo['location']))
+						$model->user_address = $userInfo['location']['name'];
 					if($model->save()) {
 						$userid = $model->user_id;
-						Yii::app()->session['userid'] = $userid;
+						Yii::app()->session['userid'] = $userInfo['id'];
 					}
 				}
 				catch(FacebookApiException $e){
