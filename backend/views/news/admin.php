@@ -60,7 +60,8 @@ Yii::app()->clientScript->registerScript('search', "
 		'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 		'emptyText' => 'Không có kết quả nào được tìm thấy',
 		'afterAjaxUpdate'=>"function(){
-		jQuery('#created_time_search').datepicker({'dateFormat': 'mm/dd/yy'})
+		jQuery('#created_time_search').datepicker({'dateFormat': 'mm/dd/yy'});
+		searchTooltip();
 }",
 		'columns'=>array(
 				array(

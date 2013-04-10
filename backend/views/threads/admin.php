@@ -63,6 +63,7 @@ Yii::app()->clientScript->registerScript('search', "
 		'afterAjaxUpdate' => 'js:function(id,options){
 			$("#threads-grid").removeClass("hasLoading");
 			jQuery("#created_time_search").datepicker({"dateFormat": "mm/dd/yy"})
+			searchTooltip();
 		}',
 		'template'=>'{summary}{pager}{items}{pager}',
 		'pagerCssClass'=>'pagination pagination-right',

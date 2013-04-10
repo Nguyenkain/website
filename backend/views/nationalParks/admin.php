@@ -35,7 +35,7 @@ $('.search-form form').submit(function(){
 			array(
 				'name' => 'park_name',
 				'value' => '$data->park_name',
-				'filter' => CHtml::listData(NationalParks::model()->findAll(), 'park_name', 'park_name'),
+				'filter' => CHtml::listData(NationalParks::model()->findAll(array('order' => 'park_name')), 'park_name', 'park_name'),
 				'htmlOptions' => array('width' => '400px'),
 				),
 			array(
