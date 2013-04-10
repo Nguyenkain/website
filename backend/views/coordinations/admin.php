@@ -25,31 +25,29 @@ Yii::app()->clientScript->registerScript('search', "
 
 <h3>Quản lý địa điểm phân bố</h3>
 
-<p>
-	Có thể nhập các phép so sánh (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>,
-	<b>&lt;&gt;</b> hoặc <b>=</b>) trước mỗi giá trị tìm kiếm để tăng độ
-	chính xác của kết quả tìm kiếm.
-</p>
-
-<?php echo CHtml::link('Tìm kiếm nâng cao','#',array('class'=>'search-button btn')); ?>
-<div class="search-form" style="display: none">
-	<?php $this->renderPartial('_search',array(
-			'model'=>$model,
-)); ?>
-</div>
 <!-- search-form -->
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
 		'id'=>'coordinations-grid',
+		'filter'=>$model,
 		'dataProvider'=>$model->search(),
 		'template'=>'{summary}{pager}{items}{pager}',
 		'pagerCssClass'=>'pagination pagination-right',
 		'htmlOptions' => array('class' => 'grid-view rounded'),
 		'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 		'columns'=>array(
-				'province_name',
-				'longitude',
-				'latitude',
+				array(
+				'name' => 'province_name',
+				'filter' => CHtml::listData(Coordinations::model()->findAll(array('order' => 'province_name')), 'province_name', 'province_name'),
+				),
+				array(
+					'name' => 'longitude',
+					'filter' => false,
+				),
+				array(
+						'name' => 'latitude',
+						'filter' => false,
+				),
 				array(
 						'class'=>'bootstrap.widgets.TbButtonColumn',
 						'template'=>'{view}{update}{delete}',

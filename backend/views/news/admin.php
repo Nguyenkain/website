@@ -1,3 +1,13 @@
+<script type="text/javascript">
+<!--
+function searchTooltip() {
+	$('#created_time_search').attr('title','Tìm kiếm những bài có thời gian tạo trước thời gian được chọn');
+	$('#created_time_search').attr('rel','tooltip');
+	$('#created_time_search').tooltip();
+}
+//-->
+</script>
+
 <?php
 $this->breadcrumbs=array(
 		'Tin tức'=>array('admin'),
@@ -8,6 +18,8 @@ $this->menu=array(
 		array('label'=>'List News','url'=>array('index')),
 		array('label'=>'Create News','url'=>array('create')),
 );
+
+Yii::app()->clientScript->registerScript('tooltip','searchTooltip();');
 
 Yii::app()->clientScript->registerScript('search', "
 		$('.search-button').click(function(){
@@ -48,7 +60,8 @@ Yii::app()->clientScript->registerScript('search', "
 		'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 		'emptyText' => 'Không có kết quả nào được tìm thấy',
 		'afterAjaxUpdate'=>"function(){
-		jQuery('#created_time_search').datepicker({'dateFormat': 'mm/dd/yy'})
+		jQuery('#created_time_search').datepicker({'dateFormat': 'mm/dd/yy'});
+		searchTooltip();
 }",
 		'columns'=>array(
 				array(

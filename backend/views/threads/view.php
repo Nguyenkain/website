@@ -36,13 +36,11 @@ $this->breadcrumbs=array(
 	'htmlOptions' => array('class' => 'grid-view rounded'),
 	'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 	'columns'=>array(
-		'post_id',
-		'user_id',
 		array(
-			'name' => 'thread_search',
-			'header' => 'Chủ đề',
-			'value' => '$data->threads',
-        ),
+				'name' => 'user_search',
+				'header' => 'Người viết',
+				'value' => '$data->users->name',
+	        ),
 		'post_content',
         array('name'=>'post_created_time',
         'value'=>'date("d/m/y H:i:s", $data->post_created_time)'),

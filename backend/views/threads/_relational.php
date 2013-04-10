@@ -10,16 +10,10 @@ $this->widget('bootstrap.widgets.TbGridView',array(
 	'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
 	'emptyText' => 'Không có kết quả nào được tìm thấy',
 	'columns'=>array(
-		'post_id',
 		array(
 			'name' => 'user_search',
 			'header'=>'Người viết',
 			'value'=>'$data->users',
-        ),
-		array(
-			'name' => 'thread_search',
-			'header' => 'Chủ đề',
-			'value' => '$data->threads',
         ),
 		'post_content',
         array('name'=>'post_created_time',

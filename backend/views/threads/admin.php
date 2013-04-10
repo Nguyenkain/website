@@ -1,3 +1,14 @@
+<script type="text/javascript">
+<!--
+function searchTooltip() {
+	$('#created_time_search').attr('title','Tìm kiếm những bài có thời gian tạo trước thời gian được chọn');
+	$('#created_time_search').attr('rel','tooltip');
+	$('#created_time_search').tooltip();
+}
+//-->
+</script>
+
+
 <?php
 $this->breadcrumbs=array(
 		'Thảo luận'=>array('admin'),
@@ -8,6 +19,8 @@ $this->menu=array(
 		array('label'=>'List Threads','url'=>array('index')),
 		array('label'=>'Create Threads','url'=>array('create')),
 );
+
+Yii::app()->clientScript->registerScript('tooltip','searchTooltip();');
 
 Yii::app()->clientScript->registerScript('search', "
 		$('.search-button').click(function(){
@@ -50,6 +63,7 @@ Yii::app()->clientScript->registerScript('search', "
 		'afterAjaxUpdate' => 'js:function(id,options){
 			$("#threads-grid").removeClass("hasLoading");
 			jQuery("#created_time_search").datepicker({"dateFormat": "mm/dd/yy"})
+			searchTooltip();
 		}',
 		'template'=>'{summary}{pager}{items}{pager}',
 		'pagerCssClass'=>'pagination pagination-right',
