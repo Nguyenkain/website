@@ -23,9 +23,9 @@ function getImageUrl($loai,$img){
 				'config' => array(
 						'items' => 5,
 						'scroll' => array(
-								'items' => 1,
-								'easing' => 'elastic',
-								'duration' => 800,
+								'items' => 3,
+								'easing' => 'quadratic',
+								'duration' => 2000,
 								'pauseDuration' => 1500,
 								'pauseOnHover' => true,
 								'fx' => 'directscroll',
