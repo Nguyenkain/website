@@ -62,6 +62,7 @@ Yii::app()->clientScript->registerScript('search', "
 		}',
 		'afterAjaxUpdate' => 'js:function(id,options){
 			$("#threads-grid").removeClass("hasLoading");
+			jQuery("#created_time_search").datepicker({"dateFormat": "mm/dd/yy"})
 		}',
 		'template'=>'{summary}{pager}{items}{pager}',
 		'pagerCssClass'=>'pagination pagination-right',
@@ -97,6 +98,7 @@ Yii::app()->clientScript->registerScript('search', "
 				array(
 					'name'=>'thread_created_time',
 		        	'value'=>'date("d/m/y H:i:s", $data->thread_created_time)',
+					'type' => 'raw',
 					'filter'=>$this->widget('zii.widgets.jui.CJuiDatepicker', array(
 						'model'=>$model, 
 						'attribute'=>'thread_created_time', 
