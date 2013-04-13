@@ -39,7 +39,7 @@ abstract class BaseNationalParks extends GxActiveRecord {
 			array('park_name, park_description', 'required',
 						'message'=>'Hãy vui lòng nhập giá trị cho {attribute}.'),
 			array('longitude, latitude', 'numerical'),
-			array('longitude, latitude', 'required',
+			array('longitude', 'required',
 						'message'=>'Hãy vui lòng chọn địa điểm.'),
 			array('park_name', 'length', 'max'=>255),
 			array('id, park_name, park_description, longitude, latitude', 'safe', 'on'=>'search'),

@@ -39,7 +39,7 @@ abstract class BaseCoordinations extends GxActiveRecord {
 						'message'=>'Hãy vui lòng nhập giá trị cho {attribute}.'),
 				array('province_id', 'numerical', 'integerOnly'=>true),
 				array('longitude, latitude', 'numerical'),
-				array('longitude, latitude', 'required',
+				array('longitude', 'required',
 						'message'=>'Hãy vui lòng chọn địa điểm.'),
 				array('province_name', 'length', 'max'=>50),
 				array('province_name, longitude, latitude', 'safe', 'on'=>'search'),
