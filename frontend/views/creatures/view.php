@@ -50,10 +50,8 @@ function getImageUrl($loai,$img){
 			echo CHtml::image($imageUrl,"Ảnh con vật");
 				}
 				else {
-?> 
-			<a href="<?php echo getImageUrl($model->Loai, $model->Img)?>"> 
-<?php
-			echo CHtml::image(getImageUrl($model->Loai, $model->Img),"Ảnh con vật");
+?> <a href="<?php echo getImageUrl($model->Loai, $model->Img)?>"> <?php
+echo CHtml::image(getImageUrl($model->Loai, $model->Img),"Ảnh con vật");
 				}
 				?>
 			</a>
@@ -219,6 +217,23 @@ function getImageUrl($loai,$img){
 			));
 			?>
 		</div>
+		
+		<div class="clearfix"></div>
+
+		<div class="comment_container">
+
+			<h3 class="comment_title">Bình luận</h3>
+
+			<div class="comment_box">
+			
+				<?php $this->widget('ext.yii-facebook-opengraph.plugins.Comments', array(
+				   'href' => Yii::app()->request->url, // if omitted Facebook will use the OG meta tag
+				   'width' => "970px",
+				)); ?>
+			
+			</div>
+
+		</div>
 	</div>
 </div>
 
@@ -265,9 +280,9 @@ function getImageUrl($loai,$img){
 					<img alt="Ảnh con vật"
 					src="<?php echo getImageUrl($data->Loai,$data->Img)?>">
 					<div class="slide">
-					<h6>
-						<?php echo $data->Viet?>
-					</h6>
+						<h6>
+							<?php echo $data->Viet?>
+						</h6>
 					</div>
 				</a>
 
