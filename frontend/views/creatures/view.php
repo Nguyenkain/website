@@ -227,7 +227,7 @@ echo CHtml::image(getImageUrl($model->Loai, $model->Img),"Ảnh con vật");
 			<div class="comment_box">
 			
 				<?php $this->widget('ext.yii-facebook-opengraph.plugins.Comments', array(
-				   'href' => Yii::app()->request->getBaseUrl(true) . Yii::app()->request->url, // if omitted Facebook will use the OG meta tag
+				   //'href' => Yii::app()->request->getBaseUrl(true) . Yii::app()->createUrl("creatures/view",array("id" => $model->ID)), // if omitted Facebook will use the OG meta tag
 				   'width' => "970px",
 				)); ?>
 			
