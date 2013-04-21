@@ -171,8 +171,11 @@ function setNotification($userid,$threadid)
 //Yii::app()->clientScript->registerScript('search', "getNotification();");
 
 Yii::app()->clientScript->registerScript('setNoti', "setNotification($userid,$model->thread_id);");
-if(isset(Yii::app()->session['userid']))
+if(isset(Yii::app()->session['userid'])) 
+{
 	$user_id = Yii::app()->session['userid'];
+	$ban = Users::model()->findByPk($user_id)->ban_status;
+}
 ?>
 
 <div id="thread_detail_container">
@@ -225,7 +228,7 @@ if(isset(Yii::app()->session['userid']))
 				?>
 			</div>
 			<div class="post_edit_content" style="display: none">
-				<?php if($userid && ($user_id==$model->user_id)) 
+				<?php if($userid && ($user_id==$model->user_id) && $ban == 0) 
 				{
 					?>
 				<?php  $form = $this -> beginWidget('bootstrap.widgets.TbActiveForm', array(
@@ -313,7 +316,7 @@ if(isset(Yii::app()->session['userid']))
 
 				<?php 
 
-				if($user_id == $model->user_id) {
+				if($user_id == $model->user_id && $ban == 0) {
 					echo CHtml::link("Xóa","javascript:;", array("onclick"=>"deleteThread(this,'$user_id')"));
 					/* EQuickDlgs::ajaxLink(
 						array(
@@ -350,7 +353,7 @@ if(isset(Yii::app()->session['userid']))
 
 			<?php 
 
-				if($user_id == $model->user_id) { ?>
+				if($user_id == $model->user_id && $ban == 0) { ?>
 
 			<div class="button">
 

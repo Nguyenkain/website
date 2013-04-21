@@ -1,5 +1,8 @@
 <?php if(isset(Yii::app()->session['userid']))
-	$user_id = Yii::app()->session['userid'];?>
+{
+	$user_id = Yii::app()->session['userid'];
+	$ban = Users::model()->findByPk($user_id)->ban_status;
+}?>
 
 <div class="thread_block">
 	<div class="thread_date">
@@ -19,7 +22,7 @@
 		</div>
 		
 		<div class="post_edit_content" style="display:none">
-			<?php if(isset($user_id) && ($user_id==$data->user_id)) 
+			<?php if(isset($user_id) && ($user_id==$data->user_id) && $ban == 0) 
 			{
 			?>
 				<?php  $form = $this -> beginWidget('bootstrap.widgets.TbActiveForm', array(
@@ -76,7 +79,7 @@
 	<div class="clearfix"></div>
 	<div class="thread_control">
 		
-		<?php if(isset($user_id) && ($user_id==$data->user_id)) 
+		<?php if(isset($user_id) && ($user_id==$data->user_id) && $ban == 0) 
 			{
 			?>
 		<div class="button">
