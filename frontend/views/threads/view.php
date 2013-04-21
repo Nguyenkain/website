@@ -388,7 +388,7 @@ if(isset(Yii::app()->session['userid']))
 </div>
 
 <?php 
-if($userid) {
+if($userid  && $ban == 0) {
 
 ?>
 
