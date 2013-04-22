@@ -15,7 +15,7 @@ Yii::app()->clientScript->registerCssFile($assetUrl.'/js/jquery.pnotify.default.
 <script>
 
 function showWarning() {
-	bootbox.alert("Tài khoản của bạn hiện đang bị khóa, liên lạc với ban quản trị để được giải quyết");
+	bootbox.alert("Tài khoản của bạn hiện đang bị khóa, bạn sẽ không thể viết bài trả lời hoặc sử dụng quyền thành viên, liên lạc với ban quản trị để được giải quyết");
 }
 
 function postToFacebook($fbId,$threadId)
