@@ -73,7 +73,7 @@ return CMap::mergeArray(
 					'secret'=>'b97d24cecf84cf66f43fcab7ee4b2e62', // needed for the PHP SDK
 					//'fileUpload'=>false, // needed to support API POST requests which send files
 					//'trustForwarded'=>false, // trust HTTP_X_FORWARDED_* headers ?
-					//'locale'=>'en_US', // override locale setting (defaults to en_US)
+					'locale'=>'vi_VN', // override locale setting (defaults to en_US)
 					//'jsSdk'=>true, // don't include JS SDK
 					//'async'=>true, // load JS SDK asynchronously
 					//'jsCallback'=>false, // declare if you are going to be inserting any JS callbacks to the async JS SDK loader
