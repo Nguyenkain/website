@@ -14,6 +14,9 @@ Yii::app()->clientScript->registerCssFile($assetUrl.'/js/jquery.pnotify.default.
 
 <script>
 
+function showWarning() {
+	bootbox.alert("Tài khoản của bạn hiện đang bị khóa, liên lạc với ban quản trị để được giải quyết");
+}
 
 function postToFacebook($fbId,$threadId)
 {
@@ -175,6 +178,10 @@ if(isset(Yii::app()->session['userid']))
 {
 	$user_id = Yii::app()->session['userid'];
 	$ban = Users::model()->findByPk($user_id)->ban_status;
+	if($ban == 1) 
+	{
+		Yii::app()->clientScript->registerScript('warning', "showWarning()");
+	} 
 }
 ?>
 
@@ -302,7 +309,7 @@ if(isset(Yii::app()->session['userid']))
 		<div class="thread_control">
 
 			<?php 
-			if($userid) { ?>
+			if($userid  && $ban == 0) { ?>
 
 			<div class="button">
 
@@ -316,7 +323,7 @@ if(isset(Yii::app()->session['userid']))
 
 				<?php 
 
-				if($user_id == $model->user_id && $ban == 0) {
+				if($user_id == $model->user_id) {
 					echo CHtml::link("Xóa","javascript:;", array("onclick"=>"deleteThread(this,'$user_id')"));
 					/* EQuickDlgs::ajaxLink(
 						array(
@@ -353,7 +360,7 @@ if(isset(Yii::app()->session['userid']))
 
 			<?php 
 
-				if($user_id == $model->user_id && $ban == 0) { ?>
+				if($user_id == $model->user_id) { ?>
 
 			<div class="button">
 
