@@ -62,6 +62,7 @@ Yii::app()->clientScript->registerScript('search', "
 					'value'=>'$data->users',
 				),
 				array(
+					'filter'=>false,
 					'class'=>'bootstrap.widgets.TbRelationalColumn',
 					'header'=>'Số lần báo cáo',
 					'name' => 'reports_count',

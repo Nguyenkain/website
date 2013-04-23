@@ -50,7 +50,7 @@ abstract class BasePosts extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-				'users' => array(self::BELONGS_TO, 'Users', 'user_id'),
+				'users' => array(self::HAS_ONE, 'Users', array('user_id'=>'user_id'), 'joinType'=>'INNER JOIN'),
 				'threads' => array(self::BELONGS_TO, 'Threads', 'thread_id'),
 		);
 	}
@@ -103,7 +103,7 @@ abstract class BasePosts extends GxActiveRecord {
 		$criteria->compare('thread_id', $this->thread_id);
 		$criteria->compare('post_content', $this->post_content, true);
 		$criteria->compare('post_created_time', '<='.strtotime($this->post_created_time), false);
-
+		
 		/* return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,
 		)); */
