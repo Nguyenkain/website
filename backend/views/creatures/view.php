@@ -58,17 +58,17 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 					'label'=>'Ảnh minh họa',
 					'type'=>'raw',
 					'value' => ''
-					.CHtml::image(getImageUrl($model->Loai).$model->Img.".jpg",'',$htmlOptions=array(
+					.CHtml::image(getImageUrl($model->Loai).$model->Img."s.jpg",'',$htmlOptions=array(
 						
 							'style'=>'margin-right:10px;height:90px'
 							))
-					.CHtml::image(getImageUrl($model->Loai).$model->Img."_1".".jpg",'',$htmlOptions=array(
+					.CHtml::image(getImageUrl($model->Loai).$model->Img."_1"."s.jpg",'',$htmlOptions=array(
 						'style'=>'margin-right:10px;height:90px'
 							))	
-					.CHtml::image(getImageUrl($model->Loai).$model->Img."_2".".jpg",'',$htmlOptions=array(
+					.CHtml::image(getImageUrl($model->Loai).$model->Img."_2"."s.jpg",'',$htmlOptions=array(
 						'style'=>'margin-right:10px;height:90px'
 							))
-					.CHtml::image(getImageUrl($model->Loai).$model->Img."_3".".jpg",'',$htmlOptions=array(
+					.CHtml::image(getImageUrl($model->Loai).$model->Img."_3"."s.jpg",'',$htmlOptions=array(
 						'style'=>'margin-right:10px;height:90px'
 							))
 							
