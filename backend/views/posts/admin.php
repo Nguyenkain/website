@@ -72,7 +72,7 @@ Yii::app()->clientScript->registerScript('search', "
 			array(
 				'name' => 'user_search',
 				'header' => 'Người viết',
-				'value' => '$data->users->name',
+				'value' => '$data->users',
 	        ),
 			'post_content',
 	        array('name'=>'post_created_time',

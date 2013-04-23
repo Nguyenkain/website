@@ -8,13 +8,39 @@ Yii::app()->clientScript->registerScript('search', "
 });
 		");
 
+function checkUrl($url) {
+	@$headers = get_headers($url);
+	if (preg_match('/^HTTP\/\d\.\d\s+(200|301|302)/', $headers[0])){
+		return true;
+	}
+	else return false;
+}
+
  function getImageUrl($loai,$img){
 	if($loai==1)
-		return Yii::app()->request->getBaseUrl(true) . "/images/pictures/animal/" . $img . ".jpg";
+	{
+		$url = Yii::app()->request->getBaseUrl(true) . "/images/pictures/animal/" . $img . "s.jpg";
+		if(checkUrl($url))
+			return $url;
+		else 
+			return Yii::app()->request->getBaseUrl(true) . "/images/pictures/animal/" . $img . ".jpg";
+	}
 	if($loai==2)
-		return Yii::app()->request->getBaseUrl(true) . "/images/pictures/plant/" . $img . ".jpg";
+	{
+		$url = Yii::app()->request->getBaseUrl(true) . "/images/pictures/plant/" . $img . "s.jpg";
+		if(checkUrl($url))
+			return $url;
+		else
+			return Yii::app()->request->getBaseUrl(true) . "/images/pictures/plant/" . $img . ".jpg"; 
+	}
 	if($loai==3)
-		return Yii::app()->request->getBaseUrl(true) . "/images/pictures/insect/" . $img . ".jpg";
+	{
+		$url = Yii::app()->request->getBaseUrl(true) . "/images/pictures/insect/" . $img . "s.jpg";
+		if(checkUrl($url))
+			return $url;
+		else 
+			return Yii::app()->request->getBaseUrl(true) . "/images/pictures/insect/" . $img . ".jpg";
+	}
 }
 ?>
 <div id="list-creature" class="page_content">
