@@ -8,6 +8,7 @@
 	    aSel.innerHTML = marker.title;
 	    aSel.onclick = function(){ 
 		    google.maps.event.trigger(marker, 'click');
+		    map.setCenter(marker.getPosition());
 		    };
 	    li.appendChild(aSel);
 	    ul.appendChild(li);
@@ -25,6 +26,7 @@
 		<div id="map_canvas"></div>
 		<?php Yii::import('common.extensions.EGMap.*');
 		$gMap = new EGMap();
+		$gMap->setJsName('map');
 
 		// Setting up an icon for marker.
 		$icon = new EGMapMarkerImage("http://".$_SERVER['HTTP_HOST'].Yii::app()->baseUrl."/images/forest.png");
