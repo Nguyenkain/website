@@ -1545,3 +1545,10 @@ element.style {
 	font-size: 15px;
 	margin-bottom: 20px;
 }
+
+#android_app {
+	float: right;
+	right: 2px;
+	position: relative;
+	top: 2px;
+}

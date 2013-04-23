@@ -74,6 +74,9 @@ $(".item").hover(
 				</a>
 				<h1 class="logo">Sinh vật rừng Việt Nam</h1>
 			</div>
+			<a id="android_app" href="https://play.google.com/store/apps/details?id=com.vncreatures">
+				<img alt="sinh vật rừng việt nam" src="css/images/android.png">
+			</a>
 			<div class="clearfix"></div>
 		</div>
 		<div id="menu">
