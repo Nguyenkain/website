@@ -91,7 +91,7 @@ abstract class BasePosts extends GxActiveRecord {
 	public function search() {
 		$criteria = new CDbCriteria;
 
-		$criteria->compare('users.name',$this->user_search, true);
+		$criteria->compare('name',$this->user_search, true);
 		$criteria->with = 'users';
 		
 		$criteria->compare('threads.thread_title',$this->thread_search, true);
@@ -113,8 +113,8 @@ abstract class BasePosts extends GxActiveRecord {
 				'sort'=>array(
 						'attributes'=>array(
 								'user_search'=>array(
-										'asc'=>'users.name',
-										'desc'=>'users.name DESC',
+										'asc'=>'name',
+										'desc'=>'name DESC',
 								),
 								'thread_search'=>array(
 										'asc'=>'threads.thread_title',
