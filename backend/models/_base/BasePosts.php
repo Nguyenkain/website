@@ -92,10 +92,8 @@ abstract class BasePosts extends GxActiveRecord {
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('users.name',$this->user_search, true);
-		$criteria->with = 'users';
-		
 		$criteria->compare('threads.thread_title',$this->thread_search, true);
-		$criteria->with = 'threads';
+		$criteria->with = array('users','threads');
 
 		$temp = strtotime($this->post_created_time);
 		$criteria->compare('post_id', $this->post_id);

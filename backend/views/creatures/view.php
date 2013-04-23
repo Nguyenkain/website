@@ -27,9 +27,14 @@ function getImageUrl($loai){
 
 <?php 
 $position='';
+$numItems = count($coordinations);
+$i = 0;
 foreach ($coordinations as $place){
 	$st = $place->province_name;
-	$position = $position .' ,' .$st;
+	$position = $position .$st;
+	if(++$i != $numItems) {
+		$position = $position .', ';
+	}
 };
 
 $this->widget('bootstrap.widgets.TbDetailView',array(

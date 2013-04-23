@@ -23,7 +23,7 @@
  *
  */
 abstract class BaseCreatures extends GxActiveRecord {
-
+	
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
 	}
@@ -40,6 +40,13 @@ abstract class BaseCreatures extends GxActiveRecord {
 		return 'Viet';
 	}
 
+	function defaultScope()
+	{
+		return array(
+				'alias' => $this->tableName()
+		);
+	}
+	
 	public function rules() {
 		return array(
 				array('Loai, Ho, Bo, Nhom, Author', 'numerical', 'integerOnly'=>true),
@@ -97,14 +104,21 @@ abstract class BaseCreatures extends GxActiveRecord {
 	public function search() {
 		$criteria = new CDbCriteria;
 		$sort = new CSort;
-		$sort->defaultOrder = 'ID DESC';
+		$sort->defaultOrder = 'creatures.ID DESC';
+		
+		$criteria->compare('rLoai.Loai',$this->Loai, true);
+		$criteria->compare('rNhom.Viet',$this->Nhom, true);
+		$criteria->compare('rBo.Viet',$this->Bo, true);
+		$criteria->compare('rHo.Viet',$this->Ho, true);
+		$criteria->with = array('rLoai','rNhom','rBo','rHo');
+		
 		$criteria->compare('ID', $this->ID);
 		$criteria->compare('Viet', strtolower($this->Viet), true);
 		$criteria->compare('Latin', strtolower($this->Latin), true);
-		$criteria->compare('Loai', $this->Loai);
+		/* $criteria->compare('Loai', $this->Loai);
 		$criteria->compare('Ho', $this->Ho);
 		$criteria->compare('Bo', $this->Bo);
-		$criteria->compare('Nhom', $this->Nhom);
+		$criteria->compare('Nhom', $this->Nhom); */
 		$criteria->compare('Description', $this->Description, true);
 		$criteria->compare('Img', $this->Img, true);
 		$criteria->compare('Author', $this->Author);
