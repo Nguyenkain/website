@@ -39,6 +39,15 @@ function getNotification($userid)
 
 
 <?php 
+if(isset(Yii::app()->session['userid']))
+{
+	$user_id = Yii::app()->session['userid'];
+	$ban = Users::model()->findByPk($user_id)->ban_status;
+	if($ban == 1)
+	{
+		Yii::app()->clientScript->registerScript('warning', "showWarning()");
+	}
+}
 $userid = Yii::app()->facebook->getUser();
 
 if ($userid)
@@ -77,7 +86,7 @@ if ($userid)
 	<div id="action_nav">
 		<?php 
 
-		if($userid)
+		if($userid && $ban)
 		{
 			/* EQuickDlgs::ajaxLink(
 				array(
