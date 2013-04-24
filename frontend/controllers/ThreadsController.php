@@ -697,7 +697,7 @@ class ThreadsController extends Controller
 		try{
 			$publishStream = Yii::app()->facebook->api("/$fbId/feed", 'post', array(
 					'message'		=> 'Từ bài viết '.$thread->thread_title.' của '.$user->name,
-					'link'			=> 'http://vncreatures.net',
+					'link'			=> 'http://113.164.1.45/web/index.php?r=threads/view&id='.$threadId,
 					'picture'		=> 'https://raw.github.com/fbsamples/ios-3.x-howtos/master/Images/iossdk_logo.png',
 					'name'			=> 'VnCreatures',
 					'caption'		=> 'Từ bài viết '.$thread->thread_title.' của '.$user->name,

@@ -21,12 +21,23 @@ function showWarning() {
 
 function postToFacebook($fbId,$threadId)
 {
+
+	$.pnotify({
+	    title: 'Đưa lên facebook',
+	    text: 'Bạn đang chia sẻ bài viết này lên facebook cá nhân của bạn',
+	});
+	
 	$.ajax({
 	      type: "POST",
 	      url:    "<? echo Yii::app()->createUrl('threads/postToFacebook'); ?>",
 	      data:  {'facebook_id':$fbId,'thread_id':$threadId},
 	      async: false,
 	      success: function(msg){
+	    	  $.pnotify({
+	    		    title: 'Thành công',
+	    		    type: 'success',
+	    		    text: 'Chia sẻ thành công lên facebook',
+	    		});
 	      },
 	      error: function(xhr){
 	      }
