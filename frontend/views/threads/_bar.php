@@ -35,6 +35,18 @@ function getNotification($userid)
 	    });
 }
 
+function showWarningError() {
+	$.pnotify({
+	    title: 'Thông báo',
+	    text: 'Hiện tại tài khoản của bạn đang bị khóa, bạn không thể sử dụng các tính năng của thành viên. Liên hệ với ban quản trị để biết thêm chi tiết.!',
+	    type: 'success',
+	    closer: true,
+	    hide: true,
+	    nonblock: true,
+	    nonblock_opacity: .2
+	});
+}
+
 </script>
 
 
@@ -45,7 +57,7 @@ if(isset(Yii::app()->session['userid']))
 	$ban = Users::model()->findByPk($user_id)->ban_status;
 	if($ban == 1)
 	{
-		Yii::app()->clientScript->registerScript('warning', "showWarning()");
+		Yii::app()->clientScript->registerScript('warning2', "showWarningError()");
 	}
 }
 $userid = Yii::app()->facebook->getUser();
@@ -86,7 +98,7 @@ if ($userid)
 	<div id="action_nav">
 		<?php 
 
-		if($userid && $ban)
+		if($userid)
 		{
 			/* EQuickDlgs::ajaxLink(
 				array(
@@ -102,11 +114,14 @@ if ($userid)
 				)
 			); */
 
-			echo CHtml::ajaxLink("<span>Thêm chủ đề </span>",$this->createUrl('threads/post',array('id'=>$userid)),array(
-				'onclick'=>'$("#postDialog").dialog("open"); return false;',
-				'update' => '#postDialog'
-        	),
-			array('id'=>'post_button')); 
+			if($ban == 1) {
+	
+				echo CHtml::ajaxLink("<span>Thêm chủ đề </span>",$this->createUrl('threads/post',array('id'=>$userid)),array(
+					'onclick'=>'$("#postDialog").dialog("open"); return false;',
+					'update' => '#postDialog'
+	        	),
+				array('id'=>'post_button'));
+			} 
 		}
 		?>
 		<div id="postDialog"></div>
