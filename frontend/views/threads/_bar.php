@@ -97,7 +97,7 @@ if ($userid)
 
 		<a href="#" style="text-decoration: none; font-size: 12px;">Có người
 			đã viết bài mới trong chủ đề : <span
-			style="color: #fff; margin: 0; padding: 0; display: inline; font-size: 12px;"
+			style="color: #867F7D; margin: 0; padding: 0; display: inline; font-size: 12px;"
 			class="thread_title_noti"></span>
 		</a>
 
