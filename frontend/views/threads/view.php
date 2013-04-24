@@ -1,4 +1,8 @@
 <?php 
+$assetUrl = Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('ext.PNotify.assets'));
+Yii::app()->clientScript->registerScriptFile($assetUrl.'/js/jquery.pnotify.min.js');
+Yii::app()->clientScript->registerCssFile($assetUrl.'/js/jquery.pnotify.default.css');
+
 function checkUrl($url) {
 	@$headers = get_headers($url);
 	if (preg_match('/^HTTP\/\d\.\d\s+(200|301|302)/', $headers[0])){
