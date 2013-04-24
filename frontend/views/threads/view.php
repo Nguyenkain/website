@@ -31,7 +31,6 @@ function postToFacebook($fbId,$threadId)
 	      type: "POST",
 	      url:    "<? echo Yii::app()->createUrl('threads/postToFacebook'); ?>",
 	      data:  {'facebook_id':$fbId,'thread_id':$threadId},
-	      async: false,
 	      success: function(msg){
 	    	  $.pnotify({
 	    		    title: 'Thành công',
