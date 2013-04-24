@@ -45,7 +45,7 @@ function showWarningError() {
 	$.pnotify({
 	    title: 'Thông báo',
 	    text: 'Hiện tại tài khoản của bạn đang bị khóa, bạn không thể sử dụng các tính năng của thành viên. Liên hệ với ban quản trị để biết thêm chi tiết.!',
-	    type: 'success',
+	    type: 'error',
 	    closer: true,
 	    hide: true,
 	    nonblock: true,
