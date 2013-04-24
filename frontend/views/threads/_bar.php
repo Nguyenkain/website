@@ -108,8 +108,8 @@ if ($userid)
 <div id="user-infor-panel">
 	<img src='http://graph.facebook.com/<?php echo $userid ?>/picture?type=normal' width='100' height='100' />
 	<?php echo $user_info['name']?>
-	<br>
-	<a href='<?php echo $url?>'> Log out</a>
+	<br><br>
+	<a href='<?php echo $url?>' id="logoutButton" class="btn btn-warning btn-small" >Đăng xuất</a>
 </div>
 
 <div id="discussion_content" class="page_content">
@@ -156,7 +156,7 @@ if ($userid)
 		Yii::app()->clientScript->registerScript('userinfo', "setUserInfo();");
 		$this->widget('ext.tooltipster.tooltipster',
 				array(
-						'identifier'=>'.tooptipster',
+						'identifier'=>'.tooptipster label',
 						'options'=>array(
 								'animation'=>'grow',
 								'interactive'=>true,
