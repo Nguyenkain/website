@@ -114,7 +114,7 @@ if ($userid)
 				)
 			); */
 
-			if($ban == 1) {
+			if($ban == 0) {
 	
 				echo CHtml::ajaxLink("<span>Thêm chủ đề </span>",$this->createUrl('threads/post',array('id'=>$userid)),array(
 					'onclick'=>'$("#postDialog").dialog("open"); return false;',
