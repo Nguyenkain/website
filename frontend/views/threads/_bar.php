@@ -43,7 +43,7 @@ function getNotification($userid)
 
 function setUserInfo() {
 	var html = $('#user-infor-panel').html();
-	$('#profile').attr('title',html);
+	$('#profile label').attr('title',html);
 }
 
 function showWarningError() {
@@ -105,11 +105,11 @@ if ($userid)
 
 </div>
 
-<div id="user-infor-panel">
+<div id="user-infor-panel" style="display: none">
 	<img src='http://graph.facebook.com/<?php echo $userid ?>/picture?type=normal' width='100' height='100' />
 	<?php echo $user_info['name']?>
 	<br><br>
-	<a href='<?php echo $url?>' id="logoutButton" class="btn btn-warning btn-small" >Đăng xuất</a>
+	<a href='<?php echo $url?>' id="logoutButton" class="btn btn-info btn-small" >Đăng xuất</a>
 </div>
 
 <div id="discussion_content" class="page_content">
@@ -156,7 +156,7 @@ if ($userid)
 		Yii::app()->clientScript->registerScript('userinfo', "setUserInfo();");
 		$this->widget('ext.tooltipster.tooltipster',
 				array(
-						'identifier'=>'.tooptipster label',
+						'identifier'=>'.tooptipster',
 						'options'=>array(
 								'animation'=>'grow',
 								'interactive'=>true,
@@ -183,9 +183,9 @@ if ($userid)
 		?>
 		</td>
 		<div id="profile_container">
-			<div id="profile" class="tooptipster" title="">
+			<div id="profile" title="">
 			<?php echo CHtml::image("http://graph.facebook.com/". $userid ."/picture?type=normal"); ?>
-			<label><?php echo $user_info['name']?> </label>
+			<label class="tooptipster"><?php echo $user_info['name']?> </label>
 			<div class="clearfix"></div>
 		</div>
 		<div class="ver_line"></div>
