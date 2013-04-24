@@ -7,9 +7,6 @@ function checkUrl($url) {
 	else return false;
 }
 
-$assetUrl = Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('ext.PNotify.assets'));
-Yii::app()->clientScript->registerScriptFile($assetUrl.'/js/jquery.pnotify.min.js');
-Yii::app()->clientScript->registerCssFile($assetUrl.'/js/jquery.pnotify.default.css');
 ?>
 
 <script>
