@@ -93,11 +93,11 @@ if ($userid)
 <div id="notification_panel" style="display: none">
 
 	<div class="notification_item"
-		style="display: block; height: 30px; line-height: 30px;">
+		style="color: #867F7D; display: block; height: 30px; line-height: 30px;">
 
 		<a href="#" style="text-decoration: none; font-size: 12px;">Có người
 			đã viết bài mới trong chủ đề : <span
-			style="color: #867F7D; margin: 0; padding: 0; display: inline; font-size: 12px;"
+			style="margin: 0; padding: 0; display: inline; font-size: 12px;"
 			class="thread_title_noti"></span>
 		</a>
 
