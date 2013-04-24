@@ -179,10 +179,6 @@ if(isset(Yii::app()->session['userid']))
 {
 	$user_id = Yii::app()->session['userid'];
 	$ban = Users::model()->findByPk($user_id)->ban_status;
-	if($ban == 1) 
-	{
-		Yii::app()->clientScript->registerScript('warning', "showWarning()");
-	} 
 }
 ?>
 
