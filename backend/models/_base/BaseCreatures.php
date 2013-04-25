@@ -113,8 +113,8 @@ abstract class BaseCreatures extends GxActiveRecord {
 		$criteria->with = array('rLoai','rNhom','rBo','rHo');
 		
 		$criteria->compare('ID', $this->ID);
-		$criteria->compare('Viet', strtolower($this->Viet), true);
-		$criteria->compare('Latin', strtolower($this->Latin), true);
+		$criteria->compare('creatures.Viet', strtolower($this->Viet), true);
+		$criteria->compare('creatures.Latin', strtolower($this->Latin), true);
 		/* $criteria->compare('Loai', $this->Loai);
 		$criteria->compare('Ho', $this->Ho);
 		$criteria->compare('Bo', $this->Bo);
