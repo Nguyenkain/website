@@ -2,7 +2,7 @@
 	function replaceImages() {
 		$('#news_content img').each(function() {
 			var link = $(this).attr('src');
-			if(link.indexOf("forumpic") != -1) {
+			if(link.indexOf("forumpic") != -1 && link.indexOf("113.164.1.45") == -1) {
 				link = "images/" + link;
 			}
 			$(this).attr('src',link);
