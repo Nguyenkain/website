@@ -11,14 +11,55 @@ $this->menu=array(
 		array('label'=>'Delete Creatures','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->ID),'confirm'=>'Are you sure you want to delete this item?')),
 		array('label'=>'Manage Creatures','url'=>array('admin')),
 );
-function getImageUrl($loai){
-	if($loai==1)
-		return Yii::app()->request->getBaseUrl(true) . "/../web/images/pictures/animal/";
 
+function checkUrl($url) {
+	@$headers = get_headers($url);
+	if (preg_match('/^HTTP\/\d\.\d\s+(200|301|302)/', $headers[0])){
+		return true;
+	}
+	else return false;
+}
+
+function getImageUrl($loai,$img){
+	if($loai==1)
+	{
+		$url = Yii::app()->request->getBaseUrl(true) . "/../web/images/pictures/animal/" . $img . "s.jpg";
+		if(checkUrl($url))
+			return $url;
+		else
+			return Yii::app()->request->getBaseUrl(true) . "/../web/images/pictures/animal/" . $img . ".jpg";
+	}
 	if($loai==2)
-		return Yii::app()->request->getBaseUrl(true) . "/../web/images/pictures/plant/";
+	{
+		$url = Yii::app()->request->getBaseUrl(true) . "/../web/images/pictures/plant/" . $img . "s.jpg";
+		if(checkUrl($url))
+			return $url;
+		else
+			return Yii::app()->request->getBaseUrl(true) . "/../web/images/pictures/plant/" . $img . ".jpg";
+	}
 	if($loai==3)
-		return Yii::app()->request->getBaseUrl(true) . "/../web/images/pictures/insect/";
+	{
+		$url = Yii::app()->request->getBaseUrl(true) . "/../web/images/pictures/insect/" . $img . "s.jpg";
+		if(checkUrl($url))
+			return $url;
+		else
+			return Yii::app()->request->getBaseUrl(true) . "/../web/images/pictures/insect/" . $img . ".jpg";
+	}
+}
+
+function getImage($loai, $img) {
+	$html = CHtml::image(getImageUrl($loai, $img),'',$htmlOptions=array(
+						
+							'style'=>'margin-right:10px;height:90px'
+							));
+	for($i = 1; $i <= 3; $i ++) {
+		$url = getImageUrl($loai, $img."_".$i);
+		if(checkUrl($url))
+			$html .= CHtml::image($url,'',$htmlOptions=array(
+						'style'=>'margin-right:10px;height:90px'
+							));;
+	}
+	return $html;
 }
 
 ?>
@@ -58,19 +99,7 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 					'label'=>'Ảnh minh họa',
 					'type'=>'raw',
 					'value' => ''
-					.CHtml::image(getImageUrl($model->Loai).$model->Img."s.jpg",'',$htmlOptions=array(
-						
-							'style'=>'margin-right:10px;height:90px'
-							))
-					.CHtml::image(getImageUrl($model->Loai).$model->Img."_1"."s.jpg",'',$htmlOptions=array(
-						'style'=>'margin-right:10px;height:90px'
-							))	
-					.CHtml::image(getImageUrl($model->Loai).$model->Img."_2"."s.jpg",'',$htmlOptions=array(
-						'style'=>'margin-right:10px;height:90px'
-							))
-					.CHtml::image(getImageUrl($model->Loai).$model->Img."_3"."s.jpg",'',$htmlOptions=array(
-						'style'=>'margin-right:10px;height:90px'
-							))
+					.getImage($model->Loai, $model->Img)
 							
 
 ,
