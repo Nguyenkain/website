@@ -5,6 +5,9 @@
 			if(link.indexOf("forumpic") != -1 || link.indexOf("vqgpic") != -1) {
 				link = "images/" + link;
 			}
+			else if(link.indexOf("bando") != -1 || link.indexOf("images") != -1) {
+				link = "http://vncreatures.net/" + link;
+			}
 			$(this).attr('src',link);
 		});
 	}
