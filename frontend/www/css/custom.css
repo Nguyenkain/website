@@ -1550,5 +1550,10 @@ element.style {
 	float: right;
 	right: 2px;
 	position: relative;
-	top: 2px;
+	top: 12px;
+}
+
+#android_app img {
+	width: 200px;
+	height: auto;
 }
