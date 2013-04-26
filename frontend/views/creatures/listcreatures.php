@@ -54,6 +54,9 @@ function checkUrl($url) {
 		?>
 	</div>
 	<!-- search-form -->
+	
+	<div id="list-creature">
+	
 	<?php 
 
 	
@@ -63,6 +66,12 @@ function checkUrl($url) {
 			'template'=>'{summary}{pager}{items}{pager}',
 			'pagerCssClass'=>'pagination pagination-right',
 			'summaryText' => 'Hiển thị kết quả từ {start} đến {end} trong tổng cộng {count} kết quả',
+			'beforeAjaxUpdate' => 'js:function(id,data){
+				$("#list-creature").addClass("hasLoading");
+			}',
+						'afterAjaxUpdate' => 'js:function(id,options){
+				$("#list-creature").removeClass("hasLoading");
+			}',
 			'emptyText' => 'Không có kết quả nào được tìm thấy',
 			'columns'=>array(
 				array(
@@ -108,6 +117,7 @@ function checkUrl($url) {
 				),
 			),
 )); ?>
+</div>
 </div>
 <div id="footer" class="normal">
 

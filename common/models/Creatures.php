@@ -12,7 +12,7 @@ class Creatures extends BaseCreatures
 		$criteria = new CDbCriteria;
 		$sort = new CSort;
 		$sort->defaultOrder = 'ID DESC';
-		$criteria->compare('ID', $this->ID);
+		//$criteria->compare('ID', $this->ID);
 // 		if($this->Viet != "") {
 // 			$criteria->condition = "MATCH (Viet,Latin) AGAINST ('$this->Viet' IN BOOLEAN MODE)";
 // 		}
@@ -24,10 +24,6 @@ class Creatures extends BaseCreatures
 		$criteria->compare('Ho', $this->Ho, false);
 		$criteria->compare('Bo', $this->Bo, false);
 		$criteria->compare('Nhom', $this->Nhom, false);
-		$criteria->compare('Description', $this->Description, true);
-		$criteria->compare('Img', $this->Img, true);
-		$criteria->compare('Author', $this->Author);
-		$criteria->compare('AuthorName', $this->AuthorName, true);
 
 		return new CActiveDataProvider($this, array(
 				'criteria'=>$criteria,
