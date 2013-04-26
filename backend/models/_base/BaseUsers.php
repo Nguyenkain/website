@@ -70,7 +70,7 @@ abstract class BaseUsers extends GxActiveRecord {
 		return array(
 			'user_id' => Yii::t('app', 'Người dùng'),
 			'facebook_id' => Yii::t('app', 'Facebook'),
-			'username' => Yii::t('app', 'Username'),
+			'username' => Yii::t('app', 'Tên'),
 			'user_dob' => Yii::t('app', 'Ngày sinh'),
 			'user_address' => Yii::t('app', 'Địa chỉ'),
 			'user_email' => Yii::t('app', 'Email'),
