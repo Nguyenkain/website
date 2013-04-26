@@ -115,10 +115,10 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'username' => Yii::t('labels', 'Username'),
-			'password' => Yii::t('labels', 'Password'),
-			'newPassword' => Yii::t('labels', 'Password'),
-			'passwordConfirm' => Yii::t('labels', 'Confirm password'),
+			'username' => Yii::t('labels', 'Tên đăng nhập'),
+			'password' => Yii::t('labels', 'Mật khẩu'),
+			'newPassword' => Yii::t('labels', 'Mật khẩu mới'),
+			'passwordConfirm' => Yii::t('labels', 'Xác nhận mật khẩu'),
 			'email' => Yii::t('labels', 'Email'),
 		);
 	}

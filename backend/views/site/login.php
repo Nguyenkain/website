@@ -1,11 +1,11 @@
 <?php
-$this->pageTitle=Yii::app()->name . ' - Login';
+$this->pageTitle=Yii::app()->name . ' - Đăng nhập';
 $this->breadcrumbs=array(
-	'Login',
+	'Đăng nhập',
 );
 ?>
 
-<p>Please fill out the following form with your login credentials:</p>
+<p>Hãy điền đầy đủ thông tin sau để đăng nhập:</p>
 
 <div class="form">
 	<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
@@ -17,15 +17,15 @@ $this->breadcrumbs=array(
 	),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Các trường có dấu <span class="required">*</span> là bắt buộc.</p>
 
 	<?php echo $form->textFieldRow($model, 'username', array('class'=>'span3'));?>
 	<?php echo $form->passwordFieldRow($model, 'password', array('class'=>'span3'));?>
 	<?php echo $form->checkBoxRow($model, 'rememberMe');?>
 
 	<div class="form-actions">
-		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit','type'=>'primary','label'=>'Submit', 'icon'=>'ok'));?>
-		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset','label'=>'Reset'));?>
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit','type'=>'primary','label'=>'Gửi', 'icon'=>'ok'));?>
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'reset','label'=>'Xóa'));?>
 	</div>
 
 	<?php $this->endWidget(); ?>
