@@ -49,6 +49,8 @@ abstract class BaseCreatures extends GxActiveRecord {
 	
 	public function rules() {
 		return array(
+				array('Loai, Ho, Bo, Nhom', 'required',
+						'message'=>'Hãy vui lòng nhập giá trị cho {attribute}.'),
 				array('Loai, Ho, Bo, Nhom, Author', 'numerical', 'integerOnly'=>true),
 				array('Viet, Latin, AuthorName', 'length', 'max'=>50),
 				array('Img', 'length', 'max'=>200),
