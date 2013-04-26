@@ -13,8 +13,13 @@ class Creatures extends BaseCreatures
 		$sort = new CSort;
 		$sort->defaultOrder = 'ID DESC';
 		$criteria->compare('ID', $this->ID);
-		$criteria->compare('Viet', $this->Viet, true, 'OR');
-		$criteria->compare('Latin', $this->Viet, true, 'OR');
+		if($this->Viet != "") {
+			$criteria->condition = "MATCH (Viet,Latin) AGAINST ('$this->Viet' IN BOOLEAN MODE)";
+		}
+		else {
+			$criteria->compare('Viet', $this->Viet, true, 'OR');
+			$criteria->compare('Latin', $this->Viet, true, 'OR');
+		}
 		$criteria->compare('Loai', $this->Loai, false);
 		$criteria->compare('Ho', $this->Ho, false);
 		$criteria->compare('Bo', $this->Bo, false);
