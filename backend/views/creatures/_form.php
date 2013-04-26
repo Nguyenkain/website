@@ -127,7 +127,7 @@ $this->widget( 'xupload.XUpload', array(
                 'htmlOptions' => array('id'=>'creatures-form'),
                 'attribute' => 'file',
                 'multiple' => true,
-				'autoUpload' => true,
+				'autoUpload' => false,
 				'options'=>array(
 		            'maxNumberOfFiles'=> 4,
 		            'acceptFileTypes' => "js:/(\.|\/)(jpg)$/i",

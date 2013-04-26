@@ -18,13 +18,6 @@
             <td>{%=file.title%}</td>//Here we show the file title
             <td>{%=file.description%}</td>//and the file description
         {% } %}
-        <td class="delete">
-            <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
-                <i class="icon-trash icon-white"></i>
-                <span>{%=locale.fileupload.destroy%}</span>
-            </button>
-            <input type="checkbox" name="delete" value="1">
-        </td>
     </tr>
 {% } %}
 </script>

@@ -105,12 +105,18 @@ if ($userid)
 
 </div>
 
-<div id="user-infor-panel" style="display: none">
-	<img src='http://graph.facebook.com/<?php echo $userid ?>/picture?type=normal' width='100' height='100' />
-	<?php echo $user_info['name']?>
-	<br><br>
-	<a href='<?php echo $url?>' id="logoutButton" class="btn btn-info btn-small" >Đăng xuất</a>
-</div>
+<?php 
+
+		if($userid)
+		{ ?>
+
+		<div id="user-infor-panel" style="display: none">
+			<img src='http://graph.facebook.com/<?php echo $userid ?>/picture?type=normal' width='100' height='100' />
+			<?php echo $user_info['name']?>
+			<br><br>
+			<a href='<?php echo $url?>' id="logoutButton" class="btn btn-info btn-small" >Đăng xuất</a>
+		</div>
+<?php }?>
 
 <div id="discussion_content" class="page_content">
 	<div id="action_nav">

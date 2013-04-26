@@ -22,11 +22,6 @@
 			<i class="icon-ban-circle icon-white"></i>
 			<span>Hủy tải</span>
 		</button>
-		<button type="button" class="btn btn-danger delete">
-			<i class="icon-trash icon-white"></i>
-			<span>Xóa</span>
-		</button>
-		<input type="checkbox" class="toggle">
         <?php } ?>
 	</div>
 	<div class="span5">
