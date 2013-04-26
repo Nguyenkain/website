@@ -87,9 +87,11 @@ class CreaturesController extends Controller
 
 		$sort = new CSort;
 		$sort->defaultOrder = 'ID DESC';
-		if($Viet != "") {
-			$criteria->condition = "MATCH (Viet,Latin) AGAINST ('$Viet' IN BOOLEAN MODE)";
-		}
+		/* if($Viet != "") {
+			$criteria->condition = "MATCH (Viet,Latin) AGAINST ('+$Viet' IN BOOLEAN MODE | WITH QUERY EXPANSION)";
+		} */
+		$criteria->compare('Viet', $Viet, true, 'OR');
+		$criteria->compare('Latin', $Viet, true, 'OR');
 		$criteria->compare('Loai', $Loai, false);
 		$criteria->compare('Ho', $Ho, false);
 		$criteria->compare('Bo', $Bo, false);
