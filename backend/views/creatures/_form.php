@@ -17,7 +17,9 @@
 
 <?php //echo $form->textFieldRow($model,'Nhom',array('class'=>'span5')); ?>
 <?php echo $form->labelEx($model, 'Ho');
-echo $form->dropDownList($model, 'Ho', CHtml::listData(Ho::model()->findAll(),'ID', 'Viet'), 
+$criteria = new CDbCriteria;
+$criteria->order = "Viet";
+echo $form->dropDownList($model, 'Ho', CHtml::listData(Ho::model()->findAll($criteria),'ID', 'Viet'), 
 				array('empty' => '--Chọn họ cho sinh vật--', 'ajax' => array(
 			 	'type' => 'POST',
 				'dataType' => 'json',
